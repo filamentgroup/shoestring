@@ -7,7 +7,7 @@
 		wrap = function( prim, sec ){
 		
 			// Qualifiers - wrap needs these to run.
-			if( !doc.querySelectorAll || !doc.addEventListener ){
+			if( !doc.querySelectorAll ){
 				return;
 			}
 		
@@ -110,6 +110,13 @@
 			ready = true;
 		}
 	};
+	
+	// Quick IE8 shiv
+	if( !w.addEventListener ){
+		w.addEventListener = function( evt, cb ){
+			return w.attachEvent( "on" + evt, cb );
+		};
+	}
 	
 	// DOM ready
 	w.addEventListener( "DOMContentLoaded", runReady, false );
