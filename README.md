@@ -9,7 +9,7 @@ wrap is a simple dom wrapper that follows a jQuery-like syntax. also like jQuery
 
 also unlike jQuery, wrap is a simple, small, extendable core that handles not much more than the wrapping and iterating of dom nodes. did i mention it's small? it's small. .5kb min/gzippd. it doesn't come with much more than a few essentials, but using those, wrap is easy to extend further.
 
-Open up [console.html](test/console.html) to play around.
+Open up test/console.html to play around.
 
 # examples
 
@@ -92,9 +92,7 @@ that's pretty much it. of course, you're going to need a few more methods to mak
 
 ## wrap extensions
 
-the [`extensions`](extensions) folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`:
-
-* [dom extensions](extensions/wrap.dom.js)
+the `extensions` folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`.
 
 ## miss your dollar?
 
