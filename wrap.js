@@ -6,11 +6,6 @@
 	var doc = w.document,
 		wrap = function( prim, sec ){
 		
-			// Qualifiers - wrap needs these to run.
-			if( !doc.querySelectorAll ){
-				return;
-			}
-		
 			var pType = typeof( prim ),
 				ret = [];
 
@@ -66,6 +61,19 @@
 	};
 	
 	// Public non-dom utilities
+	
+	// browser support qualifier - wrap any usage of wrap in a qualify callback
+	wrap.qualified = "querySelectorAll" in doc;
+	
+	wrap.qualify = function( callback ){
+		if( callback && wrap.qualified ){
+			return callback();
+		}
+		// return support bool if there's no callback
+		else if( !callback ){
+			return wrap.qualified;
+		}
+	};
 	
 	// For extending objects
 	wrap.extend = function( first, second ){

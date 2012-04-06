@@ -46,7 +46,23 @@ perhaps you'd like to iterate through each item that was found, applying scripti
 		// here, "this" refers to the current element in iteration
 	});
 
-that's all `wrap` has in the way of dom helpers... from there, we'll need extensions.
+Lastly, in order to ensure wrap doesn't apply in browsers that it shouldn't, it comes with a handy api method, `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `wrap`, receiving a boolean answer: 
+
+    var qualifiedBrowser = wrap.qualify();
+
+More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. Just wrap your code in a `qualify` callback to safeproof its execution. Basically, you can use `qualify` in place of your typical IIFE wrapper:
+
+    wrap.qualify(
+		// It's safer in here.
+	    wrap( "#foo, .bar" ).each(function(){
+			console.log( this );
+			// here, "this" refers to the current element in iteration
+		});
+	);
+
+By default, `qualify` uses the boolean stored in `wrap.qualified` internally, to determine browser qualification. You can override `wrap.qualified` with any combination of features you want. By default, it just needs `document.querySelectorAll` support.
+
+OK, that's all `wrap` has in the way of dom helpers... from there, we'll need extensions.
 
 For extensions, `wrap` comes with a utility function or three. first, the `extend` method, which is just a simple object extender:
 
