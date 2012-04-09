@@ -118,5 +118,60 @@
 			return pile;
 		}
 	};
+	
+	wrap.fn.append = function( frag ){
+		if( typeof( frag ) === "string" ){
+			frag = wrap( frag );
+		}
+		return this.each(function( i ){
+			for( var j = 0, jl = frag.length; j < jl; j++ ){
+				this.appendChild( i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ] );
+			}
+		});
+	};
+	
+	wrap.fn.prepend = function( frag ){
+		if( typeof( frag ) === "string" ){
+			frag = wrap( frag );
+		}
+		return this.each(function( i ){
+			for( var j = 0, jl = frag.length; j < jl; j++ ){
+				var insertEl = i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
+				if ( this.firstChild ){
+					this.insertBefore( insertEl, this.firstChild );
+				}
+				else {
+					this.appendChild( insertEl );
+				}
+			}
+		});
+	};
+	
+	wrap.fn.before = function( frag ){
+		if( typeof( frag ) === "string" ){
+			frag = wrap( frag );
+		}
+		return this.each(function( i ){
+			for( var j = 0, jl = frag.length; j < jl; j++ ){
+				this.parentNode.insertBefore( i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ], this );
+			}
+		});
+	};
+	
+	wrap.fn.after = function( frag ){
+		if( typeof( frag ) === "string" ){
+			frag = wrap( frag );
+		}
+		return this.each(function( i ){
+			for( var j = 0, jl = frag.length; j < jl; j++ ){
+				var insertEl = i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
+				this.parentNode.insertBefore( insertEl, this );
+				this.parentNode.insertBefore( this, insertEl );
+			}
+		});
+	};
+	
+	
+	
 
 })();
