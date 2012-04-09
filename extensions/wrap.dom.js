@@ -40,22 +40,6 @@
 		});
 		return wrap(ret);
 	};
-	
-	wrap.fn.children = function(){
-		var ret = [],
-			childs;
-		this.each(function(){
-			childs = this.children,
-			j = -1;
-		
-			while( j++ < childs.length-1 ){
-				if( !wrap.inArray( ret, childs[ j ] ) ){
-					ret.push( childs[ j ] );
-				}
-			}
-		});
-		return wrap(ret);
-	};
 
 	wrap.fn.next = function(){
 		var ret = [],

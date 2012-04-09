@@ -67,6 +67,24 @@
 		return wrap( ret );
 	};
 	
+	// Children - get element child nodes.
+	// This is needed for HTML string creation
+	wrap.fn.children = function(){
+		var ret = [],
+			childs;
+		this.each(function(){
+			childs = this.children,
+			j = -1;
+		
+			while( j++ < childs.length-1 ){
+				if( !wrap.inArray( ret, childs[ j ] ) ){
+					ret.push( childs[ j ] );
+				}
+			}
+		});
+		return wrap(ret);
+	};
+	
 	// Public non-dom utilities
 	
 	// browser support qualifier - wrap any usage of wrap in a qualify callback
