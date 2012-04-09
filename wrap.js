@@ -10,8 +10,15 @@
 				ret = [];
 
 			if( prim ){
+				// if string starting with <, make html
+				if( pType === "string" && prim.indexOf( "<" ) === 0 ){
+					var dfrag = document.createElement( "div" );
+					dfrag.innerHTML = prim;
+					// TODO - remove dependency on children()
+					ret = wrap(dfrag).children();
+				}
 				// if string, it's a selector, use qsa
-				if( pType === "string" ){
+				else if( pType === "string" ){
 					if( sec ){
 						return wrap( sec ).find( prim );
 					}
@@ -25,7 +32,7 @@
 					ret = ret.concat( prim );
 				}
 			}
-			// if no prim, return a wrapped docElem
+			// if no prim, return a wrapped doc
 			else{
 				ret = [doc];
 			}
