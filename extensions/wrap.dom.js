@@ -215,6 +215,10 @@
 		return ret;
 	};
 	
+	wrap.fn.eq = function( num ){
+		return this[ num ];
+	};
+	
 	
 
 })();
