@@ -71,7 +71,8 @@
 	// This is needed for HTML string creation
 	wrap.fn.children = function(){
 		var ret = [],
-			childs;
+			childs,
+			j;
 		this.each(function(){
 			childs = this.children,
 			j = -1;
