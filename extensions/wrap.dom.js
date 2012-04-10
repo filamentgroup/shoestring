@@ -193,6 +193,17 @@
 		return wrap( ret );
 	};
 	
+	wrap.fn.not = function( sel ){
+		var ret = [],
+			sel = wrap( sel );
+		this.each(function( i ){
+			if( !wrap.inArray( sel, this ) ){
+				ret.push( this );				
+			}
+		});
+		return wrap( ret );
+	};
+	
 	wrap.fn.is = function( sel ){
 		var ret = false,
 			sel = wrap( sel );
@@ -203,8 +214,6 @@
 		});
 		return ret;
 	};
-	
-	
 	
 	
 
