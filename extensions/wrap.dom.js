@@ -166,6 +166,36 @@
 		});
 	};
 	
+	wrap.fn.appendTo = function( sel ){
+		return this.each(function(){
+			wrap( sel ).append( this );
+		});
+	};
+
+	wrap.fn.prependTo = function( sel ){
+		return this.each(function(){
+			wrap( sel ).prepend( this );
+		});
+	};
+
+	wrap.fn.insertBefore = function( sel ){
+		return this.each(function(){
+			wrap( sel ).before( this );
+		});
+	};
+
+	wrap.fn.insertAfter = function( sel ){
+		return this.each(function(){
+			wrap( sel ).after( this );
+		});
+	};
+	
+	wrap.fn.remove = function( sel ){
+		return this.each(function(){
+			this.parentNode.removeChild( this );
+		});
+	};
+	
 	wrap.fn.replaceWith = function( frag ){
 		if( typeof( frag ) === "string" ){
 			frag = wrap( frag );
