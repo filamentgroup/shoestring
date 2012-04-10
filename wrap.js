@@ -8,7 +8,7 @@
 		
 			var pType = typeof( prim ),
 				ret = [];
-
+				
 			if( prim ){
 				// if string starting with <, make html
 				if( pType === "string" && prim.indexOf( "<" ) === 0 ){
@@ -125,7 +125,7 @@
 	// For DOM ready execution
 	wrap.ready = function( fn ){
 		if( ready && fn ){
-			return fn();
+			fn();
 		}
 		else if( fn ){
 			readyQueue.push( fn );
@@ -133,7 +133,8 @@
 		else {
 			runReady();
 		}
-		return this;
+		
+		return [doc];
 	};
 	
 	// Empty and exec the ready queue
