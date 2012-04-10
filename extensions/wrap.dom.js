@@ -216,6 +216,10 @@
 	};
 	
 	wrap.fn.eq = function( num ){
+		return wrap( this[ num ] );
+	};
+	
+	wrap.fn.get = function( num ){
 		return this[ num ];
 	};
 	
