@@ -124,11 +124,14 @@
 	
 	// For DOM ready execution
 	wrap.ready = function( fn ){
-		if( ready ){
+		if( ready && fn ){
 			return fn();
 		}
-		else{
+		else if( fn ){
 			readyQueue.push( fn );
+		}
+		else {
+			runReady();
 		}
 		return this;
 	};
@@ -139,7 +142,7 @@
 		runReady = function(){
 			if( !ready ){
 				while( readyQueue.length ){
-					readyQueue.shift()();
+					console.log(readyQueue.shift()());
 				}
 				ready = true;
 			}
