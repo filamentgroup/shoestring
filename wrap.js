@@ -137,13 +137,13 @@
 	var ready = false,
 		readyQueue = [],
 		runReady = function(){
-		if( !ready ){
-			while( readyQueue.length ){
-				readyQueue.shift()();
+			if( !ready ){
+				while( readyQueue.length ){
+					readyQueue.shift()();
+				}
+				ready = true;
 			}
-			ready = true;
-		}
-	};
+		};
 	
 	// Quick IE8 shiv
 	if( !w.addEventListener ){
