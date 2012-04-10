@@ -133,6 +133,13 @@ test( 'wrap with a function argument returns array with document child', functio
 	ok( wrap( function(){} )[ 0 ] === document );
 });
 
+test( 'passing a string argument to wrap with a second argument returns result scoped to second arg', function() { 
+	ok( wrap( "body" )[ 0 ] === wrap( "body", "html" )[ 0 ] );
+	ok( wrap( "body" )[ 0 ] !== wrap( "body", "body" )[ 0 ] );
+	ok( wrap( ".testel-2" ).length === 2 );
+	ok( wrap( ".testel-2", ".testel" ).length === 1 );
+});
+
 
 
 
