@@ -88,6 +88,55 @@ test( 'API Properties: wrap.fn.find, is a function', function() {
 
 
 
+// functionality
+test( 'wrap with no arguments returns an array', function() { 
+	ok( wrap().constructor === Array );
+});
+
+test( 'wrap with no arguments returns an array with core methods', function() { 
+	ok( wrap().constructor === Array );
+});
+
+test( 'wrap with no arguments returns an array with one child', function() { 
+	ok( wrap().length === 1 );
+});
+
+test( 'wrap with no arguments returns an array with first child of document', function() { 
+	ok( wrap()[0] === document );
+});
+
+test( 'wrap with a string argument returns a nodelist', function() { 
+	ok( wrap( "body" ).constructor === NodeList );
+});
+
+test( 'wrap with a string argument returns an array of dom nodes from qsa', function() { 
+	ok( wrap( "body" )[ 0 ] === document.querySelectorAll( "body" )[ 0 ] );
+});
+
+test( 'wrap with a string argument starting with "<" returns a generated array', function() { 
+	ok( wrap( "<div></div>" ).constructor === Array );
+});
+
+test( 'wrap with a string argument starting with "<" returns a generated array of dom nodes', function() { 
+	ok( wrap( "<div></div>" )[0].constructor === HTMLDivElement );
+});
+
+test( 'wrap with a string argument starting with "<" returns a generated array of dom nodes', function() { 
+	ok( wrap( "<div></div><h2></h2>" )[1].constructor === HTMLHeadingElement );
+});
+
+test( 'wrap with a function argument returns array', function() { 
+	ok( wrap( function(){} ).constructor === Array );
+});
+
+test( 'wrap with a function argument returns array with document child', function() { 
+	ok( wrap( function(){} )[ 0 ] === document );
+});
+
+
+
+
+
 
 
 
