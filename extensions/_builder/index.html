@@ -2,8 +2,7 @@
 <html>
 <head>
 	<title>wrap builder</title>
-	<script id="wrap" src="../../wrap.js"></script>
-	<script src="quickconcat.php?files=app.js,../extensions.js,app.enhance.js"></script>
+	<script src="quickconcat.php?files=app.js,../extensions.js,app.enhance.js,../../wrap.js"></script>
 	<style>
 	body { font-family: sans-serif; margin: 50px 30%; }
 	textarea { display: block; font-size: 1em; width: 96%;  height: 8em; padding: .5em 2%; margin: 1em 0 }
@@ -57,8 +56,8 @@
 			catch( e){
 				var etype = e.type,
 					emethod = e.arguments[0],
-					isfn = !!e.arguments[1];
-					
+					isfn = !!e.arguments[1].each;
+				
 				app.addFile( "../extensions/" + app.files.js[ ( isfn ? "fn_" : "" ) + emethod ] )
 				app.enhance();
 				
