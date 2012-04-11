@@ -57,7 +57,7 @@
 			catch( e){
 				var etype = e.type,
 					emethod = e.arguments[0],
-					isfn = e.arguments[1] !== undefined;
+					isfn = !!e.arguments[1];
 					
 				app.addFile( "../extensions/" + app.files.js[ ( isfn ? "fn_" : "" ) + emethod ] )
 				app.enhance();
