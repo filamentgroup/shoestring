@@ -53,29 +53,4 @@
 		async: true,
 		data: null
 	};
-	
-	wrap.get = function( url, callback ){
-		return wrap.ajax( url, { success: callback } );
-	};
-	
-	wrap.post = function( url, data, callback ){
-		return wrap.ajax( url, { data: data, method: "POST", success: callback } );
-	};
-	
-	wrap.fn.load = function( url, callback ){
-		var self = this,
-			args = arguments,
-			intCB = function( data ){
-				self.each(function(){
-					wrap( this ).html( data );
-				});
-				if( callback ){
-					callback.apply( self, args );
-				}
-		};
-		wrap.ajax( url, { success: intCB } );
-		return this;
-	};
-	
-
 })();
