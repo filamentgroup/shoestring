@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title>wrap builder</title>
-	<script src="quickconcat.php?files=app.js,../extensions.js,app.enhance.js,../../wrap.js"></script>
+	<script src="quickconcat.php?files=app.js,../extensions.js,app.enhance.js,../../wrap.js,builder.js"></script>
 	<style>
 	body { font-family: sans-serif; margin: 50px 30%; }
-	textarea { display: block; font-size: 1em; width: 96%;  height: 8em; padding: .5em 2%; margin: 1em 0 }
+	textarea { display: block; font-size: 1em; width: 96%;  height: 20em; padding: .5em 2%; margin: 1em 0 }
 	input[type=submit] { font-size: 1.2em; float: right; margin: 0; }
 	.done { background: lightgreen; }
 	</style>
@@ -17,59 +17,5 @@
 		<textarea name="yourcode" id="yourcode">wrap( "p" ).addClass( "foo" ).html( "whoa." );</textarea>
 		<input type="submit">
 	</form>
-
-	<script>
-	var newfiles = [];
-	
-		
-	wrap( "form" )[ 0 ].addEventListener( "submit", function( e ){
-		e.preventDefault();
-		var self= this,
-			tarea = wrap( this ).find( "textarea" )[ 0 ],
-			text = tarea.value;
-		
-		function success(){
-			var aj = document.createElement( "script" );
-			
-			aj.src = '../wrap.ajax.ajax.js';
-			
-			aj.onload = function(){
-				wrap.ajax( "quickconcat.php?files=" + app.jsToLoad.join(",") , 
-				{
-					success: function( txt ){
-						tarea.value = txt;
-						tarea.className = "done";
-						tarea.parentNode.removeChild( tarea.nextElementSibling );
-						 tarea.previousElementSibling.innerHTML = "Success! Here's your custom Wrap build!";
-					}
-				});
-			};
-			
-			wrap( "head" )[0].appendChild( aj );
-			
-		}
-		
-		function attempt(){
-			try {
-				eval( text );
-			}
-			catch( e){
-				var etype = e.type,
-					emethod = e.arguments[0],
-					isfn = !!e.arguments[1].each;
-				
-				app.addFile( "../extensions/" + app.files.js[ ( isfn ? "fn_" : "" ) + emethod ] )
-				app.enhance();
-				
-				wrap( "head script:first-child" )[0].onload = attempt;
-				return;
-			}
-			success();
-		}
-		
-		attempt();
-	});
-	</script>
-	
 </body>
 </html>
