@@ -125,7 +125,7 @@
 	// For DOM ready execution
 	wrap.ready = function( fn ){
 		if( ready && fn && wrap.qualified ){
-			fn();
+			fn.call( document );
 		}
 		else if( fn && wrap.qualified ){
 			readyQueue.push( fn );
@@ -137,13 +137,19 @@
 		return [doc];
 	};
 	
+	// non-shortcut ready
+	wrap.fn.ready = function( fn ){
+		wrap.ready( fn );
+		return this;
+	};
+	
 	// Empty and exec the ready queue
 	var ready = false,
 		readyQueue = [],
 		runReady = function(){
 			if( !ready ){
 				while( readyQueue.length ){
-					readyQueue.shift()();
+					readyQueue.shift().call( document );
 				}
 				ready = true;
 			}
