@@ -25,6 +25,7 @@
 		fn_not: "wrap.dom.not.js",
 		fn_parent: "wrap.dom.parent.js",
 		fn_parents: "wrap.dom.parents.js",
+		fn_closest: "wrap.dom.closest.js",
 		fn_prepend: "wrap.dom.prepend.js",
 		fn_prev: "wrap.dom.prev.js",
 		fn_prop: "wrap.dom.prop.js",
