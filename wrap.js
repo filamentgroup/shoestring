@@ -124,10 +124,10 @@
 	
 	// For DOM ready execution
 	wrap.ready = function( fn ){
-		if( ready && fn ){
+		if( ready && fn && wrap.qualified ){
 			fn();
 		}
-		else if( fn ){
+		else if( fn && wrap.qualified ){
 			readyQueue.push( fn );
 		}
 		else {
