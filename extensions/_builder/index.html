@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>wrap builder</title>
-	<script src="quickconcat.php?files=app.js,../extensions.js,app.enhance.js,../../wrap.js,builder.js"></script>
+	<script src="quickconcat.php?files=app.js,../extensions.js,app.enhance.js,../../wrap.js"></script>
 	<style>
 	body { font-family: sans-serif; margin: 50px 30%; }
 	textarea { display: block; font-size: 1em; width: 96%;  height: 20em; padding: .5em 2%; margin: 1em 0 }
@@ -15,7 +15,10 @@
 	<form>
 		<label for="yourcode">Paste your code &amp; get a Wrap build with the methods you need!</label>
 		<textarea name="yourcode" id="yourcode">wrap( "p" ).addClass( "foo" ).html( "whoa." );</textarea>
+		
 		<input type="submit">
+		<p><a href="#" id="all">...or just get a build with the whole thing.</a></p>
 	</form>
+	<script src="builder.js"></script>
 </body>
 </html>
