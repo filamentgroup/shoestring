@@ -143,7 +143,7 @@
 		runReady = function(){
 			if( !ready ){
 				while( readyQueue.length ){
-					console.log(readyQueue.shift()());
+					readyQueue.shift()();
 				}
 				ready = true;
 			}
