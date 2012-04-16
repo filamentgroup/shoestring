@@ -24,10 +24,12 @@
 					if( sec ){
 						return wrap( sec ).find( prim );
 					}
-					ret = doc.querySelectorAll( prim );
+					for( var i = 0, sel = doc.querySelectorAll( prim ), il = sel.length; i < il; i++ ){
+						ret[ i ] = sel[ i ];
+					}
 				}
 				// object? passthrough
-				else{
+				else {
 					ret = ret.concat( prim );
 				}
 			}

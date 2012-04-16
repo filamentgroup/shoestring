@@ -105,8 +105,8 @@ test( 'wrap with no arguments returns an array with first child of document', fu
 	ok( wrap()[0] === document );
 });
 
-test( 'wrap with a string argument returns a nodelist', function() { 
-	ok( wrap( "body" ).constructor === NodeList );
+test( 'wrap with a string argument returns an array', function() { 
+	ok( wrap( "body" ).constructor === Array );
 });
 
 test( 'wrap with a string argument returns an array of dom nodes from qsa', function() { 
