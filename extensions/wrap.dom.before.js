@@ -1,7 +1,7 @@
 // Extensions
 (function( undefined ){
 	wrap.fn.before = function( frag ){
-		if( typeof( frag ) === "string" ){
+		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = wrap( frag );
 		}
 		return this.each(function( i ){
