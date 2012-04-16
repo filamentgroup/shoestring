@@ -33,7 +33,7 @@
 			}
 			// if no prim, return a wrapped doc
 			else{
-				ret = [doc];
+				ret.push( doc );
 			}
 		
 			ret = wrap.extend( ret, wrap.fn );
