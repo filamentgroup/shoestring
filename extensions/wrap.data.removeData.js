@@ -5,6 +5,7 @@
 	wrap.fn.removeData = function( name ){
 		return this.each(function(){
 			if( name !== undefined && this.wrapData ){
+				this.wrapData[ name ] = undefined;
 				delete this.wrapData[ name ];
 			}
 			else {
