@@ -14,7 +14,7 @@
 				if( pType === "string" && prim.indexOf( "<" ) === 0 ){
 					var dfrag = document.createElement( "div" );
 					dfrag.innerHTML = prim;
-					ret = wrap(dfrag).children();
+					return wrap( dfrag ).children();
 				}
 				// if string, it's a selector, use qsa
 				else if( pType === "string" ){
