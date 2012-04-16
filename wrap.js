@@ -16,15 +16,15 @@
 					dfrag.innerHTML = prim;
 					return wrap( dfrag ).children();
 				}
+				else if( pType === "function" ){
+					return wrap.ready( prim );
+				}
 				// if string, it's a selector, use qsa
 				else if( pType === "string" ){
 					if( sec ){
 						return wrap( sec ).find( prim );
 					}
 					ret = doc.querySelectorAll( prim );
-				}
-				else if( pType === "function" ){
-					ret = wrap.ready( prim );
 				}
 				// object? passthrough
 				else{
