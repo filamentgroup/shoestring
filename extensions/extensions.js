@@ -29,6 +29,7 @@
 		fn_prepend: "wrap.dom.prepend.js",
 		fn_prev: "wrap.dom.prev.js",
 		fn_prop: "wrap.dom.prop.js",
+		fn_prop: "wrap.dom.removeProp.js",
 		fn_remove: "wrap.dom.remove.js",
 		fn_removeAttr: "wrap.dom.removeAttr.js",
 		fn_removeClass: "wrap.dom.removeClass.js",
