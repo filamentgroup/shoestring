@@ -1,9 +1,19 @@
 // Extensions
 (function( undefined ){
 	wrap.fn.attr = function( name, val ){
-		if( val !== undefined ){
+		var nameStr = typeof( name ) === "string";
+		if( val !== undefined || !nameStr ){
 			return this.each(function(){
-				this.setAttribute( name, val );
+				if( nameStr ){
+					this.setAttribute( name, val );
+				}
+				else {
+					for( var i in name ){
+						if( name.hasOwnProperty( i ) ){
+							this.setAttribute( i, name[ i ] );
+						}
+					}
+				}
 			});
 		}
 		else {
