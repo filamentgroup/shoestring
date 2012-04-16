@@ -2,7 +2,6 @@
 
 // keep this wrapper around the ones you use!
 (function( undefined ){
-
 	wrap.fn.data = function( name, val ){
 		if( name !== undefined ){
 			if( val !== undefined ){
@@ -20,16 +19,5 @@
 		else {
 			return this[ 0 ].wrapData;
 		}
-	};
-
-	wrap.fn.removeData = function( name ){
-			return this.each(function(){
-				if( name !== undefined && this.wrapData ){
-					delete this.wrapData[ name ];
-				}
-				else {
-					this[ 0 ].wrapData = {};
-				}
-			});
 	};
 })();
