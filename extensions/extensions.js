@@ -30,6 +30,7 @@
 		fn_prev: "wrap.dom.prev.js",
 		fn_prop: "wrap.dom.prop.js",
 		fn_remove: "wrap.dom.remove.js",
+		fn_removeAttr: "wrap.dom.removeAttr.js",
 		fn_removeClass: "wrap.dom.removeClass.js",
 		fn_replaceWith: "wrap.dom.replaceWith.js",
 		fn_bind: "wrap.events.bind.js",
