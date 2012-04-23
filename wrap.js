@@ -14,7 +14,9 @@
 				if( pType === "string" && prim.indexOf( "<" ) === 0 ){
 					var dfrag = document.createElement( "div" );
 					dfrag.innerHTML = prim;
-					return wrap( dfrag ).children();
+					return wrap( dfrag ).children().each(function(){
+						dfrag.removeChild( this );
+					});
 				}
 				else if( pType === "function" ){
 					return wrap.ready( prim );
