@@ -41,16 +41,17 @@ perhaps you'd like to iterate through each item that was found, applying scripti
 
 ...but wait. you'll probably want to hold off on all that until the dom is ready. no worry, just like you would in jQuery, pass a function into wrap and it'll queue it up til the coast is clear.
 
-    wrap( "#foo, .bar" ).each(function(){
-		console.log( this );
-		// here, "this" refers to the current element in iteration
+    wrap(function(){
+		// execute code here
 	});
 
-Lastly, in order to ensure wrap doesn't apply in browsers that it shouldn't, it comes with a handy api method, `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `wrap`, receiving a boolean answer: 
+Internally, this dom-ready shortcut also provides the benefit of doing nothing at all in browsers that don't mass the `wrap.qualified` boolean (which, by default, checks for `document.querySelectorAll` support).
+
+That same test is exposed in a handy api method as well: `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `wrap`, receiving a boolean answer: 
 
     var qualifiedBrowser = wrap.qualify();
 
-More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. Just wrap your code in a `qualify` callback to safeproof its execution. Basically, you can use `qualify` in place of your typical IIFE wrapper:
+More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won't need this, but if it executes earlier, just wrap your code in a `qualify` callback to safeproof its execution. Basically, you might use `qualify` in place of your typical `IIFE` wrapper:
 
     wrap.qualify(
 		// It's safer in here.
