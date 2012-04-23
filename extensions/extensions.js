@@ -5,6 +5,7 @@
 	"use strict";
 	
 	app.files.js = {
+		dollar: "wrap.dollar.js",
 		ajax: "wrap.ajax.ajax.js",
 		get: "wrap.ajax.get.js",
 		fn_load: "wrap.ajax.load.js",
