@@ -4,7 +4,7 @@
 		var ret = false,
 			sel = wrap( sel );
 		this.each(function( i ){
-			if( wrap.inArray( this, sel )  >= 0 ){
+			if( wrap.inArray( this, sel )  > -1 ){
 				ret = true;				
 			}
 		});

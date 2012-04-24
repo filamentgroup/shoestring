@@ -12,7 +12,7 @@
 				wsel = wrap( sel, context );
 			}
 			
-			if( wrap.inArray( this, wsel ) >= 0 ){
+			if( wrap.inArray( this, wsel ) > -1 ){
 				ret.push( this );				
 			}
 		});
