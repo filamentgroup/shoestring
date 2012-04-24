@@ -81,7 +81,7 @@
 			j = -1;
 		
 			while( j++ < childs.length-1 ){
-				if( !wrap.inArray( ret, childs[ j ] ) ){
+				if( wrap.inArray(  childs[ j ], ret ) === -1 ){
 					ret.push( childs[ j ] );
 				}
 			}

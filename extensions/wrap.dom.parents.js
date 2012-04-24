@@ -11,13 +11,13 @@
 				if( sel ){
 					if( curr === wrap( sel )[0] ){
 						match = true;
-						if( !wrap.inArray( curr, ret ) ){
+						if( !wrap.inArray( curr, ret ) >= 0 ){
 							ret.push( curr );
 						}
 					}
 				}
 				else {
-					if( !wrap.inArray( curr, ret ) ){
+					if( !wrap.inArray( curr, ret ) >= 0 ){
 						ret.push( curr );
 					}
 				}				

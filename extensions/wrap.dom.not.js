@@ -4,7 +4,7 @@
 		var ret = [],
 			sel = wrap( sel );
 		this.each(function( i ){
-			if( !wrap.inArray( this, sel ) ){
+			if( !wrap.inArray( this, sel ) >= 0 ){
 				ret.push( this );				
 			}
 		});
