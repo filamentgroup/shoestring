@@ -115,11 +115,11 @@
 	};
 	
 	// check if an item exists in an array
-	wrap.inArray = function( haystack, needle ){
-		var isin = false;
+	wrap.inArray = function( needle, haystack ){
+		var isin = -1;
 		for( var i in haystack ){
 			if( haystack.hasOwnProperty( i ) && haystack[ i ] === needle ){
-				isin = true;
+				isin = i;
 			}
 		}
 		return isin;

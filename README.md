@@ -78,9 +78,9 @@ extend doesn't do deep object extensions, but it covers the usual hash mixin use
 	
 	// --> throws an alert of "foo"
 
-the second utility, `inArray`, will let you know if an item is in an array or not. This is helpful when returning arrays that should only contain unique entries, like a bunch of dom node references, for instance.
+the second utility, `inArray`, will let you know if an item is in an array or not, returning the position of the item in the array (or `-1` if it's not present). This is helpful when returning arrays that should only contain unique entries, like a bunch of dom node references, for instance.
 
-    wrap.inArray( ["a","b","c"], "b" );
+    wrap.inArray( "b", ["a","b","c"] );
 	// --> true, "b" is in that array
 
 the third utility function, `fn`, is a bit more interesting, as it is where you add chainable methods to the `wrap` api. it works just like jQuery's fn method. Here's a dumb little `addClass` method, added to `wrap` via the `fn` api:
