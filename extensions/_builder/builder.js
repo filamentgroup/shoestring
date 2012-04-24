@@ -8,7 +8,16 @@
 	
 	wrap(function(){
 		
-		var tarea = wrap( "textarea" )[ 0 ];
+		var tarea = wrap( "textarea" )[ 0 ],
+			submit = wrap( "input[type=submit]" )[ 0 ],
+			all = wrap( "#all" )[ 0 ],
+			some = wrap( "#some" )[ 0 ];
+		
+			function removeElem( el ){
+				if( el.parentNode ){
+					el.parentNode.removeChild( el );
+				}
+			}
 		
 		function success(){
 			var aj = document.createElement( "script" );
@@ -22,7 +31,7 @@
 						tarea.value = txt;
 						tarea.className = "done";
 						tarea.setAttribute("readonly", true);
-						tarea.parentNode.removeChild( tarea.nextElementSibling );
+						removeElem( submit );
 						tarea.previousElementSibling.innerHTML = "Success! Here's your custom Wrap build!";
 					}
 				});
@@ -31,14 +40,55 @@
 			wrap( "head" )[0].appendChild( aj );
 		}
 		
-		wrap( "#all" )[ 0 ].addEventListener( "click", function( e ){
+		all.addEventListener( "click", function( e ){
 			e.preventDefault();
 			for( var i in app.files.js ){
 				app.addFile( "../extensions/" + app.files.js[i] );
 			}
 			success();
-			this.parentNode.removeChild( this )
+			removeElem( this );
 		});
+		
+		some.addEventListener( "click", function( e ){
+			e.preventDefault();
+			tarea.value = "";
+			
+			// remove the links and button
+			removeElem( this );
+			removeElem( submit );
+			removeElem( all );
+			
+			function addCB( extname ){
+				var li = wrap( "<div><input type='checkbox' name='" + extname + "' id='" + extname + "'><label for='" + extname + "'>"+extname+"</label></div>" );
+					
+				tarea.parentNode.insertBefore( li[0], tarea )
+					
+				li[ 0 ].addEventListener( "click", function(){
+					
+					if( this.childNodes[0].checked ){
+						app.addFile( "../extensions/" + app.files.js[extname] );
+						success();
+					}
+					else{
+						for( var i = 0, il = app.jsToLoad.length; i < il; i++ ){
+							if( app.jsToLoad[ i ] === "../../extensions/" + app.files.js[extname] ){
+								app.jsToLoad.splice( i, 1);
+								success();
+							}
+						}
+					}
+						
+				});
+			}
+			for( var i in app.files.js ){
+				
+				addCB( i );
+			}
+			
+			
+		});
+		
+		
 		
 		// on form submit
 		wrap( "form" )[ 0 ].addEventListener( "submit", function( e ){
