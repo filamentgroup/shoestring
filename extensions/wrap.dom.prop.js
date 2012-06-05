@@ -20,4 +20,4 @@
 		readonly: "readOnly",
 		tabindex: "tabIndex"
 	}
-})();
+}());

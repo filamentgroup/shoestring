@@ -5,4 +5,4 @@
 			this.className += " " + cname;
 		});
 	};
-})();
+}());

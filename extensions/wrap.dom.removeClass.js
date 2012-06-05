@@ -5,4 +5,4 @@
 			this.className = this.className.replace( new RegExp( cname, "gmi" ), "" );
 		});
 	};
-})();
+}());

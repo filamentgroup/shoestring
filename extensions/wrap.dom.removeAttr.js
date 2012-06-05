@@ -5,4 +5,4 @@
 			this.removeAttribute( attr );
 		});
 	};
-})();
+}());

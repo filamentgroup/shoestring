@@ -5,4 +5,4 @@
 	wrap.fn.eq = function( num ){
 		return wrap( this[ num ] );
 	};
-})();
+}());

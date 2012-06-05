@@ -20,4 +20,4 @@
 			return this[ 0 ].getAttribute( name );
 		}
 	};
-})();
+}());

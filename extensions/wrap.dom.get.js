@@ -5,4 +5,4 @@
 	wrap.fn.get = function( num ){
 		return this[ num ];
 	};
-})();
+}());

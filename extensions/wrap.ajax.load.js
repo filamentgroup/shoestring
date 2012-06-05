@@ -14,4 +14,4 @@
 		wrap.ajax( url, { success: intCB } );
 		return this;
 	};
-})();
+}());

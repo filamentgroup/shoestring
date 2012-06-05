@@ -16,4 +16,4 @@
 			wrap( sel ).before( this );
 		});
 	};
-})();
+}());

@@ -14,7 +14,7 @@
 		return function(){
 			return xmlhttpmethod;
 		};
-	})();
+	}());
 	
 	wrap.ajax = function( url, options ) {
 		var req = xmlHttp(),
@@ -53,4 +53,4 @@
 		async: true,
 		data: null
 	};
-})();
+}());

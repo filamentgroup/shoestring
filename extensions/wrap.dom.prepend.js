@@ -23,4 +23,4 @@
 			wrap( sel ).prepend( this );
 		});
 	};
-})();
+}());
