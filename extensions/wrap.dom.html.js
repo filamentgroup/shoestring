@@ -11,7 +11,6 @@
 			return this.each(function(){
 				pile += this.innerHTML;
 			});
-			return pile;
 		}
 	};
 }());

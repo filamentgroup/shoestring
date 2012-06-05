@@ -1,10 +1,9 @@
 // Extensions
 (function( undefined ){
 	wrap.fn.not = function( sel ){
-		var ret = [],
-			sel = wrap( sel );
+		var ret = [];
 		this.each(function( i ){
-			if( wrap.inArray( this, sel ) === -1 ){
+			if( wrap.inArray( this, wrap( sel ) ) === -1 ){
 				ret.push( this );				
 			}
 		});

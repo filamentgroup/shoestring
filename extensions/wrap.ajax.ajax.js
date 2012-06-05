@@ -38,7 +38,7 @@
 				return settings.error( req.responseText, req.status, req );
 			}
 			settings.success( req.responseText, req.status, req );
-		}
+		};
 		if( req.readyState === 4 ){
 			return;
 		}

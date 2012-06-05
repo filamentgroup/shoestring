@@ -1,7 +1,7 @@
 // Extensions
 (function( undefined ){
 	wrap.fn.prop = function( name, val ){
-		var name = wrap.propFix[ name ] || name;
+		name = wrap.propFix[ name ] || name;
 		if( val !== undefined ){
 			return this.each(function(){
 				this[ name ] = val;
@@ -19,5 +19,5 @@
 		"for": "htmlFor",
 		readonly: "readOnly",
 		tabindex: "tabIndex"
-	}
+	};
 }());

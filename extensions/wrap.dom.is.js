@@ -1,10 +1,9 @@
 // Extensions
 (function( undefined ){
 	wrap.fn.is = function( sel ){
-		var ret = false,
-			sel = wrap( sel );
+		var ret = false;
 		this.each(function( i ){
-			if( wrap.inArray( this, sel )  > -1 ){
+			if( wrap.inArray( this, wrap( sel ) )  > -1 ){
 				ret = true;				
 			}
 		});
