@@ -12,14 +12,14 @@ module.exports = function(grunt) {
         'Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */'
     },
     lint: {
-      files: ['grunt.js', 'wrap.js', 'extensions/*.js']
+      files: ['grunt.js', 'src/wrap.js', 'src/extensions/*.js']
     },
     qunit: {
       files: ['test/unit/*.html']
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:wrap.js>'],
+        src: ['<banner:meta.banner>', 'intro.js', '<file_strip_banner:src/wrap.js>', 'src/extensions/*.js'],
         dest: 'dist/wrap.js'
       }
     },
@@ -43,6 +43,7 @@ module.exports = function(grunt) {
         noarg: true,
         sub: true,
         undef: false,
+		evil: true,
         boss: true,
         eqnull: true,
         browser: true
