@@ -77,7 +77,7 @@
 			childs,
 			j;
 		this.each(function(){
-			childs = this.children,
+			childs = this.children;
 			j = -1;
 		
 			while( j++ < childs.length-1 ){
@@ -177,4 +177,4 @@
 	// expose
 	w.wrap = wrap;
 
-})( this );
+}( this ));
