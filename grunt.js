@@ -19,7 +19,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', 'intro.js', '<file_strip_banner:src/wrap.js>', 'src/extensions/*.js'],
+        src: ['<banner:meta.banner>', '<file_strip_banner:src/wrap.js>', 'src/extensions/*.js'],
         dest: 'dist/wrap.js'
       }
     },
