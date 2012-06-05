@@ -12,7 +12,7 @@ module.exports = function(grunt) {
         'Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */'
     },
     lint: {
-      files: ['grunt.js', 'wrap.js']
+      files: ['grunt.js', 'wrap.js', 'extensions/*.js']
     },
     qunit: {
       files: ['test/unit/*.html']
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         newcap: true,
         noarg: true,
         sub: true,
-        undef: true,
+        undef: false,
         boss: true,
         eqnull: true,
         browser: true
