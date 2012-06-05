@@ -18,7 +18,7 @@
 	}
 	
 	// Configure css and js paths, if desirable.
-	app.basepath.js = app.basepath.css = "../";
+	app.basepath.js = "../extensions/";
 	
 	app.addFile( "../wrap.js" );
 	
