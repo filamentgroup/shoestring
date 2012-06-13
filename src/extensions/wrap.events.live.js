@@ -9,7 +9,7 @@
 		
 			function newCB( event ){
 				if( event.target === self ){
-					callback.apply( self, [ e ].concat( event.args || [] ) );
+					callback.apply( self, [ evt ].concat( event.args || [] ) );
 				}
 			}
 			
