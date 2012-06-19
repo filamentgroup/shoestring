@@ -117,14 +117,12 @@ that's pretty much it. of course, you're going to need a few more methods to mak
 
 ## wrap extensions
 
-the `extensions` folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`.
+the `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`.
 
-## miss your dollar?
+## want a dollar?
 
 here you go:
 
     window.$ = wrap;
-
-now you can `$` it up.
 
     $( "foo, bar, .baz" ).each(...)
