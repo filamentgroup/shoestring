@@ -9,7 +9,7 @@ Wrap is a simple framework of DOM utilities that is designed to target modern br
 
 Wrap is aimed particularly at cases where you need a small set of JS utilities but not a full toolkit. It's a throwback to the days of using a simple set of utilities that you need, and nothing more, but it's "wrapped" in a handy API.
 
-Wrap is currently in development and may not be ready for production use. 
+### Wrap is currently in development and may not be ready for production use. 
 
 Within the Southstreet workflow at Filament Group, we would use Wrap on for enhancing the user experience by manipulating markup, making Ajax requests, and any other common tasks one would do when using an unobtrusive JavaScript DOM framework.
 
