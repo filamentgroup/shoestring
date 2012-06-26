@@ -1,13 +1,21 @@
 # wrap
 
-a simple framework for DOM utilities, targeting modern browsers without failing the rest
+a simple set of DOM utilities, targeting modern browsers without failing the rest
 
 * Copyright 2012 @scottjehl, Filament Group, Inc.
 * Licensed MIT/GPLv2
 
-wrap is a simple dom wrapper that follows a jQuery-like syntax. also like jQuery, wrap is meant to let you find elements and do things with them. Unlike jQuery, wrap is written in such a way that it'll only do anything at all in modern browsers, like IE8 and up. Other browsers? They'll get a less-enhanced experience. There won't be errors, but there may be less zing. Build with Progressive Enhancement and you should be fine.
+Wrap is a simple framework of DOM utilities that is designed to target modern browsers without failing the rest.
 
-also unlike jQuery, wrap is a simple, small, extendable core that handles not much more than the wrapping and iterating of dom nodes. did i mention it's small? it's small. .5kb min/gzippd. it doesn't come with much more than a few essentials, but using those, wrap is easy to extend further.
+Wrap is aimed particularly at cases where you need a small set of JS utilities but not a full toolkit. It's a throwback to the days of using a simple set of utilities that you need, and nothing more, but it's "wrapped" in a handy API.
+
+### Wrap is currently in development and may not be ready for production use. 
+
+Within the Southstreet workflow at Filament Group, we would use Wrap on for enhancing the user experience by manipulating markup, making Ajax requests, and any other common tasks one would do when using an unobtrusive JavaScript DOM framework.
+
+Wrap is inspired by the jQuery API, letting you find elements and manipulate them. However, Wrap is written in such a way that it'll only do anything at all in modern browsers, like Internet Explorer 8 and up. Other browsers? They'll get a less-enhanced experience. There won't be errors, but there may be less zing. Assuming you're already building applications with Progressive Enhancement, you should be fine without JavaScript enhancements. In that way, jQuery and Wrap have dramatically different aims regarding support: jQuery works pretty much anywhere, and is fault-tolerant to infinite levels of developer happiness... Wrap: not so much. It only supports a subset of the nice things jQuery does, and almost that entire subset is optional. 
+
+Technically, wrap.js itself is a simple, small (half a kb), extendable core function. Basically, you use Wrap like you use jQuery (just reference the wrap variable instead of $ or jQuery), but it doesn't come with much more than a means of finding and generating HTML multiple elements, a DOM-ready handler, and a few essential element-iterating methods like each, find, children. Using its API, Wrap is simple to extend further, and many extensions are available in the Wrap project for you to include in your build.
 
 Open up test/console.html to play around.
 
@@ -109,14 +117,12 @@ that's pretty much it. of course, you're going to need a few more methods to mak
 
 ## wrap extensions
 
-the `extensions` folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`.
+the `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`.
 
-## miss your dollar?
+## want a dollar?
 
 here you go:
 
     window.$ = wrap;
-
-now you can `$` it up.
 
     $( "foo, bar, .baz" ).each(...)
