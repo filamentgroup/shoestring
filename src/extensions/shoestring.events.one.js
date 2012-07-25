@@ -8,19 +8,20 @@
 			var cb;
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
+				var thisevt = evts[ i ];
 				if( "addEventListener" in this ){
 					cb = function( e ){
 						callback.call( this, e );
-						this.removeEventListener( evt, cb );
+						this.removeEventListener( thisevt, cb );
 					};
-					this.addEventListener( evt, cb, false );
+					this.addEventListener( thisevt, cb, false );
 				}
 				else if( this.attachEvent ){
 					cb = function( e ){
 						callback.call( this, e );
-						this.detachEvent( "on" + evt, cb );
+						this.detachEvent( "on" + thisevt, cb );
 					};
-					this.attachEvent( "on" + evt, cb );
+					this.attachEvent( "on" + thisevt, cb );
 				}
 			}
 		});
