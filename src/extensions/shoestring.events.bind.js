@@ -4,16 +4,11 @@
 (function( undefined ){
 	shoestring.fn.bind = function( evt, callback ){
 		return this.each(function(){
-			
-			var cb = function( e ){
-				callback.apply( this, [ e ].concat( e.args || [] )  );
-			};
-			
 			if( "addEventListener" in this ){
-				this.addEventListener( evt, cb, false );
+				this.addEventListener( evt, callback, false );
 			}
 			else if( this.attachEvent ){
-				this.attachEvent( "on" + evt, cb );
+				this.attachEvent( "on" + evt, callback );
 			}
 		});
 	};
