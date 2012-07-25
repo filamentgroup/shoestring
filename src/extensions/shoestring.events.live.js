@@ -3,21 +3,23 @@
 // keep this shoestringper around the ones you use!
 (function( undefined ){
 	shoestring.fn.live = function( evt, callback ){
+		var evts = evt.split( " " );
 		return this.each(function(){
-			
 			var self = this;
-		
-			function newCB( event ){
+			
+			function newCB( e ){
 				if( event.target === self ){
-					callback.apply( self, [ evt ].concat( event.args || [] ) );
+					callback.call( self, e );
 				}
 			}
 			
-			if( "addEventListener" in document ){
-				document.addEventListener( evt, newCB, false );
-			}
-			else if( document.attachEvent ){
-				document.attachEvent( "on" + evt, newCB );
+			for( var i = 0, il = evts.length; i < il; i++ ){
+				if( "addEventListener" in document ){
+					document.addEventListener( evts[ i ], newCB, false );
+				}
+				else if( document.attachEvent ){
+					document.attachEvent( "on" + evts[ i ], newCB );
+				}
 			}
 		});
 	};
