@@ -5,7 +5,9 @@
 		
 		return this.each(function(){
 			for( var i = 0, il = classes.length; i < il; i++ ){
-				this.className = this.className.replace( new RegExp( "(^|\\s)" + classes[ i ] + "($|\\s)", "gmi" ), " " );
+				if( this.className !== undefined ){
+					this.className = this.className.replace( new RegExp( "(^|\\s)" + classes[ i ] + "($|\\s)", "gmi" ), " " );
+				}
 			}
 		});
 	};
