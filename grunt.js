@@ -5,28 +5,28 @@ module.exports = function(grunt) {
   grunt.initConfig({
     meta: {
       version: '0.1.0',
-      banner: '/*! Wrap - v<%= meta.version %> - ' +
+      banner: '/*! Shoestring - v<%= meta.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '* http://github.com/filamentgroup/wrap/\n' +
+        '* http://github.com/filamentgroup/shoestring/\n' +
         '* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
         'Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */'
     },
     lint: {
-      files: ['grunt.js', 'src/wrap.js', 'src/extensions/*.js']
+      files: ['grunt.js', 'src/shoestring.js', 'src/extensions/*.js']
     },
     qunit: {
       files: ['test/unit/*.html']
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/wrap.js>', 'src/extensions/*.js'],
-        dest: 'dist/wrap.js'
+        src: ['<banner:meta.banner>', '<file_strip_banner:src/shoestring.js>', 'src/extensions/*.js'],
+        dest: 'dist/shoestring.js'
       }
     },
     min: {
       dist: {
         src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/wrap.min.js'
+        dest: 'dist/shoestring.min.js'
       }
     },
     watch: {

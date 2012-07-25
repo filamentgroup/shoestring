@@ -1,143 +1,143 @@
 /*
-wrap unit tests - using qUnit
+shoestring unit tests - using qUnit
 */
 (function(undefined){
 	
-test( 'API Properties: wrap is defined', function() { 
-	ok( wrap !== undefined );
+test( 'API Properties: shoestring is defined', function() { 
+	ok( shoestring !== undefined );
 });
 
-test( 'API Properties: wrap.fn is defined', function() { 
-	ok( wrap.fn !== undefined );
+test( 'API Properties: shoestring.fn is defined', function() { 
+	ok( shoestring.fn !== undefined );
 });
 
-test( 'API Properties: wrap.qualified is defined', function() { 
-	ok( wrap.qualified !== undefined );
+test( 'API Properties: shoestring.qualified is defined', function() { 
+	ok( shoestring.qualified !== undefined );
 });
 
-test( 'API Properties: wrap.qualify is defined', function() { 
-	ok( wrap.qualify !== undefined );
+test( 'API Properties: shoestring.qualify is defined', function() { 
+	ok( shoestring.qualify !== undefined );
 });
 
-test( 'API Properties: wrap.extend is defined', function() { 
-	ok( wrap.extend !== undefined );
+test( 'API Properties: shoestring.extend is defined', function() { 
+	ok( shoestring.extend !== undefined );
 });
 
-test( 'API Properties: wrap.inArray is defined', function() { 
-	ok( wrap.inArray !== undefined );
+test( 'API Properties: shoestring.inArray is defined', function() { 
+	ok( shoestring.inArray !== undefined );
 });
 
-test( 'API Properties: wrap.ready is defined', function() { 
-	ok( wrap.ready !== undefined );
+test( 'API Properties: shoestring.ready is defined', function() { 
+	ok( shoestring.ready !== undefined );
 });
 
 // Types
-test( 'API Properties: wrap is a function', function() { 
-	ok( typeof(wrap) === "function" );
+test( 'API Properties: shoestring is a function', function() { 
+	ok( typeof(shoestring) === "function" );
 });
 
-test( 'API Properties: wrap.fn is an object', function() { 
-	ok( wrap.fn.constructor === Object );
+test( 'API Properties: shoestring.fn is an object', function() { 
+	ok( shoestring.fn.constructor === Object );
 });
 
-test( 'API Properties: wrap.qualified is a boolean', function() { 
-	ok( typeof(wrap.qualified) === "boolean" );
+test( 'API Properties: shoestring.qualified is a boolean', function() { 
+	ok( typeof(shoestring.qualified) === "boolean" );
 });
 
-test( 'API Properties: wrap.qualify is a function', function() { 
-	ok( typeof(wrap.qualify) === "function" );
+test( 'API Properties: shoestring.qualify is a function', function() { 
+	ok( typeof(shoestring.qualify) === "function" );
 });
 
-test( 'API Properties: wrap.extend is a function', function() { 
-	ok( typeof(wrap.extend) === "function" );
+test( 'API Properties: shoestring.extend is a function', function() { 
+	ok( typeof(shoestring.extend) === "function" );
 });
 
-test( 'API Properties: wrap.inArray is a function', function() { 
-	ok( typeof(wrap.inArray) === "function" );
+test( 'API Properties: shoestring.inArray is a function', function() { 
+	ok( typeof(shoestring.inArray) === "function" );
 });
 
-test( 'API Properties: wrap.ready is a function', function() { 
-	ok( typeof(wrap.ready) === "function" );
+test( 'API Properties: shoestring.ready is a function', function() { 
+	ok( typeof(shoestring.ready) === "function" );
 });
 
 // core fn methods
-test( 'API Properties: wrap.fn.each, is defined', function() { 
-	ok( wrap.fn.each !== undefined );
+test( 'API Properties: shoestring.fn.each, is defined', function() { 
+	ok( shoestring.fn.each !== undefined );
 });
 
-test( 'API Properties: wrap.fn.children, is defined', function() { 
-	ok( wrap.fn.children !== undefined );
+test( 'API Properties: shoestring.fn.children, is defined', function() { 
+	ok( shoestring.fn.children !== undefined );
 });
 
-test( 'API Properties: wrap.fn.find, is defined', function() { 
-	ok( wrap.fn.find !== undefined );
+test( 'API Properties: shoestring.fn.find, is defined', function() { 
+	ok( shoestring.fn.find !== undefined );
 });
 
 // fn types
-test( 'API Properties: wrap.fn.each, is a function', function() { 
-	ok( typeof(wrap.fn.each) === "function" );
+test( 'API Properties: shoestring.fn.each, is a function', function() { 
+	ok( typeof(shoestring.fn.each) === "function" );
 });
 
-test( 'API Properties: wrap.fn.children, is a function', function() { 
-	ok( typeof(wrap.fn.children) === "function" );
+test( 'API Properties: shoestring.fn.children, is a function', function() { 
+	ok( typeof(shoestring.fn.children) === "function" );
 });
 
-test( 'API Properties: wrap.fn.find, is a function', function() { 
-	ok( typeof(wrap.fn.find) === "function" );
+test( 'API Properties: shoestring.fn.find, is a function', function() { 
+	ok( typeof(shoestring.fn.find) === "function" );
 });
 
 
 
 // functionality
-test( 'wrap with no arguments returns an array', function() { 
-	ok( wrap().constructor === Array );
+test( 'shoestring with no arguments returns an array', function() { 
+	ok( shoestring().constructor === Array );
 });
 
-test( 'wrap with no arguments returns an array with core methods', function() { 
-	ok( wrap().constructor === Array );
+test( 'shoestring with no arguments returns an array with core methods', function() { 
+	ok( shoestring().constructor === Array );
 });
 
-test( 'wrap with no arguments returns an array with one child', function() { 
-	ok( wrap().length === 1 );
+test( 'shoestring with no arguments returns an array with one child', function() { 
+	ok( shoestring().length === 1 );
 });
 
-test( 'wrap with no arguments returns an array with first child of document', function() { 
-	ok( wrap()[0] === document );
+test( 'shoestring with no arguments returns an array with first child of document', function() { 
+	ok( shoestring()[0] === document );
 });
 
-test( 'wrap with a string argument returns an array', function() { 
-	ok( wrap( "body" ).constructor === Array );
+test( 'shoestring with a string argument returns an array', function() { 
+	ok( shoestring( "body" ).constructor === Array );
 });
 
-test( 'wrap with a string argument returns an array of dom nodes from qsa', function() { 
-	ok( wrap( "body" )[ 0 ] === document.querySelectorAll( "body" )[ 0 ] );
+test( 'shoestring with a string argument returns an array of dom nodes from qsa', function() { 
+	ok( shoestring( "body" )[ 0 ] === document.querySelectorAll( "body" )[ 0 ] );
 });
 
-test( 'wrap with a string argument starting with "<" returns a generated array', function() { 
-	ok( wrap( "<div></div>" ).constructor === Array );
+test( 'shoestring with a string argument starting with "<" returns a generated array', function() { 
+	ok( shoestring( "<div></div>" ).constructor === Array );
 });
 
-test( 'wrap with a string argument starting with "<" returns a generated array of dom nodes', function() { 
-	ok( wrap( "<div></div>" )[0].constructor === HTMLDivElement );
+test( 'shoestring with a string argument starting with "<" returns a generated array of dom nodes', function() { 
+	ok( shoestring( "<div></div>" )[0].constructor === HTMLDivElement );
 });
 
-test( 'wrap with a string argument starting with "<" returns a generated array of dom nodes', function() { 
-	ok( wrap( "<div></div><h2></h2>" )[1].constructor === HTMLHeadingElement );
+test( 'shoestring with a string argument starting with "<" returns a generated array of dom nodes', function() { 
+	ok( shoestring( "<div></div><h2></h2>" )[1].constructor === HTMLHeadingElement );
 });
 
-test( 'wrap with a function argument returns array', function() { 
-	ok( wrap( function(){} ).constructor === Array );
+test( 'shoestring with a function argument returns array', function() { 
+	ok( shoestring( function(){} ).constructor === Array );
 });
 
-test( 'wrap with a function argument returns array with document child', function() { 
-	ok( wrap( function(){} )[ 0 ] === document );
+test( 'shoestring with a function argument returns array with document child', function() { 
+	ok( shoestring( function(){} )[ 0 ] === document );
 });
 
-test( 'passing a string argument to wrap with a second argument returns result scoped to second arg', function() { 
-	ok( wrap( "body" )[ 0 ] === wrap( "body", "html" )[ 0 ] );
-	ok( wrap( "body" )[ 0 ] !== wrap( "body", "body" )[ 0 ] );
-	ok( wrap( ".testel-2" ).length === 2 );
-	ok( wrap( ".testel-2", ".testel" ).length === 1 );
+test( 'passing a string argument to shoestring with a second argument returns result scoped to second arg', function() { 
+	ok( shoestring( "body" )[ 0 ] === shoestring( "body", "html" )[ 0 ] );
+	ok( shoestring( "body" )[ 0 ] !== shoestring( "body", "body" )[ 0 ] );
+	ok( shoestring( ".testel-2" ).length === 2 );
+	ok( shoestring( ".testel-2", ".testel" ).length === 1 );
 });
 
 
