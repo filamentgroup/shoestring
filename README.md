@@ -1,128 +1,142 @@
-# wrap
+# Shoestring
 
-a simple set of DOM utilities, targeting modern browsers without failing the rest
+A lightweight, simple utility made to run on a tight budget. Out of the box, all you can really do with it is make loops, but you can easily tie it to other things too.
 
 * Copyright 2012 @scottjehl, Filament Group, Inc.
 * Licensed MIT/GPLv2
 
-Wrap is a simple framework of DOM utilities that is designed to target modern browsers without failing the rest.
+Shoestring is a simple framework for organizing, creating, and using DOM-based utilities. It's a throwback to the days of building websites using a small set of utilities that you need, and not much more. The utilities are wrapped in a handy and familiar API, making it more of a pleasure to work with.  
 
-Wrap is aimed particularly at cases where you need a small set of JS utilities but not a full toolkit. It's a throwback to the days of using a simple set of utilities that you need, and nothing more, but it's "wrapped" in a handy API.
+Shoestring supports a small set of features, and almost that entire set is optional. It is aimed particularly at cases where you need a small set of JavaScript utilities but not a heavyweight toolkit. It is designed for making user experience enhancements in modern browsers, while quietly stepping aside and letting things "be" in the older ones. 
 
-### Wrap is currently in development and may not be ready for production use. 
+Shoestring is part of the Southstreet workflow at Filament Group.
 
-Within the Southstreet workflow at Filament Group, we would use Wrap on for enhancing the user experience by manipulating markup, making Ajax requests, and any other common tasks one would do when using an unobtrusive JavaScript DOM framework.
+### Shoestring is in early development and may not be ready for production use. 
 
-Wrap is inspired by the jQuery API, letting you find elements and manipulate them. However, Wrap is written in such a way that it'll only do anything at all in modern browsers, like Internet Explorer 8 and up. Other browsers? They'll get a less-enhanced experience. There won't be errors, but there may be less zing. Assuming you're already building applications with Progressive Enhancement, you should be fine without JavaScript enhancements. In that way, jQuery and Wrap have dramatically different aims regarding support: jQuery works pretty much anywhere, and is fault-tolerant to infinite levels of developer happiness... Wrap: not so much. It only supports a subset of the nice things jQuery does, and almost that entire subset is optional. 
+Shoestring is still in its experimental, alpha development days, and is sure to have plenty of quirks we've yet to uncover. We're excited about its philosophy, but are well-aware that its implementation needs improvements. If you're able, we'd love your help!
 
-Technically, wrap.js itself is a simple, small (half a kb), extendable core function. Basically, you use Wrap like you use jQuery (just reference the wrap variable instead of $ or jQuery), but it doesn't come with much more than a means of finding and generating HTML multiple elements, a DOM-ready handler, and a few essential element-iterating methods like each, find, children. Using its API, Wrap is simple to extend further, and many extensions are available in the Wrap project for you to include in your build.
+# Philosophy
 
-Open up test/console.html to play around.
+Shoestring is designed with a minimalist, mobile-first philosophy.
 
-# examples
+One unique aspect of Shoestring is that its source code tends to favor terseness over completeness, allowing it to be very lightweight, but not as fault-tolerant or broadly compatible as many common DOM toolkits. For example, a given method might support one or two argument types, and not provide logic to support others that are deemed less common. These decisions are made based on the opinion of the developers and what they found most necessary, but all methods are easily overrideable if you'd like to do so. 
 
-at it's core, wrap is a function and a few utilities. to start, you can find some elements via CSS selectors, like so:
+Shoestring also favors terseness in its string-based selector engine, which it merely offloads to modern browsers' native `document.querySelectorAll` (though you can easly plug-in an engine like Sizzle if you'd like) function. In this way, DOM selections will sometimes be a little slower than they would be in other libraries, but conversely, Shoestring's simpler logic makes it lighter in overall weight, and faster in initial load time. 
 
-    wrap( "#foo, .bar" )
+We're still assessing the benefits of these ideas and are generally looking for a good balance of code weight, runtime speed, browser support, and developer convenience.
 
-this will return a `wrap` array of DOM nodes, which allows you to chain `wrap` methods one after another, affecting all elements in the selection. after you've found some elements, you might care to find more of them within your result. the `find` method does just that.
+# Feature Set
 
-    wrap( "#foo, .bar" ).find( "#baz" );
+Shoestring's API is inspired by jQuery, because we absolutely love working with jQuery, but there are times when we only need a subset of its features and browser support. 
+
+Technically, shoestring.js is a very small, extendable core function. That core function doesn't come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like `each`, `find`, `children`. Using its `shoestring.fn` API, its core is easy to extend further, and several extensions are available in the Shoestring codebase for you to include in your build.
+
+# Examples
+
+At it's core, Shoestring is a function and a few utilities. to start, you can find some elements via CSS selectors, like so:
+
+    shoestring( "#foo, .bar" )
+
+this will return a `shoestring` array of DOM nodes, which allows you to chain `shoestring` methods one after another, affecting all elements in the selection. after you've found some elements, you might care to find more of them within your result. the `find` method does just that.
+
+    shoestring( "#foo, .bar" ).find( "#baz" );
 
 some sugary syntax for the same result as above:
 
-    wrap( "#baz",  "#foo, .bar" );
+    shoestring( "#baz",  "#foo, .bar" );
 
 perhaps you'd like to iterate through each item that was found, applying scripting to them all. the `each` method has you covered.
 
-    wrap( "#foo, .bar" ).each(function(){
+    shoestring( "#foo, .bar" ).each(function(){
 		console.log( this );
 		// here, "this" refers to the current element in iteration
 	});
 	
 `each` also supports a passed iteration number, if you please:
 
-    wrap( "#foo, .bar" ).each(function( i ){
+    shoestring( "#foo, .bar" ).each(function( i ){
 		console.log( i );
 		// here, "i" refers to the current iteration number (0 or 1 in this case)
 	});
 
-...but wait. you'll probably want to hold off on all that until the dom is ready. no worry, just like you would in jQuery, pass a function into wrap and it'll queue it up til the coast is clear.
+...but wait. you'll probably want to hold off on all that until the dom is ready. Pass a function into Shoestring and it'll queue it up til the coast is clear.
 
-    wrap(function(){
+    shoestring( function(){
 		// execute code here
-	});
+	} );
 
-Internally, this dom-ready shortcut also provides the benefit of doing nothing at all in browsers that don't mass the `wrap.qualified` boolean (which, by default, checks for `document.querySelectorAll` support).
+Internally, this dom-ready shortcut also provides the benefit of doing nothing at all in browsers that don't mass the `Shoestring.qualified` boolean (which, by default, checks for `document.querySelectorAll` support).
 
-That same test is exposed in a handy api method as well: `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `wrap`, receiving a boolean answer: 
+That same test is exposed in a handy api method as well: `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `shoestring`, receiving a boolean answer: 
 
-    var qualifiedBrowser = wrap.qualify();
+    var qualifiedBrowser = shoestring.qualify();
 
-More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won't need this, but if it executes earlier, just wrap your code in a `qualify` callback to safeproof its execution. Basically, you might use `qualify` in place of your typical `IIFE` wrapper:
+More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won't need this, but if it executes earlier, just Shoestring your code in a `qualify` callback to safeproof its execution. Basically, you might use `qualify` in place of your typical `IIFE` Shoestringper:
 
-    wrap.qualify(
+    shoestring.qualify(
 		// It's safer in here.
-	    wrap( "#foo, .bar" ).each(function(){
+	    shoestring( "#foo, .bar" ).each(function(){
 			console.log( this );
 			// here, "this" refers to the current element in iteration
 		});
 	);
 
-By default, `qualify` uses the boolean stored in `wrap.qualified` internally, to determine browser qualification. You can override `wrap.qualified` with any combination of features you want. By default, it just needs `document.querySelectorAll` support.
+By default, `qualify` uses the boolean stored in `Shoestring.qualified` internally, to determine browser qualification. You can override `Shoestring.qualified` with any combination of features you want. By default, it just needs `document.querySelectorAll` support.
 
-OK, that's all `wrap` has in the way of dom helpers... from there, we'll need extensions.
+OK, that's all `shoestring` has in the way of dom helpers... from there, we can add extensions.
 
-For extensions, `wrap` comes with a utility function or three. first, the `extend` method, which is just a simple object extender:
+For extensions, `shoestring` comes with a utility function or three. First, the `extend` method, which is just a simple object extender:
 
-    wrap.extend( { foo: "bar" }, { baz: "bam!" } );
+    shoestring.extend( { foo: "bar" }, { baz: "bam!" } );
 	// --> { foo: "bar", baz: "bam!" }
 
-extend doesn't do deep object extensions, but it covers the usual hash mixin use case pretty well. you can use it to extend any object with another, but you might choose use it to add more utility functions to `wrap` itself, like so:
+`extend` doesn't do deep object extensions, but it covers the usual hash mixin use case pretty well. You can use it to extend any object with another, but you might choose use it to add more utility functions to `shoestring` itself, like so:
 
-    wrap.extend( wrap, { alertfoo: function(){ alert( "foo" ); } });
+    shoestring.extend( Shoestring, { alertfoo: function(){ alert( "foo" ); } });
 	
-	wrap.foo();
+	shoestring.foo();
 	
 	// --> throws an alert of "foo"
 
 the second utility, `inArray`, will let you know if an item is in an array or not, returning the position of the item in the array (or `-1` if it's not present). This is helpful when returning arrays that should only contain unique entries, like a bunch of dom node references, for instance.
 
-    wrap.inArray( "b", ["a","b","c"] );
+    shoestring.inArray( "b", ["a","b","c"] );
 	// --> true, "b" is in that array
 
-the third utility function, `fn`, is a bit more interesting, as it is where you add chainable methods to the `wrap` api. it works just like jQuery's fn method. Here's a dumb little `addClass` method, added to `wrap` via the `fn` api:
+The third utility function, `fn`, is a bit more interesting, as it is where you add chainable methods to the `shoestring` api. Here's a simple little `addClass` method, added to `shoestring` via the `fn` api:
 
-    wrap.fn.addClass = function( cname ){
+    shoestring.fn.addClass = function( cname ){
       return this.each(function(){
         this.className += " " + cname;
       });
     };
 
-a quick explanation: we've defined a function with a single argument `cname`, representing the class to be added. inside the function, `this` refers to the `wrap`'d set of dom nodes. In order to maintain `wrap`'s chainability, an `fn` function should always return either `this` or a call to `wrap()` or one of its api methods. In this case, we're returning `this`, but we're also chaining on an `each` method to iterate through each item in the selection and add `cname` to its class attribute.
+A quick explanation: we've defined a function with a single argument `cname`, representing the class to be added. Inside the function, `this` refers to the `shoestring`'d set of dom nodes. In order to maintain `shoestring`'s chainability, an `fn` function should always return either `this` or a call to `Shoestring()` or one of its api methods. In this case, we're returning `this`, but we're also chaining on an `each` method to iterate through each item in the selection and add `cname` to its class attribute.
 
-now we can use it!
+Now we can use it.
 
-    wrap( "body" ).addClass( "foo" );
+    shoestring( "body" ).addClass( "foo" );
 	
 	// --> [<body class="foo"></body>]
 
-...and since we returned `this`, we can keep going.
+...and since we returned `this`, we can keep chaining.
 
-    wrap( "body, #foo" ).addClass( "foo" ).each(function(){
+    shoestring( "body, #foo" ).addClass( "foo" ).each(function(){
       // do something else here
     });
 
-that's pretty much it. of course, you're going to need a few more methods to make `wrap` useful...
+That's pretty much it. Of course, you're probably going to need a few more methods to make Shoestring useful...
 
-## wrap extensions
+## Shoestring extensions
 
-the `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project. So far, the dom methods include `parent`, `parents`, `children`, `next`, `prev`, `addClass`, `removeClass`, `attr`, `html`.
+The `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project. 
 
-## want a dollar?
+## Want a dollar?
 
 here you go:
 
-    window.$ = wrap;
+    window.$ = shoestring;
 
     $( "foo, bar, .baz" ).each(...)
+	
+	
