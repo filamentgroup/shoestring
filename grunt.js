@@ -46,7 +46,8 @@ module.exports = function(grunt) {
 		evil: true,
         boss: true,
         eqnull: true,
-        browser: true
+        browser: true,
+		loopfunc: true
       },
       globals: {}
     },
