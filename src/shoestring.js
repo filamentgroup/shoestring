@@ -41,7 +41,10 @@
 			}
 		
 			ret = shoestring.extend( ret, shoestring.fn );
-		
+			
+			// add selector prop
+			ret.selector = prim;
+			
 			return ret;
 		};
 	
