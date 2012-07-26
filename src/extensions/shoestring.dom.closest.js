@@ -11,23 +11,27 @@
 				generations = 0;
 				
 			shoestring( sel ).each(function(){
-				if( self === this ){
-					ret[ 0 ] = self;
+				if( self === this && !ret.length ){
+					ret.push( self );
 				}
-				else {
+			});
+			
+			if( !ret.length ){
+				shoestring( sel ).each(function(){
 					var i = 0;
 					while( self.parentElement && ( !generations || i < generations ) ){
 						i++;
 						if( self.parentElement === this ){
-							ret[ 0 ] = self.parentElement;
+							ret.push( self.parentElement );
 							generations = i;
 						}
 						else{
 							self = self.parentElement;
 						}
 					}
-				}
-			});
+				});
+			}
+			
 		});
 		return shoestring( ret );
 	};
