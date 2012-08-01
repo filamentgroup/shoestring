@@ -3,7 +3,7 @@
 // keep this wrapper around the ones you use!
 (function( undefined ){
 	shoestring.fn.bind = function( evt, callback ){
-		var evts = evt.split( " " )
+		var evts = evt.split( " " );
 		
 		function newCB( e ){
 			return callback.apply( this, [ e ].concat( e._args ) );
