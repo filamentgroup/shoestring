@@ -11,14 +11,14 @@
 				var thisevt = evts[ i ];
 				if( "addEventListener" in this ){
 					cb = function( e ){
-						callback.call( this, e );
+						callback.apply( this, [ e ].concat( e._args ) );
 						this.removeEventListener( thisevt, cb );
 					};
 					this.addEventListener( thisevt, cb, false );
 				}
 				else if( this.attachEvent ){
 					cb = function( e ){
-						callback.call( this, e );
+						callback.apply( this, [ e ].concat( e._args ) );
 						this.detachEvent( "on" + thisevt, cb );
 					};
 					this.attachEvent( "on" + thisevt, cb );

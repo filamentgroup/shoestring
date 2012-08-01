@@ -9,7 +9,7 @@
 		function newCB( e ){
 			shoestring( sel ).each(function(){
 				if( e.target === this ){
-					callback.call( self, e );
+					callback.apply( this, [ e ].concat( e._args ) );
 				}
 			});
 		}

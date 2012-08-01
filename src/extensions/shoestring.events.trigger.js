@@ -10,7 +10,7 @@
 				if( document.createEvent ){
 					var event = document.createEvent( "Event" );
 					event.initEvent( evts[ i ], true, true );
-					event.args = args;
+					event._args = args;
 					this.dispatchEvent( event );
 				}
 			}
