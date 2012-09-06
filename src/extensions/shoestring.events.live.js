@@ -1,6 +1,6 @@
 // Extensions
 
-// keep this shoestringper around the ones you use!
+// keep this wrapper around the ones you use!
 (function( undefined ){
 	shoestring.fn.live = function( evt, callback ){
 		var evts = evt.split( " " ),
