@@ -6,10 +6,11 @@
 		var evts = evt.split( " " );
 		return this.each(function(){
 			for( var i = 0, il = evts.length; i < il; i++ ){
-				var bound = this.shoestringData.events[ evt ];
+				var bound = this.shoestringData.events[ evt ],
+					bindingname = callback.toString();
 				if( "removeEventListener" in window ){
 					if( callback !== undefined ) {
-						this.removeEventListener( evts[ i ], bound[ callback.name ], false );
+						this.removeEventListener( evts[ i ], bound[ bindingname ], false );
 					} else {
 						for ( var ev in bound ) {
 							this.removeEventListener( evts[ i ], bound[ ev ], false );
@@ -17,7 +18,7 @@
 					}
 				}
 				else if( this.detachEvent ){
-					this.detachEvent( "on" + bound[ callback.name ], callback );
+					this.detachEvent( "on" + bound[ bindingname ], callback );
 				}
 			}
 		});

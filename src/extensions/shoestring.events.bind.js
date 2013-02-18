@@ -4,7 +4,7 @@
 (function( undefined ){
 	shoestring.fn.bind = function( evt, callback ){
 		var evts = evt.split( " " ),
-			bindingname = callback.name.toString(),
+			bindingname = callback.toString(),
 			boundEvents = function( el, evt, callback ) {
 				if ( !el.shoestringData ) {
 					el.shoestringData = {};
@@ -15,7 +15,7 @@
 				if ( !el.shoestringData.events[ evt ] ) {
 					el.shoestringData.events[ evt ] = [];
 				}
-				el.shoestringData.events[ evt ][ callback.name ] = callback.callfunc;
+				el.shoestringData.events[ evt ][ bindingname ] = callback.callfunc;
 			};
 
 		function newCB( e ){
