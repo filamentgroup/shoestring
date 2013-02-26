@@ -2,7 +2,7 @@
 
 // keep this wrapper around the ones you use!
 (function( undefined ){
-	shoestring.fn.live = function( evt, callback ){
+	shoestring.fn.on = function( evt, callback ){
 		var evts = evt.split( " " ),
 			sel = this.selector;
 		
@@ -24,4 +24,5 @@
 		}
 		return this;
 	};
+	shoestring.fn.live = shoestring.fn.on;
 }());
