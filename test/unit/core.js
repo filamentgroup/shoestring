@@ -2,7 +2,8 @@
 shoestring unit tests - using qUnit
 */
 (function(undefined){
-	
+
+module( 'Core' );
 test( 'API Properties: shoestring is defined', function() {
 	ok( shoestring !== undefined );
 });
@@ -31,7 +32,7 @@ test( 'API Properties: shoestring.ready is defined', function() {
 	ok( shoestring.ready !== undefined );
 });
 
-// Types
+module( 'Types' );
 test( 'API Properties: shoestring is a function', function() {
 	ok( typeof(shoestring) === "function" );
 });
@@ -60,7 +61,7 @@ test( 'API Properties: shoestring.ready is a function', function() {
 	ok( typeof(shoestring.ready) === "function" );
 });
 
-// core fn methods
+module( 'Core fn Methods' );
 test( 'API Properties: shoestring.fn.each, is defined', function() {
 	ok( shoestring.fn.each !== undefined );
 });
@@ -73,7 +74,8 @@ test( 'API Properties: shoestring.fn.find, is defined', function() {
 	ok( shoestring.fn.find !== undefined );
 });
 
-// fn types
+module( 'fn Types' );
+
 test( 'API Properties: shoestring.fn.each, is a function', function() {
 	ok( typeof(shoestring.fn.each) === "function" );
 });
@@ -88,7 +90,7 @@ test( 'API Properties: shoestring.fn.find, is a function', function() {
 
 
 
-// functionality
+module( 'Functionality' );
 test( 'shoestring with no arguments returns an array', function() {
 	ok( shoestring().constructor === Array );
 });
@@ -138,6 +140,11 @@ test( 'passing a string argument to shoestring with a second argument returns re
 	ok( shoestring( "body" )[ 0 ] !== shoestring( "body", "body" )[ 0 ] );
 	ok( shoestring( ".testel-2" ).length === 2 );
 	ok( shoestring( ".testel-2", ".testel" ).length === 1 );
+});
+
+module( 'Extensions' );
+test( '`.live()` is an alias of `.on()`', function() {
+	ok( shoestring( "body" ).live == shoestring( "body" ).on );
 });
 
 })();
