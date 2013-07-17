@@ -32,6 +32,10 @@
 		}	
 		
 		req.open( settings.method, url, settings.async );
+
+		if( req.setRequestHeader ){
+			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
+		}
 		
 		req.onreadystatechange = function () {
 			if ( req.readyState !== 4 || req.status !== 200 && req.status !== 304 ){
