@@ -18,15 +18,17 @@
 			
 			if( !ret.length ){
 				shoestring( sel ).each(function(){
-					var i = 0;
-					while( self.parentElement && ( !generations || i < generations ) ){
+					var i = 0,
+						otherSelf = self;
+
+					while( otherSelf.parentElement && ( !generations || i < generations ) ){
 						i++;
-						if( self.parentElement === this ){
-							ret.push( self.parentElement );
+						if( otherSelf.parentElement === this ){
+							ret.push( otherSelf.parentElement );
 							generations = i;
 						}
 						else{
-							self = self.parentElement;
+							otherSelf = otherSelf.parentElement;
 						}
 					}
 				});
