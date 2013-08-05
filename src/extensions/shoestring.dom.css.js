@@ -17,7 +17,7 @@
 				});
 			}
 			else {
-				return window.getComputedStyle( this[ 0 ], prop );
+				return window.getComputedStyle( this[ 0 ], null ).getPropertyValue( prop );
 			}
 		}
 	};
