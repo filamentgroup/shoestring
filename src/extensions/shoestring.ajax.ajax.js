@@ -38,10 +38,12 @@
 		}
 		
 		req.onreadystatechange = function () {
+			// Trim the whitespace so shoestring('<div>') works
+			var res = (req.responseText || '').replace(/^\s+|\s+$/g, '');
 			if ( req.readyState !== 4 || req.status !== 200 && req.status !== 304 ){
-				return settings.error( req.responseText, req.status, req );
+				return settings.error( res, req.status, req );
 			}
-			settings.success( req.responseText, req.status, req );
+			settings.success( res, req.status, req );
 		};
 		if( req.readyState === 4 ){
 			return;
