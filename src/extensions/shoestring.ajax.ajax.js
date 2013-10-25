@@ -3,18 +3,14 @@
 // keep this wrapper around the ones you use!
 (function( undefined ){
 	
-	var xmlHttp = (function() {
-		var xmlhttpmethod = false;	
+	var xmlHttp = function() {
 		try {
-			xmlhttpmethod = new XMLHttpRequest();
+			return new XMLHttpRequest();
 		}
 		catch( e ){
-			xmlhttpmethod = new ActiveXObject( "Microsoft.XMLHTTP" );
+			return new ActiveXObject( "Microsoft.XMLHTTP" );
 		}
-		return function(){
-			return xmlhttpmethod;
-		};
-	}());
+	};
 	
 	shoestring.ajax = function( url, options ) {
 		var req = xmlHttp(),
