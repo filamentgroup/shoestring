@@ -14,7 +14,7 @@
 	
 	shoestring.ajax = function( url, options ) {
 		var req = xmlHttp(),
-		settings = shoestring.ajax.settings;
+			settings = shoestring.extend( {}, shoestring.ajax.settings );
 		
 		if( options ){
 			shoestring.extend( settings, options );
