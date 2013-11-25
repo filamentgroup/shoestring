@@ -36,10 +36,12 @@
 		req.onreadystatechange = function () {
 			// Trim the whitespace so shoestring('<div>') works
 			var res = (req.responseText || '').replace(/^\s+|\s+$/g, '');
-			if ( req.readyState !== 4 || req.status !== 200 && req.status !== 304 ){
+			if ( req.status.toString().match( /^(4|5)/ ) && RegExp.$1 ){
 				return settings.error( res, req.status, req );
 			}
-			settings.success( res, req.status, req );
+			else {
+				return settings.success( res, req.status, req );
+			}
 		};
 		if( req.readyState === 4 ){
 			return;
