@@ -7,7 +7,7 @@
 				name = this.name,
 				value = this.value;
 
-			if( type.match( /text|hidden|color|date|datetime|datetime\-local|email|month|number|range|search|tel|time|url|week/ ) && RegExp.$1 || ( type === "checkbox" || type === "radio" ) && this.checked ){
+			if( /text|hidden|color|date|datetime|datetime\-local|email|month|number|range|search|tel|time|url|week/.test( type ) || ( type === "checkbox" || type === "radio" ) && this.checked ){
 				data[ name ] = value;
 			}
 			else if( this.nodeName === "select" ){
@@ -17,3 +17,4 @@
 		return data;
 	};
 }());
+
