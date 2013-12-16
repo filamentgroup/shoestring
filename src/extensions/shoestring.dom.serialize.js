@@ -7,7 +7,7 @@
 				name = this.name,
 				value = this.value;
 
-			if( /text|hidden|color|date|datetime|datetime\-local|email|month|number|range|search|tel|time|url|week/.test( type ) || ( type === "checkbox" || type === "radio" ) && this.checked ){
+			if( /text|hidden|password|color|date|datetime|datetime\-local|email|month|number|range|search|tel|time|url|week/.test( type ) || ( type === "checkbox" || type === "radio" ) && this.checked ){
 				data[ name ] = value;
 			}
 			else if( this.nodeName === "select" ){
