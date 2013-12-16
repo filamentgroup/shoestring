@@ -12,6 +12,15 @@
 					event.initEvent( evts[ i ], true, true );
 					event._args = args;
 					this.dispatchEvent( event );
+				} else if ( document.createEventObject ){
+					if( document.documentElement[ evts[ i ] ] === undefined ) {
+						document.documentElement[ evts[ i ] ] = {};
+					}
+					document.documentElement[ evts[ i ] ] = {
+						"el" : this,
+						_args: args
+					};
+					document.documentElement[ evts[ i ] ][ evts[ i ] ]++;
 				}
 			}
 		});

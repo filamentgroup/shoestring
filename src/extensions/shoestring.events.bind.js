@@ -21,14 +21,29 @@
 		function newCB( e ){
 			return callback.apply( this, [ e ].concat( e._args ) );
 		}
-		
+		function propChange( e, oEl ) {
+			var el = document.documentElement[ e.propertyName ].el;
+
+			if( el !== undefined && oEl === el ) {
+				newCB.call( el, e );
+			}
+		}
 		return this.each(function(){
 			for( var i = 0, il = evts.length; i < il; i++ ){
+				var evt = evts[ i ],
+					oEl = this;
+
 				if( "addEventListener" in this ){
-					this.addEventListener( evts[ i ], newCB, false );
-				}
-				else if( this.attachEvent ){
-					this.attachEvent( "on" + evts[ i ], newCB );
+					this.addEventListener( evt, newCB, false );
+				} else if( this.attachEvent ){
+					if( this[ "on" + evt ] !== undefined ) {
+						this.attachEvent( "on" + evt, newCB );
+					} else {
+						// Custom event
+						document.documentElement.attachEvent( "onpropertychange", function( e ) {
+							propChange.call( this, e, oEl );
+						});
+					}
 				}
 				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname });
 			}
