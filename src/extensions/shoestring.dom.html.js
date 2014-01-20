@@ -8,9 +8,10 @@
 		}
 		else{
 			var pile = "";
-			return this.each(function(){
+			this.each(function(){
 				pile += this.innerHTML;
 			});
+			return pile;
 		}
 	};
 }());

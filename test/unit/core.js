@@ -182,4 +182,14 @@ test( '`.insertBefore()`', function() {
 	ok( $sibling.prev().is( '#insertBefore' ), 'Inserted properly.' );
 });
 
+
+test( '`.html()`', function() {
+	var $fixture = shoestring( '#qunit-fixture' ),
+		htmlStr = '<div id="sibling"></div>';
+
+	$fixture.html( htmlStr );
+	equal( $fixture[0].innerHTML, htmlStr, '.html(str) set properly.' );
+	equal( $fixture.html(), htmlStr, '.html() get properly.' );
+});
+
 })();
