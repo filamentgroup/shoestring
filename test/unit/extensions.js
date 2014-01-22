@@ -53,4 +53,12 @@ test( '`.html()`', function() {
 	equal( $fixture.html(), htmlStr, '.html() get properly.' );
 });
 
+test( '`.siblings()`', function() {
+	var $fixture = shoestring( '#qunit-fixture' );
+	$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
+
+	strictEqual( $( '#imaginary_element' ).siblings().length, 0, '.siblings runs on an empty set.' );
+	equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
+});
+
 })();
