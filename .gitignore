@@ -1,7 +1,25 @@
-.project
-*~
+# Project files
+/dist/
+
+# Versioning
 *.diff
 *.patch
+
+# OS
 .DS_Store
-dist/
-node_modules/
+thumbs.db
+
+# Editor/IDE files
+*~
+*.iml
+*.ipr
+*.iws
+.idea
+.project
+*.sublime-workspace
+nb-configuration.xml
+nbactions.xml
+nbproject/private
+
+# Node
+node_modules
