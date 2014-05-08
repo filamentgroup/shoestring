@@ -29,7 +29,7 @@ We're still assessing the benefits of these ideas and are generally looking for 
 
 Shoestring's API is inspired by jQuery, because we absolutely love working with jQuery, but there are times when we only need a subset of its features and browser support. 
 
-Technically, shoestring.js is a very small, extendable core function. That core function doesn't come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like `each`, `find`, `children`. Using its `shoestring.fn` API, its core is easy to extend further, and several extensions are available in the Shoestring codebase for you to include in your build.
+Technically, shoestring.js is a very small, extendable core function. That core function doesn't come with much more than a means of finding and/or generating HTML elements and a few essential element-traversal methods like `each`, `find`, `children`. Using its `shoestring.fn` API, its core is easy to extend further, and several extensions are available in the Shoestring codebase for you to include in your build.
 
 # Examples
 
