@@ -5,7 +5,7 @@ shoestring unit tests - using qUnit
 
 module( 'Extensions' );
 test( '`.live()` is an alias of `.on()`', function() {
-	ok( shoestring( "body" ).live == shoestring( "body" ).on );
+	ok( shoestring( 'body' ).live === shoestring( 'body' ).on );
 });
 
 test( '`.closest()`', function() {
@@ -43,7 +43,6 @@ test( '`.insertBefore()`', function() {
 	ok( $sibling.prev().is( '#insertBefore' ), 'Inserted properly.' );
 });
 
-
 test( '`.html()`', function() {
 	var $fixture = shoestring( '#qunit-fixture' ),
 		htmlStr = '<div id="sibling"></div>';
@@ -51,6 +50,10 @@ test( '`.html()`', function() {
 	$fixture.html( htmlStr );
 	equal( $fixture[0].innerHTML, htmlStr, '.html(str) set properly.' );
 	equal( $fixture.html(), htmlStr, '.html() get properly.' );
+});
+
+test( 'API Properties: shoestring.ready is defined', function() {
+	ok( shoestring.ready !== undefined );
 });
 
 test( '`.siblings()`', function() {

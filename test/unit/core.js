@@ -28,13 +28,9 @@ test( 'API Properties: shoestring.inArray is defined', function() {
 	ok( shoestring.inArray !== undefined );
 });
 
-test( 'API Properties: shoestring.ready is defined', function() {
-	ok( shoestring.ready !== undefined );
-});
-
 module( 'Types' );
 test( 'API Properties: shoestring is a function', function() {
-	ok( typeof(shoestring) === "function" );
+	ok( typeof(shoestring) === 'function' );
 });
 
 test( 'API Properties: shoestring.fn is an object', function() {
@@ -42,23 +38,19 @@ test( 'API Properties: shoestring.fn is an object', function() {
 });
 
 test( 'API Properties: shoestring.qualified is a boolean', function() {
-	ok( typeof(shoestring.qualified) === "boolean" );
+	ok( typeof(shoestring.qualified) === 'boolean' );
 });
 
 test( 'API Properties: shoestring.qualify is a function', function() {
-	ok( typeof(shoestring.qualify) === "function" );
+	ok( typeof(shoestring.qualify) === 'function' );
 });
 
 test( 'API Properties: shoestring.extend is a function', function() {
-	ok( typeof(shoestring.extend) === "function" );
+	ok( typeof(shoestring.extend) === 'function' );
 });
 
 test( 'API Properties: shoestring.inArray is a function', function() {
-	ok( typeof(shoestring.inArray) === "function" );
-});
-
-test( 'API Properties: shoestring.ready is a function', function() {
-	ok( typeof(shoestring.ready) === "function" );
+	ok( typeof(shoestring.inArray) === 'function' );
 });
 
 module( 'Core fn Methods' );
@@ -77,15 +69,15 @@ test( 'API Properties: shoestring.fn.find, is defined', function() {
 module( 'fn Types' );
 
 test( 'API Properties: shoestring.fn.each, is a function', function() {
-	ok( typeof(shoestring.fn.each) === "function" );
+	ok( typeof(shoestring.fn.each) === 'function' );
 });
 
 test( 'API Properties: shoestring.fn.children, is a function', function() {
-	ok( typeof(shoestring.fn.children) === "function" );
+	ok( typeof(shoestring.fn.children) === 'function' );
 });
 
 test( 'API Properties: shoestring.fn.find, is a function', function() {
-	ok( typeof(shoestring.fn.find) === "function" );
+	ok( typeof(shoestring.fn.find) === 'function' );
 });
 
 
@@ -108,23 +100,23 @@ test( 'shoestring with no arguments returns an array with first child of documen
 });
 
 test( 'shoestring with a string argument returns an array', function() {
-	ok( shoestring( "body" ).constructor === Array );
+	ok( shoestring( 'body' ).constructor === Array );
 });
 
 test( 'shoestring with a string argument returns an array of dom nodes from qsa', function() {
-	ok( shoestring( "body" )[ 0 ] === document.querySelectorAll( "body" )[ 0 ] );
+	ok( shoestring( 'body' )[ 0 ] === document.querySelectorAll( 'body' )[ 0 ] );
 });
 
 test( 'shoestring with a string argument starting with "<" returns a generated array', function() {
-	ok( shoestring( "<div></div>" ).constructor === Array );
+	ok( shoestring( '<div></div>' ).constructor === Array );
 });
 
 test( 'shoestring with a string argument starting with "<" returns a generated array of dom nodes', function() {
-	ok( shoestring( "<div></div>" )[0].constructor === HTMLDivElement );
+	ok( shoestring( '<div></div>' )[0].constructor === HTMLDivElement );
 });
 
 test( 'shoestring with a string argument starting with "<" returns a generated array of dom nodes', function() {
-	ok( shoestring( "<div></div><h2></h2>" )[1].constructor === HTMLHeadingElement );
+	ok( shoestring( '<div></div><h2></h2>' )[1].constructor === HTMLHeadingElement );
 });
 
 test( 'shoestring with a function argument returns array', function() {
@@ -136,10 +128,10 @@ test( 'shoestring with a function argument returns array with document child', f
 });
 
 test( 'passing a string argument to shoestring with a second argument returns result scoped to second arg', function() {
-	ok( shoestring( "body" )[ 0 ] === shoestring( "body", "html" )[ 0 ] );
-	ok( shoestring( "body" )[ 0 ] !== shoestring( "body", "body" )[ 0 ] );
-	ok( shoestring( ".testel-2" ).length === 2 );
-	ok( shoestring( ".testel-2", ".testel" ).length === 1 );
+	ok( shoestring( 'body' )[ 0 ] === shoestring( 'body', 'html' )[ 0 ] );
+	ok( shoestring( 'body' )[ 0 ] !== shoestring( 'body', 'body' )[ 0 ] );
+	ok( shoestring( '.testel-2' ).length === 2 );
+	ok( shoestring( '.testel-2', '.testel' ).length === 1 );
 });
 
 })();
