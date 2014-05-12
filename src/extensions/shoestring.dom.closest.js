@@ -25,11 +25,11 @@
 						i++;
 						if( otherSelf.parentElement === this ){
 							ret.push( otherSelf.parentElement );
-							generations = i;
 						}
 						else{
 							otherSelf = otherSelf.parentElement;
 						}
+						generations = i;
 					}
 				});
 			}

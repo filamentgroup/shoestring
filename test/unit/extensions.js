@@ -5,7 +5,7 @@ shoestring unit tests - using qUnit
 
 module( 'Extensions' );
 test( '`.live()` is an alias of `.on()`', function() {
-	ok( shoestring( "body" ).live == shoestring( "body" ).on );
+	ok( shoestring( 'body' ).live === shoestring( 'body' ).on );
 });
 
 test( '`.closest()`', function() {
