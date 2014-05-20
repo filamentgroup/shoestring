@@ -1,3 +1,4 @@
+// Depends on .is
 // Extensions
 (function( undefined ){
 	shoestring.fn.closest = function( sel ){
@@ -5,36 +6,26 @@
 		if( !sel ){
 			return shoestring( ret );
 		}
-		
-		this.each(function(){
-			var self = this,
-				generations = 0;
-				
-			shoestring( sel ).each(function(){
-				if( self === this && !ret.length ){
-					ret.push( self );
-				}
-			});
-			
-			if( !ret.length ){
-				shoestring( sel ).each(function(){
-					var i = 0,
-						otherSelf = self;
 
-					while( otherSelf.parentElement && ( !generations || i < generations ) ){
-						i++;
-						if( otherSelf.parentElement === this ){
-							ret.push( otherSelf.parentElement );
-							generations = i;
-						}
-						else{
-							otherSelf = otherSelf.parentElement;
-						}
-					}
-				});
+		this.each(function(){
+			var element, $self = shoestring( element = this ),
+				generations = 0;
+
+			if( $self.is(sel) ){
+				ret.push( this );
+				return;
 			}
-			
+
+			while( element.parentElement ) {
+				if( shoestring(element.parentElement).is(sel) ){
+					ret.push( this.parentElement );
+					break;
+				}
+
+				element = element.parentElement;
+			}
 		});
+
 		return shoestring( ret );
 	};
 }());
