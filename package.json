@@ -3,7 +3,6 @@
 	"title": "Shoestring",
 	"version": "0.1.0",
 	"description": "A simple framework for organizing, creating, and using DOM-based utilities.",
-	"main": "grunt.js",
 	"private": true,
 	"repository": {
 		"type": "git",
@@ -17,11 +16,15 @@
 		"email": "thegroup@filamentgroup.com",
 		"url": "filamentgroup.com"
 	},
-	"license": "BSD",
+	"license": "MIT",
 	"readmeFilename": "README.md",
-	"gitHead": "c141ecf0e42d553f9400d5f1b97907fa4b443a43",
-	"dependencies": {
-		"grunt": "0.3.17"
+	"devDependencies": {
+		"grunt-cli": "",
+		"grunt-contrib-jshint": "~0.6.0",
+		"grunt-contrib-qunit": "~0.2.0",
+		"grunt-contrib-concat": "~0.3.0",
+		"grunt-contrib-uglify": "~0.2.0",
+		"grunt": "~0.4.2"
 	},
 	"keywords": []
 }
