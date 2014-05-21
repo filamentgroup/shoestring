@@ -19,8 +19,8 @@ module.exports = function(grunt) {
 		requirejs: {
 			main: {
 				options: {
-					baseUrl: ".",
-					name: "build/main",
+					baseUrl: "src",
+					name: "../build/main",
 					out: "dist/main.js",
 					mainConfigFile: "build/config.js"
 				}
