@@ -11,31 +11,44 @@ module.exports = function(grunt) {
 				'* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
 				'Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */'
 		},
-		lint: {
-			files: ['grunt.js', 'src/shoestring.js', 'src/extensions/*.js']
-		},
+
 		qunit: {
 			files: ['test/unit/*.html']
 		},
+
+		requirejs: {
+			main: {
+				options: {
+					baseUrl: ".",
+					name: "build/main",
+					out: "dist/main.js",
+					mainConfigFile: "build/config.js"
+				}
+			}
+		},
+
+		// NOTE purely for the banner
 		concat: {
 			options: {
 				banner: '<%= banner %>',
 				stripBanners: true
 			},
-			core: {
-				src: ['src/shoestring.js', 'src/extensions/*.js'],
+
+			main: {
+				src: ['dist/main.js'],
 				dest: 'dist/shoestring.js'
 			}
 		},
+
 		uglify: {
 			options: {
 				banner: '<%= banner %>'
 			},
 			all: {
-				src: ['<%= concat.core.dest %>'],
-				dest: 'dist/shoestring.min.js'
+				'dist/shoestring.min.js': ['dist/shoestring.js']
 			}
 		},
+
 		jshint: {
 			all: {
 				options: {
@@ -64,8 +77,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	// Default task.
-	grunt.registerTask('default', 'jshint concat uglify qunit'.split(' ') );
-
+	grunt.registerTask('build', 'requirejs concat uglify'.split(' ') );
+	grunt.registerTask('test', 'jshint qunit'.split(' ') );
+	grunt.registerTask('default', 'build test'.split(' ') );
 };
