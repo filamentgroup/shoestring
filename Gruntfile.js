@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 		// NOTE purely for the banner
 		concat: {
 			options: {
-				banner: '<%= banner %>',
+				banner: '<%= meta.banner %>',
 				stripBanners: true
 			},
 
@@ -41,11 +41,15 @@ module.exports = function(grunt) {
 		},
 
 		uglify: {
-			options: {
-				banner: '<%= banner %>'
-			},
 			all: {
-				'dist/shoestring.min.js': ['dist/shoestring.js']
+				options: {
+					banner: '<%= meta.banner %>',
+					report: 'gzip'
+				},
+
+				files: {
+					'dist/shoestring.min.js': ['dist/shoestring.js']
+				}
 			}
 		},
 
