@@ -12,9 +12,13 @@ test( '`.closest()`', function() {
 	var $fixture = shoestring( '#qunit-fixture' );
 	$fixture.html( '<div class="parent second"><div class="parent first"><div class="child"></div></div></div>' );
 
-	equal( $fixture.find( '.child' ).closest( '.parent' ).length, 1, 'Closest returns only one element.' );
+	var $child = $fixture.find( '.child' );
 
-	ok( $fixture.find( '.child' ).closest( '.parent' ).is( '.first' ), 'Closest returns from the bottom up.' );
+	equal( $child[0], $child.closest( '.child' )[0], 'Closest returns current element on match' );
+
+	equal( $child.closest( '.parent' ).length, 1, 'Closest returns only one element.' );
+
+	ok( $child.closest( '.parent' ).is( '.first' ), 'Closest returns from the bottom up.' );
 });
 
 test( '`.insertAfter()`', function() {
