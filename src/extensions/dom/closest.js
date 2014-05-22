@@ -1,6 +1,6 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/shoestring.dom.is" ], function( shoestring ) {
-//>>excludeEnd("exclude");// Depends on .is
+define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
+//>>excludeEnd("exclude");
 // Extensions
 (function( undefined ){
 	shoestring.fn.closest = function( sel ){
