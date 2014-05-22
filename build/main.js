@@ -2,10 +2,10 @@
 //>>group: exclude
 require([
 	"shoestring",
-	"extensions/shoestring.ajax.ajax",
-	"extensions/shoestring.ajax.get",
-	"extensions/shoestring.ajax.load",
-	"extensions/shoestring.ajax.post",
+	"extensions/ajax/ajax",
+	"extensions/ajax/get",
+	"extensions/ajax/load",
+	"extensions/ajax/post",
 	"extensions/shoestring.data.data",
 	"extensions/shoestring.data.removeData",
 	"extensions/shoestring.dollar",
