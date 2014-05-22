@@ -2,7 +2,6 @@
 define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
 //>>excludeEnd("exclude");
 
-(function( undefined ){
 	shoestring.fn.closest = function( sel ){
 		var ret = [];
 		if( !sel ){
@@ -30,7 +29,6 @@ define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
 
 		return shoestring( ret );
 	};
-}());
 
 //>>excludeStart("exclude", pragmas.exclude);
 });
