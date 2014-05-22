@@ -1,5 +1,7 @@
 # Shoestring
 
+[![Filament Group](http://filamentgroup.com/images/fg-logo-positive-sm-crop.png) ](http://www.filamentgroup.com/)
+
 A lightweight, simple utility made to run on a tight budget. Out of the box, all you can really do with it is make loops, but you can easily tie it to other things too.
 
 * Copyright 2012 @scottjehl, Filament Group, Inc.
