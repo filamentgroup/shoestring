@@ -1,7 +1,7 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
 //>>excludeEnd("exclude");
-// Extensions
+
 (function( undefined ){
 	shoestring.fn.closest = function( sel ){
 		var ret = [];
@@ -31,6 +31,7 @@ define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
 		return shoestring( ret );
 	};
 }());
+
 //>>excludeStart("exclude", pragmas.exclude);
 });
-//>>excludeEnd("exclude");// Depends on .is
+//>>excludeEnd("exclude");
