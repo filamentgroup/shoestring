@@ -1,5 +1,7 @@
-// Extensions
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.after = function( frag ){
 		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = shoestring( frag );
@@ -11,10 +13,13 @@
 			}
 		});
 	};
-	
+
 	shoestring.fn.insertAfter = function( sel ){
 		return this.each(function(){
 			shoestring( sel ).after( this );
 		});
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

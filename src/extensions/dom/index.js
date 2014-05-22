@@ -1,7 +1,7 @@
-// Extensions
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
 
-// index method
-(function( undefined ){
 	shoestring.fn.index = function( elem ){
 
 		// no arg? return number of prev siblings
@@ -27,4 +27,7 @@
 			return -1;
 		}
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

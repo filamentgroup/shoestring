@@ -2,7 +2,6 @@
 define([ "shoestring", "extensions/ajax/ajax" ], function( shoestring ) {
 //>>excludeEnd("exclude");
 
-(function( undefined ){
 	shoestring.fn.load = function( url, callback ){
 		var self = this,
 			args = arguments,
@@ -17,7 +16,6 @@ define([ "shoestring", "extensions/ajax/ajax" ], function( shoestring ) {
 		shoestring.ajax( url, { success: intCB } );
 		return this;
 	};
-}());
 
 //>>excludeStart("exclude", pragmas.exclude);
 });

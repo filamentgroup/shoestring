@@ -1,8 +1,11 @@
-// Extensions
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
 	shoestring.fn.get = function( num ){
 		return this[ num ];
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

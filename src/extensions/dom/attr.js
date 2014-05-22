@@ -1,5 +1,7 @@
-// Extensions
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.attr = function( name, val ){
 		var nameStr = typeof( name ) === "string";
 		if( val !== undefined || !nameStr ){
@@ -20,4 +22,7 @@
 			return this[ 0 ].getAttribute( name );
 		}
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

@@ -1,7 +1,9 @@
 // Extensions
 
 // keep this wrapper around the ones you use!
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
 	shoestring.fn.data = function( name, val ){
 		if( name !== undefined ){
 			if( val !== undefined ){
@@ -20,4 +22,6 @@
 			return this[ 0 ].shoestringData;
 		}
 	};
-}());
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

@@ -1,5 +1,7 @@
-// an incomplete but fairly sufficient form serialize function
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.serialize = function(){
 		var data = {};
 		shoestring( "input, select", this ).each(function(){
@@ -16,5 +18,7 @@
 		});
 		return data;
 	};
-}());
 
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

@@ -1,7 +1,7 @@
-// Extensions
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
 	shoestring.fn.triggerHandler = function( evt, args ){
 		var e = evt.split( " " )[ 0 ],
 			el = this[ 0 ],
@@ -22,4 +22,7 @@
 
 		return ret;
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

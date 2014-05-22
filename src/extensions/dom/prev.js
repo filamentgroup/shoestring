@@ -1,5 +1,7 @@
-// Extensions
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.prev = function(){
 		var ret = [],
 			next;
@@ -11,4 +13,7 @@
 		});
 		return shoestring(ret);
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

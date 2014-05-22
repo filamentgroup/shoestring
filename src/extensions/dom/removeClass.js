@@ -1,8 +1,10 @@
-// Extensions
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.removeClass = function( cname ){
 		var classes = cname.replace(/^\s+|\s+$/g, '').split( " " );
-		
+
 		return this.each(function(){
 			for( var i = 0, il = classes.length; i < il; i++ ){
 				if( this.className !== undefined ){
@@ -11,4 +13,7 @@
 			}
 		});
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

@@ -1,5 +1,7 @@
-// Extensions
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.addClass = function( cname ){
 		var classes = cname.replace(/^\s+|\s+$/g, '').split( " " );
 		return this.each(function(){
@@ -10,4 +12,7 @@
 			}
 		});
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

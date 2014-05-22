@@ -1,5 +1,7 @@
-// Extensions.
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.clone = function() {
 		var ret = [];
 		this.each(function() {
@@ -7,4 +9,7 @@
 		});
 		return $( ret );
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

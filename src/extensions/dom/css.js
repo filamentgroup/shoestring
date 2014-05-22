@@ -1,5 +1,7 @@
-// Extensions.
-(function( undefined ){	// TODO: This code should be consistent with attr().
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");// TODO: This code should be consistent with attr().
+
 	shoestring.fn.css = function( prop, val ){
 		if( typeof prop === "object" ) {
 			return this.each(function() {
@@ -21,4 +23,7 @@
 			}
 		}
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

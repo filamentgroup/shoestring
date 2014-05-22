@@ -1,7 +1,7 @@
-// Extensions
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
 	shoestring.fn.width = function( num ){
 		if( num === undefined ){
 			return this[ 0 ].offsetWidth;
@@ -12,4 +12,7 @@
 			});
 		}
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

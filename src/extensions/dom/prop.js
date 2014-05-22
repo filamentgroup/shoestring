@@ -1,5 +1,7 @@
-// Extensions
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.prop = function( name, val ){
 		name = shoestring.propFix[ name ] || name;
 		if( val !== undefined ){
@@ -11,7 +13,7 @@
 			return this[ 0 ][ name ];
 		}
 	};
-	
+
 	// Property normalization, a subset taken from jQuery src
 	shoestring.propFix = {
 		"class": "className",
@@ -20,4 +22,7 @@
 		readonly: "readOnly",
 		tabindex: "tabIndex"
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

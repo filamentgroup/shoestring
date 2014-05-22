@@ -1,8 +1,7 @@
-// Extensions
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
 
-// keep this wrapper around the ones you use!
-(function( undefined ){
-	
 	var xmlHttp = function() {
 		try {
 			return new XMLHttpRequest();
@@ -11,28 +10,28 @@
 			return new ActiveXObject( "Microsoft.XMLHTTP" );
 		}
 	};
-	
+
 	shoestring.ajax = function( url, options ) {
 		var req = xmlHttp(),
 			settings = shoestring.extend( {}, shoestring.ajax.settings );
-		
+
 		if( options ){
 			shoestring.extend( settings, options );
 		}
 		if( !url ){
 			url = settings.url;
 		}
-		
+
 		if( !req || !url ){
 			return;
 		}
-		
+
 		req.open( settings.method, url, settings.async );
 
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
 		}
-		
+
 		req.onreadystatechange = function () {
 			if( req.readyState === 4 ){
 				// Trim the whitespace so shoestring('<div>') works
@@ -56,7 +55,7 @@
 		req.send( null );
 		return req;
 	};
-	
+
 	shoestring.ajax.settings = {
 		success: function(){},
 		error: function(){},
@@ -65,4 +64,7 @@
 		async: true,
 		data: null
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

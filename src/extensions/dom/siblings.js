@@ -1,5 +1,7 @@
-// Extensions.
-(function( undefined ){
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring" ], function(){
+//>>excludeEnd("exclude");
+
 	shoestring.fn.siblings = function(){
 		if( !this.length ) {
 			return shoestring( [] );
@@ -16,4 +18,7 @@
 
 		return shoestring( sibs );
 	};
-}());
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");

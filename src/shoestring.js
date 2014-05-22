@@ -1,14 +1,13 @@
-/*! shoestring - a simple framework for DOM utilities, targeting modern browsers without failing the rest. Copyright 2012 @scottjehl, Filament Group, Inc. Licensed MIT/GPLv2 */
+//>>excludeStart("exclude", pragmas.exclude);
 (function( w, undefined ){
-	
+//>>excludeEnd("exclude");
 	"use strict";
-	
 	var doc = w.document,
 		shoestring = function( prim, sec ){
-		
+
 			var pType = typeof( prim ),
 				ret = [];
-				
+
 			if( prim ){
 				// if string starting with <, make html
 				if( pType === "string" && prim.indexOf( "<" ) === 0 ){
@@ -39,18 +38,18 @@
 			else{
 				ret.push( doc );
 			}
-		
+
 			ret = shoestring.extend( ret, shoestring.fn );
-			
+
 			// add selector prop
 			ret.selector = prim;
-			
+
 			return ret;
 		};
-	
+
 	// For adding element set methods
 	shoestring.fn = {};
-	
+
 	// Public each method
 	// For iteration on sets
 	shoestring.fn.each = function( fn ){
@@ -59,7 +58,7 @@
 		}
 		return this;
 	};
-	
+
 	// For contextual lookups
 	shoestring.fn.find = function( sel ){
 		var ret = [],
@@ -72,7 +71,7 @@
 		});
 		return shoestring( ret );
 	};
-	
+
 	// Children - get element child nodes.
 	// This is needed for HTML string creation
 	shoestring.fn.children = function(){
@@ -82,7 +81,7 @@
 		this.each(function(){
 			childs = this.children;
 			j = -1;
-		
+
 			while( j++ < childs.length-1 ){
 				if( shoestring.inArray(  childs[ j ], ret ) === -1 ){
 					ret.push( childs[ j ] );
@@ -91,12 +90,12 @@
 		});
 		return shoestring(ret);
 	};
-	
+
 	// Public non-dom utilities
-	
+
 	// browser support qualifier - shoestring any usage of shoestring in a qualify callback
 	shoestring.qualified = "querySelectorAll" in doc;
-	
+
 	shoestring.qualify = function( callback ){
 		if( callback && shoestring.qualified ){
 			return callback();
@@ -106,7 +105,7 @@
 			return shoestring.qualified;
 		}
 	};
-	
+
 	// For extending objects
 	shoestring.extend = function( first, second ){
 		for( var i in second ){
@@ -116,7 +115,7 @@
 		}
 		return first;
 	};
-	
+
 	// check if an item exists in an array
 	shoestring.inArray = function( needle, haystack ){
 		var isin = -1;
@@ -127,7 +126,7 @@
 		}
 		return isin;
 	};
-	
+
 	// For DOM ready execution
 	shoestring.ready = function( fn ){
 		if( ready && fn && shoestring.qualified ){
@@ -139,16 +138,16 @@
 		else {
 			runReady();
 		}
-		
+
 		return [doc];
 	};
-	
+
 	// non-shortcut ready
 	shoestring.fn.ready = function( fn ){
 		shoestring.ready( fn );
 		return this;
 	};
-	
+
 	// Empty and exec the ready queue
 	var ready = false,
 		readyQueue = [],
@@ -160,14 +159,14 @@
 				ready = true;
 			}
 		};
-	
+
 	// Quick IE8 shiv
 	if( !w.addEventListener ){
 		w.addEventListener = function( evt, cb ){
 			return w.attachEvent( "on" + evt, cb );
 		};
 	}
-	
+
 	// DOM ready
 	w.addEventListener( "DOMContentLoaded", runReady, false );
 	w.addEventListener( "readystatechange", runReady, false );
@@ -176,8 +175,10 @@
 	if( doc.readyState === "complete" ){
 		runReady();
 	}
-	
+
 	// expose
 	w.shoestring = shoestring;
 
+//>>excludeStart("exclude", pragmas.exclude);
 }( this ));
+//>>excludeEnd("exclude");
