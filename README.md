@@ -131,6 +131,16 @@ That's pretty much it. Of course, you're probably going to need a few more metho
 
 The `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project. 
 
+## Custom Builds
+
+Each extension is defined an AMD module and the dependencies are sort out during the build by requirejs. The all inclusive build is `build/main.js` and can act as a reference for a custom build. To creat a custom build:
+
+1. Copy `build/main.js` to `build/custom/my-build.js`
+2. Edit `build/custom/my-build.js` and remove any extensions you're not using
+3. Run `grunt build`
+4. View `dist/my-build.js`
+
+
 ## Want a dollar?
 
 here you go:
