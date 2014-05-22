@@ -14,7 +14,9 @@ define([ "shoestring" ], function(){
 			if( el.nodeType === 1 && el !== this[ 0 ] ) {
 				sibs.push( el );
 			}
-		} while( el = el.nextSibling );
+
+      el = el.nextSibling;
+		} while( el );
 
 		return shoestring( sibs );
 	};

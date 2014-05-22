@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     }
   });
 
-  builds['main'] = {
+  builds.main = {
 		options: {
 			baseUrl: "src",
 			name: "../build/main",
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 				'* http://github.com/filamentgroup/shoestring/\n' +
 				'* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
-				'Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */'
+				'Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ \n'
 		},
 
 		qunit: {
@@ -81,22 +81,10 @@ module.exports = function(grunt) {
 		jshint: {
 			all: {
 				options: {
-					curly: true,
-					eqeqeq: true,
-					immed: true,
-					latedef: true,
-					newcap: true,
-					noarg: true,
-					sub: true,
-					undef: false,
-					evil: true,
-					boss: true,
-					eqnull: true,
-					browser: true,
 					loopfunc: true
 				},
 				globals: {},
-				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/*.js']
+				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/**/*.js']
 			}
 		}
 	});
