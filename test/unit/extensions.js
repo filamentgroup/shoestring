@@ -62,6 +62,22 @@
 		});
 	});
 
+	test( '`.append()` inserts a child in the current obj element', function(){
+		var $element = $fixture.find( '.append' );
+
+		equal( $element.find( '.foo-append' ).length, 0 );
+		$element.append( "<div class='foo-append'></div> ");
+		equal( $element.find( '.foo-append' ).length, 1 );
+	});
+
+	test( '`.insertAfter()` inserts after the selector', function(){
+		var $element = $fixture.find( '.append' );
+
+		equal( $element.find( '.foo-append' ).length, 0 );
+		shoestring( "<div class='foo-append'></div> ").appendTo( $element );
+		equal( $element.find( '.foo-append' ).length, 1 );
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
