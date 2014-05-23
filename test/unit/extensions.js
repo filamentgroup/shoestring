@@ -121,6 +121,19 @@
 		});
 	});
 
+	test( '`.clone()` prevents alteration of original', function() {
+		var $clone, $element;
+
+		$element = $fixture.find( ".clone" );
+		$clone = $element.clone();
+
+		equal( $element.attr( "class" ), "clone" );
+		equal( $clone.attr( "class" ), "clone" );
+		$clone.attr( "class", "foo" );
+		equal( $element.attr( "class" ), "clone" );
+		equal( $clone.attr( "class" ), "foo" );
+	});
+
 
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
