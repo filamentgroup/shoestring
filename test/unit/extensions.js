@@ -1,68 +1,81 @@
-/*
-shoestring unit tests - using qUnit
-*/
 (function(undefined){
-
-module( 'Extensions' );
-test( '`.live()` is an alias of `.on()`', function() {
-	ok( shoestring( "body" ).live == shoestring( "body" ).on );
-});
-
-test( '`.closest()`', function() {
 	var $fixture = shoestring( '#qunit-fixture' );
-	$fixture.html( '<div class="parent second"><div class="parent first"><div class="child"></div></div></div>' );
 
-	var $child = $fixture.find( '.child' );
+	module( 'Extensions', {
+		setup: function() {
+			$fixture = shoestring( '#qunit-fixture' );
+		}
+	});
 
-	equal( $child[0], $child.closest( '.child' )[0], 'Closest returns current element on match' );
+	test( '`.add()` adds selected elements to the set', function(){
+		var length, count;
 
-	equal( $child.closest( '.parent' ).length, 1, 'Closest returns only one element.' );
+		length = $fixture.length;
+		count = shoestring( '.add' ).length;
+		$fixture = $fixture.add( '.add' );
 
-	ok( $child.closest( '.parent' ).is( '.first' ), 'Closest returns from the bottom up.' );
-});
+		equal( $fixture.length, length + count );
+	});
 
-test( '`.insertAfter()`', function() {
-	var $fixture = shoestring( '#qunit-fixture' ),
-		$sibling;
+	test( '`.live()` is an alias of `.on()`', function() {
+		ok( shoestring( "body" ).live == shoestring( "body" ).on );
+	});
 
-	$fixture.html( '<div id="sibling"></div>' );
-	$sibling = shoestring( '#sibling' );
+	test( '`.closest()`', function() {
+		var $fixture = shoestring( '#qunit-fixture' );
+		$fixture.html( '<div class="parent second"><div class="parent first"><div class="child"></div></div></div>' );
 
-	shoestring( '<div id="insertAfter">' ).insertAfter( $sibling );
+		var $child = $fixture.find( '.child' );
 
-	equal( $fixture.children().length, 2, 'Has two children.' );
-	ok( $sibling.next().is( '#insertAfter' ), 'Inserted properly.' );
-});
+		equal( $child[0], $child.closest( '.child' )[0], 'Closest returns current element on match' );
 
-test( '`.insertBefore()`', function() {
-	var $fixture = shoestring( '#qunit-fixture' ),
-		$sibling;
+		equal( $child.closest( '.parent' ).length, 1, 'Closest returns only one element.' );
 
-	$fixture.html( '<div id="sibling"></div>' );
-	$sibling = shoestring( '#sibling' );
+		ok( $child.closest( '.parent' ).is( '.first' ), 'Closest returns from the bottom up.' );
+	});
 
-	shoestring( '<div id="insertBefore">' ).insertBefore( $sibling );
+	test( '`.insertAfter()`', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+				$sibling;
 
-	equal( $fixture.children().length, 2, 'Has two children.' );
-	ok( $sibling.prev().is( '#insertBefore' ), 'Inserted properly.' );
-});
+		$fixture.html( '<div id="sibling"></div>' );
+		$sibling = shoestring( '#sibling' );
+
+		shoestring( '<div id="insertAfter">' ).insertAfter( $sibling );
+
+		equal( $fixture.children().length, 2, 'Has two children.' );
+		ok( $sibling.next().is( '#insertAfter' ), 'Inserted properly.' );
+	});
+
+	test( '`.insertBefore()`', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+				$sibling;
+
+		$fixture.html( '<div id="sibling"></div>' );
+		$sibling = shoestring( '#sibling' );
+
+		shoestring( '<div id="insertBefore">' ).insertBefore( $sibling );
+
+		equal( $fixture.children().length, 2, 'Has two children.' );
+		ok( $sibling.prev().is( '#insertBefore' ), 'Inserted properly.' );
+	});
 
 
-test( '`.html()`', function() {
-	var $fixture = shoestring( '#qunit-fixture' ),
-		htmlStr = '<div id="sibling"></div>';
+	test( '`.html()`', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+				htmlStr = '<div id="sibling"></div>';
 
-	$fixture.html( htmlStr );
-	equal( $fixture[0].innerHTML, htmlStr, '.html(str) set properly.' );
-	equal( $fixture.html(), htmlStr, '.html() get properly.' );
-});
+		$fixture.html( htmlStr );
+		equal( $fixture[0].innerHTML, htmlStr, '.html(str) set properly.' );
+		equal( $fixture.html(), htmlStr, '.html() get properly.' );
+	});
 
-test( '`.siblings()`', function() {
-	var $fixture = shoestring( '#qunit-fixture' );
-	$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
+	test( '`.siblings()`', function() {
+		var $fixture = shoestring( '#qunit-fixture' );
+		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
 
-	strictEqual( $( '#imaginary_element' ).siblings().length, 0, '.siblings runs on an empty set.' );
-	equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
-});
+		strictEqual( $( '#imaginary_element' ).siblings().length, 0, '.siblings runs on an empty set.' );
+		equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
+	});
 
 })();
