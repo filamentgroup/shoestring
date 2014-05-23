@@ -78,6 +78,50 @@
 		equal( $element.find( '.foo-append' ).length, 1 );
 	});
 
+	test( '`.attr()` gets the attribute', function(){
+		var $element = $fixture.find( '.attr' );
+
+		equal( $element.attr( 'class' ), "attr" );
+	});
+
+	test( '`.attr()` sets the attribute', function(){
+		var $element = $fixture.find( '.attr' );
+
+		equal( $element.attr( 'class', "foo" ).attr( 'class' ), "foo" );
+	});
+
+	test( '`.before()` inserts a sibling before the current obj element', function(){
+		expect( 3 );
+		var $element = $fixture.find( '.before' );
+
+		equal( $fixture.find( '.foo-before' ).length, 0 );
+		$element.before( "<div class='foo-before'></div> ");
+		equal( $fixture.find( '.foo-before' ).length, 1 );
+
+		// sibling to .foo-before
+		$fixture.children().each(function(i) {
+			if( shoestring( this ).is( '.before' ) ){
+				equal( $fixture.children()[i-1].className, "foo-before" );
+			}
+		});
+	});
+
+	test( '`.insertBefore()` inserts before the selector', function(){
+		expect( 3 );
+
+		equal( $fixture.find( '.foo-before' ).length, 0 );
+		shoestring( "<div class='foo-before'></div> ").insertBefore( '.before' );
+		equal( $fixture.find( '.foo-before' ).length, 1 );
+
+		// sibling to .foo-before
+		$fixture.children().each(function(i) {
+			if( shoestring( this ).is( '.before' ) ){
+				equal( $fixture.children()[i-1].className, "foo-before" );
+			}
+		});
+	});
+
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
