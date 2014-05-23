@@ -17,6 +17,20 @@
 		equal( $fixture.length, length + count );
 	});
 
+	test( '`.addClass()` adds a classes when they doesnt exit', function(){
+		var $element = $fixture.find( '.add-class' );
+
+		$element.addClass( 'foo bar baz' );
+		equal( $element.attr( "class" ), "add-class foo bar baz" );
+	});
+
+	test( '`.addClass()` doesnt duplicate classes', function(){
+		var $element = $fixture.find( '.add-class' );
+
+		$element.addClass( 'add-class' );
+		equal( $element.attr( "class" ), "add-class" );
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
