@@ -47,6 +47,21 @@
 		});
 	});
 
+	test( '`.insertAfter()` inserts after the selector', function(){
+		expect( 3 );
+
+		equal( $fixture.find( '.foo-after' ).length, 0 );
+		shoestring( "<div class='foo-after'></div> ").insertAfter( '.after' );
+		equal( $fixture.find( '.foo-after' ).length, 1 );
+
+		// sibling to .foo-after
+		$fixture.children().each(function(i) {
+			if( shoestring( this ).is( '.after' ) ){
+				equal( $fixture.children()[i+1].className, "foo-after" );
+			}
+		});
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
