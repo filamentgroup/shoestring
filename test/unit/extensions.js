@@ -31,6 +31,22 @@
 		equal( $element.attr( "class" ), "add-class" );
 	});
 
+	test( '`.after()` inserts a sibling after the current obj element', function(){
+		expect( 3 );
+		var $element = $fixture.find( '.after' );
+
+		equal( $fixture.find( '.foo-after' ).length, 0 );
+		$element.after( "<div class='foo-after'></div> ");
+		equal( $fixture.find( '.foo-after' ).length, 1 );
+
+		// sibling to .foo-after
+		$fixture.children().each(function(i) {
+			if( shoestring( this ).is( '.after' ) ){
+				equal( $fixture.children()[i+1].className, "foo-after" );
+			}
+		});
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
