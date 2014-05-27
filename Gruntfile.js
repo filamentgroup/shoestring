@@ -80,10 +80,7 @@ module.exports = function(grunt) {
 
 		jshint: {
 			all: {
-				options: {
-					loopfunc: true
-				},
-				globals: {},
+				jshintrc: true,
 				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/**/*.js']
 			}
 		}

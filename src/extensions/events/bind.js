@@ -29,9 +29,14 @@ define([ "shoestring" ], function(){
 			}
 		}
 		return this.each(function(){
+			var callback, oEl = this;
+
+			callback = function( e ) {
+				propChange.call( this, e, oEl );
+			};
+
 			for( var i = 0, il = evts.length; i < il; i++ ){
-				var evt = evts[ i ],
-					oEl = this;
+				var evt = evts[ i ];
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, newCB, false );
@@ -40,9 +45,7 @@ define([ "shoestring" ], function(){
 						this.attachEvent( "on" + evt, newCB );
 					} else {
 						// Custom event
-						document.documentElement.attachEvent( "onpropertychange", function( e ) {
-							propChange.call( this, e, oEl );
-						});
+						document.documentElement.attachEvent( "onpropertychange", callback );
 					}
 				}
 				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname });
