@@ -2,7 +2,7 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.remove = function( sel ){
+	shoestring.fn.remove = function(){
 		return this.each(function(){
 			this.parentNode.removeChild( this );
 		});

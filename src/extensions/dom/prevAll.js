@@ -4,7 +4,7 @@ define([ "shoestring" ], function(){
 
 	shoestring.fn.prevAll = function(){
 		var ret = [];
-		this.each(function( i ){
+		this.each(function(){
 			var self = this;
 			while( self.previousElementSibling ){
 				ret = ret.concat( self.previousElementSibling );

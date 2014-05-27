@@ -9,8 +9,7 @@ define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
 		}
 
 		this.each(function(){
-			var element, $self = shoestring( element = this ),
-				generations = 0;
+			var element, $self = shoestring( element = this );
 
 			if( $self.is(sel) ){
 				ret.push( this );

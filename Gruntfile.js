@@ -1,32 +1,32 @@
 /* global module:false */
 module.exports = function(grunt) {
 
-  var fs, files, opts, builds = {};
+	var fs, files, opts, builds = {};
 
-  opts = {
-    baseUrl: "src",
+	opts = {
+		baseUrl: "src",
 		name: "../build/REPLACE",
 		out: "dist/REPLACE.js",
 		mainConfigFile: "build/config.js"
-  };
+	};
 
-  fs = require( 'fs' );
-  files = fs.readdirSync( "build/custom/" );
+	fs = require( 'fs' );
+	files = fs.readdirSync( "build/custom/" );
 
-  files.forEach(function( file ) {
-    if( /\.js$/.test(file) ){
-      var name = file.replace(/\.js$/, "");
+	files.forEach(function( file ) {
+		if( /\.js$/.test(file) ){
+			var name = file.replace(/\.js$/, "");
 
-      builds[name] = {
-        options: opts
-      };
+			builds[name] = {
+				options: opts
+			};
 
-      builds[name].options.name = opts.name.replace("REPLACE", "custom/" + name );
-      builds[name].options.out = opts.out.replace("REPLACE", name );
-    }
-  });
+			builds[name].options.name = opts.name.replace("REPLACE", "custom/" + name );
+			builds[name].options.out = opts.out.replace("REPLACE", name );
+		}
+	});
 
-  builds.main = {
+	builds.main = {
 		options: {
 			baseUrl: "src",
 			name: "../build/main",
@@ -80,7 +80,10 @@ module.exports = function(grunt) {
 
 		jshint: {
 			all: {
-				jshintrc: true,
+				options: {
+					jshintrc: ".jshintrc",
+				},
+
 				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/**/*.js']
 			}
 		}
@@ -95,6 +98,6 @@ module.exports = function(grunt) {
 
 	// Default task.
 	grunt.registerTask('build', 'requirejs concat uglify'.split(' ') );
-	grunt.registerTask('test', 'qunit'.split(' ') );
+	grunt.registerTask('test', 'jshint qunit'.split(' ') );
 	grunt.registerTask('default', 'build test'.split(' ') );
 };

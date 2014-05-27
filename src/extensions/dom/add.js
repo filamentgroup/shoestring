@@ -4,7 +4,7 @@ define([ "shoestring" ], function(){
 
 	shoestring.fn.add = function( sel ){
 		var ret = [];
-		this.each(function( i ){
+		this.each(function(){
 			ret.push( this );
 		});
 

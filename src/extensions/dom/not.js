@@ -4,7 +4,7 @@ define([ "shoestring" ], function(){
 
 	shoestring.fn.not = function( sel ){
 		var ret = [];
-		this.each(function( i ){
+		this.each(function(){
 			if( shoestring.inArray( this, shoestring( sel ) ) === -1 ){
 				ret.push( this );
 			}

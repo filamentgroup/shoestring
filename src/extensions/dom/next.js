@@ -5,8 +5,9 @@ define([ "shoestring" ], function(){
 	shoestring.fn.next = function(){
 		var ret = [],
 			next;
-		this.each(function( i ){
+		this.each(function(){
 			next = this.nextElementSibling;
+
 			if( next ){
 				ret = ret.concat( next );
 			}
