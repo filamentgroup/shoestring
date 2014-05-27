@@ -1,4 +1,4 @@
-/*global module:false*/
+/* global module:false */
 module.exports = function(grunt) {
 
   var fs, files, opts, builds = {};
