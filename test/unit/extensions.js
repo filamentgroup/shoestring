@@ -152,8 +152,8 @@
 				htmlStr = '<div id="sibling"></div>';
 
 		$fixture.html( htmlStr );
-		equal( $fixture[0].innerHTML, htmlStr, '.html(str) set properly.' );
-		equal( $fixture.html(), htmlStr, '.html() get properly.' );
+		equal( $fixture[0].innerHTML.toLowerCase(), htmlStr, '.html(str) set properly.' );
+		equal( $fixture.html().toLowerCase(), htmlStr, '.html() get properly.' );
 	});
 
 	test( '`.live()` is an alias of `.on()`', function() {
