@@ -95,6 +95,6 @@ module.exports = function(grunt) {
 
 	// Default task.
 	grunt.registerTask('build', 'requirejs concat uglify'.split(' ') );
-	grunt.registerTask('test', 'jshint qunit'.split(' ') );
+	grunt.registerTask('test', 'qunit'.split(' ') );
 	grunt.registerTask('default', 'build test'.split(' ') );
 };
