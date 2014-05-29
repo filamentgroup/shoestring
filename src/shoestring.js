@@ -169,8 +169,15 @@
 
 	// DOM ready
 	w.addEventListener( "DOMContentLoaded", runReady, false );
-	document.addEventListener( "readystatechange", runReady, false );
 	w.addEventListener( "load", runReady, false );
+
+	// ready state change must be on the document
+	if( !document.addEventListener ){
+		document.attachEvent( "onreadystatechange", runReady );
+	} else {
+		document.addEventListener( "readystatechange", runReady, false );
+	}
+
 	// If DOM is already ready at exec time
 	if( doc.readyState === "complete" ){
 		runReady();
