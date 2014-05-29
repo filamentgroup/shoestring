@@ -169,7 +169,7 @@
 
 	// DOM ready
 	w.addEventListener( "DOMContentLoaded", runReady, false );
-	w.addEventListener( "readystatechange", runReady, false );
+	document.addEventListener( "readystatechange", runReady, false );
 	w.addEventListener( "load", runReady, false );
 	// If DOM is already ready at exec time
 	if( doc.readyState === "complete" ){
