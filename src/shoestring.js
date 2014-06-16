@@ -168,19 +168,19 @@
 	}
 
 	// DOM ready
-	w.addEventListener( "DOMContentLoaded", runReady, false );
-	w.addEventListener( "load", runReady, false );
-
-	// ready state change must be on the document
-	if( !document.addEventListener ){
-		document.attachEvent( "onreadystatechange", runReady );
-	} else {
-		document.addEventListener( "readystatechange", runReady, false );
-	}
-
 	// If DOM is already ready at exec time
-	if( doc.readyState === "complete" ){
+	if( doc.readyState === "complete" || doc.readyState === "interactive" ){
 		runReady();
+	}
+	else {
+		if( !w.document.addEventListener ){
+			w.document.attachEvent( "DOMContentLoaded", runReady );
+			w.document.attachEvent( "onreadystatechange", runReady );
+		} else {
+			w.document.addEventListener( "DOMContentLoaded", runReady, false );
+			w.document.addEventListener( "readystatechange", runReady, false );
+		}
+		w.addEventListener( "load", runReady, false );
 	}
 
 	// expose
