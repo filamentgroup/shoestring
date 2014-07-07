@@ -5,23 +5,27 @@ define([ "shoestring" ], function(){
 	shoestring.fn.one = function( evt, callback ){
 		var evts = evt.split( " " );
 		return this.each(function(){
-			var cb;
+			var cbs = {};
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var thisevt = evts[ i ];
 				if( "addEventListener" in this ){
-					cb = function( e ){
+					cbs[ thisevt ] = function( e ){
+						for( var j in cbs ) {
+							this.removeEventListener( j, cbs[ j ] );
+						}
 						callback.apply( this, [ e ].concat( e._args ) );
-						this.removeEventListener( thisevt, cb );
 					};
-					this.addEventListener( thisevt, cb, false );
+					this.addEventListener( thisevt, cbs[ thisevt ], false );
 				}
 				else if( this.attachEvent ){
-					cb = function( e ){
+					cbs[ thisevt ] = function( e ){
 						callback.apply( this, [ e ].concat( e._args ) );
-						this.detachEvent( "on" + thisevt, cb );
+						for( var j in cbs ) {
+							this.detachEvent( "on" + j, cbs[ j ] );
+						}
 					};
-					this.attachEvent( "on" + thisevt, cb );
+					this.attachEvent( "on" + thisevt, cbs[ thisevt ] );
 				}
 			}
 		});
