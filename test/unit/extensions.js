@@ -168,4 +168,22 @@
 		equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
 	});
 
+	test( '`.one()` with multiple events (see #13)', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			triggerCount = 0,
+			$el;
+
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		$el.one( "hover mousedown", function() {
+			triggerCount++;
+		});
+
+		$el.trigger( "hover" );
+		$el.trigger( "mousedown" );
+
+		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
+	});
+
 })();
