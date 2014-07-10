@@ -15,11 +15,11 @@ define([ "shoestring" ], function(){
 				});
 			}
 			else {
-				return this[ 0 ].shoestringData && this[ 0 ].shoestringData[ name ];
+				return this.length && this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
 			}
 		}
 		else {
-			return this[ 0 ].shoestringData;
+			return this.length ? this[ 0 ].shoestringData || {} : undefined;
 		}
 	};
 //>>excludeStart("exclude", pragmas.exclude);

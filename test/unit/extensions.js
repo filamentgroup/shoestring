@@ -186,4 +186,18 @@
 		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
 	});
 
+	test( '`.data` works on empty nodelists', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		strictEqual( $( '#thiswontmatch' ).data(), undefined, 'should be undefined on an empty result set.' );
+		strictEqual( $( '#thiswontmatch' ).data( "somekey" ), undefined, 'should be undefined on an empty result set with a key passed in.' );
+
+		deepEqual( $( '#el' ).data(), {}, 'should be an empty object on an nonempty result set.' );
+		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
+	});
+
 })();
