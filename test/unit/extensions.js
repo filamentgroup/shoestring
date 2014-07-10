@@ -145,6 +145,8 @@
 		equal( $child.closest( '.parent' ).length, 1, 'Closest returns only one element.' );
 
 		ok( $child.closest( '.parent' ).is( '.first' ), 'Closest returns from the bottom up.' );
+
+		ok( $child.closest( '.parent.second' ).is( '.second' ), 'Closest will traverse at least two parents correctly.' );
 	});
 
 	test( '`.html()`', function() {

@@ -18,7 +18,7 @@ define([ "shoestring", "extensions/dom/is" ], function( shoestring ) {
 
 			while( element.parentElement ) {
 				if( shoestring(element.parentElement).is(sel) ){
-					ret.push( this.parentElement );
+					ret.push( element.parentElement );
 					break;
 				}
 
