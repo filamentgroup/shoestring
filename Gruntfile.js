@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		meta: {
-			version: '0.1.0',
+			version: '0.1.2',
 			banner: '/*! Shoestring - v<%= meta.version %> - ' +
 				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 				'* http://github.com/filamentgroup/shoestring/\n' +
