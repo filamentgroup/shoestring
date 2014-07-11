@@ -136,15 +136,15 @@
 
 	test( '`.closest()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
-		$fixture.html( '<div class="parent second"><div class="parent first"><div class="child"></div></div></div><div class="parent"><div class="secondchild"></div>' );
 
-		var $child = $fixture.find( '.child' );
+		var $child = $fixture.find( '.closest .child' );
 
 		equal( $child[0], $child.closest( '.child' )[0], 'Closest returns current element on match' );
 
 		equal( $child.closest( '.parent' ).length, 1, 'Closest returns only one element when original nodelist has one element.' );
 
-		var $children = $fixture.find( '.secondchild' ).add( $child );
+		var $children = $fixture.find( '.closest .second-child' ).add( $child );
+
 		equal( $children.closest( '.parent' ).length, 2, 'Closest returns only two elements when original nodelist has two element.' );
 
 		ok( $child.closest( '.parent' ).is( '.first' ), 'Closest returns from the bottom up.' );
