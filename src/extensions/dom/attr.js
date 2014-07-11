@@ -19,7 +19,7 @@ define([ "shoestring" ], function(){
 			});
 		}
 		else {
-			return this[ 0 ].getAttribute( name );
+			return this[ 0 ] ? this[ 0 ].getAttribute( name ) : undefined;
 		}
 	};
 

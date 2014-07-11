@@ -78,6 +78,12 @@
 		equal( $element.find( '.foo-append' ).length, 1 );
 	});
 
+	test( '`.attr()` returns undefined on empty set', function(){
+		var $element = $( '#this_will_not_match' );
+
+		equal( $element.attr( 'class' ), undefined );
+	});
+
 	test( '`.attr()` gets the attribute', function(){
 		var $element = $fixture.find( '.attr' );
 
