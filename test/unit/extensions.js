@@ -200,12 +200,16 @@
 	});
 
 	test( '`.html()`', function() {
-		var $fixture = shoestring( '#qunit-fixture' ),
-				htmlStr = '<div id="sibling"></div>';
+		var $old = shoestring( '.html .old' ),
+			$new = shoestring( '.html .new' ),
+			htmlStr = '<div id="sibling"></div>';
 
-		$fixture.html( htmlStr );
-		equal( $fixture[0].innerHTML.toLowerCase(), htmlStr, '.html(str) set properly.' );
-		equal( $fixture.html().toLowerCase(), htmlStr, '.html() get properly.' );
+		$old[0].innerHTML = htmlStr;
+		$new.html( htmlStr );
+
+		ok( !!$old[0].innerHTML );
+		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(str) set properly.' );
+		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
 	});
 
 	test( '`.live()` is an alias of `.on()`', function() {
