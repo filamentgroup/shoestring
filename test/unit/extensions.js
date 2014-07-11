@@ -152,6 +152,22 @@
 		ok( $child.closest( '.parent.second' ).is( '.second' ), 'Closest will traverse at least two parents correctly.' );
 	});
 
+	test('`.css()`', function() {
+		var $css = $fixture.find( ".css" );
+
+		$css.css({
+			foo: "bar",
+			baz: "bak"
+		});
+
+		equal( $css[0].style.foo, "bar" );
+
+		// computed style should ignore spurious styles
+		equal( $css.css('baz'), null );
+
+		equal( $css.css('width'), "200px" );
+	});
+
 	test( '`.html()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 				htmlStr = '<div id="sibling"></div>';
