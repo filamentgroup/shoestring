@@ -195,6 +195,10 @@
 		equal( $fixture.eq( 0 )[0], $fixture.first()[0] );
 	});
 
+	test('`.get()`', function() {
+		equal( $fixture[0], $fixture.get(0) );
+	});
+
 	test( '`.html()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 				htmlStr = '<div id="sibling"></div>';
