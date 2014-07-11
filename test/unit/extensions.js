@@ -220,6 +220,29 @@
 		equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
 	});
 
+	asyncTest( '`.bind()` and `.trigger()`', function() {
+		// Note this test currently fails in IE8
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		}).trigger( "click" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with custom events', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		}).trigger( "aCustomEvent" );
+	});
+
 	test( '`.one()` with multiple events (see #13)', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 			triggerCount = 0,

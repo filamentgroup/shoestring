@@ -11,15 +11,15 @@ define([ "shoestring" ], function(){
 					event.initEvent( evts[ i ], true, true );
 					event._args = args;
 					this.dispatchEvent( event );
-				} else if ( document.createEventObject ){
-					if( document.documentElement[ evts[ i ] ] === undefined ) {
-						document.documentElement[ evts[ i ] ] = {};
+				} else if ( document.createEventObject ) {
+					if( this[ 'on' + evts[ i ] ] !== undefined ) {
+						this.fireEvent( 'on' + evts[ i ], document.createEventObject() );
+					} else {
+						document.documentElement[ evts[ i ] ] = {
+							"el": this,
+							_args: args
+						};
 					}
-					document.documentElement[ evts[ i ] ] = {
-						"el" : this,
-						_args: args
-					};
-					document.documentElement[ evts[ i ] ][ evts[ i ] ]++;
 				}
 			}
 		});
