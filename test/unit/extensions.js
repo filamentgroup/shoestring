@@ -169,7 +169,7 @@
 		equal( $css[0].style.foo, "bar" );
 
 		// computed style should ignore spurious styles
-		equal( $css.css('baz'), null );
+		equal( $css.css('baz'), undefined );
 
 		equal( $css.css('width'), "200px" );
 	});
