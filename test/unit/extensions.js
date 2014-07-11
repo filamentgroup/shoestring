@@ -191,6 +191,10 @@
 		equal( $withoutParent.filter( ".filter" )[0], $withoutParent[0] );
 	});
 
+	test('`.first()`', function() {
+		equal( $fixture.eq( 0 )[0], $fixture.first()[0] );
+	});
+
 	test( '`.html()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 				htmlStr = '<div id="sibling"></div>';
