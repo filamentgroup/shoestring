@@ -168,6 +168,11 @@
 		equal( $css.css('width'), "200px" );
 	});
 
+	test('`.eq()`', function() {
+		equal( $fixture.eq( 0 )[0], $fixture[0] );
+		equal( $fixture.eq( 1000000 )[0], undefined );
+	});
+
 	test( '`.html()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 				htmlStr = '<div id="sibling"></div>';
