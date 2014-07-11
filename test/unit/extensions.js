@@ -179,6 +179,18 @@
 		equal( $fixture.eq( 1000000 )[0], undefined );
 	});
 
+	test('`.filter()`', function() {
+		var $divs = $fixture.find( "div" );
+
+		equal( $divs.filter( ".filter" ).length, 1 );
+		equal( $divs.filter( ".filter" )[0], $fixture.find( ".filter" )[0] );
+
+		var $withoutParent = $( "<div class='filter'></div><div></div>" );
+
+		equal( $withoutParent.filter( ".filter" ).length, 1 );
+		equal( $withoutParent.filter( ".filter" )[0], $withoutParent[0] );
+	});
+
 	test( '`.html()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 				htmlStr = '<div id="sibling"></div>';
