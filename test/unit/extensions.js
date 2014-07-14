@@ -159,20 +159,24 @@
 	});
 
 	test('`.css()`', function() {
-		var $css = $fixture.find( ".css" );
+		var $css = $fixture.find( ".css" ),
+			$otherCss = $fixture.find( ".othercss" );
 
 		$css.css({
 			foo: "bar",
-			baz: "bak"
+			baz: "bak",
+			'margin-right': '1px',
+			'box-sizing': "border-box"
 		});
 
-		equal( $css[0].style.foo, "bar" );
-
 		// computed style should ignore spurious styles
-		// this test fails in IE8 but it also fails in jQuery in IE8 so…?
 		equal( $css.css('baz'), undefined );
 
 		equal( $css.css('width'), "200px" );
+		equal( $css.css('margin-right'), "1px", "margin-right should default to 0px" );
+		equal( $css.css('box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
+
+		notEqual( $otherCss.css('width'), undefined, 'Width should have a value even though it’s not set.' );
 
 		equal( $( "#unmatched_element" ).css('width'), undefined );
 	});
