@@ -249,6 +249,12 @@
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
 
+	test( '`.next()`', function() {
+		var $first = $fixture.find( ".next .first" );
+
+		equal( $first.next()[0], $fixture.find(".next .second")[0]);
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
