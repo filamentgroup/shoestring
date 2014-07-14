@@ -241,6 +241,10 @@
 		ok( !$fixture.is(".jacky-jormp-jomp") );
 	});
 
+	test('`.last()`', function() {
+		equal( $fixture.eq( $fixture.length - 1 )[0], $fixture.last()[0] );
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
