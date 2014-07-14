@@ -17,8 +17,7 @@ define([ "shoestring" ], function(){
 							ret.push( curr );
 						}
 					}
-				}
-				else {
+				} else {
 					if( shoestring.inArray( curr, ret ) === -1 ){
 						ret.push( curr );
 					}

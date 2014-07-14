@@ -276,6 +276,21 @@
 		equal( $( "html" ).parent()[0], document.documentElement );
 	});
 
+	test( '`.parents()` ... with an s', function() {
+		var $children, $parent;
+
+		$parent = $( "#qunit-fixture > .parents" );
+		$children = $parent.find( ".child" );
+
+		// the shared parents of the first and second child
+		// +1 for the second parent which is unique
+		equal( $children.parents().length, 6);
+		equal( $children.parents()[0], $(".parents > .first-parent")[0] );
+		equal( $children.parents()[2], $("#qunit-fixture")[0] );
+		equal( $children.parents()[4], $("html")[0] );
+		equal( $children.parents()[5], $(".parents > .second-parent")[0] );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
