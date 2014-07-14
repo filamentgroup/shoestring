@@ -5,12 +5,17 @@ define([ "shoestring" ], function(){
 	shoestring.fn.parent = function(){
 		var ret = [],
 			parent;
+
 		this.each(function(){
-			parent = this.parentElement;
+			// no parent node, assume top level
+			// TODO maybe this should be a more precise check for the document?
+			parent = this.parentElement || document.documentElement;
+
 			if( parent ){
 				ret.push( parent );
 			}
 		});
+
 		return shoestring(ret);
 	};
 

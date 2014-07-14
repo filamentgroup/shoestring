@@ -262,6 +262,20 @@
     equal( $divs.not( ".is-so" ).length, $divs.length - 1 );
 	});
 
+	test( '`.parent()`', function() {
+		var $children, $parent;
+
+		$parent = $( "#qunit-fixture > .parent" );
+		$children = $parent.find( ".child" );
+
+		// double parent
+		equal( $children.parent()[0],	 $parent[0] );
+		equal( $children.parent()[1],	 $parent[0] );
+
+		// default to document element
+		equal( $( "html" ).parent()[0], document.documentElement );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
