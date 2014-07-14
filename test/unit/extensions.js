@@ -169,9 +169,12 @@
 		equal( $css[0].style.foo, "bar" );
 
 		// computed style should ignore spurious styles
+		// this test fails in IE8 but it also fails in jQuery in IE8 so…?
 		equal( $css.css('baz'), undefined );
 
 		equal( $css.css('width'), "200px" );
+
+		equal( $( "#unmatched_element" ).css('width'), undefined );
 	});
 
 	test('`.eq()`', function() {
