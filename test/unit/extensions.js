@@ -236,6 +236,11 @@
 		equal( $second.index(), 1 );
 	});
 
+	test('`.is()`', function() {
+		ok( $fixture.is("#qunit-fixture") );
+		ok( !$fixture.is(".jacky-jormp-jomp") );
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
