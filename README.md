@@ -23,7 +23,7 @@ Shoestring is designed with a minimalist, mobile-first philosophy.
 
 One unique aspect of Shoestring is that its source code tends to favor terseness over completeness, allowing it to be very lightweight, but not as fault-tolerant or broadly compatible as many common DOM toolkits. For example, a given method might support one or two argument types, and not provide logic to support others that are deemed less common. These decisions are made based on the opinion of the developers and what they found most necessary, but all methods are easily overrideable if you'd like to do so. 
 
-Shoestring also favors terseness in its string-based selector engine, which it merely offloads to modern browsers' native `document.querySelectorAll` (though you can easly plug-in an engine like Sizzle if you'd like) function. In this way, DOM selections will sometimes be a little slower than they would be in other libraries, but conversely, Shoestring's simpler logic makes it lighter in overall weight, and faster in initial load time. 
+Shoestring also favors terseness in its string-based selector engine, which it merely offloads to modern browsers' native `document.querySelectorAll` (though you can easily plug-in an engine like Sizzle if you'd like) function. In this way, DOM selections will sometimes be a little slower than they would be in other libraries, but conversely, Shoestring's simpler logic makes it lighter in overall weight, and faster in initial load time. 
 
 We're still assessing the benefits of these ideas and are generally looking for a good balance of code weight, runtime speed, browser support, and developer convenience.
 
@@ -73,7 +73,7 @@ That same test is exposed in a handy api method as well: `qualify`. The `qualify
 
     var qualifiedBrowser = shoestring.qualify();
 
-More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won't need this, but if it executes earlier, just Shoestring your code in a `qualify` callback to safeproof its execution. Basically, you might use `qualify` in place of your typical `IIFE` Shoestringper:
+More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won't need this, but if it executes earlier, just Shoestring your code in a `qualify` callback to safeproof its execution. Basically, you might use `qualify` in place of your typical `IIFE` wrapper:
 
     shoestring.qualify(
 		// It's safer in here.
