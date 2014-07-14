@@ -3,6 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.index = function( elem ){
+		var found, doc = window.document.documentElement;
 
 		// no arg? return number of prev siblings
 		if( elem === undefined ){
@@ -13,17 +14,18 @@ define([ "shoestring" ], function(){
 				self = self.previousElementSibling;
 				ret++;
 			}
-			return ret;
-		}
-		else {
-			// arg? get its index within the jq obj
-			elem = shoestring( elem )[ 0 ];
 
+			return ret;
+		} else {
+			// arg? get its index within the jq obj
 			for( var i = 0; i < this.length; i++ ){
-				if( this[ i ] === elem ){
+				found = shoestring( elem, this[i].parentNode || doc )[ 0 ];
+
+				if( this[ i ] === found ){
 					return i;
 				}
 			}
+
 			return -1;
 		}
 	};

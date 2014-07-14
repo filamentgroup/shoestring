@@ -227,6 +227,15 @@
 		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
 	});
 
+	test('`.index()`', function() {
+		var $indexed = $fixture.find( ".index div" );
+		equal( $indexed.index( ".first" ), 0 );
+		equal( $indexed.index( ".second" ), 1 );
+
+		var $second = $fixture.find( ".index .second" );
+		equal( $second.index(), 1 );
+	});
+
 	test( '`.live()` is an alias of `.on()`', function() {
 		ok( shoestring( "body" ).live == shoestring( "body" ).on );
 	});
