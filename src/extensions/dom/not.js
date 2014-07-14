@@ -4,11 +4,15 @@ define([ "shoestring" ], function(){
 
 	shoestring.fn.not = function( sel ){
 		var ret = [];
+
 		this.each(function(){
-			if( shoestring.inArray( this, shoestring( sel ) ) === -1 ){
+			var found = shoestring( sel, this.parentNode );
+
+			if( shoestring.inArray(this, found) === -1 ){
 				ret.push( this );
 			}
 		});
+
 		return shoestring( ret );
 	};
 

@@ -255,6 +255,13 @@
 		equal( $first.next()[0], $fixture.find(".next .second")[0]);
 	});
 
+	test( '`.not()`', function() {
+		var $divs = $fixture.find( ".not div" );
+
+    equal( $divs.not( ".is-not" ).length, 1 );
+    equal( $divs.not( ".is-so" ).length, $divs.length - 1 );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
