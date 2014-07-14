@@ -199,6 +199,21 @@
 		equal( $fixture[0], $fixture.get(0) );
 	});
 
+	test('`.height()`', function() {
+		var $height = $fixture.find( ".height" );
+
+		// returns the value without param
+		equal( $height.height(), 200 );
+
+		// works with integers
+		$height.height( 300 );
+		equal( $height.height(), 300 );
+
+		// works with strings
+		$height.height( "400px" );
+		equal( $height.height(), 400 );
+	});
+
 	test( '`.html()`', function() {
 		var $old = shoestring( '.html .old' ),
 			$new = shoestring( '.html .new' ),
