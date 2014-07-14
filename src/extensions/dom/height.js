@@ -7,7 +7,7 @@ define([ "shoestring" ], function(){
 			return this[ 0 ].offsetHeight;
 		} else {
 			// support integer values as pixels
-			num = typeof num == "string" ? num : num + "px";
+			num = typeof num === "string" ? num : num + "px";
 
 			return this.each(function(){
 				this.style.height = num;
