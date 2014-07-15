@@ -2,9 +2,8 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.prev = function(selectors){
-		var ret = [],
-			next;
+	shoestring.fn.prev = function( selectors ){
+		var ret = [], next;
 
 		//>>includeStart("development", pragmas.development);
 		if( selectors ){
