@@ -26,6 +26,7 @@ shoestring.fn.prev = function(selectors){
 			ret = ret.concat( next );
 		}
 	});
+
 	return shoestring(ret);
 };
 ```

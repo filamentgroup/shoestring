@@ -17,6 +17,7 @@ define([ "shoestring" ], function(){
 				ret = ret.concat( next );
 			}
 		});
+
 		return shoestring(ret);
 	};
 
