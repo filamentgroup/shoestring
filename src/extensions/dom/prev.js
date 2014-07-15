@@ -5,11 +5,13 @@ define([ "shoestring" ], function(){
 	shoestring.fn.prev = function(selectors){
 		var ret = [],
 			next;
-//>>excludeStart("exclude", pragmas.exclude);
-	if( selectors ){
-		throw new Error( "Shoestring does not support passing selectors into .prev, try .prev().filter(selector)" );
-	}
-//>>excludeEnd("exclude");
+
+		//>>includeStart("development", pragmas.development);
+		if( selectors ){
+			throw new Error( "Shoestring does not support passing selectors into .prev, try .prev().filter(selector)" );
+		}
+		//>>includeEnd("development");
+
 		this.each(function(){
 			next = this.previousElementSibling;
 			if( next ){

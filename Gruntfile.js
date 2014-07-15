@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		baseUrl: "src",
 		name: "../build/REPLACE",
 		out: "dist/REPLACE.js",
-		mainConfigFile: "build/config.js"
+		mainConfigFile: "build/config/production.js"
 	};
 
 	fs = require( 'fs' );
@@ -26,12 +26,23 @@ module.exports = function(grunt) {
 		}
 	});
 
-	builds.main = {
+	builds.production = {
 		options: {
 			baseUrl: "src",
-			name: "../build/main",
-			out: "dist/main.js",
-			mainConfigFile: "build/config.js"
+			name: "../build/production",
+			out: "dist/production.js",
+			mainConfigFile: "build/config/production.js"
+		}
+	};
+
+  // NOTE config includes development
+	builds.development = {
+		options: {
+			baseUrl: "src",
+			// NOTE uses the same meta-module as production
+			name: "../build/production",
+			out: "dist/development.js",
+			mainConfigFile: "build/config/development.js"
 		}
 	};
 
@@ -59,9 +70,14 @@ module.exports = function(grunt) {
 				stripBanners: true
 			},
 
-			main: {
-				src: ['dist/main.js'],
+			production: {
+				src: ['dist/production.js'],
 				dest: 'dist/shoestring.js'
+			},
+
+			development: {
+				src: ['dist/development.js'],
+				dest: 'dist/shoestring-dev.js'
 			}
 		},
 
@@ -73,7 +89,8 @@ module.exports = function(grunt) {
 				},
 
 				files: {
-					'dist/shoestring.min.js': ['dist/shoestring.js']
+					'dist/shoestring.min.js': ['dist/shoestring.js'],
+					'dist/shoestring-dev.min.js': ['dist/shoestring-dev.js']
 				}
 			}
 		},
