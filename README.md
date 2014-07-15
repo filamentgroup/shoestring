@@ -7,13 +7,13 @@ A lightweight, simple utility made to run on a tight budget. Out of the box, all
 * Copyright 2012 @scottjehl, Filament Group, Inc.
 * Licensed MIT/GPLv2
 
-Shoestring is a simple framework for organizing, creating, and using DOM-based utilities. It's a throwback to the days of building websites using a small set of utilities that you need, and not much more. The utilities are wrapped in a handy and familiar API, making it more of a pleasure to work with.  
+Shoestring is a simple framework for organizing, creating, and using DOM-based utilities. It's a throwback to the days of building websites using a small set of utilities that you need, and not much more. The utilities are wrapped in a handy and familiar API, making it more of a pleasure to work with.
 
-Shoestring supports a small set of features, and almost that entire set is optional. It is aimed particularly at cases where you need a small set of JavaScript utilities but not a heavyweight toolkit. It is designed for making user experience enhancements in modern browsers, while quietly stepping aside and letting things "be" in the older ones. 
+Shoestring supports a small set of features, and almost that entire set is optional. It is aimed particularly at cases where you need a small set of JavaScript utilities but not a heavyweight toolkit. It is designed for making user experience enhancements in modern browsers, while quietly stepping aside and letting things "be" in the older ones.
 
 Shoestring is part of the Southstreet workflow at Filament Group.
 
-### Shoestring is in early development and may not be ready for production use. 
+### Shoestring is in early development and may not be ready for production use.
 
 Shoestring is still in its experimental, alpha development days, and is sure to have plenty of quirks we've yet to uncover. We're excited about its philosophy, but are well-aware that its implementation needs improvements. If you're able, we'd love your help!
 
@@ -21,15 +21,15 @@ Shoestring is still in its experimental, alpha development days, and is sure to 
 
 Shoestring is designed with a minimalist, mobile-first philosophy.
 
-One unique aspect of Shoestring is that its source code tends to favor terseness over completeness, allowing it to be very lightweight, but not as fault-tolerant or broadly compatible as many common DOM toolkits. For example, a given method might support one or two argument types, and not provide logic to support others that are deemed less common. These decisions are made based on the opinion of the developers and what they found most necessary, but all methods are easily overrideable if you'd like to do so. 
+One unique aspect of Shoestring is that its source code tends to favor terseness over completeness, allowing it to be very lightweight, but not as fault-tolerant or broadly compatible as many common DOM toolkits. For example, a given method might support one or two argument types, and not provide logic to support others that are deemed less common. These decisions are made based on the opinion of the developers and what they found most necessary, but all methods are easily overrideable if you'd like to do so.
 
-Shoestring also favors terseness in its string-based selector engine, which it merely offloads to modern browsers' native `document.querySelectorAll` (though you can easily plug-in an engine like Sizzle if you'd like) function. In this way, DOM selections will sometimes be a little slower than they would be in other libraries, but conversely, Shoestring's simpler logic makes it lighter in overall weight, and faster in initial load time. 
+Shoestring also favors terseness in its string-based selector engine, which it merely offloads to modern browsers' native `document.querySelectorAll` (though you can easily plug-in an engine like Sizzle if you'd like) function. In this way, DOM selections will sometimes be a little slower than they would be in other libraries, but conversely, Shoestring's simpler logic makes it lighter in overall weight, and faster in initial load time.
 
 We're still assessing the benefits of these ideas and are generally looking for a good balance of code weight, runtime speed, browser support, and developer convenience.
 
 # Feature Set
 
-Shoestring's API is inspired by jQuery, because we absolutely love working with jQuery, but there are times when we only need a subset of its features and browser support. 
+Shoestring's API is inspired by jQuery, because we absolutely love working with jQuery, but there are times when we only need a subset of its features and browser support.
 
 Technically, shoestring.js is a very small, extendable core function. That core function doesn't come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like `each`, `find`, `children`. Using its `shoestring.fn` API, its core is easy to extend further, and several extensions are available in the Shoestring codebase for you to include in your build.
 
@@ -53,7 +53,7 @@ perhaps you'd like to iterate through each item that was found, applying scripti
 		console.log( this );
 		// here, "this" refers to the current element in iteration
 	});
-	
+
 `each` also supports a passed iteration number, if you please:
 
     shoestring( "#foo, .bar" ).each(function( i ){
@@ -69,7 +69,7 @@ perhaps you'd like to iterate through each item that was found, applying scripti
 
 Internally, this dom-ready shortcut also provides the benefit of doing nothing at all in browsers that don't mass the `Shoestring.qualified` boolean (which, by default, checks for `document.querySelectorAll` support).
 
-That same test is exposed in a handy api method as well: `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `shoestring`, receiving a boolean answer: 
+That same test is exposed in a handy api method as well: `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `shoestring`, receiving a boolean answer:
 
     var qualifiedBrowser = shoestring.qualify();
 
@@ -95,9 +95,9 @@ For extensions, `shoestring` comes with a utility function or three. First, the 
 `extend` doesn't do deep object extensions, but it covers the usual hash mixin use case pretty well. You can use it to extend any object with another, but you might choose use it to add more utility functions to `shoestring` itself, like so:
 
     shoestring.extend( Shoestring, { alertfoo: function(){ alert( "foo" ); } });
-	
+
 	shoestring.foo();
-	
+
 	// --> throws an alert of "foo"
 
 the second utility, `inArray`, will let you know if an item is in an array or not, returning the position of the item in the array (or `-1` if it's not present). This is helpful when returning arrays that should only contain unique entries, like a bunch of dom node references, for instance.
@@ -118,7 +118,7 @@ A quick explanation: we've defined a function with a single argument `cname`, re
 Now we can use it.
 
     shoestring( "body" ).addClass( "foo" );
-	
+
 	// --> [<body class="foo"></body>]
 
 ...and since we returned `this`, we can keep chaining.
@@ -131,7 +131,7 @@ That's pretty much it. Of course, you're probably going to need a few more metho
 
 ## Shoestring extensions
 
-The `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project. 
+The `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project.
 
 ## Custom Builds
 
@@ -150,5 +150,3 @@ here you go:
     window.$ = shoestring;
 
     $( "foo, bar, .baz" ).each(...)
-	
-	
