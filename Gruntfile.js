@@ -40,7 +40,7 @@ module.exports = function(grunt) {
 		options: {
 			baseUrl: "src",
 			// NOTE uses the same meta-module as production
-			name: "../build/production",
+			name: "../build/development",
 			out: "dist/development.js",
 			mainConfigFile: "build/config/development.js"
 		}

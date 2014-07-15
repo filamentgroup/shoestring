@@ -8,7 +8,7 @@ define([ "shoestring" ], function(){
 
 		//>>includeStart("development", pragmas.development);
 		if( selectors ){
-			throw new Error( "Shoestring does not support passing selectors into .prev, try .prev().filter(selector)" );
+			shoestring.error( 'prev-selector' );
 		}
 		//>>includeEnd("development");
 
