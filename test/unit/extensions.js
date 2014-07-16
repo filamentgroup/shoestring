@@ -169,14 +169,23 @@
 			'box-sizing': "border-box"
 		});
 
+    $css.css( 'margin-left', "2px" );
+
 		// computed style should ignore spurious styles
 		equal( $css.css('baz'), undefined );
 
+    // width is defined in the page
 		equal( $css.css('width'), "200px" );
-		equal( $css.css('margin-right'), "1px", "margin-right should default to 0px" );
+
+    // margin-right is defined in the object assignment above
+		equal( $css.css('margin-right'), "1px", "margin-right should be set" );
+
+    // margin-left is defined in the property assignment above
+		equal( $css.css('margin-left'), "2px", "margin-left should be set" );
+
 		equal( $css.css('box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
 
-		notEqual( $otherCss.css('width'), undefined, 'Width should have a value even though it’s not set.' );
+		notEqual( $otherCss.css('width'), undefined, 'Width should **NOT** have a value even though it’s not set.' );
 
 		equal( $( "#unmatched_element" ).css('width'), undefined );
 	});
