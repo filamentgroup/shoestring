@@ -8,7 +8,7 @@ define([ "shoestring" ], function(){
 			'next-selector' : "Shoestring does not support passing selectors into .next, try .next().filter( selector )",
 			'has-class' : "Shoestring does not support the hasClass method. Try using .is( '.klassname' ) instead.",
 			'on-delegate' : "Shoestring does not support the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
-			'live' : "Shoestring does not support the .live method. Use .bind or .on instead."
+			'live-delegate' : "Shoestring does not support the .live or .delegate methods. Use .bind or .on instead."
 		}
 	};
 

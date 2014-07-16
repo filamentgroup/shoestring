@@ -64,7 +64,10 @@ define([ "shoestring" ], function(){
 
 	//>>includeStart("development", pragmas.development);
 	shoestring.fn.live = function(){
-		shoestring.error( 'live' );
+		shoestring.error( 'live-delegate' );
+	};
+	shoestring.fn.delegate = function(){
+		shoestring.error( 'live-delegate' );
 	};
 		//>>includeEnd("development");
 
