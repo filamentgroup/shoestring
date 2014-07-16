@@ -3,6 +3,13 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.bind = function( evt, callback ){
+
+		//>>includeStart("development", pragmas.development);
+		if( arguments.length > 2 ){
+			shoestring.error( 'on-delegate' );
+		}
+		//>>includeEnd("development");
+
 		var evts = evt.split( " " ),
 			bindingname = callback.toString(),
 			boundEvents = function( el, evt, callback ) {
@@ -52,6 +59,14 @@ define([ "shoestring" ], function(){
 			}
 		});
 	};
+
+	shoestring.fn.on = shoestring.fn.bind;
+
+	//>>includeStart("development", pragmas.development);
+	shoestring.fn.live = function(){
+		shoestring.error( 'live' );
+	};
+		//>>includeEnd("development");
 
 //>>excludeStart("exclude", pragmas.exclude);
 });

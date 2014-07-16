@@ -47,7 +47,6 @@ require([
 	"extensions/dom/width",
 	"extensions/dom/wrapInner",
 	"extensions/events/bind",
-	"extensions/events/live",
 	"extensions/events/one",
 	"extensions/events/triggerHandler",
 	"extensions/events/trigger",

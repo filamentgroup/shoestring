@@ -261,8 +261,8 @@
 		equal( $fixture.eq( $fixture.length - 1 )[0], $fixture.last()[0] );
 	});
 
-	test( '`.live()` is an alias of `.on()`', function() {
-		ok( shoestring( "body" ).live == shoestring( "body" ).on );
+	test( '`.on()` is an alias of `.bind()`', function() {
+		strictEqual( shoestring( "body" ).on, shoestring( "body" ).bind );
 	});
 
 	test( '`.next()`', function() {
@@ -316,7 +316,6 @@
 	});
 
 	asyncTest( '`.bind()` and `.trigger()`', function() {
-		// Note this test currently fails in IE8
 		expect( 1 );
 
 		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
@@ -325,6 +324,19 @@
 			ok( true, 'event callback should execute.' );
 			start();
 		}).trigger( "click" );
+	});
+
+	asyncTest( '`.on()` and click event bubbles to parent', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( '#parent' ).on( "click", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		});
+
+		$( '#child' ).trigger( "click" );
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with custom events', function() {
@@ -337,6 +349,126 @@
 			start();
 		}).trigger( "aCustomEvent" );
 	});
+
+	asyncTest( '`.on()` and custom events bubble to parent', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( '#parent' ).on( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		});
+
+		$( '#child' ).trigger( "aCustomEvent" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with multiple of the same event on a single element', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+		}).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		}).trigger( "click" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with multiple of the same event on a single element, bubbles to parent', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( "#parent" ).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+		}).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		});
+
+		$( "#child" ).trigger( "click" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with multiple of the same event on different elements', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el1"></div><div id="el2"></div>' );
+
+		$( "#el1" ).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+		})
+		$( "#el2" ).bind( "click", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		})
+		$( "#el1" ).trigger( "click" );
+		$( "#el2" ).trigger( "click" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on a single element', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+		}).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		}).trigger( "aCustomEvent" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on a single element, bubbles to parent', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( "#parent" ).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+		}).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		})
+
+		$( "#child" ).trigger( "aCustomEvent" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on different elements', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el1"></div><div id="el2"></div>' );
+
+		$( "#el1" ).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+		});
+		$( "#el2" ).bind( "aCustomEvent", function() {
+			ok( true, 'event callback should execute.' );
+			start();
+		})
+		$( "#el1" ).trigger( "aCustomEvent" );
+		$( "#el2" ).trigger( "aCustomEvent" );
+	});
+
+
+	asyncTest( '`.bind()` should not trigger', function() {
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( '#el' )
+			.bind( "dragmove.carousel", function( e, data ){
+				ok( false, "Should not execute without being triggered.")
+			});
+
+		setTimeout(function() {
+			ok( true );
+
+			start();
+		}, 30);
+	});
+
+	// TODO unbind with native events (+ optional namespace)
+	// TODO unbind with custom events (+ optional namespace)
 
 	test( '`.one()` with multiple events (see #13)', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
