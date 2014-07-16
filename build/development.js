@@ -2,6 +2,7 @@
 //>>group: exclude
 require([
   "util/errors",
-  "../build/production"
+  "../build/production",
+	"extensions/dom/hasClass"
 ]);
 //>>excludeEnd("exclude");
