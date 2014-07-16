@@ -2,9 +2,16 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.next = function(){
+	shoestring.fn.next = function( selectors ){
 		var ret = [],
 			next;
+
+		//>>includeStart("development", pragmas.development);
+		if( selectors ){
+			shoestring.error( 'next-selector' );
+		}
+		//>>includeEnd("development");
+
 		this.each(function(){
 			next = this.nextElementSibling;
 
