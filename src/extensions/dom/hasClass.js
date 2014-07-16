@@ -4,7 +4,7 @@ define([ "shoestring" ], function(){
 
 		//>>includeStart("development", pragmas.development);
 	shoestring.fn.hasClass = function(){
-		shoestring.error( 'hasClass' );
+		shoestring.error( 'has-class' );
 	};
 	//>>includeEnd("development");
 
