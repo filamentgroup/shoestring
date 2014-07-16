@@ -135,6 +135,16 @@ test( 'shoestring with a function argument returns array with document child', f
 	ok( shoestring( function(){} )[ 0 ] === document );
 });
 
+test( 'shoestring with a Node passed in returns an array of that node', function(){
+	var el = document.querySelectorAll( ".constructor-selector" )[0];
+	ok( shoestring( el ).constructor === Array );
+});
+
+test( 'shoestring with a Node passed in returns an array returns an array of that node', function(){
+	var el = document.querySelectorAll( ".constructor-selector" )[0];
+	ok( shoestring( el )[0].constructor === HTMLDivElement );
+});
+
 test( 'passing a string argument to shoestring with a second argument returns result scoped to second arg', function() {
 	ok( shoestring( "body" )[ 0 ] === shoestring( "body", "html" )[ 0 ] );
 	ok( shoestring( "body" )[ 0 ] !== shoestring( "body", "body" )[ 0 ] );

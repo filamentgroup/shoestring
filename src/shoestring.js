@@ -25,9 +25,10 @@
 					if( sec ){
 						return shoestring( sec ).find( prim );
 					}
-					for( var i = 0, sel = doc.querySelectorAll( prim ), il = sel.length; i < il; i++ ){
-						ret[ i ] = sel[ i ];
-					}
+					ret = Array.prototype.slice.call( doc.querySelectorAll( prim ) );
+				}
+				else if( pType === "object" && prim instanceof w.NodeList ){
+					ret = Array.prototype.slice.call( prim );
 				}
 				// object? passthrough
 				else {
