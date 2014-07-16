@@ -4,7 +4,8 @@ define([ "shoestring" ], function(){
 
   shoestring.enUS = {
     errors: {
-      'prev-selector' : "Shoestring does not support passing selectors into .prev, try .prev().filter(selector)"
+      'prev-selector' : "Shoestring does not support passing selectors into .prev, try .prev().filter(selector)",
+			'hasClass' : "Shoestring does not support the hasClass method. Try using .is( '.klassname' ) instead"
     }
   };
 
