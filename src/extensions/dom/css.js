@@ -56,7 +56,6 @@ define([ "shoestring" ], function(){
 					setStyle( this, prop, value );
 				});
 			}	else {
-				// try both prop types nad
 				return getStyle( this[0], prop );
 			}
 		}
