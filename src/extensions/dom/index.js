@@ -37,7 +37,7 @@ define([ "shoestring" ], function(){
 		} else {
 
 			// check if the element matches the first selected node from the parent
-			return _getIndex( self, function( element ) {
+			return _getIndex(self, function( element ) {
 				return element === (shoestring( selector, element.parentNode )[ 0 ]);
 			});
 		}
