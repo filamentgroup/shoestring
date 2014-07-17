@@ -503,14 +503,8 @@
 	});
 
 	test( '`.text()` returns content properly', function(){
-		var container = $( ".text-test" );
-		var content = "\n" +
-"			Demonstration Box\n" +
-"			\n" +
-"				list item 1\n" +
-"				list item 2\n" +
-"			\n" +
-"		";
+		var container = $( "<div class='text-test'><div class='demo-box'>Demonstration Box</div><ul><li>list item 1</li><li>list <strong>item</strong> 2</li></ul></div></div>" );
+		var content = "Demonstration Boxlist item 1list item 2";
 
 		equal( container.text(), content, "should return nested text properly" );
 	});
