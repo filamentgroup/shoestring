@@ -4,13 +4,13 @@ define([ "shoestring" ], function(){
 
 	shoestring.enUS = {
 		errors: {
-			'prev-selector' : "Shoestring does not support passing selectors into .prev, try .prev().filter( selector )",
-			'next-selector' : "Shoestring does not support passing selectors into .next, try .next().filter( selector )",
-			'has-class' : "Shoestring does not support the hasClass method. Try using .is( '.klassname' ) instead.",
-			'on-delegate' : "Shoestring does not support the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
-			'live-delegate' : "Shoestring does not support the .live or .delegate methods. Use .bind or .on instead.",
-			'text-setter': "Shoestring does not support setting text via the .text method.",
-			prefix: "Shoestring does not support"
+			prefix: "Shoestring does not support",
+			'has-class' : " the hasClass method. Try using .is( '.klassname' ) instead.",
+			'live-delegate' : "the .live or .delegate methods. Use .bind or .on instead.",
+			'next-selector' : "passing selectors into .next, try .next().filter( selector )",
+			'on-delegate' : " the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
+			'prev-selector' : "passing selectors into .prev, try .prev().filter( selector )",
+			'text-setter': "setting text via the .text method."
 		}
 	};
 
