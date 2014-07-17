@@ -13,6 +13,7 @@ define([ "shoestring" ], function(){
 			}
 
 			// ignore text nodes, etc
+			// NOTE may need to be more permissive
 			if( element.nodeType === 1 ){
 				result++;
 			}

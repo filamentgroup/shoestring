@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/dom/index" ], function(){
+define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.next = function(){
@@ -13,17 +13,24 @@ define([ "shoestring", "extensions/dom/index" ], function(){
 
 		// TODO need to implement map
 		this.each(function() {
-			var children, item;
+			var children, item, found;
 
 			// get the child nodes for this member of the set
 			children = shoestring( this.parentNode )[0].childNodes;
 
-			// grab the next element based on the current element's index
-			item = children.item( shoestring( this ).index() + 1 );
+			for( var i = 0; i < children.length; i++ ){
+				item = children.item( i );
 
-			// push the item onto the result set if it exists
-			if( item ) {
-				result.push( item );
+				// found the current item grab the next viable node
+				// NOTE may need to be more permissive
+				if( found && item.nodeType === 1 ){
+					result.push( item );
+				}
+
+				// find the current item and mark it as found
+				if( children.item( i ) === this ){
+					found = true;
+				}
 			}
 		});
 
