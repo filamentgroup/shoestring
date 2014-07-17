@@ -25,6 +25,7 @@ define([ "shoestring" ], function(){
 				// NOTE may need to be more permissive
 				if( found && item.nodeType === 1 ){
 					result.push( item );
+					break;
 				}
 
 				// find the current item and mark it as found

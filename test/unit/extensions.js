@@ -266,9 +266,19 @@
 	});
 
 	test( '`.next()`', function() {
-		var $first = $fixture.find( ".next .first" );
+		var $first, $all;
 
+		$first = $fixture.find( ".next .first" );
+		$all = $fixture.find( ".next > div" );
+
+
+		equal( $first.next().length, 1 );
 		equal( $first.next()[0], $fixture.find(".next .second")[0]);
+
+		equal( $all.next().length, 2 );
+		equal( $all.next()[0], $fixture.find(".next .second")[0]);
+		equal( $all.next()[1], $fixture.find(".next .third")[0]);
+		equal( $all.next()[2], undefined );
 	});
 
 	test( '`.not()`', function() {
