@@ -25,10 +25,14 @@
 					if( sec ){
 						return shoestring( sec ).find( prim );
 					}
-					ret = Array.prototype.slice.call( doc.querySelectorAll( prim ) );
+					for( var i = 0, sel = doc.querySelectorAll( prim ), il = sel.length; i < il; i++ ){
+						ret[ i ] = sel[ i ];
+					}
 				}
 				else if( pType === "object" && prim instanceof w.NodeList ){
-					ret = Array.prototype.slice.call( prim );
+					for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
+						ret[ i2 ] = prim[ i2 ];
+					}
 				}
 				// object? passthrough
 				else {
