@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([ "shoestring", "extensions/dom/closest" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.bind = function( evt, callback ){
@@ -11,6 +11,7 @@ define([ "shoestring" ], function(){
 		//>>includeEnd("development");
 
 		var evts = evt.split( " " ),
+			docEl = document.documentElement,
 			bindingname = callback.toString(),
 			boundEvents = function( el, evt, callback ) {
 				if ( !el.shoestringData ) {
@@ -22,19 +23,23 @@ define([ "shoestring" ], function(){
 				if ( !el.shoestringData.events[ evt ] ) {
 					el.shoestringData.events[ evt ] = [];
 				}
-				el.shoestringData.events[ evt ][ bindingname ] = callback.callfunc;
+				el.shoestringData.events[ evt ][ callback.name ] = callback.callfunc;
+				// IE custom events
+				el.shoestringData.events[ evt ][ '_' + callback.name ] = callback._callfunc;
 			};
 
 		function newCB( e ){
 			return callback.apply( this, [ e ].concat( e._args ) );
 		}
-		function propChange( e, oEl ) {
-			var el = document.documentElement[ e.propertyName ].el;
+		function propChange( e, boundElement ) {
+			var lastEvent = document.documentElement[ e.propertyName ],
+				triggeredElement = lastEvent.el;
 
-			if( el !== undefined && oEl === el ) {
-				newCB.call( el, e );
+			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
+				newCB.call( triggeredElement, e );
 			}
 		}
+
 		return this.each(function(){
 			var callback, oEl = this;
 
@@ -52,10 +57,10 @@ define([ "shoestring" ], function(){
 						this.attachEvent( "on" + evt, newCB );
 					} else {
 						// Custom event
-						document.documentElement.attachEvent( "onpropertychange", callback );
+						docEl.attachEvent( "onpropertychange", callback );
 					}
 				}
-				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname });
+				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname, "_callfunc": callback });
 			}
 		});
 	};
