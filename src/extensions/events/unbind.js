@@ -8,6 +8,12 @@ define([ "shoestring" ], function(){
 		return this.each(function(){
 			var ev;
 			for( var i = 0, il = evts.length; i < il; i++ ){
+				//>>includeStart("development", pragmas.development);
+				if( evts[ i ].indexOf( "." ) === 0 ) {
+					shoestring.error( 'event-namespaces' );
+				}
+				//>>includeEnd("development");
+
 				var bound = this.shoestringData.events[ evt ],
 					bindingname;
 				if( "removeEventListener" in window ){

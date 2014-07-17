@@ -10,7 +10,8 @@ define([ "shoestring" ], function(){
 			'next-selector' : "passing selectors into .next, try .next().filter( selector )",
 			'on-delegate' : " the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
 			'prev-selector' : "passing selectors into .prev, try .prev().filter( selector )",
-			'text-setter': "setting text via the .text method."
+			'text-setter': "setting text via the .text method.",
+			'event-namespaces': "event namespacing, especially on .unbind( '.myNamespace' ). An event namespace is treated as part of the event name."
 		}
 	};
 
