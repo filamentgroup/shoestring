@@ -3,19 +3,29 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.index = function( elem ){
-		var found;
+		var found, result, children;
+
+		//>>includeStart("development", pragmas.development);
+		if( typeof elem === "string" ){
+			shoestring.error( 'index-selector' );
+		}
+		//>>includeEnd("development");
 
 		// no arg? return number of prev siblings
 		if( elem === undefined ){
-			var ret = 0,
-				self = this[ 0 ];
+			children = (this[0].parentNode || document.documentElement).childNodes;
 
-			while( self.previousElementSibling !== null && self.previousElementSibling !== undefined ){
-				self = self.previousElementSibling;
-				ret++;
+			for( var i = result = 0; i < children.length; i++ ) {
+				if( this[0] === children.item(i) ){
+					return result;
+				}
+
+				if( children.item(i).nodeType === 1 ){
+					result++;
+				}
 			}
 
-			return ret;
+			return -1;
 		} else {
 			// arg? get its index within the jq obj
 			for( var i = 0; i < this.length; i++ ){

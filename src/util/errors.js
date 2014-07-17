@@ -9,12 +9,14 @@ define([ "shoestring" ], function(){
 			'has-class' : "Shoestring does not support the hasClass method. Try using .is( '.klassname' ) instead.",
 			'on-delegate' : "Shoestring does not support the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
 			'live-delegate' : "Shoestring does not support the .live or .delegate methods. Use .bind or .on instead.",
-			'text-setter': "Shoestring does not support setting text via the .text method."
+			'text-setter': "Shoestring does not support setting text via the .text method.",
+			prefix: "Shoestring does not support"
 		}
 	};
 
 	shoestring.error = function( id ) {
-		throw new Error( shoestring.enUS.errors[id] );
+		var errors = shoestring.enUS.errors;
+		throw new Error( errors.prefix + " " + errors[id] );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);
