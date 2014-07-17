@@ -502,4 +502,17 @@
 		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
 	});
 
+	test( '`.text()` returns content properly', function(){
+		var container = $( ".text-test" );
+		var content = "\n" +
+"			Demonstration Box\n" +
+"			\n" +
+"				list item 1\n" +
+"				list item 2\n" +
+"			\n" +
+"		";
+
+		equal( container.text(), content, "should return nested text properly" );
+	});
+
 })();

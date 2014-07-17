@@ -43,6 +43,7 @@ require([
 	"extensions/dom/replaceWith",
 	"extensions/dom/serialize",
 	"extensions/dom/siblings",
+	"extensions/dom/text",
 	"extensions/dom/val",
 	"extensions/dom/width",
 	"extensions/dom/wrapInner",
