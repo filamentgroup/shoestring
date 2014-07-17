@@ -5,6 +5,7 @@ define([ "shoestring" ], function(){
 	shoestring.enUS = {
 		errors: {
 			prefix: "Shoestring does not support",
+			'click': "the click method. Try using trigger( 'click' ) instead",
 			'has-class' : " the hasClass method. Try using .is( '.klassname' ) instead.",
 			'live-delegate' : "the .live or .delegate methods. Use .bind or .on instead.",
 			'next-selector' : "passing selectors into .next, try .next().filter( selector )",
