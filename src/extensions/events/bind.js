@@ -43,12 +43,9 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 		return this.each(function(){
 			var callback, oEl = this;
 
-			callback = function( e ) {
-				propChange.call( this, e, oEl );
-			};
-
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var evt = evts[ i ];
+				callback = null;
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, newCB, false );
@@ -57,6 +54,14 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 						this.attachEvent( "on" + evt, newCB );
 					} else {
 						// Custom event
+						callback = (function() {
+							var eventName = evt;
+							return function( e ) {
+								if( e.propertyName === eventName ) {
+									propChange.call( this, e, oEl );
+								}
+							};
+						})();
 						docEl.attachEvent( "onpropertychange", callback );
 					}
 				}

@@ -31,7 +31,9 @@ define([ "shoestring" ], function(){
 						bindingname = callback.toString();
 						this.detachEvent( "on" + evts[ i ], bound[ bindingname ] );
 						// custom event
-						docEl.detachEvent( "onpropertychange", bound[ '_' + bindingname ] );
+						if( bound[ "_" + bindingname ] ) {
+							docEl.detachEvent( "onpropertychange", bound[ '_' + bindingname ] );
+						}
 					} else {
 						for ( ev in bound ) {
 							// since the _ev and ev will both be keys here, we’ll detach both methods for each

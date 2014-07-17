@@ -360,6 +360,24 @@
 		}).trigger( "aCustomEvent" );
 	});
 
+	asyncTest( '`.bind()` doesn’t `.trigger()` with custom events', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "aCustomEvent", function() {
+			ok( false, "Should not execute without being triggered." );
+		}).bind( "anotherCustomEvent", function() {
+			ok( false, "Should not execute without being triggered." );
+		});
+
+		setTimeout(function() {
+			ok( true );
+
+			start();
+		}, 30);
+	});
+
 	asyncTest( '`.on()` and custom events bubble to parent', function() {
 		expect( 1 );
 
@@ -581,6 +599,26 @@
 		}, 30);
 	});
 
+	asyncTest( '`.unbind()` in a `.bind()` callback', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+			$( this ).unbind( "aCustomEvent", f );
+		};
+
+		$( "#el" ).bind( "aCustomEvent", f )
+			.trigger( "aCustomEvent" )
+			.trigger( "aCustomEvent" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
 	test( '`.one()` with multiple events (see #13)', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 			triggerCount = 0,
@@ -607,7 +645,7 @@
 		$fixture.html( '<div id="el"></div>' );
 		$el = $( "#el" );
 
-		$el.one( "aCustomEvent anotherCustomEvent", function() {
+		$el.one( "aCustomEvent anotherCustomEvent yetAnotherCustomEvent", function() {
 			triggerCount++;
 		});
 
@@ -618,6 +656,7 @@
 	});
 
 	// TODO test events + arguments on callbacks and trigger
+	// TODO unbind events by namespace only
 
 	test( '`.data` works on empty nodelists', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
