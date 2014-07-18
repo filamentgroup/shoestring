@@ -166,25 +166,25 @@
 			foo: "bar",
 			baz: "bak",
 			"float": "left",
-			'margin-right': '1px',
+			"margin-right": "1px",
 			"transform": "rotateX(0)",
 			"WebkitTransform": "rotateX(0)",
-			'box-sizing': "border-box",
-			'WebkitBoxSizing': "border-box"
+			"box-sizing": "border-box",
+			"WebkitBoxSizing": "border-box"
 		});
 
-    $css.css( 'margin-left', "2px" );
+		$css.css( 'margin-left', "2px" );
 
 		// computed style should ignore spurious styles
 		equal( $css.css('baz'), undefined );
 
-    // width is defined in the page
+		// width is defined in the page
 		equal( $css.css('width'), "200px", "width should show value set from <style> tag." );
 
-    // margin-right is defined in the object assignment above
+		// margin-right is defined in the object assignment above
 		equal( $css.css('margin-right'), "1px", "margin-right should be set" );
 
-    // margin-left is defined in the property assignment above
+		// margin-left is defined in the property assignment above
 		equal( $css.css('margin-left'), "2px", "margin-left should be set" );
 
 		equal( $css.css("float"), "left", "float is a special case (cssFloat in JS)." );
@@ -294,8 +294,8 @@
 	test( '`.not()`', function() {
 		var $divs = $fixture.find( ".not div" );
 
-    equal( $divs.not( ".is-not" ).length, 1 );
-    equal( $divs.not( ".is-so" ).length, $divs.length - 1 );
+		equal( $divs.not( ".is-not" ).length, 1 );
+		equal( $divs.not( ".is-so" ).length, $divs.length - 1 );
 	});
 
 	test( '`.parent()`', function() {
