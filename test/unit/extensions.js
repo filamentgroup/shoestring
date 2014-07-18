@@ -166,7 +166,10 @@
 			foo: "bar",
 			baz: "bak",
 			'margin-right': '1px',
-			'box-sizing': "border-box"
+			"transform": "rotateX(0)",
+			"WebkitTransform": "rotateX(0)",
+			'box-sizing': "border-box",
+			'WebkitBoxSizing': "border-box"
 		});
 
     $css.css( 'margin-left', "2px" );
@@ -185,7 +188,9 @@
 
 		equal( $css.css('box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
 
-		notEqual( $otherCss.css('width'), undefined, 'Width should **NOT** have a value even though it’s not set.' );
+		notEqual( $css.css('transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
+
+		notEqual( $otherCss.css('width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
 
 		equal( $( "#unmatched_element" ).css('width'), undefined );
 	});

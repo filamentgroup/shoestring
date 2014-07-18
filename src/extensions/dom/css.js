@@ -18,8 +18,7 @@ define([ "shoestring" ], function(){
 		var view = document.defaultView,
 				docElement = document.documentElement;
 
-		// if the defaultView is available use that to calculate the style
-		// otherwise use the property from the object itself
+		// if defaultView is available use getComputedStyle otherwise use currentStyle
 		if( view ){
 			return view
 				.getComputedStyle( element, null )
@@ -29,11 +28,26 @@ define([ "shoestring" ], function(){
 		}
 	}
 
-	function getStyle( element, property ) {
-		var convert = convertPropertyName( property );
+	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
 
-		// try both default to undefined
-		return _getStyle( element, convert ) || _getStyle( element, property ) || undefined;
+	function getStyle( element, property ) {
+		var convert, value;
+
+		for( var j = 0, k = vendorPrefixes.length; j < k; j++ ) {
+			convert = convertPropertyName( vendorPrefixes[ j ] + property );
+
+			value = _getStyle( element, convert ) || _getStyle( element, property );
+
+			if( vendorPrefixes[ j ] ) {
+				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
+			}
+
+			if( value ) {
+				return value;
+			}
+		}
+
+		return undefined;
 	}
 
 	shoestring.fn.css = function( prop, value ){
