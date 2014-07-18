@@ -14,7 +14,8 @@ define([ "shoestring" ], function(){
 			'text-setter': "setting text via the .text method.",
 			'event-namespaces': "event namespacing, especially on .unbind( '.myNamespace' ). An event namespace is treated as part of the event name.",
 			'outer-width': "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side.",
-			'show-hide': "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead"
+			'show-hide': "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
+			"map": "the map method. Try using .each to make a new object."
 		}
 	};
 

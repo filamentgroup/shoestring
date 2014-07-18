@@ -29,7 +29,9 @@
 						ret[ i ] = sel[ i ];
 					}
 				}
-				else if( pType === "object" && prim instanceof w.NodeList ){
+				else if( Object.prototype.toString.call( pType ) === '[object Array]' ||
+					pType === "object" && prim instanceof w.NodeList ){
+
 					for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
 						ret[ i2 ] = prim[ i2 ];
 					}

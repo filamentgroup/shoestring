@@ -180,4 +180,12 @@ test ('shoestring.each only runs as many times as are items in array', function(
 	equal( divout.length, testels.length, "Both arrays should have equal length" );
 });
 
+test( 'shoestring with an array of Nodes passed returns an array of those nodes', function(){
+	var els = [ document.createElement( "div" ), document.createElement( "div" ), document.createElement( "div" ) ];
+	ok( shoestring( els ).constructor === Array );
+	ok( shoestring( els )[0].constructor === HTMLDivElement );
+	ok( shoestring( els ).length === 3 );
+	equal( Object.prototype.toString.call( shoestring( els ).map ).indexOf( '[native code]' ), -1, undefined );
+});
+
 })();
