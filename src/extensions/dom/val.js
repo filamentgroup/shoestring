@@ -3,11 +3,12 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.val = function( val ){
+		var el;
 		if( val !== undefined ){
 			return this.each(function(){
 				if( this.tagName === "SELECT" ){
 					var optionSet, option,
-						options = elem.options,
+						options = this.options,
 						values = [],
 						i = options.length,
 						newIndex;
@@ -22,20 +23,20 @@ define([ "shoestring" ], function(){
 					}
 					// force browsers to behave consistently when non-matching value is set
 					if ( !optionSet ) {
-						elem.selectedIndex = -1;
+						this.selectedIndex = -1;
 					} else {
-						elem.selectedIndex = i;
+						this.selectedIndex = newIndex;
 					}
 				} else {
 					this.value = val;
 				}
 			});
-		}
-		else {
-			if( this.tagName === "SELECT" ){
-				return this.options[ this[0].selectedIndex ].value;
+		} else {
+			el = this[0];
+			if( el.tagName === "SELECT" ){
+				return el.options[ el.selectedIndex ].value;
 			} else {
-				return this[0].value;
+				return el.value;
 			}
 		}
 	};

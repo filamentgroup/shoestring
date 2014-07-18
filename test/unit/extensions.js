@@ -755,4 +755,60 @@
 		ok( true );
 	});
 
+	test( '`.val()` returns correct value of element', function(){
+		var value = "happy";
+		var input = document.createElement( "input" );
+		input.type = "text";
+		input.value = value;
+
+		equal( $( input ).val(), value, ".val should return the equivalent of the input's value" );
+	});
+
+	test( '`.val()` returns correct value of select element', function(){
+		var select = document.createElement( "select" );
+		var option1 = document.createElement( "option" );
+		var option2 = document.createElement( "option" );
+
+		option1.value = "1";
+		option2.value = "2";
+
+		option2.selected = "selected";
+
+		select.appendChild( option1 );
+		select.appendChild( option2 );
+
+		equal( $( select ).val(), "2", ".val should return the equivalent of the select's selected option's value" );
+	});
+
+	test( '`$( input ).val(value)` inserts value into input', function(){
+		var value = "happy";
+		var input = document.createElement( "input" );
+		input.type = "text";
+		$( input ).val( value );
+
+		equal( input.value, value, ".val should be the equivalent of setting the input's value" );
+	});
+
+	test( '`$( select ).val(value)` selects the option that matches the value', function(){
+		var select = document.createElement( "select" );
+		var option1 = document.createElement( "option" );
+		var option2 = document.createElement( "option" );
+		var option3 = document.createElement( "option" );
+
+		option1.value = "1";
+		option2.value = "2";
+		option3.value = "3";
+
+		option2.selected = "selected";
+
+		select.appendChild( option1 );
+		select.appendChild( option2 );
+		select.appendChild( option3 );
+
+		$( select ).val( "3" );
+
+
+		equal( $( select ).val(), "3", ".val should set the correct option" );
+	});
+
 })();
