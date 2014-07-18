@@ -2,6 +2,10 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");// TODO: This code should be consistent with attr().
 
+	var cssExceptions = {
+		'float': [ 'cssFloat', 'styleFloat' ] // styleFloat is IE8
+	};
+
 	// IE8 uses marginRight instead of margin-right
 	function convertPropertyName( str ) {
 		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
@@ -10,8 +14,17 @@ define([ "shoestring" ], function(){
 	}
 
 	function setStyle( element, property, value ) {
+		var convertedProperty = convertPropertyName(property);
 		element.style[ property ] = value;
-		element.style[ convertPropertyName(property) ] = value;
+
+		if( convertedProperty !== property ) {
+			element.style[ convertedProperty ] = value;
+		}
+		if( cssExceptions[ property ] ) {
+			for( var j = 0, k = cssExceptions[ property ].length; j<k; j++ ) {
+				element.style[ cssExceptions[ property ][ j ] ] = value;
+			}
+		}
 	}
 
 	function _getStyle( element, property ) {
@@ -31,14 +44,30 @@ define([ "shoestring" ], function(){
 	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
 
 	function getStyle( element, property ) {
-		var convert, value;
+		var convert, value, j, k;
 
-		for( var j = 0, k = vendorPrefixes.length; j < k; j++ ) {
+		if( cssExceptions[ property ] ) {
+			for( j = 0, k = cssExceptions[ property ].length; j < k; j++ ) {
+				value = _getStyle( element, cssExceptions[ property ][ j ] );
+
+				if( value ) {
+					return value;
+				}
+			}
+		}
+
+		for( j = 0, k = vendorPrefixes.length; j < k; j++ ) {
 			convert = convertPropertyName( vendorPrefixes[ j ] + property );
 
-			value = _getStyle( element, convert ) || _getStyle( element, property );
+			// VendorprefixKeyName || key-name
+			value = _getStyle( element, convert );
+
+			if( convert !== property ) {
+				value = value || _getStyle( element, property );
+			}
 
 			if( vendorPrefixes[ j ] ) {
+				// -vendorprefix-key-name
 				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
 			}
 

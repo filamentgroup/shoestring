@@ -165,6 +165,7 @@
 		$css.css({
 			foo: "bar",
 			baz: "bak",
+			"float": "left",
 			'margin-right': '1px',
 			"transform": "rotateX(0)",
 			"WebkitTransform": "rotateX(0)",
@@ -178,7 +179,7 @@
 		equal( $css.css('baz'), undefined );
 
     // width is defined in the page
-		equal( $css.css('width'), "200px" );
+		equal( $css.css('width'), "200px", "width should show value set from <style> tag." );
 
     // margin-right is defined in the object assignment above
 		equal( $css.css('margin-right'), "1px", "margin-right should be set" );
@@ -186,9 +187,13 @@
     // margin-left is defined in the property assignment above
 		equal( $css.css('margin-left'), "2px", "margin-left should be set" );
 
+		equal( $css.css("float"), "left", "float is a special case (cssFloat in JS)." );
+
 		equal( $css.css('box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
 
-		notEqual( $css.css('transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
+		if( document.defaultView ) { // CTM for this vendor prefix test.
+			notEqual( $css.css('transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
+		}
 
 		notEqual( $otherCss.css('width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
 
