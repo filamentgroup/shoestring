@@ -5,6 +5,6 @@ require([
 	"../build/production",
 	"extensions/dom/hasClass",
 	"extensions/events/click",
-	"extensions/events/outerWidth"
+	"extensions/dom/outerWidth"
 ]);
 //>>excludeEnd("exclude");
