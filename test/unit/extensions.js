@@ -734,4 +734,25 @@
 		equal( container.text(), content, "should return nested text properly" );
 	});
 
+	test( '`.remove()`', function(){
+		var $el, $fixture;
+
+		$fixture = shoestring( '#qunit-fixture' );
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		equal( $fixture.children().length, 1 );
+		$el.remove();
+
+		equal( $fixture.children().length, 0 );
+	});
+
+	test( '`.remove()` on unattached nodes', function(){
+		var $el;
+		$el = $( document.createElement( "div" ) );
+
+		$el.remove();
+		ok( true );
+	});
+
 })();

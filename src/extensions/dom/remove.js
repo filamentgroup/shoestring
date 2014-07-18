@@ -4,7 +4,9 @@ define([ "shoestring" ], function(){
 
 	shoestring.fn.remove = function(){
 		return this.each(function(){
-			this.parentNode.removeChild( this );
+			if( this.parentNode ) {
+				this.parentNode.removeChild( this );
+			}
 		});
 	};
 
