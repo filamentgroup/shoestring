@@ -12,7 +12,8 @@ define([ "shoestring" ], function(){
 			'on-delegate' : " the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
 			'prev-selector' : "passing selectors into .prev, try .prev().filter( selector )",
 			'text-setter': "setting text via the .text method.",
-			'event-namespaces': "event namespacing, especially on .unbind( '.myNamespace' ). An event namespace is treated as part of the event name."
+			'event-namespaces': "event namespacing, especially on .unbind( '.myNamespace' ). An event namespace is treated as part of the event name.",
+			'outer-width': "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side."
 		}
 	};
 
