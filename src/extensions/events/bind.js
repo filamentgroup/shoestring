@@ -2,13 +2,19 @@
 define([ "shoestring", "extensions/dom/closest" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.bind = function( evt, callback ){
+	shoestring.fn.bind = function( evt, data, callback ){
 
 		//>>includeStart("development", pragmas.development);
-		if( arguments.length > 2 ){
+		if( arguments.length > 3 ){
+			shoestring.error( 'on-delegate' );
+		}
+		if( typeof data === "string" ){
 			shoestring.error( 'on-delegate' );
 		}
 		//>>includeEnd("development");
+		if( typeof data === "function" ){
+			callback = data;
+		}
 
 		var evts = evt.split( " " ),
 			docEl = document.documentElement,
