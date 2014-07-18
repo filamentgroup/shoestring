@@ -6,7 +6,7 @@ define([ "shoestring" ], function(){
 		var value,
 			i = 0,
 			length = obj.length,
-			isArray = ( typeof obj === "array" );
+			isArray = ( typeof obj === "object" && Object.prototype.toString.call(obj) === '[object Array]' );
 
 		if ( args ) {
 			if ( isArray ) {

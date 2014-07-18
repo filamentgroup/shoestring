@@ -152,4 +152,32 @@ test( 'passing a string argument to shoestring with a second argument returns re
 	ok( shoestring( ".testel-2", ".testel" ).length === 1 );
 });
 
+test ('shoestring.each value matches array at index', function(){
+	expect( 5 );
+	var arr = [1,2,3,4,5];
+	$.each( arr, function( i, v ){
+		equal( v, arr[i], "Array at specified index " + i + " should have value of " + arr[i] + " but has " + v );
+	});
+});
+
+test ('shoestring.each value matches array at index for selected items', function(){
+	expect( 2 );
+	var div1 = $( "<div id='div1'></div>" );
+	var div2 = $( "<div id='div2'></div>" );
+	var divs = [ div1, div2 ];
+	$.each( divs, function( i, v ){
+		equal( v.id, divs[i].id, "Item at specified index " + i + " should have id of " + divs[i] + " but has " + v );
+	});
+});
+
+test ('shoestring.each only runs as many times as are items in array', function(){
+	var testels = $( ".testel-2" );
+	var divout = [];
+	$.each( testels, function( i, v ){
+		divout.push(v);
+	});
+
+	equal( divout.length, testels.length, "Both arrays should have equal length" );
+});
+
 })();
