@@ -21,7 +21,8 @@ define([ "shoestring" ], function(){
 			for( var i = 0; i < children.length; i++ ){
 				item = children.item( i );
 
-				// found the current item grab the next viable node
+				// found the item we needed (found) which means current item value is
+				// the next node in the list, as long as it's viable grab it
 				// NOTE may need to be more permissive
 				if( found && item.nodeType === 1 ){
 					result.push( item );
