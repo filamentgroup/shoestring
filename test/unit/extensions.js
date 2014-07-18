@@ -655,6 +655,51 @@
 		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
 	});
 
+	asyncTest( '`.bind()` bubbling event order', function() {
+		expect( 2 );
+
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( '#parent' ).bind( "click", function() {
+			counter++;
+			equal( counter, 2, 'event callback should execute second.' );
+		});
+
+		$( '#child' ).bind( "click", function() {
+			counter++;
+			equal( counter, 1, 'event callback should execute first.' );
+		}).trigger( "click" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+
+	asyncTest( '`.bind()` bubbling custom event order', function() {
+		expect( 2 );
+
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( '#parent' ).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 2, 'event callback should execute second.' );
+		});
+
+		$( '#child' ).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 1, 'event callback should execute first.' );
+		}).trigger( "aCustomEvent" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
 	// TODO test events + arguments on callbacks and trigger
 	// TODO unbind events by namespace only
 
