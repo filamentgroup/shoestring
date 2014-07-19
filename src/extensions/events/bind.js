@@ -14,6 +14,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 		//>>includeEnd("development");
 		if( typeof data === "function" ){
 			callback = data;
+			data = null;
 		}
 
 		var evts = evt.split( " " ),
@@ -35,6 +36,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 			};
 
 		function newCB( e ){
+			e.data = data;
 			return callback.apply( this, [ e ].concat( e._args ) );
 		}
 		function propChange( e, boundElement ) {

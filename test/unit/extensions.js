@@ -346,6 +346,18 @@
 		}).trigger( "click" );
 	});
 
+	asyncTest( '`.bind()` and `.trigger()` with data', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", { key: "test-value" }, function( e ) {
+			ok( true, 'event callback should execute.' );
+			equal( e.data.key, "test-value", "Data should be present on event object" );
+			start();
+		}).trigger( "click" );
+	});
+
 	asyncTest( '`.on()` and click event bubbles to parent', function() {
 		expect( 1 );
 
@@ -366,6 +378,18 @@
 
 		$( "#el" ).bind( "aCustomEvent", function() {
 			ok( true, 'event callback should execute.' );
+			start();
+		}).trigger( "aCustomEvent" );
+	});
+
+	asyncTest( '`.bind()` and `.trigger()` with custom events and data', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "aCustomEvent", { key: "custom" }, function(e) {
+			ok( true, 'event callback should execute.' );
+			equal( e.data.key, "custom" );
 			start();
 		}).trigger( "aCustomEvent" );
 	});
@@ -509,7 +533,7 @@
 			counter++;
 			equal( counter, 2, 'event callback should execute second.' );
 			start();
-		})
+		});
 		$( "#el1" ).trigger( "aCustomEvent" );
 		$( "#el2" ).trigger( "aCustomEvent" );
 	});
@@ -519,7 +543,7 @@
 
 		$( '#el' )
 			.bind( "dragmove.carousel", function( e, data ){
-				ok( false, "Should not execute without being triggered.")
+				ok( false, "Should not execute without being triggered.");
 			});
 
 		setTimeout(function() {
