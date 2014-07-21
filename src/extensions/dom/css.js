@@ -1,10 +1,11 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([
+  "shoestring",
+  "extensions/dom/css/exceptions"
+], function(){
 //>>excludeEnd("exclude");// TODO: This code should be consistent with attr().
 
-	var cssExceptions = {
-		'float': [ 'cssFloat', 'styleFloat' ] // styleFloat is IE8
-	};
+	var cssExceptions = shoestring.cssExceptions;
 
 	// IE8 uses marginRight instead of margin-right
 	function convertPropertyName( str ) {
@@ -27,59 +28,13 @@ define([ "shoestring" ], function(){
 		}
 	}
 
-	function _getStyle( element, property ) {
-		var view = document.defaultView,
-				docElement = document.documentElement;
-
-		// if defaultView is available use getComputedStyle otherwise use currentStyle
-		if( view ){
-			return view
-				.getComputedStyle( element, null )
-				.getPropertyValue( property );
-		} else {
-			return docElement.currentStyle[ property ] ? element.currentStyle[ property ] : undefined;
-		}
-	}
-
-	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
-
-	function getStyle( element, property ) {
-		var convert, value, j, k;
-
-		if( cssExceptions[ property ] ) {
-			for( j = 0, k = cssExceptions[ property ].length; j < k; j++ ) {
-				value = _getStyle( element, cssExceptions[ property ][ j ] );
-
-				if( value ) {
-					return value;
-				}
-			}
-		}
-
-		for( j = 0, k = vendorPrefixes.length; j < k; j++ ) {
-			convert = convertPropertyName( vendorPrefixes[ j ] + property );
-
-			// VendorprefixKeyName || key-name
-			value = _getStyle( element, convert );
-
-			if( convert !== property ) {
-				value = value || _getStyle( element, property );
-			}
-
-			if( vendorPrefixes[ j ] ) {
-				// -vendorprefix-key-name
-				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
-			}
-
-			if( value ) {
-				return value;
-			}
-		}
-
-		return undefined;
-	}
-
 	shoestring.fn.css = function( prop, value ){
+		//>>includeStart("development", pragmas.development);
+		if( typeof prop !== "object" && value === undefined ){
+			shoestring.error( "css-get" );
+		}
+		//>>includeEnd("development");
+
 		if( !this[0] ){
 			return;
 		}
@@ -98,9 +53,10 @@ define([ "shoestring" ], function(){
 				return this.each(function(){
 					setStyle( this, prop, value );
 				});
-			}	else {
-				return getStyle( this[0], prop );
 			}
+
+			// NOTE saved for a distant ie8-less future: src/extenstions/dom/css/getStyle.js
+			// shoestring.getStyle( this[0], prop );
 		}
 	};
 

@@ -3,10 +3,11 @@
 require([
 	"util/errors",
 	"../build/production",
+  "extensions/dom/css/getStyle.js",
 	"extensions/dom/hasClass",
-	"extensions/events/click",
+	"extensions/dom/hide",
 	"extensions/dom/outerWidth",
 	"extensions/dom/show",
-	"extensions/dom/hide"
+	"extensions/events/click"
 ]);
 //>>excludeEnd("exclude");

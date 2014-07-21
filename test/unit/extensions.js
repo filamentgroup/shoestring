@@ -1,4 +1,5 @@
 (function(undefined){
+  var ss = shoestring;
 	var $fixture = shoestring( '#qunit-fixture' );
 
 	module( 'Extensions', {
@@ -176,28 +177,31 @@
 		$css.css( 'margin-left', "2px" );
 
 		// computed style should ignore spurious styles
-		equal( $css.css('baz'), undefined );
+		equal( ss._getStyle($css[0], 'baz'), undefined );
 
 		// width is defined in the page
-		equal( $css.css('width'), "200px", "width should show value set from <style> tag." );
+		equal( ss._getStyle($css[0], 'width'), "200px", "width should show value set from <style> tag." );
 
 		// margin-right is defined in the object assignment above
-		equal( $css.css('margin-right'), "1px", "margin-right should be set" );
+		equal( ss._getStyle($css[0], 'margin-right'), "1px", "margin-right should be set" );
 
 		// margin-left is defined in the property assignment above
-		equal( $css.css('margin-left'), "2px", "margin-left should be set" );
+		equal( ss._getStyle($css[0], 'margin-left'), "2px", "margin-left should be set" );
 
-		equal( $css.css("float"), "left", "float is a special case (cssFloat in JS)." );
+		equal( ss._getStyle($css[0], "float"), "left", "float is a special case (cssFloat in JS)." );
 
-		equal( $css.css('box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
+		equal(	ss._getStyle($css[0], 'box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
 
 		if( document.defaultView ) { // CTM for this vendor prefix test.
-			notEqual( $css.css('transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
+			notEqual(	 ss._getStyle($css[0], 'transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
 		}
 
-		notEqual( $otherCss.css('width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
+		notEqual(	 ss._getStyle($otherCss[0], 'width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
 
-		equal( $( "#unmatched_element" ).css('width'), undefined );
+		throws(function() {
+			// ANY use of getter should throw an exception with the css method
+			$( "#unmatched_element" ).css('width');
+		});
 	});
 
 	test('`.eq()`', function() {
