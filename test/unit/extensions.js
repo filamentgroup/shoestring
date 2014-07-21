@@ -193,10 +193,10 @@
 		equal(	ss._getStyle($css[0], 'box-sizing'), 'border-box', 'Box-sizing should default to content-box.' );
 
 		if( document.defaultView ) { // CTM for this vendor prefix test.
-			notEqual(	 ss._getStyle($css[0], 'transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
+			notEqual( ss._getStyle($css[0], 'transform'), undefined, 'transform should **NOT** be undefined (get vendor prefixes correctly).' );
 		}
 
-		notEqual(	 ss._getStyle($otherCss[0], 'width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
+		notEqual( ss._getStyle($otherCss[0], 'width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
 
 		throws(function() {
 			// ANY use of getter should throw an exception with the css method

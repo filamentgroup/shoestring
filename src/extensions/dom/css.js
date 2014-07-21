@@ -56,7 +56,7 @@ define([
 			}
 
 			// NOTE saved for a distant ie8-less future: src/extenstions/dom/css/getStyle.js
-			// shoestring.getStyle( this[0], prop );
+			// return shoestring.getStyle( this[0], prop );
 		}
 	};
 
