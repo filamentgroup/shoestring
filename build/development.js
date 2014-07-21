@@ -8,6 +8,8 @@ require([
 	"extensions/dom/hide",
 	"extensions/dom/outerWidth",
 	"extensions/dom/show",
-	"extensions/events/click"
+	"extensions/events/click",
+	"extensions/util/map",
+	"extensions/dom/map"
 ]);
 //>>excludeEnd("exclude");

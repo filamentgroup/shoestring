@@ -27,7 +27,6 @@ require([
 	"extensions/dom/index",
 	"extensions/dom/is",
 	"extensions/dom/last",
-	"extensions/dom/map",
 	"extensions/dom/next",
 	"extensions/dom/not",
 	"extensions/dom/offset",
