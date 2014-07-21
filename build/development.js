@@ -10,6 +10,7 @@ require([
 	"extensions/dom/show",
 	"extensions/events/click",
 	"extensions/util/map",
-	"extensions/dom/map"
+	"extensions/dom/map",
+	"extensions/util/trim"
 ]);
 //>>excludeEnd("exclude");
