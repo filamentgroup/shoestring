@@ -113,6 +113,20 @@
 		});
 	});
 
+	test( '`.data` works on empty nodelists', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		strictEqual( $( '#thiswontmatch' ).data(), undefined, 'should be undefined on an empty result set.' );
+		strictEqual( $( '#thiswontmatch' ).data( "somekey" ), undefined, 'should be undefined on an empty result set with a key passed in.' );
+
+		deepEqual( $( '#el' ).data(), {}, 'should be an empty object on an nonempty result set.' );
+		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
+	});
+
 	test( '`.insertBefore()` inserts before the selector', function(){
 		expect( 3 );
 
@@ -327,6 +341,29 @@
 		equal( $children.parents()[5], $(".parents > .second-parent")[0] );
 	});
 
+	test( '`.prepend() adds a first child element', function() {
+		var tmp, $prepend = $fixture.find( ".prepend" );
+
+		tmp = $(	"<div class='first'></div>" );
+		$prepend.append( tmp[0] );
+		$prepend.append( "<div class='second'></div>" );
+		$prepend.append( ".testel" );
+
+		equal( $prepend.find( ".first" )[0], tmp[0] );
+		equal( $prepend.find( ".second" ).length, 1 );
+		equal( $prepend.find( ".testel" ).length, 1 );
+	});
+
+	test( '`.prependTo() adds the all elements to the selected element` ', function() {
+		var tmp, $prepend = $fixture.find( ".prepend" );
+
+		tmp = $(	"<div class='first'></div>" );
+
+		tmp.appendTo( "#qunit-fixture > .prepend" );
+
+		equal( $prepend.find( ".first" )[0], tmp[0] );
+	});
+
 	test( '`.remove()`', function(){
 		var $el, $fixture;
 
@@ -354,20 +391,6 @@
 
 		strictEqual( $( '#imaginary_element' ).siblings().length, 0, '.siblings runs on an empty set.' );
 		equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
-	});
-
-	test( '`.data` works on empty nodelists', function() {
-		var $fixture = shoestring( '#qunit-fixture' ),
-			$el;
-
-		$fixture.html( '<div id="el"></div>' );
-		$el = $( "#el" );
-
-		strictEqual( $( '#thiswontmatch' ).data(), undefined, 'should be undefined on an empty result set.' );
-		strictEqual( $( '#thiswontmatch' ).data( "somekey" ), undefined, 'should be undefined on an empty result set with a key passed in.' );
-
-		deepEqual( $( '#el' ).data(), {}, 'should be an empty object on an nonempty result set.' );
-		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
 	});
 
 	test( '`.text()` returns content properly', function(){

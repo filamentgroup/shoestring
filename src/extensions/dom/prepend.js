@@ -6,14 +6,14 @@ define([ "shoestring" ], function(){
 		if( typeof( frag ) === "string" || frag.nodeType !== undefined ){
 			frag = shoestring( frag );
 		}
+
 		return this.each(function( i ){
 
 			for( var j = 0, jl = frag.length; j < jl; j++ ){
 				var insertEl = i > 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
 				if ( this.firstChild ){
 					this.insertBefore( insertEl, this.firstChild );
-				}
-				else {
+				} else {
 					this.appendChild( insertEl );
 				}
 			}
