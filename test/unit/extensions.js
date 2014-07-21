@@ -1,8 +1,8 @@
 (function(undefined){
-  var ss = shoestring;
+  var config, ss = shoestring;
 	var $fixture = shoestring( '#qunit-fixture' );
 
-	module( 'Extensions', {
+	module( 'dom', config = {
 		setup: function() {
 			$fixture = shoestring( '#qunit-fixture' );
 		}
@@ -275,10 +275,6 @@
 		equal( $fixture.eq( $fixture.length - 1 )[0], $fixture.last()[0] );
 	});
 
-	test( '`.on()` is an alias of `.bind()`', function() {
-		strictEqual( shoestring( "body" ).on, shoestring( "body" ).bind );
-	});
-
 	test( '`.next()`', function() {
 		var $first, $all;
 
@@ -331,6 +327,27 @@
 		equal( $children.parents()[5], $(".parents > .second-parent")[0] );
 	});
 
+	test( '`.remove()`', function(){
+		var $el, $fixture;
+
+		$fixture = shoestring( '#qunit-fixture' );
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		equal( $fixture.children().length, 1 );
+		$el.remove();
+
+		equal( $fixture.children().length, 0 );
+	});
+
+	test( '`.remove()` on unattached nodes', function(){
+		var $el;
+		$el = $( document.createElement( "div" ) );
+
+		$el.remove();
+		ok( true );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
@@ -338,6 +355,85 @@
 		strictEqual( $( '#imaginary_element' ).siblings().length, 0, '.siblings runs on an empty set.' );
 		equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
 	});
+
+	test( '`.data` works on empty nodelists', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		strictEqual( $( '#thiswontmatch' ).data(), undefined, 'should be undefined on an empty result set.' );
+		strictEqual( $( '#thiswontmatch' ).data( "somekey" ), undefined, 'should be undefined on an empty result set with a key passed in.' );
+
+		deepEqual( $( '#el' ).data(), {}, 'should be an empty object on an nonempty result set.' );
+		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
+	});
+
+	test( '`.text()` returns content properly', function(){
+		var container = $( "<div class='text-test'><div class='demo-box'>Demonstration Box</div><ul><li>list item 1</li><li>list <strong>item</strong> 2</li></ul></div></div>" );
+		var content = "Demonstration Boxlist item 1list item 2";
+
+		equal( container.text(), content, "should return nested text properly" );
+	});
+
+	test( '`.val()` returns correct value of element', function(){
+		var value = "happy";
+		var input = document.createElement( "input" );
+		input.type = "text";
+		input.value = value;
+
+		equal( $( input ).val(), value, ".val should return the equivalent of the input's value" );
+	});
+
+	test( '`.val()` returns correct value of select element', function(){
+		var select = document.createElement( "select" );
+		var option1 = document.createElement( "option" );
+		var option2 = document.createElement( "option" );
+
+		option1.value = "1";
+		option2.value = "2";
+
+		option2.selected = "selected";
+
+		select.appendChild( option1 );
+		select.appendChild( option2 );
+
+		equal( $( select ).val(), "2", ".val should return the equivalent of the select's selected option's value" );
+	});
+
+	test( '`$( input ).val(value)` inserts value into input', function(){
+		var value = "happy";
+		var input = document.createElement( "input" );
+		input.type = "text";
+		$( input ).val( value );
+
+		equal( input.value, value, ".val should be the equivalent of setting the input's value" );
+	});
+
+	test( '`$( select ).val(value)` selects the option that matches the value', function(){
+		var select = document.createElement( "select" );
+		var option1 = document.createElement( "option" );
+		var option2 = document.createElement( "option" );
+		var option3 = document.createElement( "option" );
+
+		option1.value = "1";
+		option2.value = "2";
+		option3.value = "3";
+
+		option2.selected = "selected";
+
+		select.appendChild( option1 );
+		select.appendChild( option2 );
+		select.appendChild( option3 );
+
+		$( select ).val( "3" );
+
+
+		equal( $( select ).val(), "3", ".val should set the correct option" );
+	});
+
+	module( 'events', config );
 
 	asyncTest( '`.bind()` and `.trigger()`', function() {
 		expect( 1 );
@@ -360,6 +456,10 @@
 			equal( e.data.key, "test-value", "Data should be present on event object" );
 			start();
 		}).trigger( "click" );
+	});
+
+	test( '`.on()` is an alias of `.bind()`', function() {
+		strictEqual( shoestring( "body" ).on, shoestring( "body" ).bind );
 	});
 
 	asyncTest( '`.on()` and click event bubbles to parent', function() {
@@ -740,103 +840,5 @@
 
 	// TODO test events + arguments on callbacks and trigger
 	// TODO unbind events by namespace only
-
-	test( '`.data` works on empty nodelists', function() {
-		var $fixture = shoestring( '#qunit-fixture' ),
-			$el;
-
-		$fixture.html( '<div id="el"></div>' );
-		$el = $( "#el" );
-
-		strictEqual( $( '#thiswontmatch' ).data(), undefined, 'should be undefined on an empty result set.' );
-		strictEqual( $( '#thiswontmatch' ).data( "somekey" ), undefined, 'should be undefined on an empty result set with a key passed in.' );
-
-		deepEqual( $( '#el' ).data(), {}, 'should be an empty object on an nonempty result set.' );
-		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
-	});
-
-	test( '`.text()` returns content properly', function(){
-		var container = $( "<div class='text-test'><div class='demo-box'>Demonstration Box</div><ul><li>list item 1</li><li>list <strong>item</strong> 2</li></ul></div></div>" );
-		var content = "Demonstration Boxlist item 1list item 2";
-
-		equal( container.text(), content, "should return nested text properly" );
-	});
-
-	test( '`.remove()`', function(){
-		var $el, $fixture;
-
-		$fixture = shoestring( '#qunit-fixture' );
-		$fixture.html( '<div id="el"></div>' );
-		$el = $( "#el" );
-
-		equal( $fixture.children().length, 1 );
-		$el.remove();
-
-		equal( $fixture.children().length, 0 );
-	});
-
-	test( '`.remove()` on unattached nodes', function(){
-		var $el;
-		$el = $( document.createElement( "div" ) );
-
-		$el.remove();
-		ok( true );
-	});
-
-	test( '`.val()` returns correct value of element', function(){
-		var value = "happy";
-		var input = document.createElement( "input" );
-		input.type = "text";
-		input.value = value;
-
-		equal( $( input ).val(), value, ".val should return the equivalent of the input's value" );
-	});
-
-	test( '`.val()` returns correct value of select element', function(){
-		var select = document.createElement( "select" );
-		var option1 = document.createElement( "option" );
-		var option2 = document.createElement( "option" );
-
-		option1.value = "1";
-		option2.value = "2";
-
-		option2.selected = "selected";
-
-		select.appendChild( option1 );
-		select.appendChild( option2 );
-
-		equal( $( select ).val(), "2", ".val should return the equivalent of the select's selected option's value" );
-	});
-
-	test( '`$( input ).val(value)` inserts value into input', function(){
-		var value = "happy";
-		var input = document.createElement( "input" );
-		input.type = "text";
-		$( input ).val( value );
-
-		equal( input.value, value, ".val should be the equivalent of setting the input's value" );
-	});
-
-	test( '`$( select ).val(value)` selects the option that matches the value', function(){
-		var select = document.createElement( "select" );
-		var option1 = document.createElement( "option" );
-		var option2 = document.createElement( "option" );
-		var option3 = document.createElement( "option" );
-
-		option1.value = "1";
-		option2.value = "2";
-		option3.value = "3";
-
-		option2.selected = "selected";
-
-		select.appendChild( option1 );
-		select.appendChild( option2 );
-		select.appendChild( option3 );
-
-		$( select ).val( "3" );
-
-
-		equal( $( select ).val(), "3", ".val should set the correct option" );
-	});
 
 })();
