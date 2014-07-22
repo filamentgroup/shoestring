@@ -373,10 +373,26 @@
 		equal( $last.prev().length, 1 );
 		equal( $last.prev()[0], $fixture.find(".prev .second")[0]);
 
+		// ordering correct according to jquery api
+		// http://api.jquery.com/prev/
 		equal( $all.prev().length, 2 );
 		equal( $all.prev()[0], $fixture.find(".prev .first")[0]);
 		equal( $all.prev()[1], $fixture.find(".prev .second")[0]);
 		equal( $all.prev()[2], undefined );
+	});
+
+	test( '`.prevAll()`', function() {
+		var $last;
+
+		$last = $fixture.find( ".prev div.third" );
+
+		equal( $last.prevAll().length, 2 );
+
+		// ordering correct according to jquery api
+		// http://api.jquery.com/prevall/
+		equal( $last.prevAll()[0], $fixture.find(".prev .second")[0]);
+		equal( $last.prevAll()[1], $fixture.find(".prev .first")[0]);
+		equal( $last.prevAll()[2], undefined );
 	});
 
 	test( '`.remove()`', function(){
