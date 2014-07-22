@@ -364,6 +364,21 @@
 		equal( $prepend.find( ".first" )[0], tmp[0] );
 	});
 
+	test( '`.prev()`', function() {
+		var $last, $all;
+
+		$last = $fixture.find( ".prev div.third" );
+		$all = $fixture.find( ".prev > div" );
+
+		equal( $last.prev().length, 1 );
+		equal( $last.prev()[0], $fixture.find(".prev .second")[0]);
+
+		equal( $all.prev().length, 2 );
+		equal( $all.prev()[0], $fixture.find(".prev .first")[0]);
+		equal( $all.prev()[1], $fixture.find(".prev .second")[0]);
+		equal( $all.prev()[2], undefined );
+	});
+
 	test( '`.remove()`', function(){
 		var $el, $fixture;
 
