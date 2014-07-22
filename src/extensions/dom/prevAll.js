@@ -1,20 +1,26 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([ "shoestring", "extensions/dom/prev" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.prevAll = function(){
-		var ret = [];
+		//>>includeStart("development", pragmas.development);
+		if( arguments.length > 0 ){
+			shoestring.error( 'prevall-selector' );
+		}
+		//>>includeEnd("development");
 
-		this.each(function(){
-			var self = this;
+		var result = [];
 
-			while( self.previousElementSibling ){
-				ret = ret.concat( self.previousElementSibling );
-				self = self.previousElementSibling;
+		this.each(function() {
+			var $previous = shoestring( this ).prev();
+
+			while( $previous.length ){
+				result.push( $previous[0] );
+				$previous = $previous.prev();
 			}
 		});
 
-		return shoestring(ret);
+		return shoestring( result );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);

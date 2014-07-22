@@ -384,14 +384,14 @@
 	test( '`.prevAll()`', function() {
 		var $last;
 
-		$last = $fixture.find( ".prev div.third" );
+		$last = $fixture.find( ".prevall div.third" );
 
 		equal( $last.prevAll().length, 2 );
 
 		// ordering correct according to jquery api
 		// http://api.jquery.com/prevall/
-		equal( $last.prevAll()[0], $fixture.find(".prev .second")[0]);
-		equal( $last.prevAll()[1], $fixture.find(".prev .first")[0]);
+		equal( $last.prevAll()[0], $fixture.find(".prevall .second")[0]);
+		equal( $last.prevAll()[1], $fixture.find(".prevall .first")[0]);
 		equal( $last.prevAll()[2], undefined );
 	});
 

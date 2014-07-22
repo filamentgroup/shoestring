@@ -16,6 +16,7 @@ define([ "shoestring" ], function(){
 			"on-delegate" : "the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
 			"outer-width": "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side.",
 			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
+			"prevall-selector" : "passing selectors into .prevAll, try .prevAll().filter( selector )",
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
 			"text-setter": "setting text via the .text method.",
 			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8"
