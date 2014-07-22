@@ -30,7 +30,7 @@ define([ "shoestring" ], function(){
 				}
 
 				// find the current item and mark it as found
-				if( children.item( i ) === this ){
+				if( item === this ){
 					found = true;
 				}
 			}
