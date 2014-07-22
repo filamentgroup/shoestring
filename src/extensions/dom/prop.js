@@ -3,6 +3,10 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.prop = function( name, val ){
+		if( !this[0] ){
+			return;
+		}
+
 		name = shoestring.propFix[ name ] || name;
 		if( val !== undefined ){
 			return this.each(function(){

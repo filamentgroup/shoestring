@@ -395,6 +395,24 @@
 		equal( $last.prevAll()[2], undefined );
 	});
 
+	test( '`.prop()` returns undefined on empty set', function(){
+		var $element = $( '#this_will_not_match' );
+
+		equal( $element.prop( 'class' ), undefined );
+	});
+
+	test( '`.prop()` gets the attribute', function(){
+		var $element = $fixture.find( '.prop' );
+
+		equal( $element.prop( 'class' ), "prop" );
+	});
+
+	test( '`.prop()` sets the attribute', function(){
+		var $element = $fixture.find( '.prop' );
+
+		equal( $element.prop( 'class', "bar" )[0].className, "bar" );
+	});
+
 	test( '`.remove()`', function(){
 		var $el, $fixture;
 
