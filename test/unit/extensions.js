@@ -434,6 +434,15 @@
 		ok( true );
 	});
 
+	// here to test for ie8
+	test( '`.removeAttr()`', function() {
+		var $removeAttr = $fixture.find( ".remove-attr" );
+
+		equal( $removeAttr.attr( "data-foo" ), "bar" );
+		$removeAttr.removeAttr( "data-foo" );
+		equal( $removeAttr.attr( "data-foo" ), undefined );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
