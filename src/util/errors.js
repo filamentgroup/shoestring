@@ -19,13 +19,15 @@ define([ "shoestring" ], function(){
 			"prevall-selector" : "passing selectors into .prevAll, try .prevAll().filter( selector )",
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
 			"text-setter": "setting text via the .text method.",
-			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8"
+			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8",
+			"map": "the map method. Try using .each to make a new object.",
+			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: "
 		}
 	};
 
-	shoestring.error = function( id ) {
+	shoestring.error = function( id, str ) {
 		var errors = shoestring.enUS.errors;
-		throw new Error( errors.prefix + " " + errors[id] );
+		throw new Error( errors.prefix + " " + errors[id] + ( str ? " " + str : "" ) );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);

@@ -6,7 +6,8 @@
 		shoestring = function( prim, sec ){
 
 			var pType = typeof( prim ),
-				ret = [];
+				ret = [],
+				sel;
 
 			if( prim ){
 				// if string starting with <, make html
@@ -25,7 +26,16 @@
 					if( sec ){
 						return shoestring( sec ).find( prim );
 					}
-					for( var i = 0, sel = doc.querySelectorAll( prim ), il = sel.length; i < il; i++ ){
+//>>includeStart("development", pragmas.development);
+					try {
+//>>includeEnd("development");
+						sel = doc.querySelectorAll( prim );
+//>>includeStart("development", pragmas.development);
+					} catch( e ) {
+						shoestring.error( 'queryselector', prim );
+					}
+//>>includeEnd("development");
+					for( var i = 0, il = sel.length; i < il; i++ ){
 						ret[ i ] = sel[ i ];
 					}
 				}
