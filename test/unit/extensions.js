@@ -472,6 +472,17 @@
 		equal( $removeProp.attr( "class"), "undefined" );
 	});
 
+	test( '`.replaceWith()`', function() {
+		var $replaceWith = $fixture.find( ".replace-with" );
+
+		equal( $fixture.find( ".replace-with" ).length, 1 );
+
+		$replaceWith.replaceWith( "<div class='relacement'></div>" );
+
+		equal( $fixture.find( ".replace-with" ).length, 0 );
+		equal( $fixture.find( ".replacement" ).length, 0 );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
