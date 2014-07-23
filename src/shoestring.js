@@ -81,7 +81,16 @@
 		var ret = [],
 			finds;
 		this.each(function(){
-			finds = this.querySelectorAll( sel );
+//>>includeStart("development", pragmas.development);
+			try {
+//>>includeEnd("development");
+				finds = this.querySelectorAll( sel );
+//>>includeStart("development", pragmas.development);
+			} catch( e ) {
+				shoestring.error( 'queryselector', sel );
+			}
+//>>includeEnd("development");
+
 			for( var i = 0, il = finds.length; i < il; i++ ){
 				ret = ret.concat( finds[i] );
 			}
