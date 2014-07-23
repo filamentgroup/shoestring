@@ -188,4 +188,8 @@ test( 'shoestring with an array of Nodes passed returns an array of those nodes'
 	equal( Object.prototype.toString.call( shoestring( els ).map ).indexOf( '[native code]' ), -1, undefined );
 });
 
+test( "find can select multiple comma-separated children", function() {
+	equal( shoestring( ".find" ).find( ".child1, .child2" ).length, 2 );
+});
+
 })();
