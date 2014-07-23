@@ -483,6 +483,26 @@
 		equal( $fixture.find( ".replacement" ).length, 0 );
 	});
 
+  // TODO make this suck less
+	test( '`.serialize()`', function() {
+		var data, input, type, $serialize = $fixture.find( ".serialize" );
+
+		for( var i = 0; i < shoestring.inputTypes.length; i++ ) {
+			type = shoestring.inputTypes[i];
+			input = "<input type='" + type + "'" +
+				"name='" + type + "'" +
+				"value='" + type + "'></input>";
+
+			$serialize.append( input );
+		}
+
+		data = $serialize.serialize();
+
+		for( var val in data ) {
+			ok( data[ val ] || data[ val ] === "" );
+		}
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
