@@ -462,6 +462,14 @@
 		equal( $removeClass[0].className, "remove-class" );
 	});
 
+	test( '`.removeProp()`', function() {
+		var $removeProp = $fixture.find( ".remove-prop" );
+
+		equal( $removeProp[0].className, "remove-prop" );
+		$removeProp.removeProp( "class" );
+		equal( $removeProp[0].className, undefined );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );

@@ -2,13 +2,13 @@
 define([ "shoestring", "extensions/dom/propFix.js" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.removeProp = function( prop ){
-		var name = shoestring.propFix[ prop ] || prop;
-
-		return this.each(function(){
-			this[ name ] = undefined;
-			delete this[ name ];
-		});
+	// Property normalization, a subset taken from jQuery src
+	shoestring.propFix = {
+		"class": "className",
+		contenteditable: "contentEditable",
+		"for": "htmlFor",
+		readonly: "readOnly",
+		tabindex: "tabIndex"
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);
