@@ -6,9 +6,14 @@ define([ "shoestring" ], function(){
 		var classes = cname.replace(/^\s+|\s+$/g, '').split( " " );
 
 		return this.each(function(){
+			var newClassName, regex;
+
 			for( var i = 0, il = classes.length; i < il; i++ ){
 				if( this.className !== undefined ){
-					this.className = this.className.replace( new RegExp( "(^|\\s)" + classes[ i ] + "($|\\s)", "gmi" ), " " );
+					regex = new RegExp( "(^|\\s)" + classes[ i ] + "($|\\s)", "gmi" );
+					newClassName = this.className.replace( regex, " " );
+
+					this.className = newClassName.replace(/^\s+|\s+$/g, '');
 				}
 			}
 		});

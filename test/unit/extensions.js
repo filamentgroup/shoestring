@@ -443,6 +443,25 @@
 		equal( $removeAttr.attr( "data-foo" ), undefined );
 	});
 
+	test( '`.removeClass()` removes the class', function() {
+		var $removeClass = $fixture.find( ".remove-class" );
+
+		ok( $removeClass.is( ".foo" ) );
+		$removeClass.removeClass( "foo" );
+		ok( !$removeClass.is( ".foo" ) );
+	});
+
+	test( '`.removeClass()` leaves no extra whitespace', function() {
+		var $removeClass = $fixture.find( ".remove-class" );
+
+		$removeClass.addClass( "foo" );
+		$removeClass.removeClass( "foo" );
+		$removeClass.addClass( "foo" );
+		$removeClass.removeClass( "foo" );
+
+		equal( $removeClass[0].className, "remove-class" );
+	});
+
 	test( '`.siblings()`', function() {
 		var $fixture = shoestring( '#qunit-fixture' );
 		$fixture.html( '<div></div><div id="sibling"></div><div></div>' );
