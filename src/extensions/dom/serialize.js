@@ -29,9 +29,9 @@ define([ "shoestring" ], function(){
 		shoestring( "input, select", this ).each(function(){
 			var type = this.type, name = this.name,	value = this.value;
 
-			if( shoestring.inputTypeTest.test( type )
-				 || ( type === "checkbox" || type === "radio" )
-				 && this.checked ){
+			if( shoestring.inputTypeTest.test( type ) ||
+					( type === "checkbox" || type === "radio" ) &&
+					this.checked ){
 
 				data[ name ] = value;
 			}	else if( this.nodeName === "select" ){
