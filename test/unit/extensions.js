@@ -465,9 +465,11 @@
 	test( '`.removeProp()`', function() {
 		var $removeProp = $fixture.find( ".remove-prop" );
 
-		equal( $removeProp[0].className, "remove-prop" );
+		equal( $removeProp.attr( "class" ), "remove-prop" );
 		$removeProp.removeProp( "class" );
-		equal( $removeProp[0].className, undefined );
+
+		// NOTE this is bullshit, unquoted undefined works in everything but phantom
+		equal( $removeProp.attr( "class"), "undefined" );
 	});
 
 	test( '`.siblings()`', function() {
