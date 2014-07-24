@@ -589,6 +589,14 @@
 		equal( $width.width(), 400 );
 	});
 
+	test('`.wrapInner()`', function() {
+		var $wrapInner = $fixture.find( ".wrap-inner" );
+
+		$wrapInner.wrapInner( "<div class='wrapper'></div>" );
+		equal( $wrapInner.find( ".wrapper > .inner" ).length, 1 );
+		equal( $wrapInner.find( ".wrapper" ).length, 1 );
+	});
+
 	module( 'events', config );
 
 	asyncTest( '`.bind()` and `.trigger()`', function() {
