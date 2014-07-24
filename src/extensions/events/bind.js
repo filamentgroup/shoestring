@@ -37,11 +37,20 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 
 		function newCB( e ){
 			e.data = data;
+
+			// thanks https://github.com/jonathantneal/EventListener
+			e.target = e.target || e.srcElement;
+			e.preventDefault = e.preventDefault || function () {
+				e.returnValue = false;
+			};
+			e.stopPropagation = function () {
+				e.cancelBubble = true;
+			};
+
 			return callback.apply( this, [ e ].concat( e._args ) );
 		}
 		function propChange( e, boundElement ) {
-			var lastEvent = document.documentElement[ e.propertyName ],
-				triggeredElement = lastEvent.el;
+			var triggeredElement = document.documentElement[ e.propertyName ].el;
 
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
 				newCB.call( triggeredElement, e );

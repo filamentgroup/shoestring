@@ -600,12 +600,13 @@
 	module( 'events', config );
 
 	asyncTest( '`.bind()` and `.trigger()`', function() {
-		expect( 1 );
+		expect( 2 );
 
 		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
 
-		$( "#el" ).bind( "click", function() {
+		$( "#el" ).bind( "click", function( e ) {
 			ok( true, 'event callback should execute.' );
+			ok( e.target, 'event.target should exist.' );
 			start();
 		}).trigger( "click" );
 	});
