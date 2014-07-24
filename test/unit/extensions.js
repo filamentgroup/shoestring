@@ -574,6 +574,21 @@
 		equal( $( select ).val(), "3", ".val should set the correct option" );
 	});
 
+	test('`.width()`', function() {
+		var $width = $fixture.find( ".width" );
+
+		// returns the value without param
+		equal( $width.width(), 200 );
+
+		// works with integers
+		$width.width( 300 );
+		equal( $width.width(), 300 );
+
+		// works with strings
+		$width.width( "400px" );
+		equal( $width.width(), 400 );
+	});
+
 	module( 'events', config );
 
 	asyncTest( '`.bind()` and `.trigger()`', function() {
