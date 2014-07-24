@@ -2,7 +2,7 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-  /* jshint unused: false */
+	/* jshint unused: false */
 
 	function _dimension( set, name, num ){
 		var offsetName;
