@@ -1,18 +1,9 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([ "shoestring", "extensions/dom/dimension" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.height = function( num ){
-		if( num === undefined ){
-			return this[ 0 ].offsetHeight;
-		} else {
-			// support integer values as pixels
-			num = typeof num === "string" ? num : num + "px";
-
-			return this.each(function(){
-				this.style.height = num;
-			});
-		}
+		return this.dimension( "height", num );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);
