@@ -3,7 +3,7 @@ define([ "shoestring", "extensions/dom/dimension" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.height = function( num ){
-		return this.dimension( "height", num );
+		return _dimension( this, "height", num );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);

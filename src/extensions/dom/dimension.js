@@ -2,7 +2,9 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.dimension = function( name, num ){
+  /* jshint unused: false */
+
+	function _dimension( set, name, num ){
 		var offsetName;
 
 		if( num === undefined ){
@@ -10,16 +12,16 @@ define([ "shoestring" ], function(){
 				return letter.toUpperCase();
 			});
 
-			return this[ 0 ][ "offset" + offsetName ];
+			return set[ 0 ][ "offset" + offsetName ];
 		} else {
 			// support integer values as pixels
 			num = typeof num === "string" ? num : num + "px";
 
-			return this.each(function(){
+			return set.each(function(){
 				this.style[ name ] = num;
 			});
 		}
-	};
+	}
 
 //>>excludeStart("exclude", pragmas.exclude);
 });
