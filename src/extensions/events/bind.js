@@ -68,7 +68,9 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 					this.addEventListener( evt, newCB, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, newCB );
+                        this.attachEvent( "on" + evt, function(e) {
+                            return newCB.call( oEl, e );
+                        });
 					} else {
 						// Custom event
 						callback = (function() {
