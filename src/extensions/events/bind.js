@@ -47,7 +47,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 				e.cancelBubble = true;
 			};
 
-			return callback.apply( this, [ e ].concat( e._args ) );
+			return callback.apply(e.target, [ e ].concat( e._args ) );
 		}
 		function propChange( e, boundElement ) {
 			var triggeredElement = document.documentElement[ e.propertyName ].el;
