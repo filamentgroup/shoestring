@@ -47,7 +47,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 				e.cancelBubble = true;
 			};
 
-			return callback.apply( this, [ e ].concat( e._args ) );
+			return callback.apply(this, [ e ].concat( e._args ) );
 		}
 		function propChange( e, boundElement ) {
 			var triggeredElement = document.documentElement[ e.propertyName ].el;
@@ -68,7 +68,9 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 					this.addEventListener( evt, newCB, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, newCB );
+						this.attachEvent( "on" + evt, function(e) {
+							return newCB.call( oEl, e );
+						});
 					} else {
 						// Custom event
 						callback = (function() {
