@@ -8,7 +8,7 @@ define([ "shoestring" ], function(){
     // simple check for localStorage from http://diveintohtml5.info/storage.html
 		function supportsStorage() {
 			try {
-				return 'localStorage' in window && window['localStorage'] !== null;
+				return 'localStorage' in window && window.localStorage !== null;
 			} catch (e) {
 				return false;
 			}
@@ -17,8 +17,9 @@ define([ "shoestring" ], function(){
     // return a new function closed over the old implementation
 		function recordProxy( old, name ) {
 			return function() {
+        var tracked;
 				try {
-					var tracked = JSON.parse(window.localStorage.getItem( key ) || "{}");
+					tracked = JSON.parse(window.localStorage.getItem( key ) || "{}");
 				} catch (e) {
 					if( e instanceof SyntaxError) {
 						tracked = {};

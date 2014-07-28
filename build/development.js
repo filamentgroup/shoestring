@@ -1,7 +1,7 @@
 //>>excludeStart("exclude", pragmas.exclude);
 //>>group: exclude
 require([
-	"util/errors",
+	"extensions/util/errors",
 	"../build/production",
   "extensions/dom/css/getStyle.js",
 	"extensions/dom/hasClass",
@@ -12,6 +12,6 @@ require([
 	"extensions/util/map",
 	"extensions/dom/map",
 	"extensions/util/trim",
-	"util/tracker.js"
+	"extensions/util/tracker.js"
 ]);
 //>>excludeEnd("exclude");
