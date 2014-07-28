@@ -999,7 +999,23 @@
 		}, 15);
 	});
 
+	if( window.JSON && 'localStorage' in window ) {
+		module( "util", config );
+
+		test( "when a shoestring.fn method is called it gets tracked", function() {
+			var tracked;
+
+			window.localStorage.setItem( shoestring.trackedMethodsKey,	"{}" );
+
+			$fixture.find( "div" ).remove();
+
+			tracked = JSON.parse( window.localStorage.getItem(shoestring.trackedMethodsKey) );
+
+			ok( tracked.find );
+			ok( tracked.remove );
+		});
+	}
+
 	// TODO test events + arguments on callbacks and trigger
 	// TODO unbind events by namespace only
-
 })();
