@@ -623,10 +623,6 @@
 		}).trigger( "click" );
 	});
 
-	test( '`.on()` is an alias of `.bind()`', function() {
-		strictEqual( shoestring( "body" ).on, shoestring( "body" ).bind );
-	});
-
 	asyncTest( '`.on()` and click event bubbles to parent', function() {
 		expect( 1 );
 

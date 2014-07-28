@@ -11,6 +11,7 @@ require([
 	"extensions/events/click",
 	"extensions/util/map",
 	"extensions/dom/map",
-	"extensions/util/trim"
+	"extensions/util/trim",
+	"util/tracker.js"
 ]);
 //>>excludeEnd("exclude");
