@@ -30,9 +30,9 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 				if ( !el.shoestringData.events[ evt ] ) {
 					el.shoestringData.events[ evt ] = [];
 				}
-				el.shoestringData.events[ evt ][ callback.name ] = callback.callfunc;
-				// IE custom events
-				el.shoestringData.events[ evt ][ '_' + callback.name ] = callback._callfunc;
+				var obj = {};
+				obj[ callback.name ] = callback.callfunc;
+				el.shoestringData.events[ evt ].push( obj );
 			};
 
 		function newCB( e ){
@@ -60,6 +60,18 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 					e[ j ] = originalEvent[ j ];
 				}
 				newCB.call( triggeredElement, e );
+			}
+		}
+
+		function reorderEvents( eventName ) {
+			if( this.shoestringData && this.shoestringData.events ) {
+				var otherEvents = this.shoestringData.events[ eventName ];
+				for( var j = otherEvents.length - 1; j >= 0; j-- ) {
+					for( var k in otherEvents[ j ] ) {
+						this.detachEvent( "on" + evt, otherEvents[ j ][ k ] );
+						this.attachEvent( "on" + evt, otherEvents[ j ][ k ] );
+					}
+				}
 			}
 		}
 
@@ -96,7 +108,11 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 						docEl.attachEvent( "onpropertychange", customCallback );
 					}
 				}
-				boundEvents( this, evts[ i ], { "callfunc" : callback || newCB, "name" : bindingname, "_callfunc": customCallback });
+				boundEvents( this, evts[ i ], { "callfunc" : customCallback || callback || newCB, "name" : bindingname });
+
+				if( this.attachEvent ) {
+					reorderEvents.call( oEl, evt );
+				}
 			}
 		});
 	};
