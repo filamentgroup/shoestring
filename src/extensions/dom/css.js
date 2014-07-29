@@ -1,7 +1,8 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
   "shoestring",
-  "extensions/dom/css/exceptions"
+  "extensions/dom/css/exceptions",
+  "extensions/dom/css/getStyle"
 ], function(){
 //>>excludeEnd("exclude");// TODO: This code should be consistent with attr().
 
@@ -29,12 +30,6 @@ define([
 	}
 
 	shoestring.fn.css = function( prop, value ){
-		//>>includeStart("development", pragmas.development);
-		if( typeof prop !== "object" && value === undefined ){
-			shoestring.error( "css-get" );
-		}
-		//>>includeEnd("development");
-
 		if( !this[0] ){
 			return;
 		}
@@ -55,8 +50,7 @@ define([
 				});
 			}
 
-			// NOTE saved for a distant ie8-less future: src/extenstions/dom/css/getStyle.js
-			// return shoestring.getStyle( this[0], prop );
+			return shoestring.getStyle( this[0], prop );
 		}
 	};
 

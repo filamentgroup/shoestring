@@ -211,11 +211,6 @@
 		}
 
 		notEqual( ss._getStyle($otherCss[0], 'width'), undefined, 'Width should **NOT** have a value because it’s not set.' );
-
-		throws(function() {
-			// ANY use of getter should throw an exception with the css method
-			$( "#unmatched_element" ).css('width');
-		});
 	});
 
 	test('`.eq()`', function() {

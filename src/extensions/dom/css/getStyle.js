@@ -1,7 +1,8 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
 	"shoestring",
-	"extensions/dom/css/exceptions"
+	"extensions/dom/css/exceptions",
+	"extensions/dom/css/getComputedStyle"
 ], function(){
 //>>excludeEnd("exclude");
 
@@ -17,17 +18,8 @@ define([
 	}
 
 	function _getStyle( element, property ) {
-		var view = document.defaultView,
-				docElement = document.documentElement;
-
-		// if defaultView is available use getComputedStyle otherwise use currentStyle
-		if( view ){
-			return view
-				.getComputedStyle( element, null )
-				.getPropertyValue( property );
-		} else {
-			return docElement.currentStyle[ property ] ? element.currentStyle[ property ] : undefined;
-		}
+		// polyfilled in getComputedStyle module
+		return window.getComputedStyle( element, null ).getPropertyValue( property );
 	}
 
 	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
