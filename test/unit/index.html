@@ -15,6 +15,19 @@
 	<script src="extensions.js"></script>
 </head>
 <body>
+
+	<style>
+		#qunit-fixture .css {
+			width: 200px;
+			margin-right: 20px;
+			box-sizing: border-box;
+		}
+
+		#qunit-fixture .height {
+			height: 200px;
+		}
+	</style>
+
 	<div id="qunit"></div>
 	<div id="qunit-fixture">
 		<div class="constructor-selector"></div>
@@ -36,13 +49,6 @@
 			</div>
 		</div>
 
-		<style>
-			#qunit-fixture .css {
-				width: 200px;
-        margin-right: 20px;
-        box-sizing: border-box;
-			}
-		</style>
 		<div class="css"></div>
 		<div class="othercss"></div>
 
@@ -54,11 +60,6 @@
 			</div>
 		</div>
 
-		<style>
-			#qunit-fixture .height {
-				height: 200px;
-			}
-		</style>
 		<div class="height">
 			height
 		</div>
