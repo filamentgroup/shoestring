@@ -43,16 +43,22 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 			e.preventDefault = e.preventDefault || function () {
 				e.returnValue = false;
 			};
-			e.stopPropagation = function () {
+			e.stopPropagation = e.stopPropagation || function () {
 				e.cancelBubble = true;
 			};
 
 			return callback.apply(this, [ e ].concat( e._args ) );
 		}
-		function propChange( e, boundElement ) {
-			var triggeredElement = document.documentElement[ e.propertyName ].el;
+
+		function propChange( originalEvent, boundElement ) {
+			var triggeredElement = document.documentElement[ originalEvent.propertyName ].el;
 
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
+				// make a new event object to avoid event.data forced to a string in IE8
+				var e = {};
+				for( var j in originalEvent ) {
+					e[ j ] = originalEvent;
+				}
 				newCB.call( triggeredElement, e );
 			}
 		}
@@ -68,7 +74,12 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 					this.addEventListener( evt, newCB, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, function(e) {
+						this.attachEvent( "on" + evt, function( originalEvent ) {
+							// make a new event object to avoid event.data forced to a string in IE8
+							var e = {};
+							for( var j in originalEvent ) {
+								e[ j ] = originalEvent;
+							}
 							return newCB.call( oEl, e );
 						});
 					} else {

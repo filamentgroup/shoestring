@@ -618,6 +618,18 @@
 		}).trigger( "click" );
 	});
 
+	asyncTest( '`.bind()` and `.trigger()` custom event with data', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "aCustomEvent", { key: "test-value" }, function( e ) {
+			ok( true, 'event callback should execute.' );
+			equal( e.data.key, "test-value", "Data should be present on event object" );
+			start();
+		}).trigger( "aCustomEvent" );
+	});
+
 	asyncTest( '`.on()` and click event bubbles to parent', function() {
 		expect( 1 );
 
