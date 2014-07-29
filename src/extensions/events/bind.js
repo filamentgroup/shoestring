@@ -57,7 +57,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 				// make a new event object to avoid event.data forced to a string in IE8
 				var e = {};
 				for( var j in originalEvent ) {
-					e[ j ] = originalEvent;
+					e[ j ] = originalEvent[ j ];
 				}
 				newCB.call( triggeredElement, e );
 			}
@@ -79,7 +79,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 							// make a new event object to avoid event.data forced to a string in IE8
 							var e = {};
 							for( var j in originalEvent ) {
-								e[ j ] = originalEvent;
+								e[ j ] = originalEvent[ j ];
 							}
 							return newCB.call( oEl, e );
 						};
