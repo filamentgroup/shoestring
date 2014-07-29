@@ -64,27 +64,28 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 		}
 
 		return this.each(function(){
-			var callback, oEl = this;
+			var callback, customCallback, oEl = this;
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var evt = evts[ i ];
 				callback = null;
+				customCallback = null;
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, newCB, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						this.attachEvent( "on" + evt, function( originalEvent ) {
+						callback = function( originalEvent ) {
 							// make a new event object to avoid event.data forced to a string in IE8
 							var e = {};
 							for( var j in originalEvent ) {
 								e[ j ] = originalEvent;
 							}
 							return newCB.call( oEl, e );
-						});
+						};
+						this.attachEvent( "on" + evt, callback);
 					} else {
-						// Custom event
-						callback = (function() {
+						customCallback = (function() {
 							var eventName = evt;
 							return function( e ) {
 								if( e.propertyName === eventName ) {
@@ -92,10 +93,10 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 								}
 							};
 						})();
-						docEl.attachEvent( "onpropertychange", callback );
+						docEl.attachEvent( "onpropertychange", customCallback );
 					}
 				}
-				boundEvents( this, evts[ i ], { "callfunc" : newCB, "name" : bindingname, "_callfunc": callback });
+				boundEvents( this, evts[ i ], { "callfunc" : callback || newCB, "name" : bindingname, "_callfunc": customCallback });
 			}
 		});
 	};
