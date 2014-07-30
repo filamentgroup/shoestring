@@ -78,8 +78,8 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 				var otherEvents = this.shoestringData.events[ eventName ];
 				for( var j = otherEvents.length - 1; j >= 0; j-- ) {
 					if( !otherEvents[ j ].isCustomEvent ) {
-						this.detachEvent( "on" + evt, otherEvents[ j ].callback );
-						this.attachEvent( "on" + evt, otherEvents[ j ].callback );
+						this.detachEvent( "on" + eventName, otherEvents[ j ].callback );
+						this.attachEvent( "on" + eventName, otherEvents[ j ].callback );
 					} else {
 						docEl.detachEvent( "onpropertychange", otherEvents[ j ].callback );
 						docEl.attachEvent( "onpropertychange", otherEvents[ j ].callback );
