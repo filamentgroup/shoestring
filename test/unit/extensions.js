@@ -640,6 +640,8 @@
 			ok( true, 'event callback should execute.' );
 			start();
 		}).trigger( "aCustomEvent" );
+
+		$( "#el" ).unbind( "aCustomEvent" );
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with custom events and data', function() {
@@ -652,9 +654,11 @@
 			equal( e.data.key, "custom" );
 			start();
 		}).trigger( "aCustomEvent" );
+
+		$( "#el" ).unbind( "aCustomEvent" );
 	});
 
-	asyncTest( '`.bind()` doesn’t `.trigger()` with custom events', function() {
+	asyncTest( '`.bind()` doesn’t execute callback without `.trigger()` with custom events', function() {
 		expect( 1 );
 
 		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
@@ -668,6 +672,8 @@
 		setTimeout(function() {
 			ok( true );
 
+			$( "#el" ).unbind( "aCustomEvent" ).unbind( "anotherCustomEvent" );
+
 			start();
 		}, 30);
 	});
@@ -679,10 +685,12 @@
 
 		$( '#parent' ).on( "aCustomEvent", function() {
 			ok( true, 'event callback should execute.' );
+
 			start();
 		});
 
 		$( '#child' ).trigger( "aCustomEvent" );
+		$( "#parent" ).unbind( "aCustomEvent" );
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with multiple of the same event on a single element', function() {
@@ -758,6 +766,8 @@
 			equal( counter, 2, 'event callback should execute second.' );
 			start();
 		}).trigger( "aCustomEvent" );
+
+		$( "#el" ).unbind( "aCustomEvent" );
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on a single element, bubbles to parent', function() {
@@ -776,6 +786,8 @@
 		});
 
 		$( "#child" ).trigger( "aCustomEvent" );
+
+		$( "#parent" ).unbind( "aCustomEvent" );
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on different elements', function() {
@@ -796,9 +808,12 @@
 		});
 		$( "#el1" ).trigger( "aCustomEvent" );
 		$( "#el2" ).trigger( "aCustomEvent" );
+
+		$( "#el1" ).unbind( "aCustomEvent" );
+		$( "#el2" ).unbind( "aCustomEvent" );
 	});
 
-	asyncTest( '`.bind()` should not trigger', function() {
+	asyncTest( '`.bind()` should not execute without trigger', function() {
 		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
 
 		$( '#el' )
@@ -808,6 +823,8 @@
 
 		setTimeout(function() {
 			ok( true );
+
+			$( "#el" ).unbind( "dragmove.carousel" );
 
 			start();
 		}, 30);
