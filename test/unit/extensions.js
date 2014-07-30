@@ -672,7 +672,7 @@
 		setTimeout(function() {
 			ok( true );
 
-			$( "#el" ).unbind( "aCustomEvent" ).unbind( "anotherCustomEvent" );
+			$( "#el" ).unbind( "aCustomEvent anotherCustomEvent" );
 
 			start();
 		}, 30);
@@ -846,6 +846,48 @@
 
 		setTimeout(function() {
 			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`.unbind() multiple dom events`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "mouseup", f )
+			.bind( "mousedown", f )
+			.unbind( "mouseup mousedown", f )
+			.trigger( "mouseup" )
+			.trigger( "mousedown" );
+
+		setTimeout(function() {
+			strictEqual( counter, 0, "callback should not have fired." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`.unbind() multiple custom events`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "aCustomEvent", f )
+			.bind( "anotherCustomEvent", f )
+			.unbind( "aCustomEvent anotherCustomEvent", f )
+			.trigger( "aCustomEvent" )
+			.trigger( "anotherCustomEvent" );
+
+		setTimeout(function() {
+			strictEqual( counter, 0, "callback should not have fired." );
 			start();
 		}, 30);
 	});

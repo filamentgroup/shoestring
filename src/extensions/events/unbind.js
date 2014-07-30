@@ -6,6 +6,10 @@ define([ "shoestring" ], function(){
 		var evts = evt.split( " " ),
 			docEl = document.documentElement;
 		return this.each(function(){
+			if( !this.shoestringData || !this.shoestringData.events ) {
+				return;
+			}
+
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				//>>includeStart("development", pragmas.development);
 				if( evts[ i ].indexOf( "." ) === 0 ) {
@@ -13,23 +17,25 @@ define([ "shoestring" ], function(){
 				}
 				//>>includeEnd("development");
 
-				var bound = this.shoestringData.events[ evt ];
-				for( var j = 0, jl = bound.length; j < jl; j++ ) {
-					if( "removeEventListener" in window ){
-						if( callback === undefined ) {
-							this.removeEventListener( evts[ i ], bound[ j ].callback, false );
-						} else if( callback === bound[ j ].originalCallback ) {
-							this.removeEventListener( evts[ i ], bound[ j ].callback, false );
-						}
-					} else if( this.detachEvent ){
-						if( callback === undefined ) {
-							this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
-							// custom event
-							docEl.detachEvent( "onpropertychange", bound[ j ].callback );
-						} else if( callback === bound[ j ].originalCallback ) {
-							this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
-							// custom event
-							docEl.detachEvent( "onpropertychange", bound[ j ].callback );
+				var bound = this.shoestringData.events[ evts[ i ] ];
+				if( bound ) {
+					for( var j = 0, jl = bound.length; j < jl; j++ ) {
+						if( "removeEventListener" in window ){
+							if( callback === undefined ) {
+								this.removeEventListener( evts[ i ], bound[ j ].callback, false );
+							} else if( callback === bound[ j ].originalCallback ) {
+								this.removeEventListener( evts[ i ], bound[ j ].callback, false );
+							}
+						} else if( this.detachEvent ){
+							if( callback === undefined ) {
+								this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
+								// custom event
+								docEl.detachEvent( "onpropertychange", bound[ j ].callback );
+							} else if( callback === bound[ j ].originalCallback ) {
+								this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
+								// custom event
+								docEl.detachEvent( "onpropertychange", bound[ j ].callback );
+							}
 						}
 					}
 				}
