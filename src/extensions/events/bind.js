@@ -19,7 +19,6 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 
 		var evts = evt.split( " " ),
 			docEl = document.documentElement,
-			bindingname = callback.toString(),
 			boundEvents = function( el, evt, callback ) {
 				if ( !el.shoestringData ) {
 					el.shoestringData = {};
@@ -31,7 +30,12 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 					el.shoestringData.events[ evt ] = [];
 				}
 				var obj = {};
-				obj[ callback.name ] = callback.callfunc;
+				if( callback.customCallfunc ) {
+					obj.isCustomEvent = true;
+				}
+				obj.callback = callback.customCallfunc || callback.callfunc;
+				obj.originalCallback = callback.originalCallback;
+
 				el.shoestringData.events[ evt ].push( obj );
 			};
 
@@ -63,31 +67,35 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 			}
 		}
 
+		// reverse the order by rebinding everything on a specific element.
 		function reorderEvents( eventName ) {
 			if( this.shoestringData && this.shoestringData.events ) {
 				var otherEvents = this.shoestringData.events[ eventName ];
 				for( var j = otherEvents.length - 1; j >= 0; j-- ) {
-					for( var k in otherEvents[ j ] ) {
-						this.detachEvent( "on" + evt, otherEvents[ j ][ k ] );
-						this.attachEvent( "on" + evt, otherEvents[ j ][ k ] );
+					if( !otherEvents[ j ].isCustomEvent ) {
+						this.detachEvent( "on" + evt, otherEvents[ j ].callback );
+						this.attachEvent( "on" + evt, otherEvents[ j ].callback );
+					} else {
+						docEl.detachEvent( "onpropertychange", otherEvents[ j ].callback );
+						docEl.attachEvent( "onpropertychange", otherEvents[ j ].callback );
 					}
 				}
 			}
 		}
 
 		return this.each(function(){
-			var callback, customCallback, oEl = this;
+			var normalCallback, customCallback, oEl = this;
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var evt = evts[ i ];
-				callback = null;
+				normalCallback = null;
 				customCallback = null;
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, newCB, false );
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
-						callback = function( originalEvent ) {
+						normalCallback = function( originalEvent ) {
 							// make a new event object to avoid event.data forced to a string in IE8
 							var e = {};
 							for( var j in originalEvent ) {
@@ -95,7 +103,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 							}
 							return newCB.call( oEl, e );
 						};
-						this.attachEvent( "on" + evt, callback);
+						this.attachEvent( "on" + evt, normalCallback);
 					} else {
 						customCallback = (function() {
 							var eventName = evt;
@@ -108,7 +116,12 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 						docEl.attachEvent( "onpropertychange", customCallback );
 					}
 				}
-				boundEvents( this, evts[ i ], { "callfunc" : customCallback || callback || newCB, "name" : bindingname });
+
+				boundEvents( this, evts[ i ], {
+					callfunc: normalCallback || newCB,
+					customCallfunc: customCallback,
+					originalCallback: callback
+				});
 
 				if( this.attachEvent ) {
 					reorderEvents.call( oEl, evt );
