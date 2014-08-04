@@ -59,12 +59,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 			var triggeredElement = document.documentElement[ originalEvent.propertyName ].el;
 
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
-				// make a new event object to avoid event.data forced to a string in IE8
-				var e = {};
-				for( var j in originalEvent ) {
-					e[ j ] = originalEvent[ j ];
-				}
-				encasedCallback.call( triggeredElement, e );
+				encasedCallback.call( triggeredElement, originalEvent );
 			}
 		}
 
@@ -101,12 +96,7 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 				} else if( this.attachEvent ){
 					if( this[ "on" + evt ] !== undefined ) {
 						domEventCallback = function( originalEvent ) {
-							// make a new event object to avoid event.data forced to a string in IE8
-							var e = {};
-							for( var j in originalEvent ) {
-								e[ j ] = originalEvent[ j ];
-							}
-							return encasedCallback.call( oEl, e );
+							return encasedCallback.call( oEl, originalEvent );
 						};
 						this.attachEvent( "on" + evt, domEventCallback );
 					} else {
