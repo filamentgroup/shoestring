@@ -1077,10 +1077,11 @@
 
 		$( '#el' ).bind( "click", function( e ) {
 			e.preventDefault();
-			equal( location.hash, hash, 'hash should not have changed, event should preventDefault' );
 		}).trigger( "click" );
 
 		setTimeout(function() {
+			equal( location.hash, hash, 'hash should not have changed, event should preventDefault' );
+
 			location.hash = "";
 			start();
 		}, 15);
