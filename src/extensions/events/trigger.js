@@ -12,8 +12,8 @@ define([ "shoestring" ], function(){
 					event._args = args;
 					this.dispatchEvent( event );
 				} else if ( document.createEventObject ) {
-					if( this[ 'on' + evts[ i ] ] !== undefined ) {
-						this.fireEvent( 'on' + evts[ i ], document.createEventObject() );
+					if( ( "" + this[ evts[ i ] ] ).indexOf( "function" ) > -1 ) {
+						this[ evts[ i ] ]();
 					} else {
 						document.documentElement[ evts[ i ] ] = {
 							"el": this,

@@ -1053,6 +1053,39 @@
 		}, 15);
 	});
 
+	asyncTest( 'trigger click executes a native click', function() {
+		var hash = location.hash;
+
+		expect( 1 );
+		shoestring( '#qunit-fixture' ).html( '<a href="#test" id="el">Link</a>' );
+
+		$( '#el' ).trigger( "click" );
+
+		setTimeout(function() {
+			notEqual( location.hash, hash, 'hash should have changed, link should have been clicked.' );
+
+			location.hash = "";
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'preventDefault on dom event', function() {
+		var hash = location.hash;
+
+		expect( 1 );
+		shoestring( '#qunit-fixture' ).html( '<a href="#test" id="el">Link</a>' );
+
+		$( '#el' ).bind( "click", function( e ) {
+			e.preventDefault();
+			equal( location.hash, hash, 'hash should not have changed, event should preventDefault' );
+		}).trigger( "click" );
+
+		setTimeout(function() {
+			location.hash = "";
+			start();
+		}, 15);
+	});
+
 	if( window.JSON && 'localStorage' in window ) {
 		module( "util", config );
 
