@@ -41,12 +41,30 @@ define([ "shoestring", "extensions/dom/closest" ], function(){
 
 		function encasedCallback( e ){
 			e.data = data;
+			var returnTrue = function(){
+				return true;
+			};
+			e.isDefaultPrevented = function(){
+				return false;
+			};
+			var originalPreventDefault = e.preventDefault;
+			var preventDefaultConstructor = function(){
+				if( originalPreventDefault ) {
+					return function(){
+						e.isDefaultPrevented = returnTrue;
+						originalPreventDefault.call(e);
+					};
+				} else {
+					return function(){
+						e.isDefaultPrevented = returnTrue;
+						e.returnValue = false;
+					};
+				}
+			};
 
 			// thanks https://github.com/jonathantneal/EventListener
 			e.target = e.target || e.srcElement;
-			e.preventDefault = e.preventDefault || function () {
-				e.returnValue = false;
-			};
+			e.preventDefault = preventDefaultConstructor();
 			e.stopPropagation = e.stopPropagation || function () {
 				e.cancelBubble = true;
 			};

@@ -1087,6 +1087,41 @@
 		}, 15);
 	});
 
+	asyncTest( '`.isDefaultPrevented()`', function(){
+		expect(1);
+		var fn = function(e){
+			e.preventDefault();
+			ok(e.isDefaultPrevented());
+		};
+
+		shoestring( '#qunit-fixture' ).html( '<div id="preventdefault"></div>' );
+
+		$( "#preventdefault" ).bind( "click", fn )
+			.trigger( "click" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+
+	});
+
+	asyncTest( '`.isDefaultPrevented()` without `.preventDefault()`', function(){
+		expect(1);
+		var fn = function(e){
+			ok(!e.isDefaultPrevented());
+		};
+
+		shoestring( '#qunit-fixture' ).html( '<div id="preventdefault2"></div>' );
+
+		$( "#preventdefault2" ).bind( "click", fn )
+			.trigger( "click" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+
+	});
+
 	if( window.JSON && 'localStorage' in window ) {
 		module( "util", config );
 
