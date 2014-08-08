@@ -9,7 +9,6 @@ define([ "shoestring" ], function(){
 			"click": "the click method. Try using trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"event-namespaces": "event namespacing, especially on .unbind( '.myNamespace' ). An event namespace is treated as part of the event name.",
-			"filter-function": " a function argument on filter. Try using .each to make a new object.",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
 			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
 			"map": "the map method. Try using .each to make a new object.",

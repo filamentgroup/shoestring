@@ -5,24 +5,23 @@ define([ "shoestring" ], function(){
 	shoestring.fn.filter = function( sel ){
 		var ret = [];
 
-		//>>includeStart("development", pragmas.development);
-		if( typeof sel === 'function' ){
-			shoestring.error( 'filter-function' );
-		}
-		//>>includeEnd("development");
-
-		this.each(function(){
-
-			if( !this.parentNode ){
-				var context = shoestring( document.createDocumentFragment() );
-				context[ 0 ].appendChild( this );
-				wsel = shoestring( sel, context );
+		this.each(function( index ){
+			if( typeof sel === 'function' ) {
+				if( sel.call( this, index ) !== false ) {
+					ret.push( this );
+				}
 			} else {
-				wsel = shoestring( sel, this.parentNode );
-			}
+				if( !this.parentNode ){
+					var context = shoestring( document.createDocumentFragment() );
+					context[ 0 ].appendChild( this );
+					wsel = shoestring( sel, context );
+				} else {
+					wsel = shoestring( sel, this.parentNode );
+				}
 
-			if( shoestring.inArray( this, wsel ) > -1 ){
-				ret.push( this );
+				if( shoestring.inArray( this, wsel ) > -1 ){
+					ret.push( this );
+				}
 			}
 		});
 

@@ -218,7 +218,7 @@
 		equal( $fixture.eq( 1000000 )[0], undefined );
 	});
 
-	test('`.filter()`', function() {
+	test('`.filter( selector )`', function() {
 		var $divs = $fixture.find( "div" );
 
 		equal( $divs.filter( ".filter" ).length, 1 );
@@ -228,6 +228,14 @@
 
 		equal( $withoutParent.filter( ".filter" ).length, 1 );
 		equal( $withoutParent.filter( ".filter" )[0], $withoutParent[0] );
+	});
+
+	test('`.filter( function )`', function() {
+		var $divs = $fixture.find( ".filter" );
+
+		equal( $divs.length, 1 );
+		equal( $divs.filter(function() { return false; }).length, 0 );
+		equal( $divs.filter(function() { return true; }).length, 1 );
 	});
 
 	test('`.first()`', function() {
