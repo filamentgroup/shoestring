@@ -5,6 +5,12 @@ define([ "shoestring" ], function(){
 	shoestring.fn.filter = function( sel ){
 		var ret = [];
 
+		//>>includeStart("development", pragmas.development);
+		if( typeof sel === 'function' ){
+			shoestring.error( 'filter-function' );
+		}
+		//>>includeEnd("development");
+
 		this.each(function(){
 
 			if( !this.parentNode ){
