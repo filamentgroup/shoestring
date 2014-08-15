@@ -5,8 +5,6 @@ define([ "shoestring" ], function(){
 	/**
 	 * Add a class to each DOM element in the collection.
 	 *
-	 * @module dom
-	 * @submodule laddClass
 	 * @param {string} className The name of the class to be added.
 	 * @return shoestring
 	 * @this shoestring
