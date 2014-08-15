@@ -1,5 +1,6 @@
 # Project files
-/dist/
+/dist/*
+!/dist/docs
 
 # Versioning
 *.diff
