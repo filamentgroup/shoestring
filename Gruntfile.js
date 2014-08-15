@@ -1,7 +1,7 @@
 /* global module:false */
 module.exports = function(grunt) {
 
-	var fs, files, opts, builds = {};
+	var fs, files, opts, spawn, builds = {};
 
 	opts = {
 		baseUrl: "src",
@@ -104,6 +104,19 @@ module.exports = function(grunt) {
 				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/**/*.js']
 			}
 		}
+	});
+
+	spawn = require('child_process').spawn;
+
+	grunt.registerTask('docs', function() {
+		var doxx, done = this.async();
+
+		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', 'src', '--target', 'dist/docs']);
+
+		doxx.on( 'close', function( code ) {
+			console.log( "doxx completed with exit code: "	+ code );
+			done();
+		});
 	});
 
 	// These plugins provide necessary tasks.

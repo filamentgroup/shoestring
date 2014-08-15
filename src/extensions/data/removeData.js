@@ -1,9 +1,7 @@
-// Extensions
-
-// keep this wrapper around the ones you use!
 //>>excludeStart("exclude", pragmas.exclude);
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
+
 	shoestring.fn.removeData = function( name ){
 		return this.each(function(){
 			if( name !== undefined && this.shoestringData ){
@@ -15,6 +13,7 @@ define([ "shoestring" ], function(){
 			}
 		});
 	};
+
 //>>excludeStart("exclude", pragmas.exclude);
 });
 //>>excludeEnd("exclude");

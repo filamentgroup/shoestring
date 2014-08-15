@@ -2,6 +2,13 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
+	/**
+	 * Remove a class from each DOM element in the collection.
+	 *
+	 * @param {string} className The name of the class to be removed.
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.removeClass = function( cname ){
 		var classes = cname.replace(/^\s+|\s+$/g, '').split( " " );
 
