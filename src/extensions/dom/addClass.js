@@ -11,6 +11,7 @@ define([ "shoestring" ], function(){
 	 */
 	shoestring.fn.addClass = function( className ){
 		var classes = className.replace(/^\s+|\s+$/g, '').split( " " );
+
 		return this.each(function(){
 			for( var i = 0, il = classes.length; i < il; i++ ){
 				if( this.className !== undefined &&
