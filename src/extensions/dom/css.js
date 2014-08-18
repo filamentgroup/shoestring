@@ -1,7 +1,6 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
   "shoestring",
-  "extensions/dom/css/exceptions",
   "extensions/dom/css/getStyle",
   "extensions/dom/css/setStyle"
 ], function(){
