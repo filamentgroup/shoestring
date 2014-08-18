@@ -27,6 +27,7 @@ require([
 	"extensions/dom/html",
 	"extensions/dom/index",
 	"extensions/dom/insertAfter",
+	"extensions/dom/insertBefore",
 	"extensions/dom/is",
 	"extensions/dom/last",
 	"extensions/dom/next",
