@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/ajax/ajax" ], function( shoestring ) {
+define([ "shoestring", "ajax/ajax" ], function( shoestring ) {
 //>>excludeEnd("exclude");
 
 	shoestring.fn.load = function( url, callback ){

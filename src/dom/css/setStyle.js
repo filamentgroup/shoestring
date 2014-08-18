@@ -1,7 +1,7 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
 	"shoestring",
-	"extensions/dom/css/exceptions"
+	"dom/css/exceptions"
 ], function(){
 //>>excludeEnd("exclude");// TODO: This code should be consistent with attr().
 

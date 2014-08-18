@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/dom/closest" ], function(){
+define([ "shoestring", "dom/closest" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.bind = function( evt, data, originalCallback ){

@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/dom/propFix.js" ], function(){
+define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	// Property normalization, a subset taken from jQuery src

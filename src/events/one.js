@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/events/bind", "extensions/events/unbind" ], function(){
+define([ "shoestring", "events/bind", "events/unbind" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.one = function( evt, callback ){
