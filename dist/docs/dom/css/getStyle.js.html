@@ -91,6 +91,7 @@
             <li><a href="../../dom/css/exceptions.js.html">dom/css/exceptions.js</a></li>
             <li><a href="../../dom/css/getComputedStyle.js.html">dom/css/getComputedStyle.js</a></li>
             <li class="active"><a href="../../dom/css/getStyle.js.html">dom/css/getStyle.js</a></li>
+            <li><a href="../../dom/css/setStyle.js.html">dom/css/setStyle.js</a></li>
             <li><a href="../../dom/css.js.html">dom/css.js</a></li>
             <li><a href="../../dom/dimension.js.html">dom/dimension.js</a></li>
             <li><a href="../../dom/eq.js.html">dom/eq.js</a></li>
@@ -146,83 +147,111 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#cssExceptions"><i class="alert alert-success"></i><span>cssExceptions</span></a>
+              <li><a href="#_getStyle"><i class="alert alert-info"></i><span>_getStyle</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="cssExceptions">
-            <h1>cssExceptions</h1>
+          <section id="_getStyle">
+            <h1>_getStyle</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-success radius ctx-type">declaration</div><span>cssExceptions</span>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring._getStyle()</span>
             </p>
           </section>
-          <div class="description"><p>jshint unused: false</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>element</td>
+                <td>HTMLElement</td>
+                <td>The element we want the style property for.</td>
+              </tr>
+              <tr>
+                <td>property</td>
+                <td>string</td>
+                <td>The css property we want the style for.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Private function for getting the computed style of an element.</p><p>NOTE do not use this directory, please use <a href="../css.js.html">shoestring.fn.css</a> instead.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([
 	&quot;shoestring&quot;,
-	&quot;extensions/dom/css/exceptions&quot;,
-	&quot;extensions/dom/css/getComputedStyle&quot;
+	&quot;dom/css/exceptions&quot;,
+	&quot;dom/css/getComputedStyle&quot;
 ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	/* jshint unused: false */
+	(function() {
+		var cssExceptions = shoestring.cssExceptions;
 
-	var cssExceptions = shoestring.cssExceptions;
+		// IE8 uses marginRight instead of margin-right
+		function convertPropertyName( str ) {
+			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
+				return character.toUpperCase();
+			});
+		}
 
-	// IE8 uses marginRight instead of margin-right
-	function convertPropertyName( str ) {
-		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
-			return character.toUpperCase();
-		});
-	}
+		function _getStyle( element, property ) {
+			// polyfilled in getComputedStyle module
+			return window.getComputedStyle( element, null ).getPropertyValue( property );
+		}
 
-	function _getStyle( element, property ) {
-		// polyfilled in getComputedStyle module
-		return window.getComputedStyle( element, null ).getPropertyValue( property );
-	}
+		var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
 
-	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
+		/**
+		 * Private function for getting the computed style of an element.
+		 *
+		 * NOTE do not use this directory, please use [shoestring.fn.css](../css.js.html) instead.
+		 *
+		 * @method _getStyle
+		 * @param {HTMLElement} element The element we want the style property for.
+		 * @param {string} property The css property we want the style for.
+		 */
+		shoestring._getStyle = function( element, property ) {
+			var convert, value, j, k;
 
-	function getStyle( element, property ) {
-		var convert, value, j, k;
+			if( cssExceptions[ property ] ) {
+				for( j = 0, k = cssExceptions[ property ].length; j &lt; k; j++ ) {
+					value = _getStyle( element, cssExceptions[ property ][ j ] );
 
-		if( cssExceptions[ property ] ) {
-			for( j = 0, k = cssExceptions[ property ].length; j &lt; k; j++ ) {
-				value = _getStyle( element, cssExceptions[ property ][ j ] );
+					if( value ) {
+						return value;
+					}
+				}
+			}
+
+			for( j = 0, k = vendorPrefixes.length; j &lt; k; j++ ) {
+				convert = convertPropertyName( vendorPrefixes[ j ] + property );
+
+				// VendorprefixKeyName || key-name
+				value = _getStyle( element, convert );
+
+				if( convert !== property ) {
+					value = value || _getStyle( element, property );
+				}
+
+				if( vendorPrefixes[ j ] ) {
+					// -vendorprefix-key-name
+					value = value || _getStyle( element, vendorPrefixes[ j ] + property );
+				}
 
 				if( value ) {
 					return value;
 				}
 			}
-		}
 
-		for( j = 0, k = vendorPrefixes.length; j &lt; k; j++ ) {
-			convert = convertPropertyName( vendorPrefixes[ j ] + property );
-
-			// VendorprefixKeyName || key-name
-			value = _getStyle( element, convert );
-
-			if( convert !== property ) {
-				value = value || _getStyle( element, property );
-			}
-
-			if( vendorPrefixes[ j ] ) {
-				// -vendorprefix-key-name
-				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
-			}
-
-			if( value ) {
-				return value;
-			}
-		}
-
-		return undefined;
-	}
-
-  shoestring._getStyle = getStyle;
+			return undefined;
+		};
+	})();
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });
