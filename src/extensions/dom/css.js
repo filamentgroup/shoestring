@@ -6,16 +6,24 @@ define([
 ], function(){
 //>>excludeEnd("exclude");// TODO: This code should be consistent with attr().
 
-	shoestring.fn.css = function( prop, value ){
+	/**
+	 * Get the compute style property of the first element or set the value of a style property
+	 * on all elements in the set.
+	 *
+	 * @method _setStyle
+	 * @param {string} property The property being used to style the element.
+	 * @param {string} value The css value for the style property.
+	 */
+	shoestring.fn.css = function( property, value ){
 		if( !this[0] ){
 			return;
 		}
 
-		if( typeof prop === "object" ) {
+		if( typeof property === "object" ) {
 			return this.each(function() {
-				for( var key in prop ) {
-					if( prop.hasOwnProperty( key ) ) {
-						shoestring._setStyle( this, key, prop[key] );
+				for( var key in property ) {
+					if( property.hasOwnProperty( key ) ) {
+						shoestring._setStyle( this, key, property[key] );
 					}
 				}
 			});
@@ -23,11 +31,11 @@ define([
 			// assignment else retrieve first
 			if( value !== undefined ){
 				return this.each(function(){
-					shoestring._setStyle( this, prop, value );
+					shoestring._setStyle( this, property, value );
 				});
 			}
 
-			return shoestring._getStyle( this[0], prop );
+			return shoestring._getStyle( this[0], property );
 		}
 	};
 
