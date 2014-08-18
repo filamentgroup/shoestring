@@ -4,7 +4,7 @@ define([
 	"extensions/dom/css/exceptions",
 	"extensions/dom/css/getComputedStyle"
 ], function(){
-	//>>excludeEnd("exclude");
+//>>excludeEnd("exclude");
 
 	(function() {
 		var cssExceptions = shoestring.cssExceptions;
@@ -32,7 +32,7 @@ define([
 		 * @param {HTMLElement} element The element we want the style property for.
 		 * @param {string} property The css property we want the style for.
 		 */
-		shoestring._getStyle = function getStyle( element, property ) {
+		shoestring._getStyle = function( element, property ) {
 			var convert, value, j, k;
 
 			if( cssExceptions[ property ] ) {
@@ -69,6 +69,6 @@ define([
 		};
 	})();
 
-	//>>excludeStart("exclude", pragmas.exclude);
+//>>excludeStart("exclude", pragmas.exclude);
 });
 //>>excludeEnd("exclude");

@@ -1,6 +1,6 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define(function(){
-	//>>excludeEnd("exclude");
+//>>excludeEnd("exclude");
 
 	/**
 	 * A polyfill to support computed styles in IE < 9
@@ -126,6 +126,6 @@ define(function(){
 		}
 	})();
 
-	//>>excludeStart("exclude", pragmas.exclude);
+//>>excludeStart("exclude", pragmas.exclude);
 });
 //>>excludeEnd("exclude");
