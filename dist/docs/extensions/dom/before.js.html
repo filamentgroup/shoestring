@@ -83,6 +83,7 @@
             <li><a href="../../extensions/dom/addClass.js.html">extensions/dom/addClass.js</a></li>
             <li><a href="../../extensions/dom/after.js.html">extensions/dom/after.js</a></li>
             <li><a href="../../extensions/dom/append.js.html">extensions/dom/append.js</a></li>
+            <li><a href="../../extensions/dom/appendTo.js.html">extensions/dom/appendTo.js</a></li>
             <li><a href="../../extensions/dom/attr.js.html">extensions/dom/attr.js</a></li>
             <li class="active"><a href="../../extensions/dom/before.js.html">extensions/dom/before.js</a></li>
             <li><a href="../../extensions/dom/clone.js.html">extensions/dom/clone.js</a></li>
@@ -90,6 +91,7 @@
             <li><a href="../../extensions/dom/css/exceptions.js.html">extensions/dom/css/exceptions.js</a></li>
             <li><a href="../../extensions/dom/css/getComputedStyle.js.html">extensions/dom/css/getComputedStyle.js</a></li>
             <li><a href="../../extensions/dom/css/getStyle.js.html">extensions/dom/css/getStyle.js</a></li>
+            <li><a href="../../extensions/dom/css/setStyle.js.html">extensions/dom/css/setStyle.js</a></li>
             <li><a href="../../extensions/dom/css.js.html">extensions/dom/css.js</a></li>
             <li><a href="../../extensions/dom/dimension.js.html">extensions/dom/dimension.js</a></li>
             <li><a href="../../extensions/dom/eq.js.html">extensions/dom/eq.js</a></li>
@@ -102,6 +104,7 @@
             <li><a href="../../extensions/dom/html.js.html">extensions/dom/html.js</a></li>
             <li><a href="../../extensions/dom/index.js.html">extensions/dom/index.js</a></li>
             <li><a href="../../extensions/dom/insertAfter.js.html">extensions/dom/insertAfter.js</a></li>
+            <li><a href="../../extensions/dom/insertBefore.js.html">extensions/dom/insertBefore.js</a></li>
             <li><a href="../../extensions/dom/is.js.html">extensions/dom/is.js</a></li>
             <li><a href="../../extensions/dom/last.js.html">extensions/dom/last.js</a></li>
             <li><a href="../../extensions/dom/map.js.html">extensions/dom/map.js</a></li>
@@ -144,29 +147,56 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#before"><i class="alert alert-info"></i><span>before</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="before">
+            <h1>before</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.before()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>fragment</td>
+                <td>string,HTMLElement</td>
+                <td>The HTML or HTMLElement to insert.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Insert an element or HTML string before each element in the current set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.before = function( frag ){
-		if( typeof( frag ) === &quot;string&quot; || frag.nodeType !== undefined ){
-			frag = shoestring( frag );
+	/**
+	 * Insert an element or HTML string before each element in the current set.
+	 *
+	 * @param {string|HTMLElement} fragment The HTML or HTMLElement to insert.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.before = function( fragment ){
+		if( typeof( fragment ) === &quot;string&quot; || fragment.nodeType !== undefined ){
+			fragment = shoestring( fragment );
 		}
-		return this.each(function( i ){
-			for( var j = 0, jl = frag.length; j &lt; jl; j++ ){
-				this.parentNode.insertBefore( i &gt; 0 ? frag[ j ].cloneNode( true ) : frag[ j ], this );
-			}
-		});
-	};
 
-	shoestring.fn.insertBefore = function( sel ){
-		return this.each(function(){
-			shoestring( sel ).before( this );
+		return this.each(function( i ){
+			for( var j = 0, jl = fragment.length; j &lt; jl; j++ ){
+				this.parentNode.insertBefore( i &gt; 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ], this );
+			}
 		});
 	};
 

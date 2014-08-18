@@ -83,6 +83,7 @@
             <li><a href="../../../extensions/dom/addClass.js.html">extensions/dom/addClass.js</a></li>
             <li><a href="../../../extensions/dom/after.js.html">extensions/dom/after.js</a></li>
             <li><a href="../../../extensions/dom/append.js.html">extensions/dom/append.js</a></li>
+            <li><a href="../../../extensions/dom/appendTo.js.html">extensions/dom/appendTo.js</a></li>
             <li><a href="../../../extensions/dom/attr.js.html">extensions/dom/attr.js</a></li>
             <li><a href="../../../extensions/dom/before.js.html">extensions/dom/before.js</a></li>
             <li><a href="../../../extensions/dom/clone.js.html">extensions/dom/clone.js</a></li>
@@ -90,6 +91,7 @@
             <li><a href="../../../extensions/dom/css/exceptions.js.html">extensions/dom/css/exceptions.js</a></li>
             <li><a href="../../../extensions/dom/css/getComputedStyle.js.html">extensions/dom/css/getComputedStyle.js</a></li>
             <li class="active"><a href="../../../extensions/dom/css/getStyle.js.html">extensions/dom/css/getStyle.js</a></li>
+            <li><a href="../../../extensions/dom/css/setStyle.js.html">extensions/dom/css/setStyle.js</a></li>
             <li><a href="../../../extensions/dom/css.js.html">extensions/dom/css.js</a></li>
             <li><a href="../../../extensions/dom/dimension.js.html">extensions/dom/dimension.js</a></li>
             <li><a href="../../../extensions/dom/eq.js.html">extensions/dom/eq.js</a></li>
@@ -102,6 +104,7 @@
             <li><a href="../../../extensions/dom/html.js.html">extensions/dom/html.js</a></li>
             <li><a href="../../../extensions/dom/index.js.html">extensions/dom/index.js</a></li>
             <li><a href="../../../extensions/dom/insertAfter.js.html">extensions/dom/insertAfter.js</a></li>
+            <li><a href="../../../extensions/dom/insertBefore.js.html">extensions/dom/insertBefore.js</a></li>
             <li><a href="../../../extensions/dom/is.js.html">extensions/dom/is.js</a></li>
             <li><a href="../../../extensions/dom/last.js.html">extensions/dom/last.js</a></li>
             <li><a href="../../../extensions/dom/map.js.html">extensions/dom/map.js</a></li>
@@ -144,20 +147,41 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#cssExceptions"><i class="alert alert-success"></i><span>cssExceptions</span></a>
+              <li><a href="#_getStyle"><i class="alert alert-info"></i><span>_getStyle</span></a>
               </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <section id="cssExceptions">
-            <h1>cssExceptions</h1>
+          <section id="_getStyle">
+            <h1>_getStyle</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-success radius ctx-type">declaration</div><span>cssExceptions</span>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring._getStyle()</span>
             </p>
           </section>
-          <div class="description"><p>jshint unused: false</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>element</td>
+                <td>HTMLElement</td>
+                <td>The element we want the style property for.</td>
+              </tr>
+              <tr>
+                <td>property</td>
+                <td>string</td>
+                <td>The css property we want the style for.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Private function for getting the computed style of an element.</p><p>NOTE do not use this directory, please use <a href="../css.js.html">shoestring.fn.css</a> instead.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([
 	&quot;shoestring&quot;,
@@ -166,61 +190,68 @@ define([
 ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	/* jshint unused: false */
+	(function() {
+		var cssExceptions = shoestring.cssExceptions;
 
-	var cssExceptions = shoestring.cssExceptions;
+		// IE8 uses marginRight instead of margin-right
+		function convertPropertyName( str ) {
+			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
+				return character.toUpperCase();
+			});
+		}
 
-	// IE8 uses marginRight instead of margin-right
-	function convertPropertyName( str ) {
-		return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
-			return character.toUpperCase();
-		});
-	}
+		function _getStyle( element, property ) {
+			// polyfilled in getComputedStyle module
+			return window.getComputedStyle( element, null ).getPropertyValue( property );
+		}
 
-	function _getStyle( element, property ) {
-		// polyfilled in getComputedStyle module
-		return window.getComputedStyle( element, null ).getPropertyValue( property );
-	}
+		var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
 
-	var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
+		/**
+		 * Private function for getting the computed style of an element.
+		 *
+		 * NOTE do not use this directory, please use [shoestring.fn.css](../css.js.html) instead.
+		 *
+		 * @method _getStyle
+		 * @param {HTMLElement} element The element we want the style property for.
+		 * @param {string} property The css property we want the style for.
+		 */
+		shoestring._getStyle = function( element, property ) {
+			var convert, value, j, k;
 
-	function getStyle( element, property ) {
-		var convert, value, j, k;
+			if( cssExceptions[ property ] ) {
+				for( j = 0, k = cssExceptions[ property ].length; j &lt; k; j++ ) {
+					value = _getStyle( element, cssExceptions[ property ][ j ] );
 
-		if( cssExceptions[ property ] ) {
-			for( j = 0, k = cssExceptions[ property ].length; j &lt; k; j++ ) {
-				value = _getStyle( element, cssExceptions[ property ][ j ] );
+					if( value ) {
+						return value;
+					}
+				}
+			}
+
+			for( j = 0, k = vendorPrefixes.length; j &lt; k; j++ ) {
+				convert = convertPropertyName( vendorPrefixes[ j ] + property );
+
+				// VendorprefixKeyName || key-name
+				value = _getStyle( element, convert );
+
+				if( convert !== property ) {
+					value = value || _getStyle( element, property );
+				}
+
+				if( vendorPrefixes[ j ] ) {
+					// -vendorprefix-key-name
+					value = value || _getStyle( element, vendorPrefixes[ j ] + property );
+				}
 
 				if( value ) {
 					return value;
 				}
 			}
-		}
 
-		for( j = 0, k = vendorPrefixes.length; j &lt; k; j++ ) {
-			convert = convertPropertyName( vendorPrefixes[ j ] + property );
-
-			// VendorprefixKeyName || key-name
-			value = _getStyle( element, convert );
-
-			if( convert !== property ) {
-				value = value || _getStyle( element, property );
-			}
-
-			if( vendorPrefixes[ j ] ) {
-				// -vendorprefix-key-name
-				value = value || _getStyle( element, vendorPrefixes[ j ] + property );
-			}
-
-			if( value ) {
-				return value;
-			}
-		}
-
-		return undefined;
-	}
-
-  shoestring._getStyle = getStyle;
+			return undefined;
+		};
+	})();
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });
