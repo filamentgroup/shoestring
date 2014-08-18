@@ -3,7 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	/**
-	 * Add a class to each DOM element in the collection.
+	 * Add a class to each DOM element in the set of elements.
 	 *
 	 * @param {string} className The name of the class to be added.
 	 * @return shoestring
