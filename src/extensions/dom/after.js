@@ -2,7 +2,6 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-
 	/**
 	 * Insert an element or HTML string after each element in the current set.
 	 *
@@ -20,19 +19,6 @@ define([ "shoestring" ], function(){
 				var insertEl = i > 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
 				this.parentNode.insertBefore( insertEl, this.nextSibling );
 			}
-		});
-	};
-
-	/**
-	 * Insert the current set after the elements matching the selector.
-	 *
-	 * @param {string} selector The selector after which to inser the current set.
-	 * @return shoestring
-	 * @this shoestring
-	 */
-	shoestring.fn.insertAfter = function( selector ){
-		return this.each(function(){
-			shoestring( selector ).after( this );
 		});
 	};
 
