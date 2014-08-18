@@ -25,6 +25,7 @@ require([
 	"extensions/dom/height",
 	"extensions/dom/html",
 	"extensions/dom/index",
+	"extensions/dom/insertAfter",
 	"extensions/dom/is",
 	"extensions/dom/last",
 	"extensions/dom/next",

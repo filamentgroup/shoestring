@@ -15,6 +15,7 @@
 		count = shoestring( '.add' ).length;
 		$fixture = $fixture.add( '.add' );
 
+		ok( count > 0 );
 		equal( $fixture.length, length + count );
 	});
 
