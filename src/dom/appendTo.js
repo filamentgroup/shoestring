@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/dom/append" ], function(){
+define([ "shoestring", "dom/append" ], function(){
 //>>excludeEnd("exclude");
 
 	/**

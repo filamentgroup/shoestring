@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "extensions/dom/propFix.js" ], function(){
+define([ "shoestring", "dom/propFix.js" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.prop = function( name, val ){

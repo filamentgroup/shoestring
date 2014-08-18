@@ -1,8 +1,8 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
 	"shoestring",
-	"extensions/dom/css/exceptions",
-	"extensions/dom/css/getComputedStyle"
+	"dom/css/exceptions",
+	"dom/css/getComputedStyle"
 ], function(){
 //>>excludeEnd("exclude");
 
