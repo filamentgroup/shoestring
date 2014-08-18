@@ -13,6 +13,7 @@ require([
 	"extensions/dom/add",
 	"extensions/dom/after",
 	"extensions/dom/append",
+	"extensions/dom/appendTo",
 	"extensions/dom/attr",
 	"extensions/dom/before",
 	"extensions/dom/clone",
