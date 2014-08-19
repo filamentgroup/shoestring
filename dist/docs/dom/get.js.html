@@ -147,17 +147,49 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#get"><i class="alert alert-info"></i><span>get</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="get">
+            <h1>get</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.get()</span>→<span>HTMLElement</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>index</td>
+                <td>integer</td>
+                <td>The index of the element to wrap and return.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Returns the raw DOM node at the passed index.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.get = function( num ){
-		return this[ num ];
+	/**
+	 * Returns the raw DOM node at the passed index.
+	 *
+	 * @param {integer} index The index of the element to wrap and return.
+	 * @return HTMLElement
+	 * @this shoestring
+	 */
+	shoestring.fn.get = function( index ){
+		return this[ index ];
 	};
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);

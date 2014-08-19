@@ -147,30 +147,65 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#filter"><i class="alert alert-info"></i><span>filter</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="filter">
+            <h1>filter</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.filter()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>selector</td>
+                <td>string</td>
+                <td>The selector used to filter the elements.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Filter out the current set if they do <em>not</em> match the passed selector.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.filter = function( sel ){
+	/**
+	 * Filter out the current set if they do *not* match the passed selector.
+	 *
+	 * @param {string} selector The selector used to filter the elements.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.filter = function( selector ){
 		var ret = [];
 
 		this.each(function( index ){
-			if( typeof sel === 'function' ) {
-				if( sel.call( this, index ) !== false ) {
+			var wsel;
+
+			if( typeof selector === 'function' ) {
+				if( selector.call( this, index ) !== false ) {
 					ret.push( this );
 				}
 			} else {
 				if( !this.parentNode ){
 					var context = shoestring( document.createDocumentFragment() );
+
 					context[ 0 ].appendChild( this );
-					wsel = shoestring( sel, context );
+					wsel = shoestring( selector, context );
 				} else {
-					wsel = shoestring( sel, this.parentNode );
+					wsel = shoestring( selector, this.parentNode );
 				}
 
 				if( shoestring.inArray( this, wsel ) &gt; -1 ){

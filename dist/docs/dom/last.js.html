@@ -147,15 +147,30 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#last"><i class="alert alert-info"></i><span>last</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="last">
+            <h1>last</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.last()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns the last element of the set wrapped in a new <code>shoestring</code> object.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
+	/**
+	 * Returns the last element of the set wrapped in a new `shoestring` object.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.last = function(){
 		return this.eq( this.length - 1 );
 	};

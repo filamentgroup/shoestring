@@ -147,19 +147,52 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#eq"><i class="alert alert-info"></i><span>eq</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="eq">
+            <h1>eq</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.eq()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>index</td>
+                <td>integer</td>
+                <td>The index of the element to wrap and return.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Returns the indexed element wrapped in a new <code>shoestring</code> object.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.eq = function( num ){
-		if( this[ num ] ){
-			return shoestring( this[ num ] );
+	/**
+	 * Returns the indexed element wrapped in a new `shoestring` object.
+	 *
+	 * @param {integer} index The index of the element to wrap and return.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.eq = function( index ){
+		if( this[index] ){
+			return shoestring( this[index] );
 		}
+
 		return shoestring([]);
 	};
 

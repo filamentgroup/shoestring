@@ -147,22 +147,56 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#is"><i class="alert alert-info"></i><span>is</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="is">
+            <h1>is</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.is()</span>→<span>boolean</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>selector</td>
+                <td>string</td>
+                <td>The selector to check.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Checks the current set of elements against the selector, if one matches return <code>true</code>.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.is = function( sel ){
+  /**
+	 * Checks the current set of elements against the selector, if one matches return `true`.
+	 *
+	 * @param {string} selector The selector to check.
+	 * @return {boolean}
+	 * @this {shoestring}
+	 */
+	shoestring.fn.is = function( selector ){
 		var ret = false;
+
 		this.each(function(){
-			if( shoestring.inArray( this, shoestring( sel ) )  &gt; -1 ){
+			if( shoestring.inArray( this, shoestring( selector ) )  &gt; -1 ){
 				ret = true;
 			}
 		});
+
 		return ret;
 	};
 

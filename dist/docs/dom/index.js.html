@@ -147,56 +147,91 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#index"><i class="alert alert-info"></i><span>index</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="index">
+            <h1>index</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.index()</span>→<span>integer</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>selector</td>
+                <td>string,undefined</td>
+                <td>The selector used to search for the index.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Find the index in the current set for the passed selector.<br />Without a selector it returns the index of the first node within the array of its siblings.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	function _getIndex( set, test ) {
-		var i, result, element;
+	(function() {
+		function _getIndex( set, test ) {
+			var i, result, element;
 
-		for( i = result = 0; i &lt; set.length; i++ ) {
-			element = set.item ? set.item(i) : set[i];
+			for( i = result = 0; i &lt; set.length; i++ ) {
+				element = set.item ? set.item(i) : set[i];
 
-			if( test(element) ){
-				return result;
+				if( test(element) ){
+					return result;
+				}
+
+				// ignore text nodes, etc
+				// NOTE may need to be more permissive
+				if( element.nodeType === 1 ){
+					result++;
+				}
 			}
 
-			// ignore text nodes, etc
-			// NOTE may need to be more permissive
-			if( element.nodeType === 1 ){
-				result++;
+			return -1;
+		}
+
+		/**
+		 * Find the index in the current set for the passed selector.
+		 * Without a selector it returns the index of the first node within the array of its siblings.
+		 *
+		 * @param {string|undefined} selector The selector used to search for the index.
+		 * @return {integer}
+		 * @this {shoestring}
+		 */
+		shoestring.fn.index = function( selector ){
+			var self, children;
+
+			self = this;
+
+			// no arg? check the children, otherwise check each element that matches
+			if( selector === undefined ){
+				children = (this[0].parentNode || document.documentElement).childNodes;
+
+				// check if the element matches the first of the set
+				return _getIndex(children, function( element ) {
+					return self[0] === element;
+				});
+			} else {
+
+				// check if the element matches the first selected node from the parent
+				return _getIndex(self, function( element ) {
+					return element === (shoestring( selector, element.parentNode )[ 0 ]);
+				});
 			}
-		}
-
-		return -1;
-	}
-
-	shoestring.fn.index = function( selector ){
-		var self, children;
-
-		self = this;
-
-		// no arg? check the children, otherwise check each element that matches
-		if( selector === undefined ){
-			children = (this[0].parentNode || document.documentElement).childNodes;
-
-			// check if the element matches the first of the set
-			return _getIndex(children, function( element ) {
-				return self[0] === element;
-			});
-		} else {
-
-			// check if the element matches the first selected node from the parent
-			return _getIndex(self, function( element ) {
-				return element === (shoestring( selector, element.parentNode )[ 0 ]);
-			});
-		}
-	};
+		};
+	})();
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });

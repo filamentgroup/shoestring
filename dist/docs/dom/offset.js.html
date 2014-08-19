@@ -147,15 +147,30 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#offset"><i class="alert alert-info"></i><span>offset</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="offset">
+            <h1>offset</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.offset()</span>→<span>object</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns an object with the <code>top</code> and <code>left</code> properties corresponging to the first elements offsets.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
+	/**
+	 * Returns an object with the `top` and `left` properties corresponging to the first elements offsets.
+	 *
+	 * @return object
+	 * @this shoestring
+	 */
 	shoestring.fn.offset = function(){
 		return {
 			top: this[ 0 ].offsetTop,

@@ -147,20 +147,52 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#not"><i class="alert alert-info"></i><span>not</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="not">
+            <h1>not</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.not()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>selector</td>
+                <td>string</td>
+                <td>The selector to use when removing the elements.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Removes elements from the current set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.not = function( sel ){
+	/**
+	 * Removes elements from the current set.
+	 *
+	 * @param {string} selector The selector to use when removing the elements.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.not = function( selector ){
 		var ret = [];
 
 		this.each(function(){
-			var found = shoestring( sel, this.parentNode );
+			var found = shoestring( selector, this.parentNode );
 
 			if( shoestring.inArray(this, found) === -1 ){
 				ret.push( this );

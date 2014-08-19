@@ -157,20 +157,55 @@
             <h1>_dimension</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">function</div><span>_dimension()</span>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring._dimension()</span>→<span>shoestring</span>
             </p>
           </section>
-          <div class="description"><p>jshint unused: false</p> </div>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>set</td>
+                <td>shoestring</td>
+                <td>The set of elements.</td>
+              </tr>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>The string &quot;height&quot; or &quot;width&quot;.</td>
+              </tr>
+              <tr>
+                <td>value</td>
+                <td>float,undefined</td>
+                <td>The value to assign.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Private function for setting/getting the offset property for height/width.</p><p><strong>NOTE</strong> Please use the <a href="width.js.html">width</a> or <a href="height.js.html">height</a> methods instead.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	/* jshint unused: false */
-
-	function _dimension( set, name, num ){
+	/**
+	 * Private function for setting/getting the offset property for height/width.
+	 *
+	 * **NOTE** Please use the [width](width.js.html) or [height](height.js.html) methods instead.
+	 *
+	 * @param {shoestring} set The set of elements.
+	 * @param {string} name The string &quot;height&quot; or &quot;width&quot;.
+	 * @param {float|undefined} value The value to assign.
+	 * @return shoestring
+	 * @this window
+	 */
+	shoestring._dimension = function( set, name, value ){
 		var offsetName;
 
-		if( num === undefined ){
+		if( value === undefined ){
 			offsetName = name.replace(/^[a-z]/, function( letter ) {
 				return letter.toUpperCase();
 			});
@@ -178,10 +213,10 @@ define([ &quot;shoestring&quot; ], function(){
 			return set[ 0 ][ &quot;offset&quot; + offsetName ];
 		} else {
 			// support integer values as pixels
-			num = typeof num === &quot;string&quot; ? num : num + &quot;px&quot;;
+			value = typeof value === &quot;string&quot; ? value : value + &quot;px&quot;;
 
 			return set.each(function(){
-				this.style[ name ] = num;
+				this.style[ name ] = value;
 			});
 		}
 	}

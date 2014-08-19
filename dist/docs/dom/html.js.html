@@ -147,26 +147,59 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#html"><i class="alert alert-info"></i><span>html</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="html">
+            <h1>html</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.html()</span>→<span>string shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>html</td>
+                <td>string,undefined</td>
+                <td>The html to assign</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets or sets the <code>innerHTML</code> from all the elements in the set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
+	/**
+	 * Gets or sets the `innerHTML` from all the elements in the set.
+	 *
+	 * @param {string|undefined} html The html to assign
+	 * @return {string|shoestring}
+	 * @this shoestring
+	 */
 	shoestring.fn.html = function( html ){
 		if( html ){
 			return this.each(function(){
 				this.innerHTML = html;
 			});
-		}
-		else{
+		} else {
 			var pile = &quot;&quot;;
+
 			this.each(function(){
 				pile += this.innerHTML;
 			});
+
 			return pile;
 		}
 	};

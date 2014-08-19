@@ -147,17 +147,34 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#first"><i class="alert alert-info"></i><span>first</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="first">
+            <h1>first</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.first()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns the first element of the set wrapped in a new <code>shoestring</code> object.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
-define([ &quot;shoestring&quot; ], function(){
+define([ &quot;shoestring&quot;, &quot;dom/eq&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
-  shoestring.fn.first = function(){
+
+	/**
+	 * Returns the first element of the set wrapped in a new `shoestring` object.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.first = function(){
 		return this.eq( 0 );
 	};
+
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
