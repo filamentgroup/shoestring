@@ -18,7 +18,7 @@ define([
 		/**
 		 * Private function for setting the style of an element.
 		 *
-		 * NOTE do not use this directory, please use [shoestring.fn.css](../css.js.html) instead.
+		 * NOTE Please use the [css](../css.js.html) method instead.
 		 *
 		 * @method _setStyle
 		 * @param {HTMLElement} element The element we want to style.
