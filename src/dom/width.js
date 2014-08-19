@@ -5,7 +5,7 @@ define([ "shoestring", "dom/dimension" ], function(){
 	/**
 	 * Gets the width value of the first element or sets the width for the whole set.
 	 *
-	 * @param {float} value The value to assign.
+	 * @param {float|undefined} value The value to assign.
 	 * @return shoestring
 	 * @this shoestring
 	 */
