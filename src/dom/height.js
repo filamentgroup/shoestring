@@ -2,8 +2,15 @@
 define([ "shoestring", "dom/dimension" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.height = function( num ){
-		return shoestring._dimension( this, "height", num );
+	/**
+	 * Gets the height value of the first element or sets the height for the whole set.
+	 *
+	 * @param {float} value The value to assign.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.height = function( value ){
+		return shoestring._dimension( this, "height", value );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);

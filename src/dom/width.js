@@ -2,8 +2,15 @@
 define([ "shoestring", "dom/dimension" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.width = function( num ){
-		return shoestring._dimension( this, "width", num );
+	/**
+	 * Gets the width value of the first element or sets the width for the whole set.
+	 *
+	 * @param {float} value The value to assign.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.width = function( value ){
+		return shoestring._dimension( this, "width", value );
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);
