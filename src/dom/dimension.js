@@ -7,7 +7,7 @@ define([ "shoestring" ], function(){
 	 *
 	 * @param {shoestring} set The set of elements.
 	 * @param {string} name The string "height" or "width".
-	 * @param {integer} value The value to assign.
+	 * @param {float} value The value to assign.
 	 * @return shoestring
 	 * @this window
 	 */
