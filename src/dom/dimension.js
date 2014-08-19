@@ -2,12 +2,19 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	/* jshint unused: false */
-
-	function _dimension( set, name, num ){
+	/**
+	 * Private function for setting/getting the offset property for height/width.
+	 *
+	 * @param {shoestring} set The set of elements.
+	 * @param {string} name The string "height" or "width".
+	 * @param {integer} value The value to assign.
+	 * @return shoestring
+	 * @this window
+	 */
+	shoestring._dimension = function( set, name, value ){
 		var offsetName;
 
-		if( num === undefined ){
+		if( value === undefined ){
 			offsetName = name.replace(/^[a-z]/, function( letter ) {
 				return letter.toUpperCase();
 			});
@@ -15,10 +22,10 @@ define([ "shoestring" ], function(){
 			return set[ 0 ][ "offset" + offsetName ];
 		} else {
 			// support integer values as pixels
-			num = typeof num === "string" ? num : num + "px";
+			value = typeof value === "string" ? value : value + "px";
 
 			return set.each(function(){
-				this.style[ name ] = num;
+				this.style[ name ] = value;
 			});
 		}
 	}
