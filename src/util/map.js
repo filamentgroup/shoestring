@@ -2,7 +2,7 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-		//>>includeStart("development", pragmas.development);
+	//>>includeStart("development", pragmas.development);
 	shoestring.map = function(){
 		shoestring.error( 'map' );
 	};

@@ -2,6 +2,12 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
+	/**
+	 * Returns a `shoestring` object with the set of siblings of each element in the original set.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.next = function(){
 		//>>includeStart("development", pragmas.development);
 		if( arguments.length > 0 ){

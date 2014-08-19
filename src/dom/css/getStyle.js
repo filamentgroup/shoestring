@@ -26,7 +26,7 @@ define([
 		/**
 		 * Private function for getting the computed style of an element.
 		 *
-		 * NOTE do not use this directory, please use [shoestring.fn.css](../css.js.html) instead.
+		 * **NOTE** Please use the [css](../css.js.html) method instead.
 		 *
 		 * @method _getStyle
 		 * @param {HTMLElement} element The element we want the style property for.

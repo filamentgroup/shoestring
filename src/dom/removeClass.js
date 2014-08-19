@@ -3,7 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	/**
-	 * Remove a class from each DOM element in the collection.
+	 * Remove a class from each DOM element in the set of elements.
 	 *
 	 * @param {string} className The name of the class to be removed.
 	 * @return shoestring
