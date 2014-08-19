@@ -3,7 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	/**
-	 * Returns the set of parents for each element in the current set.
+	 * Returns the set of first parents for each element in the current set.
 	 *
 	 * @return shoestring
 	 * @this shoestring
