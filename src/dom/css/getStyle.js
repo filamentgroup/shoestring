@@ -26,7 +26,7 @@ define([
 		/**
 		 * Private function for getting the computed style of an element.
 		 *
-		 * NOTE Please use the [css](../css.js.html) method instead.
+		 * **NOTE** Please use the [css](../css.js.html) method instead.
 		 *
 		 * @method _getStyle
 		 * @param {HTMLElement} element The element we want the style property for.

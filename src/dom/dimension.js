@@ -5,7 +5,7 @@ define([ "shoestring" ], function(){
 	/**
 	 * Private function for setting/getting the offset property for height/width.
 	 *
-	 * NOTE Please use the [width](width.js.html) or [height](height.js.html) methods instead.
+	 * **NOTE** Please use the [width](width.js.html) or [height](height.js.html) methods instead.
 	 *
 	 * @param {shoestring} set The set of elements.
 	 * @param {string} name The string "height" or "width".

@@ -18,7 +18,7 @@ define([
 		/**
 		 * Private function for setting the style of an element.
 		 *
-		 * NOTE Please use the [css](../css.js.html) method instead.
+		 * **NOTE** Please use the [css](../css.js.html) method instead.
 		 *
 		 * @method _setStyle
 		 * @param {HTMLElement} element The element we want to style.
