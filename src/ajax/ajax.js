@@ -24,7 +24,7 @@ define([ "shoestring" ], function(){
 	 * - *cancel* - Callback for cancelled request and response.
 	 *
 	 * @param {string} url The url to request.
-	 * @param {object} options The options object, see Notes above.
+	 * @param {object} options The options object, see Notes.
 	 * @return shoestring
 	 * @this shoestring
 	 */
