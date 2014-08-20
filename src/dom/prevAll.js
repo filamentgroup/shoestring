@@ -1,4 +1,4 @@
-//>>excludeStart("exclude", pragmas.exclude);
+//>>xcludeStart("exclude", pragmas.exclude);
 define([ "shoestring", "dom/prev" ], function(){
 //>>excludeEnd("exclude");
 
