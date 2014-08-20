@@ -115,6 +115,7 @@
             <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
             <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
             <li><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
             <li><a href="../dom/prev.js.html">dom/prev.js</a></li>
             <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
             <li><a href="../dom/prop.js.html">dom/prop.js</a></li>
@@ -147,11 +148,20 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#serialize"><i class="alert alert-info"></i><span>serialize</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="serialize">
+            <h1>serialize</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.serialize()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <div class="description"><p>Serialize child input element values into an object.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
@@ -177,6 +187,13 @@ define([ &quot;shoestring&quot; ], function(){
 
 	shoestring.inputTypeTest = new RegExp( shoestring.inputTypes.join( &quot;|&quot; ) );
 
+
+	/**
+	 * Serialize child input element values into an object.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.serialize = function(){
 		var data = {};
 

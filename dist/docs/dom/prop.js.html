@@ -115,6 +115,7 @@
             <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
             <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
             <li><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
             <li><a href="../dom/prev.js.html">dom/prev.js</a></li>
             <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
             <li class="active"><a href="../dom/prop.js.html">dom/prop.js</a></li>
@@ -147,25 +148,63 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#prop"><i class="alert alert-info"></i><span>prop</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="prop">
+            <h1>prop</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.prop()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>The property name.</td>
+              </tr>
+              <tr>
+                <td>value</td>
+                <td>any</td>
+                <td>The property value.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Gets the property value from the first element or sets the property value on all elements of the currrent set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot;, &quot;dom/propFix.js&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.prop = function( name, val ){
+	/**
+	 * Gets the property value from the first element or sets the property value on all elements of the currrent set.
+   *
+	 * @param {string} name The property name.
+   * @param {any} value The property value.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.prop = function( name, value ){
 		if( !this[0] ){
 			return;
 		}
 
 		name = shoestring.propFix[ name ] || name;
 
-		if( val !== undefined ){
+		if( value !== undefined ){
 			return this.each(function(){
-				this[ name ] = val;
+				this[ name ] = value;
 			});
 		}	else {
 			return this[ 0 ][ name ];

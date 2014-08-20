@@ -115,6 +115,7 @@
             <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
             <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
             <li class="active"><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
             <li><a href="../dom/prev.js.html">dom/prev.js</a></li>
             <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
             <li><a href="../dom/prop.js.html">dom/prop.js</a></li>
@@ -147,36 +148,62 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#prepend"><i class="alert alert-info"></i><span>prepend</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="prepend">
+            <h1>prepend</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.prepend()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>fragment</td>
+                <td>string,HTMLElement</td>
+                <td>The HTML string or element to add.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Add an HTML string or element before the children of each element in the current set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.prepend = function( frag ){
-		if( typeof( frag ) === &quot;string&quot; || frag.nodeType !== undefined ){
-			frag = shoestring( frag );
+	/**
+	 * Add an HTML string or element before the children of each element in the current set.
+	 *
+	 * @param {string|HTMLElement} fragment The HTML string or element to add.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.prepend = function( fragment ){
+		if( typeof( fragment ) === &quot;string&quot; || fragment.nodeType !== undefined ){
+			fragment = shoestring( fragment );
 		}
 
 		return this.each(function( i ){
 
-			for( var j = 0, jl = frag.length; j &lt; jl; j++ ){
-				var insertEl = i &gt; 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
+			for( var j = 0, jl = fragment.length; j &lt; jl; j++ ){
+				var insertEl = i &gt; 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
 				if ( this.firstChild ){
 					this.insertBefore( insertEl, this.firstChild );
 				} else {
 					this.appendChild( insertEl );
 				}
 			}
-		});
-	};
-
-	shoestring.fn.prependTo = function( sel ){
-		return this.each(function(){
-			shoestring( sel ).prepend( this );
 		});
 	};
 

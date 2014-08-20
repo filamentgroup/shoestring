@@ -115,6 +115,7 @@
             <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
             <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
             <li><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
             <li><a href="../dom/prev.js.html">dom/prev.js</a></li>
             <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
             <li><a href="../dom/prop.js.html">dom/prop.js</a></li>
@@ -147,25 +148,58 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#replaceWith"><i class="alert alert-info"></i><span>replaceWith</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="replaceWith">
+            <h1>replaceWith</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.replaceWith()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>fragment</td>
+                <td>string,HTMLElement</td>
+                <td>The value to assign.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Replace each element in the current set with that argument HTML string or HTMLElement.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.replaceWith = function( frag ){
-		if( typeof( frag ) === &quot;string&quot; ){
-			frag = shoestring( frag );
+	/**
+	 * Replace each element in the current set with that argument HTML string or HTMLElement.
+	 *
+	 * @param {string|HTMLElement} fragment The value to assign.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.replaceWith = function( fragment ){
+		if( typeof( fragment ) === &quot;string&quot; ){
+			fragment = shoestring( fragment );
 		}
 
 		var ret = [];
 
 		this.each(function( i ){
-			for( var j = 0, jl = frag.length; j &lt; jl; j++ ){
-				var insertEl = i &gt; 0 ? frag[ j ].cloneNode( true ) : frag[ j ];
+			for( var j = 0, jl = fragment.length; j &lt; jl; j++ ){
+				var insertEl = i &gt; 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
+
 				this.parentNode.insertBefore( insertEl, this );
 				insertEl.parentNode.removeChild( this );
 				ret.push( insertEl );

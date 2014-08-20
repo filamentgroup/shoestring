@@ -115,6 +115,7 @@
             <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
             <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
             <li><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
             <li><a href="../dom/prev.js.html">dom/prev.js</a></li>
             <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
             <li><a href="../dom/prop.js.html">dom/prop.js</a></li>
@@ -147,18 +148,51 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#val"><i class="alert alert-info"></i><span>val</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="val">
+            <h1>val</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.val()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>value</td>
+                <td>string</td>
+                <td>The value to set.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Get the value of the first element or set the value of all elements in the current set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.val = function( val ){
+
+	/**
+	 * Get the value of the first element or set the value of all elements in the current set.
+	 *
+	 * @param {string} value The value to set.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.val = function( value ){
 		var el;
-		if( val !== undefined ){
+		if( value !== undefined ){
 			return this.each(function(){
 				if( this.tagName === &quot;SELECT&quot; ){
 					var optionSet, option,
@@ -167,7 +201,7 @@ define([ &quot;shoestring&quot; ], function(){
 						i = options.length,
 						newIndex;
 
-					values[0] = val;
+					values[0] = value;
 					while ( i-- ) {
 						option = options[ i ];
 						if ( (option.selected = shoestring.inArray( option.value, values ) &gt;= 0) ) {
@@ -182,11 +216,12 @@ define([ &quot;shoestring&quot; ], function(){
 						this.selectedIndex = newIndex;
 					}
 				} else {
-					this.value = val;
+					this.value = value;
 				}
 			});
 		} else {
 			el = this[0];
+
 			if( el.tagName === &quot;SELECT&quot; ){
 				return el.options[ el.selectedIndex ].value;
 			} else {

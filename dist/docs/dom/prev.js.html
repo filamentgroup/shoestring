@@ -115,6 +115,7 @@
             <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
             <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
             <li><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
             <li class="active"><a href="../dom/prev.js.html">dom/prev.js</a></li>
             <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
             <li><a href="../dom/prop.js.html">dom/prop.js</a></li>
@@ -147,15 +148,30 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#prev"><i class="alert alert-info"></i><span>prev</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="prev">
+            <h1>prev</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.prev()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <div class="description"><p>Returns a <code>shoestring</code> object with the set of <em>one</em> siblingx before each element in the original set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
+	/**
+	 * Returns a `shoestring` object with the set of *one* siblingx before each element in the original set.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.prev = function(){
 		//&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
 		if( arguments.length &gt; 0 ){
