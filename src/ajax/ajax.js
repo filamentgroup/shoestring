@@ -12,7 +12,7 @@ define([ "shoestring" ], function(){
 	};
 
 	/**
-	 * Make a request to the server.
+	 * Make an HTTP request to a url.
 	 *
 	 * **NOTE** the following options are supported:
 	 *
