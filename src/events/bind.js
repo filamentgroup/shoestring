@@ -147,10 +147,11 @@ define([ "shoestring", "dom/closest" ], function(){
 	shoestring.fn.live = function(){
 		shoestring.error( 'live-delegate' );
 	};
+
 	shoestring.fn.delegate = function(){
 		shoestring.error( 'live-delegate' );
 	};
-		//>>includeEnd("development");
+	//>>includeEnd("development");
 
 //>>excludeStart("exclude", pragmas.exclude);
 });
