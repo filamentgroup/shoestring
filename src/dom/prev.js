@@ -3,7 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	/**
-	 * Returns a `shoestring` object with the set of siblings before each element in the original set.
+	 * Returns a `shoestring` object with the set of *one* sibling before each element in the original set.
 	 *
 	 * @return shoestring
 	 * @this shoestring
