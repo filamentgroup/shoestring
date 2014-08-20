@@ -7,7 +7,7 @@ define([ "shoestring", "dom/propFix.js" ], function(){
    *
 	 * @param {string} name The property name.
    * @param {any} value The property value.
-	 * @return shoestring
+	 * @return {any|shoestring}
 	 * @this shoestring
 	 */
 	shoestring.fn.prop = function( name, value ){

@@ -7,7 +7,7 @@ define([ "shoestring" ], function(){
 	 *
 	 * @param {string} name The data attribute name.
 	 * @param {any} value The value assigned to the data attribute.
-	 * @return shoestring
+	 * @return {any|shoestring}
 	 * @this shoestring
 	 */
 	shoestring.fn.data = function( name, value ){
