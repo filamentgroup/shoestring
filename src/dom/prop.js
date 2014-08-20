@@ -2,16 +2,24 @@
 define([ "shoestring", "dom/propFix.js" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.prop = function( name, val ){
+	/**
+	 * Gets the property value from the first element or sets the property value on all elements of the currrent set.
+   *
+	 * @param {string} name The property name.
+   * @param {any} value The property value.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.prop = function( name, value ){
 		if( !this[0] ){
 			return;
 		}
 
 		name = shoestring.propFix[ name ] || name;
 
-		if( val !== undefined ){
+		if( value !== undefined ){
 			return this.each(function(){
-				this[ name ] = val;
+				this[ name ] = value;
 			});
 		}	else {
 			return this[ 0 ][ name ];

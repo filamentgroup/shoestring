@@ -23,6 +23,13 @@ define([ "shoestring" ], function(){
 
 	shoestring.inputTypeTest = new RegExp( shoestring.inputTypes.join( "|" ) );
 
+
+	/**
+	 * Serialize child input element values into an object.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.serialize = function(){
 		var data = {};
 

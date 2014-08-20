@@ -2,6 +2,12 @@
 define([ "shoestring", "dom/prev" ], function(){
 //>>excludeEnd("exclude");
 
+	/**
+	 * Returns a `shoestring` object with the set of *all* siblings before each element in the original set.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.prevAll = function(){
 		//>>includeStart("development", pragmas.development);
 		if( arguments.length > 0 ){

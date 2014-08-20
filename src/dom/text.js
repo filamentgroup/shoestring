@@ -33,6 +33,12 @@ define([ "shoestring" ], function(){
 		return ret;
 	};
 
+  /**
+	 * Recursively retrieve the text content of the each element in the current set.
+	 *
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.text = function() {
 		//>>includeStart("development", pragmas.development);
 		if( arguments.length > 0 ){
@@ -46,4 +52,3 @@ define([ "shoestring" ], function(){
 //>>excludeStart("exclude", pragmas.exclude);
 });
 //>>excludeEnd("exclude");
-

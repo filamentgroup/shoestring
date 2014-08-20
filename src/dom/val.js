@@ -2,9 +2,17 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.val = function( val ){
+
+	/**
+	 * Get the value of the first element or set the value of all elements in the current set.
+	 *
+	 * @param {string} value The value to set.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.val = function( value ){
 		var el;
-		if( val !== undefined ){
+		if( value !== undefined ){
 			return this.each(function(){
 				if( this.tagName === "SELECT" ){
 					var optionSet, option,
@@ -13,7 +21,7 @@ define([ "shoestring" ], function(){
 						i = options.length,
 						newIndex;
 
-					values[0] = val;
+					values[0] = value;
 					while ( i-- ) {
 						option = options[ i ];
 						if ( (option.selected = shoestring.inArray( option.value, values ) >= 0) ) {
@@ -28,11 +36,12 @@ define([ "shoestring" ], function(){
 						this.selectedIndex = newIndex;
 					}
 				} else {
-					this.value = val;
+					this.value = value;
 				}
 			});
 		} else {
 			el = this[0];
+
 			if( el.tagName === "SELECT" ){
 				return el.options[ el.selectedIndex ].value;
 			} else {
