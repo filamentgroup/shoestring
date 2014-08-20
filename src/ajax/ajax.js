@@ -11,13 +11,30 @@ define([ "shoestring" ], function(){
 		}
 	};
 
+	/**
+	 * Make a request to the server.
+	 *
+	 * **NOTE** the following options are supported:
+	 *
+	 * - *method* - The HTTP method used with the request. Default: `GET`.
+	 * - *data* - Raw object with keys and values to pass with request. Default `null`.
+	 * - *async* - Whether the opened request is asynchronouse. Default `true`.
+	 * - *success* - Callback for successful request and response. Passed the response data.
+	 * - *error* - Callback for failed request and response.
+	 * - *cancel* - Callback for cancelled request and response.
+	 *
+	 * @param {string} url The url to request.
+	 * @param {object} options The options object, see Notes above.
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.ajax = function( url, options ) {
-		var req = xmlHttp(),
-			settings = shoestring.extend( {}, shoestring.ajax.settings );
+		var req = xmlHttp(), settings = shoestrint.ajax.settings;
 
 		if( options ){
 			shoestring.extend( settings, options );
 		}
+
 		if( !url ){
 			url = settings.url;
 		}
