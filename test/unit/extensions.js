@@ -1155,6 +1155,26 @@
 
 	});
 
+	asyncTest( 'return false prevents propagation', function() {
+		expect( 1 ) ;
+
+		$fixture.one( "click", function() {
+			ok( true, "one runs" );
+
+			setTimeout(function() {
+				start();
+			});
+
+			return false;
+		});
+
+		$fixture.parent().one( "click", function() {
+			ok( false, "never runs" );
+		});
+
+		$fixture.trigger( "click" );
+	});
+
 	if( window.JSON && 'localStorage' in window ) {
 		module( "util", config );
 

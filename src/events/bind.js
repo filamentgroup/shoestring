@@ -40,13 +40,18 @@ define([ "shoestring", "dom/closest" ], function(){
 			};
 
 		function encasedCallback( e ){
+			var result;
+
 			e.data = data;
+
 			var returnTrue = function(){
 				return true;
 			};
+
 			e.isDefaultPrevented = function(){
 				return false;
 			};
+
 			var originalPreventDefault = e.preventDefault;
 			var preventDefaultConstructor = function(){
 				if( originalPreventDefault ) {
@@ -69,7 +74,14 @@ define([ "shoestring", "dom/closest" ], function(){
 				e.cancelBubble = true;
 			};
 
-			return originalCallback.apply(this, [ e ].concat( e._args ) );
+			result = originalCallback.apply(this, [ e ].concat( e._args ) );
+
+			if( result === false ){
+				e.preventDefault();
+				e.stopPropagation();
+			}
+
+			return result;
 		}
 
 		// This is exclusively for custom events on browsers without addEventListener (IE8)

@@ -18,7 +18,7 @@ define([ "shoestring", "events/bind", "events/unbind" ], function(){
 						$t.unbind( j, cbs[ j ] );
 					}
 
-					callback.apply( this, [ e ].concat( e._args ) );
+					return callback.apply( this, [ e ].concat( e._args ) );
 				};
 
 				$t.bind( thisevt, cbs[ thisevt ] );
