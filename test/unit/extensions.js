@@ -346,7 +346,12 @@
 		equal( $children.parent()[1],	 $parent[0] );
 
 		// default to document element
-		equal( $( "html" ).parent()[0], document.documentElement );
+		// NOTE: this behavior is to match the jQuery semantics
+		equal( $( "html" ).parent()[0], document );
+
+		$children.remove();
+
+		equal( $children.eq(0).parent().length, 0);
 	});
 
 	test( '`.parents()` ... with an s', function() {
