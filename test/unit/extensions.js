@@ -1167,6 +1167,14 @@
 		});
 	}
 
+	module( 'events', config );
+
+	test( "ajax doesn't override default options", function() {
+		equal( shoestring.ajax.settings.method, "GET" );
+		shoestring.ajax( "foo", { method: "FOO" } );
+		equal( shoestring.ajax.settings.method, "GET" );
+	});
+
 	// TODO test events + arguments on callbacks and trigger
 	// TODO unbind events by namespace only
 })();
