@@ -29,7 +29,7 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.ajax = function( url, options ) {
-		var req = xmlHttp(), settings = shoestring.ajax.settings;
+		var req = xmlHttp(), settings = shoestring.extend( {}, shoestring.ajax.settings );
 
 		if( options ){
 			shoestring.extend( settings, options );
