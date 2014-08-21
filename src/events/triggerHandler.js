@@ -16,7 +16,9 @@ define([ "shoestring" ], function(){
 					var event = document.createEvent( "Event" );
 					event.initEvent( e, true, true );
 					event._args = args;
-					ret = bindings[ i ]( event );
+					args.unshift( event );
+
+					ret = bindings[ i ].originalCallback.apply( event.target, args );
 				}
 			}
 		}
