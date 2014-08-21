@@ -49,6 +49,25 @@
 		});
 	});
 
+	test( '`.after()` inserts siblings after the current obj element in the correct order', function(){
+		expect( 6 );
+		var $element = $fixture.find( '.after' );
+
+		equal( $fixture.find( '.foo-after' ).length, 0 );
+		equal( $fixture.find( '.foo-after2' ).length, 0 );
+		$element.after( "<div class='foo-after'></div><div class='foo-after2'></div> ");
+		equal( $fixture.find( '.foo-after' ).length, 1 );
+		equal( $fixture.find( '.foo-after2' ).length, 1 );
+
+		// sibling to .foo-after
+		$fixture.children().each(function(i) {
+			if( shoestring( this ).is( '.after' ) ){
+				equal( $fixture.children()[i+1].className, "foo-after" );
+				equal( $fixture.children()[i+2].className, "foo-after2" );
+			}
+		});
+	});
+
 	test( '`.insertAfter()` inserts after the selector', function(){
 		expect( 3 );
 
