@@ -17,12 +17,12 @@ define([ "shoestring" ], function(){
 		var ret = [];
 
 		this.each(function( i ){
+			var clone = this.cloneNode( true );
 			for( var j = 0, jl = fragment.length; j < jl; j++ ){
 				var insertEl = i > 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
-
 				this.parentNode.replaceChild( insertEl, this );
-				ret.push( insertEl );
 			}
+			ret.push( clone );
 		});
 
 		return shoestring( ret );

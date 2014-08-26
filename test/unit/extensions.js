@@ -505,10 +505,11 @@
 
 		equal( $fixture.find( ".replace-with" ).length, 1 );
 
-		$replaceWith.replaceWith( "<div class='replacement'></div>" );
+		var old = $replaceWith.replaceWith( "<div class='replacement'></div>" );
 
 		equal( $fixture.find( ".replace-with" ).length, 0 );
 		equal( $fixture.find( ".replacement" ).length, 1 );
+		ok( old[0].className === "replace-with", "Returned element should be the original element copied" );
 	});
 
   // TODO make this suck less
