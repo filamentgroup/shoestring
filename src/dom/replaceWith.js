@@ -22,6 +22,10 @@ define([ "shoestring" ], function(){
 		this.each(function( i ){
 			var clone = this.cloneNode( true ),
 				insertEl;
+			ret.push( clone );
+
+			// If there is no parentNode, this is pointless, drop it.
+			if( !this.parentNode ){ return; }
 
 			if( fragment.length === 1 ){
 				insertEl = i > 0 ? fragment[ 0 ].cloneNode( true ) : fragment[ 0 ];
@@ -33,7 +37,6 @@ define([ "shoestring" ], function(){
 				}
 				this.parentNode.removeChild( this );
 			}
-			ret.push( clone );
 		});
 
 		return shoestring( ret );

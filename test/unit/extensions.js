@@ -531,6 +531,18 @@
 		});
 	});
 
+	test( '`.replaceWith()` with no dom piece/missing parentNode', function() {
+		var $replaceWith = $( "<div class='replace-missing'></div>" );
+
+		equal( $replaceWith.length, 1 );
+
+		var old = $replaceWith.replaceWith( "<div class='replace-it'></div>" );
+
+		equal( $fixture.find( ".replace-it" ).length, 0 );
+		ok( old[0].className === "replace-missing", "Returned element should be the original element copied" );
+
+	});
+
   // TODO make this suck less
 	test( '`.serialize()`', function() {
 		var data, input, type, $serialize = $fixture.find( ".serialize" );
