@@ -505,10 +505,42 @@
 
 		equal( $fixture.find( ".replace-with" ).length, 1 );
 
-		$replaceWith.replaceWith( "<div class='relacement'></div>" );
+		var old = $replaceWith.replaceWith( "<div class='replacement'></div>" );
 
 		equal( $fixture.find( ".replace-with" ).length, 0 );
-		equal( $fixture.find( ".replacement" ).length, 0 );
+		equal( $fixture.find( ".replacement" ).length, 1 );
+		ok( old[0].className === "replace-with", "Returned element should be the original element copied" );
+	});
+
+	test( '`.replaceWith()` with multiple pieces', function() {
+		var $replaceWith = $fixture.find( ".replace-with-multiple" );
+
+		equal( $fixture.find( ".replace-with-multiple" ).length, 1 );
+
+		var old = $replaceWith.replaceWith( "<div class='replacement1'></div><div class='replacement2'></div>" );
+
+		equal( $fixture.find( ".replace-with-multiple" ).length, 0 );
+		equal( $fixture.find( ".replacement1" ).length, 1 );
+		equal( $fixture.find( ".replacement2" ).length, 1 );
+		ok( old[0].className === "replace-with-multiple", "Returned element should be the original element copied" );
+
+		$fixture.children().each(function(i) {
+			if( shoestring( this ).is( '.replacement1' ) ){
+				equal( $fixture.children()[i+1].className, "replacement2", "Elements should be in order" );
+			}
+		});
+	});
+
+	test( '`.replaceWith()` with no dom piece/missing parentNode', function() {
+		var $replaceWith = $( "<div class='replace-missing'></div>" );
+
+		equal( $replaceWith.length, 1 );
+
+		var old = $replaceWith.replaceWith( "<div class='replace-it'></div>" );
+
+		equal( $fixture.find( ".replace-it" ).length, 0 );
+		ok( old[0].className === "replace-missing", "Returned element should be the original element copied" );
+
 	});
 
   // TODO make this suck less

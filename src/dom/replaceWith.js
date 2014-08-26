@@ -16,13 +16,26 @@ define([ "shoestring" ], function(){
 
 		var ret = [];
 
+		if( fragment.length > 1 ){
+			fragment = fragment.reverse();
+		}
 		this.each(function( i ){
-			for( var j = 0, jl = fragment.length; j < jl; j++ ){
-				var insertEl = i > 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
+			var clone = this.cloneNode( true ),
+				insertEl;
+			ret.push( clone );
 
-				this.parentNode.insertBefore( insertEl, this );
-				insertEl.parentNode.removeChild( this );
-				ret.push( insertEl );
+			// If there is no parentNode, this is pointless, drop it.
+			if( !this.parentNode ){ return; }
+
+			if( fragment.length === 1 ){
+				insertEl = i > 0 ? fragment[ 0 ].cloneNode( true ) : fragment[ 0 ];
+				this.parentNode.replaceChild( insertEl, this );
+			} else {
+				for( var j = 0, jl = fragment.length; j < jl; j++ ){
+					insertEl = i > 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
+					this.parentNode.insertBefore( insertEl, this.nextSibling );
+				}
+				this.parentNode.removeChild( this );
 			}
 		});
 
