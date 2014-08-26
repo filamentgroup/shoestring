@@ -505,10 +505,10 @@
 
 		equal( $fixture.find( ".replace-with" ).length, 1 );
 
-		$replaceWith.replaceWith( "<div class='relacement'></div>" );
+		$replaceWith.replaceWith( "<div class='replacement'></div>" );
 
 		equal( $fixture.find( ".replace-with" ).length, 0 );
-		equal( $fixture.find( ".replacement" ).length, 0 );
+		equal( $fixture.find( ".replacement" ).length, 1 );
 	});
 
   // TODO make this suck less
