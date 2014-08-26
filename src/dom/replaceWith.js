@@ -20,8 +20,7 @@ define([ "shoestring" ], function(){
 			for( var j = 0, jl = fragment.length; j < jl; j++ ){
 				var insertEl = i > 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];
 
-				this.parentNode.insertBefore( insertEl, this );
-				insertEl.parentNode.removeChild( this );
+				this.parentNode.replaceChild( insertEl, this );
 				ret.push( insertEl );
 			}
 		});
