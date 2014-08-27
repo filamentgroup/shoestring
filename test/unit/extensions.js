@@ -1209,6 +1209,84 @@
 		$( "#child" ).trigger( "click" );
 	});
 
+	asyncTest( 'Namespaced Custom Event: namespaced bind, namespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "customEvent.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( e.namespace, 'namespace property should exist.' );
+		})
+		.trigger( "customEvent.myNamespace" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'Namespaced Custom Event: namespaced bind, unnamespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "customEvent.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( !e.namespace, 'namespace property should not exist.' );
+		})
+		.trigger( "customEvent" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'Namespaced DOM Event: namespaced bind, namespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( e.namespace, 'namespace property should exist.' );
+		})
+		.trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'Namespaced DOM Event: namespaced bind, unnamespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el2"></div>' );
+
+		$( "#el2" ).bind( "click.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( !e.namespace, 'namespace property should not exist.' );
+		})
+		.trigger( "click" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'unnamespaced bind, namespaced trigger', function() {
+		expect( 0 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", function( e ) {
+			ok( true, 'event callback should not execute.' );
+		}).trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
 	if( window.JSON && 'localStorage' in window ) {
 		module( "util", config );
 
@@ -1226,7 +1304,7 @@
 		});
 	}
 
-	module( 'events', config );
+	module( 'ajax', config );
 
 	test( "ajax doesn't override default options", function() {
 		equal( shoestring.ajax.settings.method, "GET" );
