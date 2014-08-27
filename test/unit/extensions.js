@@ -1190,7 +1190,9 @@
 	asyncTest( 'return false prevents propagation', function() {
 		expect( 1 ) ;
 
-		$fixture.one( "click", function() {
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( "#child" ).one( "click", function() {
 			ok( true, "one runs" );
 
 			setTimeout(function() {
@@ -1200,11 +1202,11 @@
 			return false;
 		});
 
-		$fixture.parent().one( "click", function() {
+		$( "#parent" ).one( "click", function() {
 			ok( false, "never runs" );
 		});
 
-		$fixture.trigger( "click" );
+		$( "#child" ).trigger( "click" );
 	});
 
 	if( window.JSON && 'localStorage' in window ) {
