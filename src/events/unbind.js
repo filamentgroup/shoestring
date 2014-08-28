@@ -2,41 +2,61 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.unbind = function( evt, callback ){
-		var evts = evt.split( " " ),
-			docEl = document.documentElement;
+	function unbind( evt, namespace, callback ) {
+		var bound = this.shoestringData.events[ evt ];
+		if( !bound.length ) {
+			return;
+		}
+
+		for( var j = 0, jl = bound.length; j < jl; j++ ) {
+			if( !namespace || namespace === bound[ j ].namespace ) {
+				if( "removeEventListener" in window ){
+					if( callback === undefined ) {
+						this.removeEventListener( evt, bound[ j ].callback, false );
+					} else if( callback === bound[ j ].originalCallback ) {
+						this.removeEventListener( evt, bound[ j ].callback, false );
+					}
+				} else if( this.detachEvent ){
+					if( callback === undefined ) {
+						this.detachEvent( "on" + evt, bound[ j ].callback );
+						// custom event
+						document.documentElement.detachEvent( "onpropertychange", bound[ j ].callback );
+					} else if( callback === bound[ j ].originalCallback ) {
+						this.detachEvent( "on" + evt, bound[ j ].callback );
+						// custom event
+						document.documentElement.detachEvent( "onpropertychange", bound[ j ].callback );
+					}
+				}
+			}
+		}
+	}
+
+	function unbindAll( namespace, callback ) {
+		for( var evtKey in this.shoestringData.events ) {
+			unbind.call( this, evtKey, namespace, callback );
+		}
+	}
+
+	shoestring.fn.unbind = function( str, callback ){
+		var evts = str ? str.split( " " ) : [];
 		return this.each(function(){
 			if( !this.shoestringData || !this.shoestringData.events ) {
 				return;
 			}
 
-			for( var i = 0, il = evts.length; i < il; i++ ){
-				//>>includeStart("development", pragmas.development);
-				if( evts[ i ].indexOf( "." ) === 0 ) {
-					shoestring.error( 'event-namespaces' );
-				}
-				//>>includeEnd("development");
+			if( !evts.length ) {
+				unbindAll.call( this );
+			} else {
+				var split, evt, namespace;
+				for( var i = 0, il = evts.length; i < il; i++ ){
+					split = evts[ i ].split( "." ),
+					evt = split[ 0 ],
+					namespace = split.length > 0 ? split[ 1 ] : null;
 
-				var bound = this.shoestringData.events[ evts[ i ] ];
-				if( bound ) {
-					for( var j = 0, jl = bound.length; j < jl; j++ ) {
-						if( "removeEventListener" in window ){
-							if( callback === undefined ) {
-								this.removeEventListener( evts[ i ], bound[ j ].callback, false );
-							} else if( callback === bound[ j ].originalCallback ) {
-								this.removeEventListener( evts[ i ], bound[ j ].callback, false );
-							}
-						} else if( this.detachEvent ){
-							if( callback === undefined ) {
-								this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
-								// custom event
-								docEl.detachEvent( "onpropertychange", bound[ j ].callback );
-							} else if( callback === bound[ j ].originalCallback ) {
-								this.detachEvent( "on" + evts[ i ], bound[ j ].callback );
-								// custom event
-								docEl.detachEvent( "onpropertychange", bound[ j ].callback );
-							}
-						}
+					if( evt ) {
+						unbind.call( this, evt, namespace, callback );
+					} else {
+						unbindAll.call( this, namespace, callback );
 					}
 				}
 			}

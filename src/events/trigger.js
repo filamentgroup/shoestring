@@ -6,19 +6,30 @@ define([ "shoestring" ], function(){
 		var evts = evt.split( " " );
 
 		return this.each(function(){
+			var split, evt, namespace;
 			for( var i = 0, il = evts.length; i < il; i++ ){
+				split = evts[ i ].split( "." ),
+				evt = split[ 0 ],
+				namespace = split.length > 0 ? split[ 1 ] : null;
+
 				if( document.createEvent ){
 					var event = document.createEvent( "Event" );
-					event.initEvent( evts[ i ], true, true );
+					event.initEvent( evt, true, true );
 					event._args = args;
+					event._namespace = namespace;
 
 					this.dispatchEvent( event );
 				} else if ( document.createEventObject ) {
-					if( ( "" + this[ evts[ i ] ] ).indexOf( "function" ) > -1 ) {
-						this[ evts[ i ] ]();
+					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
+						this.ssEventTrigger = {
+							_namespace: namespace,
+							_args: args
+						};
+						this[ evt ]();
 					} else {
-						document.documentElement[ evts[ i ] ] = {
+						document.documentElement[ evt ] = {
 							"el": this,
+							_namespace: namespace,
 							_args: args
 						};
 					}

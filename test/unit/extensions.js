@@ -671,6 +671,28 @@
 		}).trigger( "click" );
 	});
 
+	asyncTest( 'DOM Event `.bind()` and `.trigger()` with arguments', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", function( e, myArgument ) {
+			equal( myArgument, "Argument", 'a custom argument should exist.' );
+			start();
+		}).trigger( "click", [ "Argument" ] );
+	});
+
+	asyncTest( 'Custom Event `.bind()` and `.trigger()` with arguments', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "myCustomEvent", function( e, myArgument ) {
+			equal( myArgument, "Argument", 'a custom argument should exist.' );
+			start();
+		}).trigger( "myCustomEvent", [ "Argument" ] );
+	});
+
 	asyncTest( '`.bind()` and `.trigger()` with data', function() {
 		expect( 2 );
 
@@ -895,7 +917,7 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind()`', function() {
+	asyncTest( '`.unbind("click", function)`', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -915,7 +937,7 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind() multiple dom events`', function() {
+	asyncTest( '`.unbind("mouseup mousedown", function) multiple dom events`', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -936,7 +958,7 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind() multiple custom events`', function() {
+	asyncTest( '`.unbind("aCustomEvent anotherCustomEvent", function)`', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -957,7 +979,7 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind()` without callback', function() {
+	asyncTest( '`.unbind("click")`', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -977,7 +999,7 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind()` custom event', function() {
+	asyncTest( '`.unbind("aCustomEvent", function)`', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -997,7 +1019,7 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind()` without callback, custom event', function() {
+	asyncTest( '`.unbind("aCustomEvent")`', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -1017,7 +1039,27 @@
 		}, 30);
 	});
 
-	asyncTest( '`.unbind()` in a `.bind()` callback', function() {
+	asyncTest( '`.unbind()` all', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "aCustomEvent", f )
+			.trigger( "aCustomEvent" )
+			.unbind()
+			.trigger( "aCustomEvent" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`.unbind("aCustomEvent", function)` in a `.bind()` callback', function() {
 		expect( 1 );
 		var counter = 0;
 
@@ -1209,6 +1251,264 @@
 		$( "#child" ).trigger( "click" );
 	});
 
+	asyncTest( 'Custom Events: namespaced bind, namespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "customEvent.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( e.namespace, 'namespace property should exist.' );
+		})
+		.trigger( "customEvent.myNamespace" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'Custom Events: namespaced bind, unnamespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "customEvent.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( !e.namespace, 'namespace property should not exist.' );
+		})
+		.trigger( "customEvent" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'DOM Events: namespaced bind, namespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( e.namespace, 'namespace property should exist.' );
+		})
+		.trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'DOM Events: namespaced bind, unnamespaced trigger', function() {
+		expect( 2 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el2"></div>' );
+
+		$( "#el2" ).bind( "click.myNamespace", function( e ) {
+			ok( true, 'event callback should execute.' );
+			ok( !e.namespace, 'namespace property should not exist.' );
+		})
+		.trigger( "click" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( 'DOM Events: unnamespaced bind, namespaced trigger', function() {
+		expect( 0 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", function( e ) {
+			ok( true, 'event callback should not execute.' );
+		}).trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustomEvent.myNamespace")`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "myCustomEvent.myNamespace", f )
+			.trigger( "myCustomEvent.myNamespace" )
+			.unbind( "myCustomEvent.myNamespace" )
+			.trigger( "myCustomEvent.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustomEvent.myNamespace", function)`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "myCustomEvent.myNamespace", f )
+			.trigger( "myCustomEvent.myNamespace" )
+			.unbind( "myCustomEvent.myNamespace", f )
+			.trigger( "myCustomEvent.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustomEvent")`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "myCustomEvent.myNamespace", f )
+			.trigger( "myCustomEvent.myNamespace" )
+			.unbind( "myCustomEvent" )
+			.trigger( "myCustomEvent.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`Custom Events: .bind("myCustomEvent") .unbind("myCustomEvent.myNamespace", function)`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "myCustomEvent", f )
+			.trigger( "myCustomEvent" )
+			.unbind( "myCustomEvent.myNamespace", f )
+			.trigger( "myCustomEvent" );
+
+		setTimeout(function() {
+			equal( counter, 2, "callback should fire twice. unbind should have not matched anything." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`DOM Events: .bind("click.myNamespace") .unbind("click.myNamespace")`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "click.myNamespace", f )
+			.trigger( "click.myNamespace" )
+			.unbind( "click.myNamespace" )
+			.trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`DOM Events: .bind("click.myNamespace") .unbind("click.myNamespace", function)`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "click.myNamespace", f )
+			.trigger( "click.myNamespace" )
+			.unbind( "click.myNamespace", f )
+			.trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`DOM Events: .bind("click.myNamespace") .unbind("click")`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "click.myNamespace", f )
+			.trigger( "click.myNamespace" )
+			.unbind( "click" )
+			.trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should have fired once." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`DOM Events: .bind("click") .unbind("click.myNamespace", function)`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "click", f )
+			.trigger( "click" )
+			.unbind( "click.myNamespace", f )
+			.trigger( "click" );
+
+		setTimeout(function() {
+			equal( counter, 2, "callback should fire twice. unbind should have not matched anything." );
+			start();
+		}, 30);
+	});
+
+	asyncTest( '`DOM Events: .unbind(".myNamespace")`', function() {
+		expect( 1 );
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		var f = function() {
+			counter++;
+		};
+
+		$( "#el" ).bind( "click.myNamespace", f )
+			.trigger( "click.myNamespace" )
+			.unbind( ".myNamespace", f )
+			.trigger( "click.myNamespace" );
+
+		setTimeout(function() {
+			equal( counter, 1, "callback should fire once." );
+			start();
+		}, 30);
+	});
+
 	if( window.JSON && 'localStorage' in window ) {
 		module( "util", config );
 
@@ -1226,7 +1526,7 @@
 		});
 	}
 
-	module( 'events', config );
+	module( 'ajax', config );
 
 	test( "ajax doesn't override default options", function() {
 		equal( shoestring.ajax.settings.method, "GET" );
@@ -1235,5 +1535,4 @@
 	});
 
 	// TODO test events + arguments on callbacks and trigger
-	// TODO unbind events by namespace only
 })();
