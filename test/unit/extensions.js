@@ -671,6 +671,28 @@
 		}).trigger( "click" );
 	});
 
+	asyncTest( 'DOM Event `.bind()` and `.trigger()` with arguments', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "click", function( e, myArgument ) {
+			equal( myArgument, "Argument", 'a custom argument should exist.' );
+			start();
+		}).trigger( "click", [ "Argument" ] );
+	});
+
+	asyncTest( 'Custom Event `.bind()` and `.trigger()` with arguments', function() {
+		expect( 1 );
+
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+
+		$( "#el" ).bind( "myCustomEvent", function( e, myArgument ) {
+			equal( myArgument, "Argument", 'a custom argument should exist.' );
+			start();
+		}).trigger( "myCustomEvent", [ "Argument" ] );
+	});
+
 	asyncTest( '`.bind()` and `.trigger()` with data', function() {
 		expect( 2 );
 

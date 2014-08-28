@@ -92,9 +92,12 @@ define([ "shoestring", "dom/closest" ], function(){
 
 		// This is exclusively for custom events on browsers without addEventListener (IE8)
 		function propChange( originalEvent, boundElement, namespace ) {
-			var triggeredElement = document.documentElement[ originalEvent.propertyName ].el;
+			var lastEventInfo = document.documentElement[ originalEvent.propertyName ],
+				triggeredElement = lastEventInfo.el;
 
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
+				originalEvent._namespace = lastEventInfo._namespace;
+				originalEvent._args = lastEventInfo._args;
 				encasedCallback.call( triggeredElement, originalEvent, namespace );
 			}
 		}
@@ -128,6 +131,12 @@ define([ "shoestring", "dom/closest" ], function(){
 					namespace = split.length > 0 ? split[ 1 ] : null;
 
 				domEventCallback = function( originalEvent ) {
+					if( oEl.ssEventTrigger ) {
+						originalEvent._namespace = oEl.ssEventTrigger._namespace;
+						originalEvent._args = oEl.ssEventTrigger._args;
+
+						oEl.ssEventTrigger = null;
+					}
 					return encasedCallback.call( oEl, originalEvent, namespace );
 				};
 				customEventCallback = null;

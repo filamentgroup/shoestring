@@ -21,6 +21,10 @@ define([ "shoestring" ], function(){
 					this.dispatchEvent( event );
 				} else if ( document.createEventObject ) {
 					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
+						this.ssEventTrigger = {
+							_namespace: namespace,
+							_args: args
+						};
 						this[ evt ]();
 					} else {
 						document.documentElement[ evt ] = {
