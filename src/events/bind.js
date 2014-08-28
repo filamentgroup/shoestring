@@ -150,7 +150,7 @@ define([ "shoestring", "dom/closest" ], function(){
 					}
 				}
 
-				addToEventCache( this, evts[ i ], {
+				addToEventCache( this, evt, {
 					callfunc: domEventCallback || encasedCallback,
 					customCallfunc: customEventCallback,
 					originalCallback: originalCallback,
