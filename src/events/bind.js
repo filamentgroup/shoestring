@@ -105,8 +105,8 @@ define([ "shoestring", "dom/closest" ], function(){
 		// In IE8 the events trigger in a reverse order. This code unbinds and
 		// rebinds all callbacks on an element in the correct order.
 		function reorderEvents( eventName ) {
-			if( !this.attachEvent ) {
-				// do nothing
+			if( this.addEventListener ) {
+				// add event listner obviates the need for all the callback order juggling
 				return;
 			} else if( this.shoestringData && this.shoestringData.events ) {
 				var otherEvents = this.shoestringData.events[ eventName ];
