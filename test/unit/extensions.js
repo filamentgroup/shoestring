@@ -303,6 +303,10 @@
 		equal( $second.index(), 1 );
 	});
 
+	test('empty set `.index()`', function() {
+		equal( $( ".this-set-will-be-empty" ).index(), -1 );
+	});
+
 	test('`.is()`', function() {
 		ok( $fixture.is("#qunit-fixture") );
 		ok( !$fixture.is(".jacky-jormp-jomp") );
