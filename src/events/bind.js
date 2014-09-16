@@ -98,7 +98,7 @@ define([ "shoestring", "dom/closest" ], function(){
 			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
 				originalEvent._namespace = lastEventInfo._namespace;
 				originalEvent._args = lastEventInfo._args;
-				encasedCallback.call( triggeredElement, originalEvent, namespace );
+				encasedCallback.call( boundElement, originalEvent, namespace );
 			}
 		}
 
