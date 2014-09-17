@@ -159,19 +159,32 @@ define([ &quot;shoestring&quot; ], function(){
 
 	shoestring.fn.trigger = function( evt, args ){
 		var evts = evt.split( &quot; &quot; );
+
 		return this.each(function(){
+			var split, evt, namespace;
 			for( var i = 0, il = evts.length; i &lt; il; i++ ){
+				split = evts[ i ].split( &quot;.&quot; ),
+				evt = split[ 0 ],
+				namespace = split.length &gt; 0 ? split[ 1 ] : null;
+
 				if( document.createEvent ){
 					var event = document.createEvent( &quot;Event&quot; );
-					event.initEvent( evts[ i ], true, true );
+					event.initEvent( evt, true, true );
 					event._args = args;
+					event._namespace = namespace;
+
 					this.dispatchEvent( event );
 				} else if ( document.createEventObject ) {
-					if( ( &quot;&quot; + this[ evts[ i ] ] ).indexOf( &quot;function&quot; ) &gt; -1 ) {
-						this[ evts[ i ] ]();
+					if( ( &quot;&quot; + this[ evt ] ).indexOf( &quot;function&quot; ) &gt; -1 ) {
+						this.ssEventTrigger = {
+							_namespace: namespace,
+							_args: args
+						};
+						this[ evt ]();
 					} else {
-						document.documentElement[ evts[ i ] ] = {
+						document.documentElement[ evt ] = {
 							&quot;el&quot;: this,
+							_namespace: namespace,
 							_args: args
 						};
 					}

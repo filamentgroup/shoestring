@@ -172,20 +172,21 @@
             <tbody>
               <tr>
                 <td>selector</td>
-                <td>string</td>
-                <td>The selector used to filter the elements.</td>
+                <td>string,function</td>
+                <td>The selector or boolean return value callback used to filter the elements.</td>
               </tr>
             </tbody>
           </table>
-          <div class="description"><p>Filter out the current set if they do <em>not</em> match the passed selector.</p> </div>
+          <div class="description"><p>Filter out the current set if they do <em>not</em> match the passed selector or<br />the supplied callback returns false</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
 	/**
-	 * Filter out the current set if they do *not* match the passed selector.
+	 * Filter out the current set if they do *not* match the passed selector or
+	 * the supplied callback returns false
 	 *
-	 * @param {string} selector The selector used to filter the elements.
+	 * @param {string,function} selector The selector or boolean return value callback used to filter the elements.
 	 * @return shoestring
 	 * @this shoestring
 	 */

@@ -158,7 +158,7 @@
             <h1>css</h1>
             <h5 class="subheader"></h5>
             <p>
-              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.css()</span>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.css()</span>→<span>string shoestring</span>
             </p>
           </section>
           <table class="table table-bordered table-striped">
@@ -198,6 +198,8 @@ define([
 	 * @method _setStyle
 	 * @param {string} property The property being used to style the element.
 	 * @param {string|undefined} value The css value for the style property.
+	 * @return {string|shoestring}
+	 * @this shoestring
 	 */
 	shoestring.fn.css = function( property, value ){
 		if( !this[0] ){

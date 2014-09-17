@@ -148,11 +148,49 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#ajax"><i class="alert alert-info"></i><span>ajax</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="ajax">
+            <h1>ajax</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.ajax()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>url</td>
+                <td>string</td>
+                <td>The url to request.</td>
+              </tr>
+              <tr>
+                <td>options</td>
+                <td>object</td>
+                <td>The options object, see Notes.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Make an HTTP request to a url.</p><p><strong>NOTE</strong> the following options are supported:</p><ul>
+<li><em>method</em> - The HTTP method used with the request. Default: <code>GET</code>.</li>
+<li><em>data</em> - Raw object with keys and values to pass with request. Default <code>null</code>.</li>
+<li><em>async</em> - Whether the opened request is asynchronouse. Default <code>true</code>.</li>
+<li><em>success</em> - Callback for successful request and response. Passed the response data.</li>
+<li><em>error</em> - Callback for failed request and response.</li>
+<li><em>cancel</em> - Callback for cancelled request and response.</li>
+</ul>
+ </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
@@ -166,13 +204,30 @@ define([ &quot;shoestring&quot; ], function(){
 		}
 	};
 
+	/**
+	 * Make an HTTP request to a url.
+	 *
+	 * **NOTE** the following options are supported:
+	 *
+	 * - *method* - The HTTP method used with the request. Default: `GET`.
+	 * - *data* - Raw object with keys and values to pass with request. Default `null`.
+	 * - *async* - Whether the opened request is asynchronouse. Default `true`.
+	 * - *success* - Callback for successful request and response. Passed the response data.
+	 * - *error* - Callback for failed request and response.
+	 * - *cancel* - Callback for cancelled request and response.
+	 *
+	 * @param {string} url The url to request.
+	 * @param {object} options The options object, see Notes.
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.ajax = function( url, options ) {
-		var req = xmlHttp(),
-			settings = shoestring.extend( {}, shoestring.ajax.settings );
+		var req = xmlHttp(), settings = shoestring.extend( {}, shoestring.ajax.settings );
 
 		if( options ){
 			shoestring.extend( settings, options );
 		}
+
 		if( !url ){
 			url = settings.url;
 		}

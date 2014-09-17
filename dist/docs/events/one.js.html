@@ -173,7 +173,7 @@ define([ &quot;shoestring&quot;, &quot;events/bind&quot;, &quot;events/unbind&qu
 						$t.unbind( j, cbs[ j ] );
 					}
 
-					callback.apply( this, [ e ].concat( e._args ) );
+					return callback.apply( this, [ e ].concat( e._args ) );
 				};
 
 				$t.bind( thisevt, cbs[ thisevt ] );

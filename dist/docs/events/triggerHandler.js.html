@@ -171,7 +171,9 @@ define([ &quot;shoestring&quot; ], function(){
 					var event = document.createEvent( &quot;Event&quot; );
 					event.initEvent( e, true, true );
 					event._args = args;
-					ret = bindings[ i ]( event );
+					args.unshift( event );
+
+					ret = bindings[ i ].originalCallback.apply( event.target, args );
 				}
 			}
 		}

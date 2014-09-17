@@ -148,38 +148,76 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#data"><i class="alert alert-info"></i><span>data</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
-          <pre><code class="language-javascript">// Extensions
-
-// keep this wrapper around the ones you use!
-//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
+          <section id="data">
+            <h1>data</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.data()</span>→<span>any shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>The data attribute name.</td>
+              </tr>
+              <tr>
+                <td>value</td>
+                <td>any</td>
+                <td>The value assigned to the data attribute.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Get data attached to the first element or set data values on all elements in the current set.</p> </div>
+          <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
-	shoestring.fn.data = function( name, val ){
+
+	/**
+	 * Get data attached to the first element or set data values on all elements in the current set.
+	 *
+	 * @param {string} name The data attribute name.
+	 * @param {any} value The value assigned to the data attribute.
+	 * @return {any|shoestring}
+	 * @this shoestring
+	 */
+	shoestring.fn.data = function( name, value ){
 		if( name !== undefined ){
-			if( val !== undefined ){
+			if( value !== undefined ){
 				return this.each(function(){
 					if( !this.shoestringData ){
 						this.shoestringData = {};
 					}
-					this.shoestringData[ name ] = val;
+
+					this.shoestringData[ name ] = value;
 				});
 			}
 			else {
-				return this.length &amp;&amp; this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
+				return this[ 0 ] &amp;&amp; this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
 			}
 		}
 		else {
-			return this.length ? this[ 0 ].shoestringData || {} : undefined;
+			return this[ 0 ] ? this[ 0 ].shoestringData || {} : undefined;
 		}
 	};
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });
-//&gt;&gt;excludeEnd(&quot;exclude&quot;);</code></pre>
+//&gt;&gt;excludeEnd(&quot;exclude&quot;);
+</code></pre>
         </div>
       </div>
     </div>

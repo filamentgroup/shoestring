@@ -194,6 +194,9 @@ define([ &quot;shoestring&quot; ], function(){
 			fragment = shoestring( fragment );
 		}
 
+		if( fragment.length &gt; 1 ){
+			fragment = fragment.reverse();
+		}
 		return this.each(function( i ){
 			for( var j = 0, jl = fragment.length; j &lt; jl; j++ ){
 				var insertEl = i &gt; 0 ? fragment[ j ].cloneNode( true ) : fragment[ j ];

@@ -148,22 +148,53 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#removeData"><i class="alert alert-info"></i><span>removeData</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="removeData">
+            <h1>removeData</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.removeData()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>name</td>
+                <td>string</td>
+                <td>The data attribute name.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Remove data associated with <code>name</code> or all the data, for each element in the current set.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
+	/**
+	 * Remove data associated with `name` or all the data, for each element in the current set.
+	 *
+	 * @param {string} name The data attribute name.
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.removeData = function( name ){
 		return this.each(function(){
 			if( name !== undefined &amp;&amp; this.shoestringData ){
 				this.shoestringData[ name ] = undefined;
 				delete this.shoestringData[ name ];
-			}
-			else {
+			}	else {
 				this[ 0 ].shoestringData = {};
 			}
 		});
