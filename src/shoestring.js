@@ -193,12 +193,11 @@
 		};
 	}
 
-	// DOM ready
-	// If DOM is already ready at exec time
-	if( doc.readyState === "complete" || doc.readyState === "interactive" ){
+	// If DOM is already ready at exec time, depends on the browser.
+	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
+	if (document.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
-	}
-	else {
+	}	else {
 		if( !w.document.addEventListener ){
 			w.document.attachEvent( "DOMContentLoaded", runReady );
 			w.document.attachEvent( "onreadystatechange", runReady );

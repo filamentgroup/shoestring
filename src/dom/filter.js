@@ -3,9 +3,10 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	/**
-	 * Filter out the current set if they do *not* match the passed selector.
+	 * Filter out the current set if they do *not* match the passed selector or
+	 * the supplied callback returns false
 	 *
-	 * @param {string} selector The selector used to filter the elements.
+	 * @param {string,function} selector The selector or boolean return value callback used to filter the elements.
 	 * @return shoestring
 	 * @this shoestring
 	 */

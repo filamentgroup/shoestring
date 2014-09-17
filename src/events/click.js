@@ -2,7 +2,7 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-		//>>includeStart("development", pragmas.development);
+	//>>includeStart("development", pragmas.development);
 	shoestring.fn.click = function(){
 		shoestring.error( 'click' );
 	};

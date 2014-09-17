@@ -36,6 +36,7 @@ require([
 	"dom/parent",
 	"dom/parents",
 	"dom/prepend",
+	"dom/prependTo",
 	"dom/prevAll",
 	"dom/prev",
 	"dom/prop",

@@ -13,6 +13,8 @@ define([
 	 * @method _setStyle
 	 * @param {string} property The property being used to style the element.
 	 * @param {string|undefined} value The css value for the style property.
+	 * @return {string|shoestring}
+	 * @this shoestring
 	 */
 	shoestring.fn.css = function( property, value ){
 		if( !this[0] ){
