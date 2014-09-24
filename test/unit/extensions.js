@@ -675,6 +675,42 @@
 		}).trigger( "click" );
 	});
 
+	asyncTest( "custom event bindings get the right target", function() {
+		expect( 1 );
+
+		var $div = $fixture.find( "div" ).first();
+
+		$fixture.one( "foo", function( event ) {
+			equal( $div[0], event.target );
+			start();
+		});
+
+		$div.trigger( "foo" );
+	});
+
+	asyncTest( "custom event bindings get the right context (`this`)", function() {
+		expect( 1 );
+
+		var $div = $fixture.find( "div" ).first();
+
+		$fixture.one( "foo", function( event ) {
+			equal( this, $fixture[0] );
+			start();
+		});
+
+		$div.trigger( "foo" );
+	});
+
+	asyncTest( "`document` bindings get events triggered on `documentElement` children", function() {
+		ok( false );
+		start();
+	});
+
+	asyncTest( "`document` bindings get events triggered on `document`", function() {
+		ok( false );
+		start();
+	});
+
 	asyncTest( 'DOM Event `.bind()` and `.trigger()` with arguments', function() {
 		expect( 1 );
 

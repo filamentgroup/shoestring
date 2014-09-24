@@ -40,7 +40,8 @@ define([ "shoestring", "dom/closest" ], function(){
 				el.shoestringData.events[ evt ].push( obj );
 			};
 
-		function encasedCallback( e, namespace ){
+		// NOTE the `triggeredElement` is purely for custom events from IE
+		function encasedCallback( e, namespace, triggeredElement ){
 			var result;
 
 			if( e._namespace && e._namespace !== namespace ) {
@@ -74,7 +75,7 @@ define([ "shoestring", "dom/closest" ], function(){
 			};
 
 			// thanks https://github.com/jonathantneal/EventListener
-			e.target = e.target || e.srcElement;
+			e.target = triggeredElement || e.target || e.srcElement;
 			e.preventDefault = preventDefaultConstructor();
 			e.stopPropagation = e.stopPropagation || function () {
 				e.cancelBubble = true;
@@ -95,10 +96,18 @@ define([ "shoestring", "dom/closest" ], function(){
 			var lastEventInfo = document.documentElement[ originalEvent.propertyName ],
 				triggeredElement = lastEventInfo.el;
 
-			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
+			var boundCheckElement = boundElement;
+
+			if( boundElement === document && triggeredElement !== document ) {
+				boundCheckElement = document.documentElement;
+			}
+
+			if( triggeredElement !== undefined &&
+				shoestring( triggeredElement ).closest( boundCheckElement ).length ) {
+
 				originalEvent._namespace = lastEventInfo._namespace;
 				originalEvent._args = lastEventInfo._args;
-				encasedCallback.call( boundElement, originalEvent, namespace );
+				encasedCallback.call( boundElement, originalEvent, namespace, triggeredElement );
 			}
 		}
 
@@ -151,7 +160,7 @@ define([ "shoestring", "dom/closest" ], function(){
 							var eventName = evt;
 							return function( e ) {
 								if( e.propertyName === eventName ) {
-									propChange.call( this, e, oEl, namespace );
+									propChange( e, oEl, namespace );
 								}
 							};
 						})();
