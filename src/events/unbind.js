@@ -11,17 +11,11 @@ define([ "shoestring" ], function(){
 		for( var j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
 				if( "removeEventListener" in window ){
-					if( callback === undefined ) {
-						this.removeEventListener( evt, bound[ j ].callback, false );
-					} else if( callback === bound[ j ].originalCallback ) {
+					if( callback === undefined || callback === bound[ j ].originalCallback) {
 						this.removeEventListener( evt, bound[ j ].callback, false );
 					}
 				} else if( this.detachEvent ){
-					if( callback === undefined ) {
-						this.detachEvent( "on" + evt, bound[ j ].callback );
-						// custom event
-						document.documentElement.detachEvent( "onpropertychange", bound[ j ].callback );
-					} else if( callback === bound[ j ].originalCallback ) {
+					if( callback === undefined || callback === bound[ j ].originalCallback ) {
 						this.detachEvent( "on" + evt, bound[ j ].callback );
 						// custom event
 						document.documentElement.detachEvent( "onpropertychange", bound[ j ].callback );
