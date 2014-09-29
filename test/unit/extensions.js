@@ -1178,7 +1178,7 @@
 	});
 
 
-	asyncTest( '`.bind()` bubbling custom event order', function() {
+	asyncTest( '`.bind()` bubbling custom event order (parent first)', function() {
 		expect( 2 );
 
 		var counter = 0;
@@ -1187,13 +1187,37 @@
 
 		$( '#parent' ).bind( "aCustomEvent", function() {
 			counter++;
-			equal( counter, 2, 'event callback should execute second.' );
+			equal( counter, 2, 'parent event callback should execute second.' );
 		});
 
 		$( '#child' ).bind( "aCustomEvent", function() {
 			counter++;
-			equal( counter, 1, 'event callback should execute first.' );
+			equal( counter, 1, 'child event callback should execute first.' );
 		}).trigger( "aCustomEvent" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( '`.bind()` bubbling custom event order (child first)', function() {
+		expect( 2 );
+
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( '#child' ).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 1, 'child event callback should execute first.' );
+		});
+
+		$( '#parent' ).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 2, 'parent event callback should execute second.' );
+		});
+
+		$( '#child' ).trigger( "aCustomEvent" );
 
 		setTimeout(function() {
 			start();
