@@ -148,17 +148,55 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#triggerHandler"><i class="alert alert-info"></i><span>triggerHandler</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="triggerHandler">
+            <h1>triggerHandler</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.triggerHandler()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>event</td>
+                <td>string</td>
+                <td>The event(s) to trigger.</td>
+              </tr>
+              <tr>
+                <td>args</td>
+                <td>object</td>
+                <td>Arguments to append to callback invocations.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Trigger an event on the first element in the set, no bubbling, no defaults.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.triggerHandler = function( evt, args ){
-		var e = evt.split( &quot; &quot; )[ 0 ],
+	/**
+	 * Trigger an event on the first element in the set, no bubbling, no defaults.
+	 *
+	 * @param {string} event The event(s) to trigger.
+	 * @param {object} args Arguments to append to callback invocations.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.triggerHandler = function( event, args ){
+		var e = event.split( &quot; &quot; )[ 0 ],
 			el = this[ 0 ],
 			ret;
 

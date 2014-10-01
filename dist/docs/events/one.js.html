@@ -148,17 +148,55 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#one"><i class="alert alert-info"></i><span>one</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="one">
+            <h1>one</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.one()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>event</td>
+                <td>string</td>
+                <td>The event(s) to watch for.</td>
+              </tr>
+              <tr>
+                <td>callback</td>
+                <td>function</td>
+                <td>Callback to invoke on the event.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Bind a callback to an event for the currrent set of elements, unbind after one occurence.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot;, &quot;events/bind&quot;, &quot;events/unbind&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.fn.one = function( evt, callback ){
-		var evts = evt.split( &quot; &quot; );
+	/**
+	 * Bind a callback to an event for the currrent set of elements, unbind after one occurence.
+	 *
+	 * @param {string} event The event(s) to watch for.
+	 * @param {function} callback Callback to invoke on the event.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.one = function( event, callback ){
+		var evts = event.split( &quot; &quot; );
 
 		return this.each(function(){
 			var thisevt, cbs = {},	$t = shoestring( this );

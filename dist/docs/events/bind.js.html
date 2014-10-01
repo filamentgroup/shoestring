@@ -148,15 +148,60 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#bind"><i class="alert alert-info"></i><span>bind</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="bind">
+            <h1>bind</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.bind()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>evt</td>
+                <td>string</td>
+                <td>The event(s) to watch for.</td>
+              </tr>
+              <tr>
+                <td>data</td>
+                <td>object,function</td>
+                <td>Data to be included with each event or the callback.</td>
+              </tr>
+              <tr>
+                <td>originalCallback</td>
+                <td>function</td>
+                <td>Callback to be invoked when data is define.d.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Bind a callback to an event for the currrent set of elements.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot;, &quot;dom/closest&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
+
+	/**
+	 * Bind a callback to an event for the currrent set of elements.
+	 *
+	 * @param {string} evt The event(s) to watch for.
+	 * @param {object,function} data Data to be included with each event or the callback.
+	 * @param {function} originalCallback Callback to be invoked when data is define.d.
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.bind = function( evt, data, originalCallback ){
 
 		//&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);

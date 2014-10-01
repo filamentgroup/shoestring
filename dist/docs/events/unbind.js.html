@@ -148,14 +148,79 @@
           </ul>
           <div class="scrollspy">
             <ul class="nav nav-list bs-docs-sidenav affix-top">
+              <li><a href="#unbind"><i class="alert alert-info"></i><span>unbind</span></a>
+              </li>
             </ul>
           </div>
         </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="unbind">
+            <h1>unbind</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.unbind()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>event</td>
+                <td>string</td>
+                <td>The event(s) the callback was bound to..</td>
+              </tr>
+              <tr>
+                <td>callback</td>
+                <td>function</td>
+                <td>Callback to unbind.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Unbind a previous bound callback for an event.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
+
+	/**
+	 * Unbind a previous bound callback for an event.
+	 *
+	 * @param {string} event The event(s) the callback was bound to..
+	 * @param {function} callback Callback to unbind.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.unbind = function( event, callback ){
+		var evts = event ? event.split( &quot; &quot; ) : [];
+
+		return this.each(function(){
+			if( !this.shoestringData || !this.shoestringData.events ) {
+				return;
+			}
+
+			if( !evts.length ) {
+				unbindAll.call( this );
+			} else {
+				var split, evt, namespace;
+				for( var i = 0, il = evts.length; i &lt; il; i++ ){
+					split = evts[ i ].split( &quot;.&quot; ),
+					evt = split[ 0 ],
+					namespace = split.length &gt; 0 ? split[ 1 ] : null;
+
+					if( evt ) {
+						unbind.call( this, evt, namespace, callback );
+					} else {
+						unbindAll.call( this, namespace, callback );
+					}
+				}
+			}
+		});
+	};
 
 	function unbind( evt, namespace, callback ) {
 		var bound = this.shoestringData.events[ evt ];
@@ -191,32 +256,6 @@ define([ &quot;shoestring&quot; ], function(){
 			unbind.call( this, evtKey, namespace, callback );
 		}
 	}
-
-	shoestring.fn.unbind = function( str, callback ){
-		var evts = str ? str.split( &quot; &quot; ) : [];
-		return this.each(function(){
-			if( !this.shoestringData || !this.shoestringData.events ) {
-				return;
-			}
-
-			if( !evts.length ) {
-				unbindAll.call( this );
-			} else {
-				var split, evt, namespace;
-				for( var i = 0, il = evts.length; i &lt; il; i++ ){
-					split = evts[ i ].split( &quot;.&quot; ),
-					evt = split[ 0 ],
-					namespace = split.length &gt; 0 ? split[ 1 ] : null;
-
-					if( evt ) {
-						unbind.call( this, evt, namespace, callback );
-					} else {
-						unbindAll.call( this, namespace, callback );
-					}
-				}
-			}
-		});
-	};
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });
