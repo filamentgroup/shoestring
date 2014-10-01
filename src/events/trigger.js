@@ -2,8 +2,16 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.trigger = function( evt, args ){
-		var evts = evt.split( " " );
+	/**
+	 * Trigger an event on each of the DOM elements in the current set.
+	 *
+	 * @param {string} event The event(s) to trigger.
+	 * @param {object} args Arguments to append to callback invocations.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.trigger = function( event, args ){
+		var evts = event.split( " " );
 
 		return this.each(function(){
 			var split, evt, namespace;

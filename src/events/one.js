@@ -2,8 +2,16 @@
 define([ "shoestring", "events/bind", "events/unbind" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.one = function( evt, callback ){
-		var evts = evt.split( " " );
+	/**
+	 * Bind a callback to an event for the currrent set of elements, unbind after one occurence.
+	 *
+	 * @param {string} event The event(s) to watch for.
+	 * @param {function} callback Callback to invoke on the event.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.one = function( event, callback ){
+		var evts = event.split( " " );
 
 		return this.each(function(){
 			var thisevt, cbs = {},	$t = shoestring( this );
