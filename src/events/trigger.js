@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([ "shoestring", "events/reorder" ], function(){
 //>>excludeEnd("exclude");
 
 	shoestring.fn.trigger = function( evt, args ){
@@ -25,8 +25,13 @@ define([ "shoestring" ], function(){
 							_namespace: namespace,
 							_args: args
 						};
+
 						this[ evt ]();
 					} else {
+						// If DOM Event, reorder on bind
+						// If Custom Event, reorder on trigger
+						reorderEvents( this, evt );
+
 						document.documentElement[ evt ] = {
 							"el": this,
 							_namespace: namespace,

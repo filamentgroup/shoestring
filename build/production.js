@@ -51,6 +51,7 @@ require([
 	"dom/val",
 	"dom/width",
 	"dom/wrapInner",
+	"events/reorder",
 	"events/bind",
 	"events/one",
 	"events/triggerHandler",
