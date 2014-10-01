@@ -8,20 +8,25 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
+		var matched = [];
 		for( var j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
-				if( "removeEventListener" in window ){
-					if( callback === undefined || callback === bound[ j ].originalCallback) {
+				if( callback === undefined || callback === bound[ j ].originalCallback ) {
+					if( "removeEventListener" in window ){
 						this.removeEventListener( evt, bound[ j ].callback, false );
-					}
-				} else if( this.detachEvent ){
-					if( callback === undefined || callback === bound[ j ].originalCallback ) {
+					} else if( this.detachEvent ){
+						// dom event
 						this.detachEvent( "on" + evt, bound[ j ].callback );
 						// custom event
 						document.documentElement.detachEvent( "onpropertychange", bound[ j ].callback );
 					}
+					matched.push( j );
 				}
 			}
+		}
+
+		for( var j = 0, jl = matched.length; j < jl; j++ ) {
+			this.shoestringData.events[ evt ].splice( j, 1 );
 		}
 	}
 
