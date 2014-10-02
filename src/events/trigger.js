@@ -1,5 +1,5 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring", "events/reorder" ], function(){
+define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	/**
