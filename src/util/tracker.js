@@ -3,7 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	(function() {
-		shoestring.trachedMethodsKey = "shoestringMethods";
+		shoestring.trackedMethodsKey = "shoestringMethods";
 
 		// simple check for localStorage from http://diveintohtml5.info/storage.html
 		function supportsStorage() {

@@ -31,6 +31,15 @@ define([ "shoestring", "events/reorder", "dom/closest" ], function(){
 		}
 	}
 
+	/**
+	 * Bind a callback to an event for the currrent set of elements.
+	 *
+	 * @param {string} evt The event(s) to watch for.
+	 * @param {object,function} data Data to be included with each event or the callback.
+	 * @param {function} originalCallback Callback to be invoked when data is define.d.
+	 * @return shoestring
+	 * @this shoestring
+	 */
 	shoestring.fn.bind = function( evt, data, originalCallback ){
 
 		//>>includeStart("development", pragmas.development);

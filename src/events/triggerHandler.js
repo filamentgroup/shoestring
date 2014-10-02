@@ -2,8 +2,16 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.fn.triggerHandler = function( evt, args ){
-		var e = evt.split( " " )[ 0 ],
+	/**
+	 * Trigger an event on the first element in the set, no bubbling, no defaults.
+	 *
+	 * @param {string} event The event(s) to trigger.
+	 * @param {object} args Arguments to append to callback invocations.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.triggerHandler = function( event, args ){
+		var e = event.split( " " )[ 0 ],
 			el = this[ 0 ],
 			ret;
 
