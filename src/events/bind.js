@@ -2,16 +2,22 @@
 define([ "shoestring", "events/reorder", "dom/closest" ], function(){
 //>>excludeEnd("exclude");
 
-	function addToEventCache( el, evt, eventInfo ) {
+	function initEventCache( el, evt ) {
 		if ( !el.shoestringData ) {
 			el.shoestringData = {};
 		}
 		if ( !el.shoestringData.events ) {
 			el.shoestringData.events = {};
 		}
+		if ( !el.shoestringData.loop ) {
+			el.shoestringData.loop = {};
+		}
 		if ( !el.shoestringData.events[ evt ] ) {
 			el.shoestringData.events[ evt ] = [];
 		}
+	}
+
+	function addToEventCache( el, evt, eventInfo ) {
 		var obj = {};
 		obj.isCustomEvent = eventInfo.isCustomEvent;
 		obj.callback = eventInfo.callfunc;
@@ -19,6 +25,10 @@ define([ "shoestring", "events/reorder", "dom/closest" ], function(){
 		obj.namespace = eventInfo.namespace;
 
 		el.shoestringData.events[ evt ].push( obj );
+
+		if( eventInfo.customEventLoop ) {
+			el.shoestringData.loop[ evt ] = eventInfo.customEventLoop;
+		}
 	}
 
 	shoestring.fn.bind = function( evt, data, originalCallback ){
@@ -111,7 +121,10 @@ define([ "shoestring", "events/reorder", "dom/closest" ], function(){
 		}
 
 		return this.each(function(){
-			var domEventCallback, customEventCallback, oEl = this;
+			var domEventCallback,
+				customEventCallback,
+				customEventLoop,
+				oEl = this;
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var split = evts[ i ].split( "." ),
@@ -128,6 +141,9 @@ define([ "shoestring", "events/reorder", "dom/closest" ], function(){
 					return encasedCallback.call( oEl, originalEvent, namespace );
 				};
 				customEventCallback = null;
+				customEventLoop = null;
+
+				initEventCache( this, evt );
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, domEventCallback, false );
@@ -144,19 +160,40 @@ define([ "shoestring", "events/reorder", "dom/closest" ], function(){
 							};
 						})();
 
-						docEl.attachEvent( "onpropertychange", customEventCallback );
+						// only assign one onpropertychange per element
+						if( this.shoestringData.events[ evt ].length === 0 ) {
+							customEventLoop = (function() {
+								var eventName = evt;
+								return function( e ) {
+									if( !oEl.shoestringData || !oEl.shoestringData.events ) {
+										return;
+									}
+									var events = oEl.shoestringData.events[ eventName ];
+									if( !events ) {
+										return;
+									}
+
+									// TODO stopImmediatePropagation
+									for( var j = 0, k = events.length; j < k; j++ ) {
+										events[ j ].callback( e );
+									}
+								};
+							})();
+
+							docEl.attachEvent( "onpropertychange", customEventLoop );
+						}
 					}
 				}
 
 				addToEventCache( this, evt, {
 					callfunc: customEventCallback || domEventCallback,
 					isCustomEvent: !!customEventCallback,
+					customEventLoop: customEventLoop,
 					originalCallback: originalCallback,
 					namespace: namespace
 				});
 
-				// If DOM Event, reorder on bind
-				// If Custom Event, reorder on trigger
+				// Don’t reorder custom events, only DOM Events.
 				if( !customEventCallback ) {
 					reorderEvents( oEl, evt );
 				}

@@ -28,10 +28,6 @@ define([ "shoestring", "events/reorder" ], function(){
 
 						this[ evt ]();
 					} else {
-						// If DOM Event, reorder on bind
-						// If Custom Event, reorder on trigger
-						reorderEvents( this, evt );
-
 						document.documentElement[ evt ] = {
 							"el": this,
 							_namespace: namespace,

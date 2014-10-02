@@ -8,8 +8,8 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
-		var matched = [];
-		for( var j = 0, jl = bound.length; j < jl; j++ ) {
+		var matched = [], j, jl;
+		for( j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
 				if( callback === undefined || callback === bound[ j ].originalCallback ) {
 					if( "removeEventListener" in window ){
@@ -17,15 +17,18 @@ define([ "shoestring" ], function(){
 					} else if( this.detachEvent ){
 						// dom event
 						this.detachEvent( "on" + evt, bound[ j ].callback );
-						// custom event
-						document.documentElement.detachEvent( "onpropertychange", bound[ j ].callback );
+
+						// only unbind custom events if its the last one on the element
+						if( bound.length === 1 && this.shoestringData.loop && this.shoestringData.loop[ evt ] ) {
+							document.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
+						}
 					}
 					matched.push( j );
 				}
 			}
 		}
 
-		for( var j = 0, jl = matched.length; j < jl; j++ ) {
+		for( j = 0, jl = matched.length; j < jl; j++ ) {
 			this.shoestringData.events[ evt ].splice( j, 1 );
 		}
 	}

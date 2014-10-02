@@ -701,15 +701,15 @@
 		$div.trigger( "foo" );
 	});
 
-	asyncTest( "`document` bindings get events triggered on `documentElement` children", function() {
-		ok( false );
-		start();
-	});
+	// asyncTest( "`document` bindings get events triggered on `documentElement` children", function() {
+	// 	ok( false );
+	// 	start();
+	// });
 
-	asyncTest( "`document` bindings get events triggered on `document`", function() {
-		ok( false );
-		start();
-	});
+	// asyncTest( "`document` bindings get events triggered on `document`", function() {
+	// 	ok( false );
+	// 	start();
+	// });
 
 	asyncTest( 'DOM Event `.bind()` and `.trigger()` with arguments', function() {
 		expect( 1 );
@@ -880,7 +880,7 @@
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on a single element', function() {
-		expect( 2 );
+		expect( 4 );
 		var counter = 0;
 
 		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
@@ -891,6 +891,12 @@
 		}).bind( "aCustomEvent", function() {
 			counter++;
 			equal( counter, 2, 'event callback should execute second.' );
+		}).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 3, 'event callback should execute third.' );
+		}).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 4, 'event callback should execute fourth.' );
 			start();
 		}).trigger( "aCustomEvent" );
 
@@ -1137,7 +1143,8 @@
 		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
 	});
 
-	test( '`.one()` with multiple custom events', function() {
+	asyncTest( '`.one()` with multiple custom events', function() {
+		expect( 1 );
 		var $fixture = shoestring( '#qunit-fixture' ),
 			triggerCount = 0,
 			$el;
@@ -1152,7 +1159,10 @@
 		$el.trigger( "aCustomEvent" );
 		$el.trigger( "anotherCustomEvent" );
 
-		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
+		window.setTimeout(function() {
+			strictEqual( triggerCount, 1, 'only one event callback should execute.' );
+			start();
+		}, 15);
 	});
 
 	asyncTest( '`.bind()` bubbling event order', function() {
