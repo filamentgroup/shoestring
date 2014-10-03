@@ -2,6 +2,52 @@
 define([ "shoestring", "dom/closest" ], function(){
 //>>excludeEnd("exclude");
 
+	function initEventCache( el, evt ) {
+		if ( !el.shoestringData ) {
+			el.shoestringData = {};
+		}
+		if ( !el.shoestringData.events ) {
+			el.shoestringData.events = {};
+		}
+		if ( !el.shoestringData.loop ) {
+			el.shoestringData.loop = {};
+		}
+		if ( !el.shoestringData.events[ evt ] ) {
+			el.shoestringData.events[ evt ] = [];
+		}
+	}
+
+	function addToEventCache( el, evt, eventInfo ) {
+		var obj = {};
+		obj.isCustomEvent = eventInfo.isCustomEvent;
+		obj.callback = eventInfo.callfunc;
+		obj.originalCallback = eventInfo.originalCallback;
+		obj.namespace = eventInfo.namespace;
+
+		el.shoestringData.events[ evt ].push( obj );
+
+		if( eventInfo.customEventLoop ) {
+			el.shoestringData.loop[ evt ] = eventInfo.customEventLoop;
+		}
+	}
+
+	// In IE8 the events trigger in a reverse order (LIFO). This code
+	// unbinds and rebinds all callbacks on an element in the a FIFO order.
+	function reorderEvents( node, eventName ) {
+		if( node.addEventListener || !node.shoestringData || !node.shoestringData.events ) {
+			// add event listner obviates the need for all the callback order juggling
+			return;
+		}
+
+		var otherEvents = node.shoestringData.events[ eventName ] || [];
+		for( var j = otherEvents.length - 1; j >= 0; j-- ) {
+			// DOM Events only, Custom events maintain their own order internally.
+			if( !otherEvents[ j ].isCustomEvent ) {
+				node.detachEvent( "on" + eventName, otherEvents[ j ].callback );
+				node.attachEvent( "on" + eventName, otherEvents[ j ].callback );
+			}
+		}
+	}
 
 	/**
 	 * Bind a callback to an event for the currrent set of elements.
@@ -28,29 +74,10 @@ define([ "shoestring", "dom/closest" ], function(){
 		}
 
 		var evts = evt.split( " " ),
-			docEl = document.documentElement,
-			addToEventCache = function( el, evt, eventInfo ) {
-				if ( !el.shoestringData ) {
-					el.shoestringData = {};
-				}
-				if ( !el.shoestringData.events ) {
-					el.shoestringData.events = {};
-				}
-				if ( !el.shoestringData.events[ evt ] ) {
-					el.shoestringData.events[ evt ] = [];
-				}
-				var obj = {};
-				if( eventInfo.customCallfunc ) {
-					obj.isCustomEvent = true;
-				}
-				obj.callback = eventInfo.customCallfunc || eventInfo.callfunc;
-				obj.originalCallback = eventInfo.originalCallback;
-				obj.namespace = eventInfo.namespace;
+			docEl = document.documentElement;
 
-				el.shoestringData.events[ evt ].push( obj );
-			};
-
-		function encasedCallback( e, namespace ){
+		// NOTE the `triggeredElement` is purely for custom events from IE
+		function encasedCallback( e, namespace, triggeredElement ){
 			var result;
 
 			if( e._namespace && e._namespace !== namespace ) {
@@ -84,7 +111,7 @@ define([ "shoestring", "dom/closest" ], function(){
 			};
 
 			// thanks https://github.com/jonathantneal/EventListener
-			e.target = e.target || e.srcElement;
+			e.target = triggeredElement || e.target || e.srcElement;
 			e.preventDefault = preventDefaultConstructor();
 			e.stopPropagation = e.stopPropagation || function () {
 				e.cancelBubble = true;
@@ -105,35 +132,26 @@ define([ "shoestring", "dom/closest" ], function(){
 			var lastEventInfo = document.documentElement[ originalEvent.propertyName ],
 				triggeredElement = lastEventInfo.el;
 
-			if( triggeredElement !== undefined && shoestring( triggeredElement ).closest( boundElement ).length ) {
+			var boundCheckElement = boundElement;
+
+			if( boundElement === document && triggeredElement !== document ) {
+				boundCheckElement = document.documentElement;
+			}
+
+			if( triggeredElement !== undefined &&
+				shoestring( triggeredElement ).closest( boundCheckElement ).length ) {
+
 				originalEvent._namespace = lastEventInfo._namespace;
 				originalEvent._args = lastEventInfo._args;
-				encasedCallback.call( boundElement, originalEvent, namespace );
-			}
-		}
-
-		// In IE8 the events trigger in a reverse order. This code unbinds and
-		// rebinds all callbacks on an element in the correct order.
-		function reorderEvents( eventName ) {
-			if( this.addEventListener ) {
-				// add event listner obviates the need for all the callback order juggling
-				return;
-			} else if( this.shoestringData && this.shoestringData.events ) {
-				var otherEvents = this.shoestringData.events[ eventName ];
-				for( var j = otherEvents.length - 1; j >= 0; j-- ) {
-					if( !otherEvents[ j ].isCustomEvent ) {
-						this.detachEvent( "on" + eventName, otherEvents[ j ].callback );
-						this.attachEvent( "on" + eventName, otherEvents[ j ].callback );
-					} else {
-						docEl.detachEvent( "onpropertychange", otherEvents[ j ].callback );
-						docEl.attachEvent( "onpropertychange", otherEvents[ j ].callback );
-					}
-				}
+				encasedCallback.call( boundElement, originalEvent, namespace, triggeredElement );
 			}
 		}
 
 		return this.each(function(){
-			var domEventCallback, customEventCallback, oEl = this;
+			var domEventCallback,
+				customEventCallback,
+				customEventLoop,
+				oEl = this;
 
 			for( var i = 0, il = evts.length; i < il; i++ ){
 				var split = evts[ i ].split( "." ),
@@ -150,6 +168,9 @@ define([ "shoestring", "dom/closest" ], function(){
 					return encasedCallback.call( oEl, originalEvent, namespace );
 				};
 				customEventCallback = null;
+				customEventLoop = null;
+
+				initEventCache( this, evt );
 
 				if( "addEventListener" in this ){
 					this.addEventListener( evt, domEventCallback, false );
@@ -161,22 +182,48 @@ define([ "shoestring", "dom/closest" ], function(){
 							var eventName = evt;
 							return function( e ) {
 								if( e.propertyName === eventName ) {
-									propChange.call( this, e, oEl, namespace );
+									propChange( e, oEl, namespace );
 								}
 							};
 						})();
-						docEl.attachEvent( "onpropertychange", customEventCallback );
+
+						// only assign one onpropertychange per element
+						if( this.shoestringData.events[ evt ].length === 0 ) {
+							customEventLoop = (function() {
+								var eventName = evt;
+								return function( e ) {
+									if( !oEl.shoestringData || !oEl.shoestringData.events ) {
+										return;
+									}
+									var events = oEl.shoestringData.events[ eventName ];
+									if( !events ) {
+										return;
+									}
+
+									// TODO stopImmediatePropagation
+									for( var j = 0, k = events.length; j < k; j++ ) {
+										events[ j ].callback( e );
+									}
+								};
+							})();
+
+							docEl.attachEvent( "onpropertychange", customEventLoop );
+						}
 					}
 				}
 
 				addToEventCache( this, evt, {
-					callfunc: domEventCallback || encasedCallback,
-					customCallfunc: customEventCallback,
+					callfunc: customEventCallback || domEventCallback,
+					isCustomEvent: !!customEventCallback,
+					customEventLoop: customEventLoop,
 					originalCallback: originalCallback,
 					namespace: namespace
 				});
 
-				reorderEvents.call( oEl, evt );
+				// Don’t reorder custom events, only DOM Events.
+				if( !customEventCallback ) {
+					reorderEvents( oEl, evt );
+				}
 			}
 		});
 	};

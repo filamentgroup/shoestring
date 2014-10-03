@@ -33,6 +33,7 @@ define([ "shoestring" ], function(){
 							_namespace: namespace,
 							_args: args
 						};
+
 						this[ evt ]();
 					} else {
 						document.documentElement[ evt ] = {
