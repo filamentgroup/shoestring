@@ -5,7 +5,12 @@
 	module( 'dom', config = {
 		setup: function() {
 			$fixture = shoestring( '#qunit-fixture' );
-		}
+		},
+
+    teardown: function() {
+      $fixture.unbind("foo");
+      $(document).unbind("foo");
+    }
 	});
 
 	test( '`.add()` adds selected elements to the set', function(){
@@ -701,15 +706,27 @@
 		$div.trigger( "foo" );
 	});
 
-	// asyncTest( "`document` bindings get events triggered on `documentElement` children", function() {
-	// 	ok( false );
-	// 	start();
-	// });
+	asyncTest( "`document` bindings get events triggered on `documentElement` children", function() {
+		expect( 1 );
 
-	// asyncTest( "`document` bindings get events triggered on `document`", function() {
-	// 	ok( false );
-	// 	start();
-	// });
+		$(document).one( "foo", function() {
+			ok( true );
+			start();
+		});
+
+		$fixture.trigger( "foo" );
+	});
+
+	asyncTest( "`document` bindings get events triggered on `document`", function() {
+		expect( 1 );
+
+		$(document).one( "foo", function() {
+			ok( true );
+			start();
+		});
+
+		$( document ).trigger( "foo" );
+	});
 
 	asyncTest( 'DOM Event `.bind()` and `.trigger()` with arguments', function() {
 		expect( 1 );
