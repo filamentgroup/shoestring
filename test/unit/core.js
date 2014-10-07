@@ -12,14 +12,6 @@ test( 'API Properties: shoestring.fn is defined', function() {
 	ok( shoestring.fn !== undefined );
 });
 
-test( 'API Properties: shoestring.qualified is defined', function() {
-	ok( shoestring.qualified !== undefined );
-});
-
-test( 'API Properties: shoestring.qualify is defined', function() {
-	ok( shoestring.qualify !== undefined );
-});
-
 test( 'API Properties: shoestring.extend is defined', function() {
 	ok( shoestring.extend !== undefined );
 });
@@ -39,14 +31,6 @@ test( 'API Properties: shoestring is a function', function() {
 
 test( 'API Properties: shoestring.fn is an object', function() {
 	ok( shoestring.fn.constructor === Object );
-});
-
-test( 'API Properties: shoestring.qualified is a boolean', function() {
-	ok( typeof(shoestring.qualified) === "boolean" );
-});
-
-test( 'API Properties: shoestring.qualify is a function', function() {
-	ok( typeof(shoestring.qualify) === "function" );
 });
 
 test( 'API Properties: shoestring.extend is a function', function() {

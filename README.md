@@ -69,24 +69,6 @@ perhaps you'd like to iterate through each item that was found, applying scripti
 		// execute code here
 	} );
 
-Internally, this dom-ready shortcut also provides the benefit of doing nothing at all in browsers that don't mass the `Shoestring.qualified` boolean (which, by default, checks for `document.querySelectorAll` support).
-
-That same test is exposed in a handy api method as well: `qualify`. The `qualify` method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run `shoestring`, receiving a boolean answer:
-
-    var qualifiedBrowser = shoestring.qualify();
-
-More useful, you can pass a function to `qualify` and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won't need this, but if it executes earlier, just Shoestring your code in a `qualify` callback to safeproof its execution. Basically, you might use `qualify` in place of your typical `IIFE` wrapper:
-
-    shoestring.qualify(
-		// It's safer in here.
-	    shoestring( "#foo, .bar" ).each(function(){
-			console.log( this );
-			// here, "this" refers to the current element in iteration
-		});
-	);
-
-By default, `qualify` uses the boolean stored in `Shoestring.qualified` internally, to determine browser qualification. You can override `Shoestring.qualified` with any combination of features you want. By default, it just needs `document.querySelectorAll` support.
-
 OK, that's all `shoestring` has in the way of dom helpers... from there, we can add extensions.
 
 For extensions, `shoestring` comes with a utility function or three. First, the `extend` method, which is just a simple object extender:
