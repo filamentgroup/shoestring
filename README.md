@@ -1,13 +1,3 @@
-# outline
-
-- builds
-  - production
-  - development
-  - custom
-  - tracker
-- contributing
-  - link to guidelines
-
 # Shoestring
 
 [![Filament Group](http://filamentgroup.com/images/fg-logo-positive-sm-crop.png) ](http://www.filamentgroup.com/)
@@ -163,4 +153,4 @@ If the method tracker is included during a significant portion of development th
 
 ## Contributing
 
-...
+Please see the [contribution guidelines](../CONTRIBUTING.md).
