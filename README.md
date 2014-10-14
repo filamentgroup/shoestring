@@ -153,4 +153,4 @@ If the method tracker is included during a significant portion of development th
 
 ## Contributing
 
-Please see the [contribution guidelines](../CONTRIBUTING.md).
+Please see the [contribution guidelines](CONTRIBUTING.md).
