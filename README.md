@@ -11,7 +11,7 @@ You can find more details in the [API documentation](http://filamentgroup.github
 ## Philosophy
 
 
-Shoestring is built to be a lightweight DOM framework for developers that value simplicity and speed. It is intended to be "just enough" of a tool of make working in vanilla JavaScript efficient and enjoyable. The API is modeleled after jQuery but we intentionally implemennt a tiny subset of the API. For example, many invocation patterns for common methods are ignored in favor of the most ubiquitous use. Similarly the selector engine delegates to modern browsers' native `document.querySelectorAll`, though you can plug-in an engine like Sizzle. For projects that require deeper compatibility or a richer set of features, it is simple upgrade path from Shoestring to jQuery.
+Shoestring is a lightweight, modular DOM framework intended for developers that value simplicity and speed over  features. It is intended to be "just enough" of a tool of make working in vanilla JavaScript efficient and enjoyable. The API is modeled after jQuery but we intentionally implement a tiny subset of the API to cover only the methods we commonly need in client projects. Each feature is built as an optional extension to a minimal core so each can be removed from the production build. For example, many invocation patterns for common methods are ignored in favor of the most ubiquitous use. Similarly the selector engine delegates to modern browsers' native `document.querySelectorAll`, though you can plug-in an engine like Sizzle. For projects that require deeper compatibility or a richer set of features, it is simple upgrade path from Shoestring to jQuery.
 
 We strive to strike a good balance of code weight, runtime speed, browser support, and developer convenience. 
 
