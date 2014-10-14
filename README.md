@@ -11,16 +11,16 @@ You can find more details in the [API documentation](http://filamentgroup.github
 ## Philosophy
 
 
-Shoestring is a lightweight, modular DOM framework intended for developers that value simplicity and speed over  features. It is intended to be "just enough" of a tool of make working in vanilla JavaScript efficient and enjoyable. The API is modeled after jQuery but we intentionally implement a tiny subset of the API to cover only the methods we commonly need in client projects. Each feature is built as an optional extension to a minimal core so each can be removed from the production build. For example, many invocation patterns for common methods are ignored in favor of the most ubiquitous use. Similarly the selector engine delegates to modern browsers' native `document.querySelectorAll`, though you can plug-in an engine like Sizzle. For projects that require deeper compatibility or a richer set of features, it is simple upgrade path from Shoestring to jQuery.
+Shoestring is a lightweight, modular DOM framework intended for developers that value simplicity and speed over  features. It is intended to be "just enough" of a tool to efficently write maintainable cross-browser JavaScript. The API is modeled after jQuery but we intentionally implement a tiny subset of the API to cover only the methods we commonly need in client projects. Each feature is built as an optional extension to a minimal core so each can be removed from the production build. The selector engine delegates to modern browsers' native `document.querySelectorAll`, which means it requires browsers that support that feature, such as IE8. For projects that require deeper compatibility or a richer set of features, it is simple to swap in jQuery. As a rule, anything you write in Shoestring should work in jQuery, but not the opposite.
 
-We strive to strike a good balance of code weight, runtime speed, browser support, and developer convenience. 
+Our goal is to strike a good balance of code weight, runtime speed, browser support, and developer convenience. 
 
 
 ## Features
 
 Shoestring's API is inspired by jQuery.
 
-Technically, shoestring.js is a very small, extendable core function. That core function doesn't come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like `each`, `find`, `children`. Using its `shoestring.fn` API, its core is easy to extend further, and many extensions are available for you to include in your build.
+Technically, shoestring.js is a very small, extendable core function. That core function doesn't come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like `each`, `find`, `children`. Using its `shoestring.fn` API, its core is easy to extend further, and many extensions are available for you to include in your build – the default build includes all extensions, but it's still very small (~3kb compressed).
 
 If you are concerned about compatibility issues/pitfalls consider using the development build releases (`-dev` in the [releases](https://github.com/filamentgroup/shoestring/releases)). We've endeavored to throw exceptions where a particular invocation pattern or feature isn't supported as a means to document the disparity. We recommend that you use the development version in development and the regular non-`-dev` version in production.
 
