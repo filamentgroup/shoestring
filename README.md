@@ -126,7 +126,7 @@ Note that the AMD wrapper is removed during the process of the build and that th
 
 ### Dependencies
 
-Browsing the modules in Shoestring you'll notice that very few have explicit dependencies in their module definitions. This is by design. We are interested in being able to select the minimum number of methods necessary for a given project to reduce load **and** parse times.
+Browsing the modules in Shoestring you'll notice that very few have explicit dependencies in their module definitions. This is by design. We are interested in being able to select the minimum number of methods necessary for a given project to reduce load and parse times.
 
 ## Builds
 
