@@ -1,12 +1,5 @@
 # outline
 
-- extensions
-  - DONE extension
-    - DONE example
-  - module definition
-    - example
-  - dependencies (minimize)
-    - example
 - builds
   - production
   - development
@@ -121,11 +114,13 @@ shoestring.fn.remove = function(){
 };
 ```
 
-It uses the `each` method to handle the DOM elements in the current sequence in turn. **NOTE** these definitions must be made a Shoestring object is constructed. This is in contrast with jQuery where each object has access to new methods through the prototype change. This will be changed soon.
+It uses the `each` method to handle the DOM elements in the current sequence in turn.
+
+**NOTE** these definitions must be made before a Shoestring object that depends on them is constructed. This is in contrast with jQuery where each object has access to new methods through the prototype change. This will be changed soon.
 
 ### Modules
 
-Each extension to Shoestring included in the repository is defined as an AMD module, but only for build purposes. We don't support or plan to support loading the library as modules to the browser.
+Each extension to Shoestring included in the repository is defined as an AMD module, but only for build purposes. We don't support, or plan to support, loading the library as modules in the browser.
 
 ```javascript
 //>>excludeStart("exclude", pragmas.exclude);
@@ -140,6 +135,10 @@ shoestring.fn.foo = function(){ ... };
 ```
 
 Note that the AMD wrapper is removed during the process of the build and that the dependencies are defined from the `src` subdirectory. More on custom builds below.
+
+### Dependencies
+
+Browsing the modules in Shoestring you'll notice that very few have explicit dependencies in their module definitions. This is by design. We are interested in being able to select the minimum number of methods necessary for a given project to reduce load **and** parse times.
 
 ## Custom Builds
 
