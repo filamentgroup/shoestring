@@ -1,6 +1,6 @@
 # Contributing to Shoestring
 
-Contributions are appreciated. In order for us to consider including a contribution, it does have to meet a few **criteria**:
+Contributions are appreciated. In order for us to consider including a contribution, it does have to meet a few criteria:
 
 * Code is specific to one issue (eg. feature, extension or bug)
 * Code is formatted according to JavaScript Style Guide.
