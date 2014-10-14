@@ -138,20 +138,25 @@ Note that the AMD wrapper is removed during the process of the build and that th
 
 Browsing the modules in Shoestring you'll notice that very few have explicit dependencies in their module definitions. This is by design. We are interested in being able to select the minimum number of methods necessary for a given project to reduce load **and** parse times.
 
-## Custom Builds
+## Builds
 
-Each extension is defined an AMD module and the dependencies are sort out during the build by requirejs. The all inclusive build is `build/main.js` and can act as a reference for a custom build. To creat a custom build:
+Shoestring releases include two different builds. One for development and one for production. The development build is larger. It is intended to help with jQuery compatibility issues and includes other development utilities like the method tracker. The production build is meant to be shipped in production and does not include the extra dev-time helpers.
 
-1. Copy `build/main.js` to `build/custom/my-build.js`
-2. Edit `build/custom/my-build.js` and remove any extensions you're not using
-3. Run `grunt build`
-4. View `dist/my-build.js`
+### Custom
 
+This repository supports custom builds through creating a meta-module in the `build/custom/` directory and running the default Grunt task. To get started building a custom production build, do the following:
 
-## Want a dollar?
+1. make sure the project dependencies are installed with `npm install`
+2. copy `build/development.js` to `build/custom/foo.js`
+3. run `grunt` or `node node_modules/.bin/grunt`
+4. use `dist/foo.js`
 
-here you go:
+### Tracker
 
-    window.$ = shoestring;
+Included in the development build is a method tracker. It works by proxying all calls to `shoestring.fn` methods through a corresponding method that records the invocation in local storage. **NOTE** this does not include methods defined on `shoestring`. The methods used during execution can be inspected.
 
-    $( "foo, bar, .baz" ).each(...)
+```javascript
+JSON.parse( window.localStorage.getItem(shoestring.trackedMethodsKey) );
+```
+
+If the method tracker is included during a significant portion of development then this list can be used to remove unused functions from your Shoestring build using a custom meta-module.
