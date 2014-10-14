@@ -8,7 +8,6 @@ Shoestring is part of the [Southstreet workflow](https://github.com/filamentgrou
 
 You can find the API documentaiton [here](http://filamentgroup.github.io/shoestring/dist/docs/).
 
-
 ## Philosophy
 
 Shoestring is built to be lightweight, but not as broadly compatible as many common DOM toolkits. For example, many invocation patterns for common methods are ignored in favor of the most ubiquitous use. Similarly the selector engine delegates to modern browsers' native `document.querySelectorAll`, though you can plug-in an engine like Sizzle.
@@ -130,7 +129,7 @@ Browsing the modules in Shoestring you'll notice that very few have explicit dep
 
 ## Builds
 
-Shoestring releases include two different builds. One for development and one for production. The development build is larger. It is intended to help with jQuery compatibility issues and includes other development utilities like the method tracker. The production build is meant to be shipped in production and does not include the extra dev-time helpers.
+Shoestring releases include two different builds, one for development and one for production. The development build is larger. It is intended to help with jQuery compatibility issues and includes other development utilities like the method tracker. The production build is meant to be shipped in production and does not include the extra dev-time helpers.
 
 ### Custom
 
