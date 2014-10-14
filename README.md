@@ -53,7 +53,7 @@ If you are concerned about compatibility issues/pitfalls consider using the deve
 
 ## Features
 
-There are three sets of extensions to the Shoestring core: DOM manipulation, events, and ajax. 
+There are three sets of extensions to the Shoestring core: DOM manipulation, events, and ajax.
 
 ### DOM
 
@@ -63,27 +63,52 @@ If you've used jQuery, the structure and behavior of the DOM manipulation method
 shoestring( ".foo" ).addClass( "bar" ).attr( "data-baz", "bak" );
 ```
 
-Construct a sequence of elements from the DOM and invoke each method on all the elements of sequence in turn. You can find a full list of the supported DOM methods in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `dom/*` subdirectory.
+That is, construct a sequence of elements from the DOM and invoke each method on all the elements of sequence in turn. You can find a full list of the supported DOM methods in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `dom/*` subdirectory.
 
-### 
+### Events
 
+Shoestring supports the core portions of the jQuery events API including: normalized bubbling for IE, custom events, and event arguments.
+
+```javascript
+shoestring( ".foo" ).bind( "click", function( event ) { ... });
+```
+
+Or with a custom event triggered on a child element:
+
+
+```javascript
+shoestring( ".foo" ).bind( "bar", function( event, arg ) {
+  ...
+  if(arg1 == 1) { ... }
+  ...
+});
+
+// ...
+
+shoestring( ".foo" ).children().first().trigger( "bar", 1 );
+
+```
+
+## Ajax
+
+Shoestring supports a full `shoestring.ajax` method
 
 ## Shoestring extensions
 
 ```javascript
-/**                                                                           
- * Remove the current set of elements from the DOM.                                                                           
- *                                                                           
- * @return shoestring                                                                           
- * @this shoestring                                                                         
- */                                                                           
-shoestring.fn.remove = function(){                                                                           
-  return this.each(function(){                                                                           
-    if( this.parentNode ) {                                                                         
-      this.parentNode.removeChild( this );                                                                          
-    }                                                                           
-  });                                                                           
-}; 
+/**
+ * Remove the current set of elements from the DOM.
+ *
+ * @return shoestring
+ * @this shoestring
+ */
+shoestring.fn.remove = function(){
+  return this.each(function(){
+    if( this.parentNode ) {
+      this.parentNode.removeChild( this );
+    }
+  });
+};
 ```
 
 The `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project.
