@@ -153,10 +153,14 @@ This repository supports custom builds through creating a meta-module in the `bu
 
 ### Tracker
 
-Included in the development build is a method tracker. It works by proxying all calls to `shoestring.fn` methods through a corresponding method that records the invocation in local storage. **NOTE** this does not include methods defined on `shoestring`. The methods used during execution can be inspected.
+Included in the development build is a method tracker. It works by proxying all calls to `shoestring.fn` methods through a corresponding method that records the invocation in local storage. **NOTE** this does not include methods defined on `shoestring`. Then the methods being used across pages by your application can be inspected.
 
 ```javascript
 JSON.parse( window.localStorage.getItem(shoestring.trackedMethodsKey) );
 ```
 
-If the method tracker is included during a significant portion of development then this list can be used to remove unused functions from your Shoestring build using a custom meta-module.
+If the method tracker is included during a significant portion of development this list can be used to remove unused functions from your Shoestring build with a custom meta-module.
+
+## Contributing
+
+...
