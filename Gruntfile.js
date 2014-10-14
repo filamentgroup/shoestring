@@ -111,7 +111,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('docs', function() {
 		var doxx, done = this.async();
 
-		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', 'src', '--target', 'dist/docs']);
+		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', 'src', '--target', 'dist/docs', '--template', 'views/template.jade' ]);
 
 		doxx.on( 'close', function( code ) {
 			console.log( "doxx completed with exit code: "	+ code );
