@@ -1,22 +1,8 @@
 # outline
 
-- intro
-  - motto
-  - demo link
-- philosophy
-  - why shoestring
-  - modularity
-  - wire weight
-- features
-  - dom
-    - example
-  - events
-    - example
-  - ajax
-    - example
 - extensions
-  - extension
-    - example
+  - DONE extension
+    - DONE example
   - module definition
     - example
   - dependencies (minimize)
@@ -94,7 +80,7 @@ shoestring( ".foo" ).children().first().trigger( "bar", 1 );
 You can find a full list of the supported event methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `events/*` subdirectory.
 
 
-## Ajax
+### Ajax
 
 Shoestring supports a full `shoestring.ajax` method as well as some shorthand helpers like `shoestring.get` and `shoestring.post`.
 
@@ -115,7 +101,9 @@ shoestring.get( "/foo", function(){ ... });
 You can find a full list of the supported ajax methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `ajax/*` subdirectory.
 
 
-## Shoestring extensions
+## Extensions
+
+Extending Shoestring is done in nearly the same fashion as jQuery. There is an object on which you can define properties using functions and those functions will have access to the Shoestring DOM element sequence during invocation using `this`. As an example the remove method:
 
 ```javascript
 /**
@@ -133,7 +121,25 @@ shoestring.fn.remove = function(){
 };
 ```
 
-The `src/extensions` folder includes a few prebuilt methods you can grab and chuck into your project.
+It uses the `each` method to handle the DOM elements in the current sequence in turn. **NOTE** these definitions must be made a Shoestring object is constructed. This is in contrast with jQuery where each object has access to new methods through the prototype change. This will be changed soon.
+
+### Modules
+
+Each extension to Shoestring included in the repository is defined as an AMD module, but only for build purposes. We don't support or plan to support loading the library as modules to the browser.
+
+```javascript
+//>>excludeStart("exclude", pragmas.exclude);
+define([ "shoestring", "dom/remove" ], function(){
+//>>excludeEnd("exclude");
+
+shoestring.fn.foo = function(){ ... };
+
+//>>excludeStart("exclude", pragmas.exclude);
+});
+//>>excludeEnd("exclude");
+```
+
+Note that the AMD wrapper is removed during the process of the build and that the dependencies are defined from the `src` subdirectory. More on custom builds below.
 
 ## Custom Builds
 
