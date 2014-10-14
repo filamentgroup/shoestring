@@ -33,7 +33,7 @@ If you've used jQuery, the structure and behavior of the DOM manipulation method
 shoestring( ".foo" ).addClass( "bar" ).attr( "data-baz", "bak" );
 ```
 
-That is, construct a sequence of elements from the DOM and invoke each method on all the elements of sequence in turn. You can find a full list of the supported DOM methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `dom/*` subdirectory.
+That is, construct a sequence of elements from the DOM and invoke each method on all the elements of the sequence in turn. You can find a full list of the supported DOM methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `dom/*` subdirectory.
 
 ### Events
 
