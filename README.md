@@ -33,9 +33,12 @@
 
 [![Filament Group](http://filamentgroup.com/images/fg-logo-positive-sm-crop.png) ](http://www.filamentgroup.com/)
 
-A lightweight, simple DOM utility made to run on a tight budget. You can find the API documentaiton [here](http://filamentgroup.github.io/shoestring/dist/docs/)
+A lightweight, simple DOM utility made to run on a tight budget.
 
 Shoestring is part of the [Southstreet workflow](https://github.com/filamentgroup/southstreet) at Filament Group.
+
+You can find the API documentaiton [here](http://filamentgroup.github.io/shoestring/dist/docs/).
+
 
 ## Philosophy
 
@@ -63,7 +66,7 @@ If you've used jQuery, the structure and behavior of the DOM manipulation method
 shoestring( ".foo" ).addClass( "bar" ).attr( "data-baz", "bak" );
 ```
 
-That is, construct a sequence of elements from the DOM and invoke each method on all the elements of sequence in turn. You can find a full list of the supported DOM methods in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `dom/*` subdirectory.
+That is, construct a sequence of elements from the DOM and invoke each method on all the elements of sequence in turn. You can find a full list of the supported DOM methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `dom/*` subdirectory.
 
 ### Events
 
@@ -79,19 +82,38 @@ Or with a custom event triggered on a child element:
 ```javascript
 shoestring( ".foo" ).bind( "bar", function( event, arg ) {
   ...
-  if(arg1 == 1) { ... }
+  if(arg == 1) { ... }
   ...
 });
 
 // ...
 
 shoestring( ".foo" ).children().first().trigger( "bar", 1 );
-
 ```
+
+You can find a full list of the supported event methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `events/*` subdirectory.
+
 
 ## Ajax
 
-Shoestring supports a full `shoestring.ajax` method
+Shoestring supports a full `shoestring.ajax` method as well as some shorthand helpers like `shoestring.get` and `shoestring.post`.
+
+```javascript
+shoestring.ajax( "/foo", {
+  success: function(){ ... },
+  method: "GET",
+  ...
+});
+```
+
+Which could also be accomplished using `shoestring.get`
+
+```javascript
+shoestring.get( "/foo", function(){ ... });
+```
+
+You can find a full list of the supported ajax methods and their arguments in the [API docs](http://filamentgroup.github.io/shoestring/dist/docs/) under the `ajax/*` subdirectory.
+
 
 ## Shoestring extensions
 
