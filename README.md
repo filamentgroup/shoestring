@@ -84,7 +84,7 @@ You can find a full list of the supported ajax methods and their arguments in th
 
 ## Extensions
 
-Extending Shoestring is done in nearly the same fashion as jQuery. There is an object on which you can define properties using functions and those functions will have access to the Shoestring DOM element sequence during invocation using `this`. As an example the remove method:
+Extending Shoestring is done in nearly the same fashion as jQuery. There is an object on which you can define properties using functions and those functions will have access to the Shoestring DOM element sequence during invocation using `this`. As an example the `remove` method:
 
 ```javascript
 /**
