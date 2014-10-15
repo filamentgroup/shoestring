@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 		}
 	};
 
-  // NOTE config includes development
+	// NOTE config includes development
 	builds.development = {
 		options: {
 			baseUrl: "src",
