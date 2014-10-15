@@ -38,7 +38,7 @@ That is, construct a sequence of elements from the DOM and invoke each method on
 
 ### Events
 
-Shoestring supports the core portions of the jQuery events API including: normalized bubbling for IE, custom events, and event arguments.
+Shoestring supports most of the jQuery events API including: custom events that bubble, event namespaces, a normalized event object, event arguments, DOM Ready, a `.one` method, comprehensive `.unbind`, etc. The major difference here is that Shoestring does not support the event delegation helpers built into jQuery, like `.delegate` or `.on` with a selector argument.
 
 ```javascript
 shoestring( ".foo" ).bind( "click", function( event ) { ... });
