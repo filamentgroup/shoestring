@@ -110,9 +110,15 @@ module.exports = function(grunt) {
 	spawn = require('child_process').spawn;
 
 	grunt.registerTask('docs', function() {
-		var doxx, done = this.async();
+		var doxx, srcs, args = [], done = this.async();
 
-		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', 'src', '--target', 'dist/docs']);
+		for(var i in arguments){
+			args.push(arguments[i]);
+		}
+
+		srcs = args.length ? srcs = args.join(":") : "src";
+
+		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', srcs, '--target', 'dist/docs']);
 
 		doxx.on( 'close', function( code ) {
 			console.log( "doxx completed with exit code: "	+ code );
