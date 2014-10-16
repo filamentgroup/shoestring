@@ -3,7 +3,7 @@
 require([
 	"util/errors",
 	"../build/production",
-  "dom/css/getStyle.js",
+	"dom/css/getStyle.js",
 	"dom/hasClass",
 	"dom/hide",
 	"dom/outerWidth",

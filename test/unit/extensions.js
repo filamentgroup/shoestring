@@ -5,7 +5,12 @@
 	module( 'dom', config = {
 		setup: function() {
 			$fixture = shoestring( '#qunit-fixture' );
-		}
+		},
+
+    teardown: function() {
+      $fixture.unbind("foo");
+      $(document).unbind("foo");
+    }
 	});
 
 	test( '`.add()` adds selected elements to the set', function(){
@@ -675,6 +680,54 @@
 		}).trigger( "click" );
 	});
 
+	asyncTest( "custom event bindings get the right target", function() {
+		expect( 1 );
+
+		var $div = $fixture.find( "div" ).first();
+
+		$fixture.one( "foo", function( event ) {
+			equal( $div[0], event.target );
+			start();
+		});
+
+		$div.trigger( "foo" );
+	});
+
+	asyncTest( "custom event bindings get the right context (`this`)", function() {
+		expect( 1 );
+
+		var $div = $fixture.find( "div" ).first();
+
+		$fixture.one( "foo", function( event ) {
+			equal( this, $fixture[0] );
+			start();
+		});
+
+		$div.trigger( "foo" );
+	});
+
+	asyncTest( "`document` bindings get events triggered on `documentElement` children", function() {
+		expect( 1 );
+
+		$(document).one( "foo", function() {
+			ok( true );
+			start();
+		});
+
+		$fixture.trigger( "foo" );
+	});
+
+	asyncTest( "`document` bindings get events triggered on `document`", function() {
+		expect( 1 );
+
+		$(document).one( "foo", function() {
+			ok( true );
+			start();
+		});
+
+		$( document ).trigger( "foo" );
+	});
+
 	asyncTest( 'DOM Event `.bind()` and `.trigger()` with arguments', function() {
 		expect( 1 );
 
@@ -844,7 +897,7 @@
 	});
 
 	asyncTest( '`.bind()` and `.trigger()` with multiple of the same custom event on a single element', function() {
-		expect( 2 );
+		expect( 4 );
 		var counter = 0;
 
 		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
@@ -855,6 +908,12 @@
 		}).bind( "aCustomEvent", function() {
 			counter++;
 			equal( counter, 2, 'event callback should execute second.' );
+		}).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 3, 'event callback should execute third.' );
+		}).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 4, 'event callback should execute fourth.' );
 			start();
 		}).trigger( "aCustomEvent" );
 
@@ -1101,7 +1160,8 @@
 		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
 	});
 
-	test( '`.one()` with multiple custom events', function() {
+	asyncTest( '`.one()` with multiple custom events', function() {
+		expect( 1 );
 		var $fixture = shoestring( '#qunit-fixture' ),
 			triggerCount = 0,
 			$el;
@@ -1116,7 +1176,10 @@
 		$el.trigger( "aCustomEvent" );
 		$el.trigger( "anotherCustomEvent" );
 
-		strictEqual( triggerCount, 1, 'only one event callback should execute.' );
+		window.setTimeout(function() {
+			strictEqual( triggerCount, 1, 'only one event callback should execute.' );
+			start();
+		}, 15);
 	});
 
 	asyncTest( '`.bind()` bubbling event order', function() {
@@ -1142,7 +1205,7 @@
 	});
 
 
-	asyncTest( '`.bind()` bubbling custom event order', function() {
+	asyncTest( '`.bind()` bubbling custom event order (parent first)', function() {
 		expect( 2 );
 
 		var counter = 0;
@@ -1151,13 +1214,37 @@
 
 		$( '#parent' ).bind( "aCustomEvent", function() {
 			counter++;
-			equal( counter, 2, 'event callback should execute second.' );
+			equal( counter, 2, 'parent event callback should execute second.' );
 		});
 
 		$( '#child' ).bind( "aCustomEvent", function() {
 			counter++;
-			equal( counter, 1, 'event callback should execute first.' );
+			equal( counter, 1, 'child event callback should execute first.' );
 		}).trigger( "aCustomEvent" );
+
+		setTimeout(function() {
+			start();
+		}, 15);
+	});
+
+	asyncTest( '`.bind()` bubbling custom event order (child first)', function() {
+		expect( 2 );
+
+		var counter = 0;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( '#child' ).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 1, 'child event callback should execute first.' );
+		});
+
+		$( '#parent' ).bind( "aCustomEvent", function() {
+			counter++;
+			equal( counter, 2, 'parent event callback should execute second.' );
+		});
+
+		$( '#child' ).trigger( "aCustomEvent" );
 
 		setTimeout(function() {
 			start();

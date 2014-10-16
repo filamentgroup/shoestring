@@ -69,7 +69,7 @@ define([ "shoestring" ], function(){
 			return req;
 		}
 
-		req.send( null );
+		req.send( settings.data || null );
 		return req;
 	};
 

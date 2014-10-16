@@ -15,14 +15,15 @@ module.exports = function(grunt) {
 
 	files.forEach(function( file ) {
 		if( /\.js$/.test(file) ){
-			var name = file.replace(/\.js$/, "");
+			var name = file.replace(/\.js$/, ""),
+				o = Object.create(opts);
 
 			builds[name] = {
-				options: opts
+				options: o
 			};
 
-			builds[name].options.name = opts.name.replace("REPLACE", "custom/" + name );
-			builds[name].options.out = opts.out.replace("REPLACE", name );
+			builds[name].options.name = o.name.replace("REPLACE", "custom/" + name );
+			builds[name].options.out = o.out.replace("REPLACE", name );
 		}
 	});
 
