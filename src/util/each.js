@@ -2,6 +2,15 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
+  /**
+	 * Non-shoestring-object iteration.
+	 *
+	 * @param {object} obj The object to iterate over
+	 * @param {function} callback The callback to pass each item
+	 * @param {array} args Extra arguments for the callback
+	 * @return shoestring
+	 * @this window
+	 */
 	shoestring.each = function( obj, callback, args ){
 		var value,
 			i = 0,
