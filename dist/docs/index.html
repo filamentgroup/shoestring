@@ -159,18 +159,6 @@
 <pre><code>shoestring( function(){
     // execute code here
 } );</code></pre>
-<p>Internally, this dom-ready shortcut also provides the benefit of doing nothing at all in browsers that don&#39;t mass the <code>Shoestring.qualified</code> boolean (which, by default, checks for <code>document.querySelectorAll</code> support).</p>
-<p>That same test is exposed in a handy api method as well: <code>qualify</code>. The <code>qualify</code> method serves two purposes: first, you can run it with no arguments to find out if a browser is qualified to run <code>shoestring</code>, receiving a boolean answer:</p>
-<pre><code>var qualifiedBrowser = shoestring.qualify();</code></pre>
-<p>More useful, you can pass a function to <code>qualify</code> and that function will only execute in qualified browsers. If all of your code executes via DOM ready, you won&#39;t need this, but if it executes earlier, just Shoestring your code in a <code>qualify</code> callback to safeproof its execution. Basically, you might use <code>qualify</code> in place of your typical <code>IIFE</code> wrapper:</p>
-<pre><code>shoestring.qualify(
-    // It&#39;s safer in here.
-    shoestring( &quot;#foo, .bar&quot; ).each(function(){
-        console.log( this );
-        // here, &quot;this&quot; refers to the current element in iteration
-    });
-);</code></pre>
-<p>By default, <code>qualify</code> uses the boolean stored in <code>Shoestring.qualified</code> internally, to determine browser qualification. You can override <code>Shoestring.qualified</code> with any combination of features you want. By default, it just needs <code>document.querySelectorAll</code> support.</p>
 <p>OK, that&#39;s all <code>shoestring</code> has in the way of dom helpers... from there, we can add extensions.</p>
 <p>For extensions, <code>shoestring</code> comes with a utility function or three. First, the <code>extend</code> method, which is just a simple object extender:</p>
 <pre><code>shoestring.extend( { foo: &quot;bar&quot; }, { baz: &quot;bam!&quot; } );

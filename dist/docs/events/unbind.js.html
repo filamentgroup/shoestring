@@ -191,26 +191,28 @@ define([ &quot;shoestring&quot; ], function(){
 			return;
 		}
 
-		for( var j = 0, jl = bound.length; j &lt; jl; j++ ) {
+		var matched = [], j, jl;
+		for( j = 0, jl = bound.length; j &lt; jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
-				if( &quot;removeEventListener&quot; in window ){
-					if( callback === undefined ) {
+				if( callback === undefined || callback === bound[ j ].originalCallback ) {
+					if( &quot;removeEventListener&quot; in window ){
 						this.removeEventListener( evt, bound[ j ].callback, false );
-					} else if( callback === bound[ j ].originalCallback ) {
-						this.removeEventListener( evt, bound[ j ].callback, false );
-					}
-				} else if( this.detachEvent ){
-					if( callback === undefined ) {
+					} else if( this.detachEvent ){
+						// dom event
 						this.detachEvent( &quot;on&quot; + evt, bound[ j ].callback );
-						// custom event
-						document.documentElement.detachEvent( &quot;onpropertychange&quot;, bound[ j ].callback );
-					} else if( callback === bound[ j ].originalCallback ) {
-						this.detachEvent( &quot;on&quot; + evt, bound[ j ].callback );
-						// custom event
-						document.documentElement.detachEvent( &quot;onpropertychange&quot;, bound[ j ].callback );
+
+						// only unbind custom events if its the last one on the element
+						if( bound.length === 1 &amp;&amp; this.shoestringData.loop &amp;&amp; this.shoestringData.loop[ evt ] ) {
+							document.documentElement.detachEvent( &quot;onpropertychange&quot;, this.shoestringData.loop[ evt ] );
+						}
 					}
+					matched.push( j );
 				}
 			}
+		}
+
+		for( j = 0, jl = matched.length; j &lt; jl; j++ ) {
+			this.shoestringData.events[ evt ].splice( j, 1 );
 		}
 	}
 

@@ -239,19 +239,6 @@
 
 	// Public non-dom utilities
 
-	// browser support qualifier - shoestring any usage of shoestring in a qualify callback
-	shoestring.qualified = &quot;querySelectorAll&quot; in doc;
-
-	shoestring.qualify = function( callback ){
-		if( callback &amp;&amp; shoestring.qualified ){
-			return callback();
-		}
-		// return support bool if there's no callback
-		else if( !callback ){
-			return shoestring.qualified;
-		}
-	};
-
 	// For extending objects
 	shoestring.extend = function( first, second ){
 		for( var i in second ){
@@ -275,10 +262,10 @@
 
 	// For DOM ready execution
 	shoestring.ready = function( fn ){
-		if( ready &amp;&amp; fn &amp;&amp; shoestring.qualified ){
+		if( ready &amp;&amp; fn ){
 			fn.call( document );
 		}
-		else if( fn &amp;&amp; shoestring.qualified ){
+		else if( fn ){
 			readyQueue.push( fn );
 		}
 		else {
