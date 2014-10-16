@@ -18,7 +18,7 @@
       
       .jumbotron {
       background: #247201;
-      padding: .5em 0;
+      padding: .3em 0;
       }
        .jumbotron:after {
        display: none;
@@ -28,10 +28,36 @@
        font-weight: normal;
        text-align: left;
        padding-left: 20px;
+       text-transform: capitalize;
        }
        .jumbotron  h1 span {
        display: inline-block;
        padding-left: .3em;
+       }
+       .jumbotron {
+       box-shadow: none;
+       overflow: hidden;
+       }
+       header.backout.jumbotron {
+       background: #fff;
+       text-align: left;
+       min-height: 3em;
+       }
+       header.backout {
+       padding-left: 20px;
+       padding-right: 20px;
+       }
+       header.backout.jumbotron a {
+       float: left;
+       color: #222;
+       text-shadow: none;
+       text-decoration: underline;
+       }
+       header.backout.jumbotron a.fglogo {
+        float: right;
+       }
+       header.backout.jumbotron img {
+       max-width: 120px;
        }
        
        [class*="span"] {
@@ -59,6 +85,12 @@
          }
           .jumbotron  h1 {
             padding-left: 0;
+            
+       }
+       header.backout.jumbotron {
+       padding-left: 0;
+       padding-right: 0;
+       min-height: none;
        }
         }
         
@@ -108,6 +140,9 @@
         </div>
       </div>
     </div>
+    <header class="backout jumbotron">
+      <div class="container"><a href="https://github.com/filamentgroup/shoestring">Shoestring project site</a><a href="http://filamentgroup.com/" class="fglogo"><img src="https://camo.githubusercontent.com/c74c8622d1d577cdc13ab7d162e44efbc81a4c2f/687474703a2f2f66696c616d656e7467726f75702e636f6d2f696d616765732f66672d6c6f676f2d706f7369746976652d736d2d63726f702e706e67"></a></div>
+    </header>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
         <h1>shoestring<span>docs</span></h1><a href="#nav">Menu</a>
