@@ -9,12 +9,59 @@
     <style>
       body > .navbar .brand {
         float:left;
-        text-shadow: rgba(255, 255, 255, 0.0980392) 0px 1px 0px, rgba(255, 255, 255, 0.4) 0px 0px 30px;
         color: white;
         margin-left:0px;
         font-weight:normal;
+        font-size: 18px;
       }
       
+      
+      .jumbotron {
+      background: #247201;
+      padding: .5em 0;
+      }
+       .jumbotron:after {
+       display: none;
+       }
+       .jumbotron  h1 {
+       font-size: 25px;
+       font-weight: normal;
+       text-align: left;
+       padding-left: 20px;
+       }
+       .jumbotron  h1 span {
+       display: inline-block;
+       padding-left: .3em;
+       }
+       
+       [class*="span"] {
+            float: right;
+       }
+        section#main {
+        padding-left: 20px;
+        }
+        div.navbar-inner {
+        display: none;
+        }
+        body {
+        padding-top: 0;
+        }
+        a[href="#nav"] {
+        position: absolute;
+        right: 2em;
+        color: #fff;
+        top: 1em;
+        }
+        @media (min-width: 768px){
+         a[href="#nav"] {
+        position: absolute;
+        left: -999px;
+         }
+          .jumbotron  h1 {
+            padding-left: 0;
+       }
+        }
+        
       .bs-docs-sidenav.affix {
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
         z-index: 10;
@@ -63,13 +110,82 @@
     </div>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
-        <h1>shoestring</h1>
+        <h1>shoestring<span>docs</span></h1><a href="#nav">Menu</a>
         <p class="lead"></p>
       </div>
     </header>
     <div class="container">
       <div class="row">
-        <div class="span3 bs-docs-sidebar">
+        <div class="span9">
+          <section id="closest">
+            <h1>closest</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.closest()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>selector</td>
+                <td>string</td>
+                <td>The selector used to identify the target element.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Find an element matching the selector in the set of the current element and its parents.</p> </div>
+          <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
+define([ &quot;shoestring&quot;, &quot;dom/is&quot; ], function( shoestring ) {
+//&gt;&gt;excludeEnd(&quot;exclude&quot;);
+
+	/**
+	 * Find an element matching the selector in the set of the current element and its parents.
+	 *
+	 * @param {string} selector The selector used to identify the target element.
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.closest = function( selector ){
+		var ret = [];
+
+		if( !selector ){
+			return shoestring( ret );
+		}
+
+		this.each(function(){
+			var element, $self = shoestring( element = this );
+
+			if( $self.is(selector) ){
+				ret.push( this );
+				return;
+			}
+
+			while( element.parentElement ) {
+				if( shoestring(element.parentElement).is(selector) ){
+					ret.push( element.parentElement );
+					break;
+				}
+
+				element = element.parentElement;
+			}
+		});
+
+		return shoestring( ret );
+	};
+
+//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
+});
+//&gt;&gt;excludeEnd(&quot;exclude&quot;);
+</code></pre>
+        </div>
+        <div id="nav" class="span3 bs-docs-sidebar">
           <ul class="nav nav-list bs-docs-sidenav affix-top">
             <li><a href="../index.html">Main</a></li>
             <li><a href="../ajax/ajax.js.html">ajax/ajax.js</a></li>
@@ -146,81 +262,6 @@
             <li><a href="../util/tracker.js.html">util/tracker.js</a></li>
             <li><a href="../util/trim.js.html">util/trim.js</a></li>
           </ul>
-          <div class="scrollspy">
-            <ul class="nav nav-list bs-docs-sidenav affix-top">
-              <li><a href="#closest"><i class="alert alert-info"></i><span>closest</span></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="span9">
-          <section id="closest">
-            <h1>closest</h1>
-            <h5 class="subheader"></h5>
-            <p>
-              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.closest()</span>→<span>shoestring</span>
-            </p>
-          </section>
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th style="width:20%">Option name</th>
-                <th style="width:20%">Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>selector</td>
-                <td>string</td>
-                <td>The selector used to identify the target element.</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="description"><p>Find an element matching the selector in the set of the current element and its parents.</p> </div>
-          <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
-define([ &quot;shoestring&quot;, &quot;dom/is&quot; ], function( shoestring ) {
-//&gt;&gt;excludeEnd(&quot;exclude&quot;);
-
-	/**
-	 * Find an element matching the selector in the set of the current element and its parents.
-	 *
-	 * @param {string} selector The selector used to identify the target element.
-	 * @return shoestring
-	 * @this shoestring
-	 */
-	shoestring.fn.closest = function( selector ){
-		var ret = [];
-
-		if( !selector ){
-			return shoestring( ret );
-		}
-
-		this.each(function(){
-			var element, $self = shoestring( element = this );
-
-			if( $self.is(selector) ){
-				ret.push( this );
-				return;
-			}
-
-			while( element.parentElement ) {
-				if( shoestring(element.parentElement).is(selector) ){
-					ret.push( element.parentElement );
-					break;
-				}
-
-				element = element.parentElement;
-			}
-		});
-
-		return shoestring( ret );
-	};
-
-//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
-});
-//&gt;&gt;excludeEnd(&quot;exclude&quot;);
-</code></pre>
         </div>
       </div>
     </div>
