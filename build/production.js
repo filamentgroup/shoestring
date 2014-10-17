@@ -60,8 +60,6 @@ require([
 	"events/one",
 	"events/triggerHandler",
 	"events/trigger",
-	"events/unbind",
-	"util/each",
-	"util/merge"
+	"events/unbind"
 ]);
 //>>excludeEnd("exclude");
