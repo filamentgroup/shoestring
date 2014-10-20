@@ -7,10 +7,10 @@
 			$fixture = shoestring( '#qunit-fixture' );
 		},
 
-    teardown: function() {
-      $fixture.unbind("foo");
-      $(document).unbind("foo");
-    }
+		teardown: function() {
+			$fixture.unbind("foo");
+			$(document).unbind("foo");
+		}
 	});
 
 	test( '`.add()` adds selected elements to the set', function(){
