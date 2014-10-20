@@ -1621,9 +1621,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 
 	test( "ajax doesn't override default options", function() {
 		equal( shoestring.ajax.settings.method, "GET" );
-		shoestring.ajax( "foo", { method: "FOO" } );
+		shoestring.ajax( "foo", { method: "POST" } );
 		equal( shoestring.ajax.settings.method, "GET" );
 	});
-
-	// TODO test events + arguments on callbacks and trigger
 })();
