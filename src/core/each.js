@@ -5,15 +5,20 @@ define([ "shoestring" ], function(){
 	/**
 	 * Iterates over `shoestring` collections.
 	 *
-	 * @param {function} fn The callback to be invoked on each element and index
+	 * @param {function} callback The callback to be invoked on each element and index
 	 * @return shoestring
 	 * @this shoestring
 	 */
-	shoestring.fn.each = function( fn ){
-		for( var i = 0, il = this.length; i < il; i++ ){
-			fn.call( this[ i ], i );
+	shoestring.fn.each = function( callback ){
+		return shoestring.each( this, callback );
+	};
+
+	shoestring.each = function( collection, callback ) {
+		for( var i = 0, il = collection.length; i < il; i++ ){
+			callback.call( collection[i], i, collection[i] );
 		}
-		return this;
+
+		return collection;
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);
