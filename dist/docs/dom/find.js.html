@@ -9,12 +9,91 @@
     <style>
       body > .navbar .brand {
         float:left;
-        text-shadow: rgba(255, 255, 255, 0.0980392) 0px 1px 0px, rgba(255, 255, 255, 0.4) 0px 0px 30px;
         color: white;
         margin-left:0px;
         font-weight:normal;
+        font-size: 18px;
       }
       
+      
+      .jumbotron {
+      background: #247201;
+      padding: .3em 0;
+      }
+       .jumbotron:after {
+       display: none;
+       }
+       .jumbotron  h1 {
+       font-size: 25px;
+       font-weight: normal;
+       text-align: left;
+       padding-left: 20px;
+       text-transform: capitalize;
+       }
+       .jumbotron  h1 span {
+       display: inline-block;
+       padding-left: .3em;
+       }
+       .jumbotron {
+       box-shadow: none;
+       overflow: hidden;
+       }
+       header.backout.jumbotron {
+       background: #fff;
+       text-align: left;
+       min-height: 3em;
+       }
+       header.backout {
+       padding-left: 20px;
+       padding-right: 20px;
+       }
+       header.backout.jumbotron a {
+       float: left;
+       color: #222;
+       text-shadow: none;
+       text-decoration: underline;
+       }
+       header.backout.jumbotron a.fglogo {
+        float: right;
+       }
+       header.backout.jumbotron img {
+       max-width: 120px;
+       }
+       
+       [class*="span"] {
+            float: right;
+       }
+        section#main {
+        padding-left: 20px;
+        }
+        div.navbar-inner {
+        display: none;
+        }
+        body {
+        padding-top: 0;
+        }
+        a[href="#nav"] {
+        position: absolute;
+        right: 2em;
+        color: #fff;
+        top: 1em;
+        }
+        @media (min-width: 768px){
+         a[href="#nav"] {
+        position: absolute;
+        left: -999px;
+         }
+          .jumbotron  h1 {
+            padding-left: 0;
+            
+       }
+       header.backout.jumbotron {
+       padding-left: 0;
+       padding-right: 0;
+       min-height: none;
+       }
+        }
+        
       .bs-docs-sidenav.affix {
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);
         z-index: 10;
@@ -61,154 +140,159 @@
         </div>
       </div>
     </div>
+    <header class="backout jumbotron">
+      <div class="container"><a href="https://github.com/filamentgroup/shoestring">Shoestring project site</a><a href="http://filamentgroup.com/" class="fglogo"><img src="https://camo.githubusercontent.com/c74c8622d1d577cdc13ab7d162e44efbc81a4c2f/687474703a2f2f66696c616d656e7467726f75702e636f6d2f696d616765732f66672d6c6f676f2d706f7369746976652d736d2d63726f702e706e67"></a></div>
+    </header>
     <header id="overview" class="jumbotron subhead">
       <div class="container">
-        <h1>shoestring</h1>
+        <h1>shoestring<span>docs</span></h1><a href="#nav">Menu</a>
         <p class="lead"></p>
       </div>
     </header>
     <div class="container">
       <div class="row">
-        <div class="span3 bs-docs-sidebar">
-          <ul class="nav nav-list bs-docs-sidenav affix-top">
-            <li><a href="../../index.html">Main</a></li>
-            <li><a href="../../extensions/ajax/ajax.js.html">extensions/ajax/ajax.js</a></li>
-            <li><a href="../../extensions/ajax/get.js.html">extensions/ajax/get.js</a></li>
-            <li><a href="../../extensions/ajax/load.js.html">extensions/ajax/load.js</a></li>
-            <li><a href="../../extensions/ajax/post.js.html">extensions/ajax/post.js</a></li>
-            <li><a href="../../extensions/data/data.js.html">extensions/data/data.js</a></li>
-            <li><a href="../../extensions/data/removeData.js.html">extensions/data/removeData.js</a></li>
-            <li><a href="../../extensions/dollar.js.html">extensions/dollar.js</a></li>
-            <li><a href="../../extensions/dom/add.js.html">extensions/dom/add.js</a></li>
-            <li><a href="../../extensions/dom/addClass.js.html">extensions/dom/addClass.js</a></li>
-            <li><a href="../../extensions/dom/after.js.html">extensions/dom/after.js</a></li>
-            <li><a href="../../extensions/dom/append.js.html">extensions/dom/append.js</a></li>
-            <li><a href="../../extensions/dom/appendTo.js.html">extensions/dom/appendTo.js</a></li>
-            <li><a href="../../extensions/dom/attr.js.html">extensions/dom/attr.js</a></li>
-            <li><a href="../../extensions/dom/before.js.html">extensions/dom/before.js</a></li>
-            <li><a href="../../extensions/dom/clone.js.html">extensions/dom/clone.js</a></li>
-            <li><a href="../../extensions/dom/closest.js.html">extensions/dom/closest.js</a></li>
-            <li><a href="../../extensions/dom/css/exceptions.js.html">extensions/dom/css/exceptions.js</a></li>
-            <li><a href="../../extensions/dom/css/getComputedStyle.js.html">extensions/dom/css/getComputedStyle.js</a></li>
-            <li><a href="../../extensions/dom/css/getStyle.js.html">extensions/dom/css/getStyle.js</a></li>
-            <li><a href="../../extensions/dom/css/setStyle.js.html">extensions/dom/css/setStyle.js</a></li>
-            <li><a href="../../extensions/dom/css.js.html">extensions/dom/css.js</a></li>
-            <li><a href="../../extensions/dom/dimension.js.html">extensions/dom/dimension.js</a></li>
-            <li><a href="../../extensions/dom/eq.js.html">extensions/dom/eq.js</a></li>
-            <li><a href="../../extensions/dom/filter.js.html">extensions/dom/filter.js</a></li>
-            <li><a href="../../extensions/dom/first.js.html">extensions/dom/first.js</a></li>
-            <li><a href="../../extensions/dom/get.js.html">extensions/dom/get.js</a></li>
-            <li><a href="../../extensions/dom/hasClass.js.html">extensions/dom/hasClass.js</a></li>
-            <li><a href="../../extensions/dom/height.js.html">extensions/dom/height.js</a></li>
-            <li><a href="../../extensions/dom/hide.js.html">extensions/dom/hide.js</a></li>
-            <li><a href="../../extensions/dom/html.js.html">extensions/dom/html.js</a></li>
-            <li><a href="../../extensions/dom/index.js.html">extensions/dom/index.js</a></li>
-            <li><a href="../../extensions/dom/insertAfter.js.html">extensions/dom/insertAfter.js</a></li>
-            <li><a href="../../extensions/dom/insertBefore.js.html">extensions/dom/insertBefore.js</a></li>
-            <li><a href="../../extensions/dom/is.js.html">extensions/dom/is.js</a></li>
-            <li><a href="../../extensions/dom/last.js.html">extensions/dom/last.js</a></li>
-            <li><a href="../../extensions/dom/map.js.html">extensions/dom/map.js</a></li>
-            <li><a href="../../extensions/dom/next.js.html">extensions/dom/next.js</a></li>
-            <li><a href="../../extensions/dom/not.js.html">extensions/dom/not.js</a></li>
-            <li><a href="../../extensions/dom/offset.js.html">extensions/dom/offset.js</a></li>
-            <li><a href="../../extensions/dom/outerWidth.js.html">extensions/dom/outerWidth.js</a></li>
-            <li><a href="../../extensions/dom/parent.js.html">extensions/dom/parent.js</a></li>
-            <li><a href="../../extensions/dom/parents.js.html">extensions/dom/parents.js</a></li>
-            <li><a href="../../extensions/dom/prepend.js.html">extensions/dom/prepend.js</a></li>
-            <li><a href="../../extensions/dom/prev.js.html">extensions/dom/prev.js</a></li>
-            <li><a href="../../extensions/dom/prevAll.js.html">extensions/dom/prevAll.js</a></li>
-            <li><a href="../../extensions/dom/prop.js.html">extensions/dom/prop.js</a></li>
-            <li><a href="../../extensions/dom/propFix.js.html">extensions/dom/propFix.js</a></li>
-            <li><a href="../../extensions/dom/remove.js.html">extensions/dom/remove.js</a></li>
-            <li><a href="../../extensions/dom/removeAttr.js.html">extensions/dom/removeAttr.js</a></li>
-            <li><a href="../../extensions/dom/removeClass.js.html">extensions/dom/removeClass.js</a></li>
-            <li><a href="../../extensions/dom/removeProp.js.html">extensions/dom/removeProp.js</a></li>
-            <li><a href="../../extensions/dom/replaceWith.js.html">extensions/dom/replaceWith.js</a></li>
-            <li><a href="../../extensions/dom/serialize.js.html">extensions/dom/serialize.js</a></li>
-            <li><a href="../../extensions/dom/show.js.html">extensions/dom/show.js</a></li>
-            <li><a href="../../extensions/dom/siblings.js.html">extensions/dom/siblings.js</a></li>
-            <li><a href="../../extensions/dom/text.js.html">extensions/dom/text.js</a></li>
-            <li><a href="../../extensions/dom/val.js.html">extensions/dom/val.js</a></li>
-            <li><a href="../../extensions/dom/width.js.html">extensions/dom/width.js</a></li>
-            <li><a href="../../extensions/dom/wrapInner.js.html">extensions/dom/wrapInner.js</a></li>
-            <li><a href="../../extensions/events/bind.js.html">extensions/events/bind.js</a></li>
-            <li><a href="../../extensions/events/click.js.html">extensions/events/click.js</a></li>
-            <li><a href="../../extensions/events/one.js.html">extensions/events/one.js</a></li>
-            <li><a href="../../extensions/events/trigger.js.html">extensions/events/trigger.js</a></li>
-            <li><a href="../../extensions/events/triggerHandler.js.html">extensions/events/triggerHandler.js</a></li>
-            <li><a href="../../extensions/events/unbind.js.html">extensions/events/unbind.js</a></li>
-            <li class="active"><a href="../../extensions/util/each.js.html">extensions/util/each.js</a></li>
-            <li><a href="../../extensions/util/errors.js.html">extensions/util/errors.js</a></li>
-            <li><a href="../../extensions/util/map.js.html">extensions/util/map.js</a></li>
-            <li><a href="../../extensions/util/merge.js.html">extensions/util/merge.js</a></li>
-            <li><a href="../../extensions/util/tracker.js.html">extensions/util/tracker.js</a></li>
-            <li><a href="../../extensions/util/trim.js.html">extensions/util/trim.js</a></li>
-            <li><a href="../../shoestring.js.html">shoestring.js</a></li>
-          </ul>
-          <div class="scrollspy">
-            <ul class="nav nav-list bs-docs-sidenav affix-top">
-            </ul>
-          </div>
-        </div>
         <div class="span9">
-          <div class="description"> </div>
+          <section id="find">
+            <h1>find</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">method</div><span>shoestring.fn.find()</span>→<span>shoestring</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>selector</td>
+                <td>string</td>
+                <td>The selector used to find the children</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>Find descendant elements of the current collection.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 define([ &quot;shoestring&quot; ], function(){
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-	shoestring.each = function( obj, callback, args ){
-		var value,
-			i = 0,
-			length = obj.length,
-			isArray = ( typeof obj === &quot;object&quot; &amp;&amp; Object.prototype.toString.call(obj) === '[object Array]' );
-
-		if ( args ) {
-			if ( isArray ) {
-				for ( ; i &lt; length; i++ ) {
-					value = callback.apply( obj[ i ], args );
-
-					if ( value === false ) {
-						break;
-					}
-				}
-			} else {
-				for ( i in obj ) {
-					value = callback.apply( obj[ i ], args );
-
-					if ( value === false ) {
-						break;
-					}
-				}
+	/**
+	 * Find descendant elements of the current collection.
+	 *
+	 * @param {string} selector The selector used to find the children
+	 * @return shoestring
+	 * @this shoestring
+	 */
+	shoestring.fn.find = function( selector ){
+		var ret = [],
+			finds;
+		this.each(function(){
+//&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
+			try {
+//&gt;&gt;includeEnd(&quot;development&quot;);
+				finds = this.querySelectorAll( selector );
+//&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
+			} catch( e ) {
+				shoestring.error( 'queryselector', selector );
 			}
+//&gt;&gt;includeEnd(&quot;development&quot;);
 
-		// A special, fast, case for the most common use of each
-		} else {
-			if ( isArray ) {
-				for ( ; i &lt; length; i++ ) {
-					value = callback.call( obj[ i ], i, obj[ i ] );
-
-					if ( value === false ) {
-						break;
-					}
-				}
-			} else {
-				for ( i in obj ) {
-					value = callback.call( obj[ i ], i, obj[ i ] );
-
-					if ( value === false ) {
-						break;
-					}
-				}
+			for( var i = 0, il = finds.length; i &lt; il; i++ ){
+				ret = ret.concat( finds[i] );
 			}
-		}
-
-		return shoestring( obj );
+		});
+		return shoestring( ret );
 	};
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
 });
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 </code></pre>
+        </div>
+        <div id="nav" class="span3 bs-docs-sidebar">
+          <ul class="nav nav-list bs-docs-sidenav affix-top">
+            <li><a href="../index.html">Main</a></li>
+            <li><a href="../ajax/ajax.js.html">ajax/ajax.js</a></li>
+            <li><a href="../ajax/get.js.html">ajax/get.js</a></li>
+            <li><a href="../ajax/load.js.html">ajax/load.js</a></li>
+            <li><a href="../ajax/post.js.html">ajax/post.js</a></li>
+            <li><a href="../core/each.js.html">core/each.js</a></li>
+            <li><a href="../core/inarray.js.html">core/inarray.js</a></li>
+            <li><a href="../core/ready.js.html">core/ready.js</a></li>
+            <li><a href="../data/data.js.html">data/data.js</a></li>
+            <li><a href="../data/removeData.js.html">data/removeData.js</a></li>
+            <li><a href="../dollar.js.html">dollar.js</a></li>
+            <li><a href="../dom/add.js.html">dom/add.js</a></li>
+            <li><a href="../dom/addClass.js.html">dom/addClass.js</a></li>
+            <li><a href="../dom/after.js.html">dom/after.js</a></li>
+            <li><a href="../dom/append.js.html">dom/append.js</a></li>
+            <li><a href="../dom/appendTo.js.html">dom/appendTo.js</a></li>
+            <li><a href="../dom/attr.js.html">dom/attr.js</a></li>
+            <li><a href="../dom/before.js.html">dom/before.js</a></li>
+            <li><a href="../dom/children.js.html">dom/children.js</a></li>
+            <li><a href="../dom/clone.js.html">dom/clone.js</a></li>
+            <li><a href="../dom/closest.js.html">dom/closest.js</a></li>
+            <li><a href="../dom/css/exceptions.js.html">dom/css/exceptions.js</a></li>
+            <li><a href="../dom/css/getComputedStyle.js.html">dom/css/getComputedStyle.js</a></li>
+            <li><a href="../dom/css/getStyle.js.html">dom/css/getStyle.js</a></li>
+            <li><a href="../dom/css/setStyle.js.html">dom/css/setStyle.js</a></li>
+            <li><a href="../dom/css.js.html">dom/css.js</a></li>
+            <li><a href="../dom/dimension.js.html">dom/dimension.js</a></li>
+            <li><a href="../dom/eq.js.html">dom/eq.js</a></li>
+            <li><a href="../dom/filter.js.html">dom/filter.js</a></li>
+            <li class="active"><a href="../dom/find.js.html">dom/find.js</a></li>
+            <li><a href="../dom/first.js.html">dom/first.js</a></li>
+            <li><a href="../dom/get.js.html">dom/get.js</a></li>
+            <li><a href="../dom/hasClass.js.html">dom/hasClass.js</a></li>
+            <li><a href="../dom/height.js.html">dom/height.js</a></li>
+            <li><a href="../dom/hide.js.html">dom/hide.js</a></li>
+            <li><a href="../dom/html.js.html">dom/html.js</a></li>
+            <li><a href="../dom/index.js.html">dom/index.js</a></li>
+            <li><a href="../dom/insertAfter.js.html">dom/insertAfter.js</a></li>
+            <li><a href="../dom/insertBefore.js.html">dom/insertBefore.js</a></li>
+            <li><a href="../dom/is.js.html">dom/is.js</a></li>
+            <li><a href="../dom/last.js.html">dom/last.js</a></li>
+            <li><a href="../dom/map.js.html">dom/map.js</a></li>
+            <li><a href="../dom/next.js.html">dom/next.js</a></li>
+            <li><a href="../dom/not.js.html">dom/not.js</a></li>
+            <li><a href="../dom/offset.js.html">dom/offset.js</a></li>
+            <li><a href="../dom/outerWidth.js.html">dom/outerWidth.js</a></li>
+            <li><a href="../dom/parent.js.html">dom/parent.js</a></li>
+            <li><a href="../dom/parents.js.html">dom/parents.js</a></li>
+            <li><a href="../dom/prepend.js.html">dom/prepend.js</a></li>
+            <li><a href="../dom/prependTo.js.html">dom/prependTo.js</a></li>
+            <li><a href="../dom/prev.js.html">dom/prev.js</a></li>
+            <li><a href="../dom/prevAll.js.html">dom/prevAll.js</a></li>
+            <li><a href="../dom/prop.js.html">dom/prop.js</a></li>
+            <li><a href="../dom/propFix.js.html">dom/propFix.js</a></li>
+            <li><a href="../dom/remove.js.html">dom/remove.js</a></li>
+            <li><a href="../dom/removeAttr.js.html">dom/removeAttr.js</a></li>
+            <li><a href="../dom/removeClass.js.html">dom/removeClass.js</a></li>
+            <li><a href="../dom/removeProp.js.html">dom/removeProp.js</a></li>
+            <li><a href="../dom/replaceWith.js.html">dom/replaceWith.js</a></li>
+            <li><a href="../dom/serialize.js.html">dom/serialize.js</a></li>
+            <li><a href="../dom/show.js.html">dom/show.js</a></li>
+            <li><a href="../dom/siblings.js.html">dom/siblings.js</a></li>
+            <li><a href="../dom/text.js.html">dom/text.js</a></li>
+            <li><a href="../dom/val.js.html">dom/val.js</a></li>
+            <li><a href="../dom/width.js.html">dom/width.js</a></li>
+            <li><a href="../dom/wrapInner.js.html">dom/wrapInner.js</a></li>
+            <li><a href="../events/bind.js.html">events/bind.js</a></li>
+            <li><a href="../events/click.js.html">events/click.js</a></li>
+            <li><a href="../events/one.js.html">events/one.js</a></li>
+            <li><a href="../events/trigger.js.html">events/trigger.js</a></li>
+            <li><a href="../events/triggerHandler.js.html">events/triggerHandler.js</a></li>
+            <li><a href="../events/unbind.js.html">events/unbind.js</a></li>
+            <li><a href="../shoestring.js.html">shoestring.js</a></li>
+            <li><a href="../util/errors.js.html">util/errors.js</a></li>
+            <li><a href="../util/map.js.html">util/map.js</a></li>
+            <li><a href="../util/tracker.js.html">util/tracker.js</a></li>
+            <li><a href="../util/trim.js.html">util/trim.js</a></li>
+          </ul>
         </div>
       </div>
     </div>

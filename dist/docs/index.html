@@ -154,90 +154,92 @@
         <div class="span9">
           <section id="Main"><h1 id="shoestring">Shoestring</h1>
 <p><a href="http://www.filamentgroup.com/"><img src="http://filamentgroup.com/images/fg-logo-positive-sm-crop.png" alt="Filament Group"> </a></p>
-<p>A lightweight, simple utility made to run on a tight budget. Out of the box, all you can really do with it is make loops, but you can easily tie it to other things too.</p>
-<ul>
-<li>Copyright 2012 @scottjehl, Filament Group, Inc.</li>
-<li>Licensed MIT/GPLv2</li>
-</ul>
-<p>Shoestring is a simple framework for organizing, creating, and using DOM-based utilities. It&#39;s a throwback to the days of building websites using a small set of utilities that you need, and not much more. The utilities are wrapped in a handy and familiar API, making it more of a pleasure to work with.</p>
-<p>Shoestring supports a small set of features, and almost that entire set is optional. It is aimed particularly at cases where you need a small set of JavaScript utilities but not a heavyweight toolkit. It is designed for making user experience enhancements in modern browsers, while quietly stepping aside and letting things &quot;be&quot; in the older ones.</p>
-<p>Shoestring is part of the Southstreet workflow at Filament Group.</p>
-<h3 id="shoestring-is-in-early-development-and-may-not-be-ready-for-production-use-">Shoestring is in early development and may not be ready for production use.</h3>
-<p>Shoestring is still in its experimental, alpha development days, and is sure to have plenty of quirks we&#39;ve yet to uncover. We&#39;re excited about its philosophy, but are well-aware that its implementation needs improvements. If you&#39;re able, we&#39;d love your help!</p>
-<h1 id="philosophy">Philosophy</h1>
-<p>Shoestring is designed with a minimalist, mobile-first philosophy.</p>
-<p>One unique aspect of Shoestring is that its source code tends to favor terseness over completeness, allowing it to be very lightweight, but not as fault-tolerant or broadly compatible as many common DOM toolkits. For example, a given method might support one or two argument types, and not provide logic to support others that are deemed less common. These decisions are made based on the opinion of the developers and what they found most necessary, but all methods are easily overrideable if you&#39;d like to do so.</p>
-<p>Shoestring also favors terseness in its string-based selector engine, which it merely offloads to modern browsers&#39; native <code>document.querySelectorAll</code> (though you can easily plug-in an engine like Sizzle if you&#39;d like) function. In this way, DOM selections will sometimes be a little slower than they would be in other libraries, but conversely, Shoestring&#39;s simpler logic makes it lighter in overall weight, and faster in initial load time.</p>
-<p>We&#39;re still assessing the benefits of these ideas and are generally looking for a good balance of code weight, runtime speed, browser support, and developer convenience.</p>
-<h1 id="feature-set">Feature Set</h1>
-<p>Shoestring&#39;s API is inspired by jQuery, because we absolutely love working with jQuery, but there are times when we only need a subset of its features and browser support.</p>
-<p>Technically, shoestring.js is a very small, extendable core function. That core function doesn&#39;t come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like <code>each</code>, <code>find</code>, <code>children</code>. Using its <code>shoestring.fn</code> API, its core is easy to extend further, and several extensions are available in the Shoestring codebase for you to include in your build.</p>
+<p>A lightweight, simple DOM utility made to run on a tight budget.</p>
+<p>Shoestring is part of the <a href="https://github.com/filamentgroup/southstreet">Southstreet workflow</a> at Filament Group.</p>
+<p>You can find more details in the <a href="http://filamentgroup.github.io/shoestring/dist/docs/">API documentation</a>.</p>
+<h2 id="philosophy">Philosophy</h2>
+<p>Shoestring is a lightweight, modular DOM framework intended for developers who need their code to download and run as fast as possible. It is intended to be &quot;just enough&quot; of a tool to efficently write maintainable cross-browser JavaScript. The API is modeled after jQuery but we intentionally implement a tiny subset of the API to cover only the methods we commonly need in our projects.  Each feature is built as an optional extension to a minimal core so each can be removed from the production build (dependencies between extensions are rare). The selector engine delegates to modern browsers&#39; native <code>document.querySelectorAll</code>, which means it requires browsers that support that feature, such as IE8. For projects that require deeper compatibility or a richer set of features, it is simple to swap in jQuery instead. As a rule, anything that works with Shoestring should work with jQuery, but not the converse.</p>
+<p>Our goal is to strike a good balance of code weight, runtime speed, browser support, and developer convenience. </p>
+<h2 id="features">Features</h2>
+<p>Shoestring&#39;s API is inspired by jQuery.</p>
+<p>Technically, shoestring.js is a very small, extendable core function. That core function doesn&#39;t come with much more than a means of finding and/or generating HTML elements, a DOM-ready handler, and a few essential element-traversal methods like <code>each</code>, <code>find</code>, <code>children</code>. Using its <code>shoestring.fn</code> API, its core is easy to extend further, and many extensions are available for you to include in your build – the default build includes all extensions, but it&#39;s still very small (~3kb compressed).</p>
 <p>If you are concerned about compatibility issues/pitfalls consider using the development build releases (<code>-dev</code> in the <a href="https://github.com/filamentgroup/shoestring/releases">releases</a>). We&#39;ve endeavored to throw exceptions where a particular invocation pattern or feature isn&#39;t supported as a means to document the disparity. We recommend that you use the development version in development and the regular non-<code>-dev</code> version in production.</p>
-<h1 id="examples">Examples</h1>
-<p>At it&#39;s core, Shoestring is a function and a few utilities. to start, you can find some elements via CSS selectors, like so:</p>
-<pre><code>shoestring( &quot;#foo, .bar&quot; )</code></pre>
-<p>this will return a <code>shoestring</code> array of DOM nodes, which allows you to chain <code>shoestring</code> methods one after another, affecting all elements in the selection. after you&#39;ve found some elements, you might care to find more of them within your result. the <code>find</code> method does just that.</p>
-<pre><code>shoestring( &quot;#foo, .bar&quot; ).find( &quot;#baz&quot; );</code></pre>
-<p>some sugary syntax for the same result as above:</p>
-<pre><code>shoestring( &quot;#baz&quot;,  &quot;#foo, .bar&quot; );</code></pre>
-<p>perhaps you&#39;d like to iterate through each item that was found, applying scripting to them all. the <code>each</code> method has you covered.</p>
-<pre><code>shoestring( &quot;#foo, .bar&quot; ).each(function(){
-    console.log( this );
-    // here, &quot;this&quot; refers to the current element in iteration
-});</code></pre>
-<p><code>each</code> also supports a passed iteration number, if you please:</p>
-<pre><code>shoestring( &quot;#foo, .bar&quot; ).each(function( i ){
-    console.log( i );
-    // here, &quot;i&quot; refers to the current iteration number (0 or 1 in this case)
-});</code></pre>
-<p>...but wait. you&#39;ll probably want to hold off on all that until the dom is ready. Pass a function into Shoestring and it&#39;ll queue it up til the coast is clear.</p>
-<pre><code>shoestring( function(){
-    // execute code here
-} );</code></pre>
-<p>OK, that&#39;s all <code>shoestring</code> has in the way of dom helpers... from there, we can add extensions.</p>
-<p>For extensions, <code>shoestring</code> comes with a utility function or three. First, the <code>extend</code> method, which is just a simple object extender:</p>
-<pre><code>shoestring.extend( { foo: &quot;bar&quot; }, { baz: &quot;bam!&quot; } );
-// --&gt; { foo: &quot;bar&quot;, baz: &quot;bam!&quot; }</code></pre>
-<p><code>extend</code> doesn&#39;t do deep object extensions, but it covers the usual hash mixin use case pretty well. You can use it to extend any object with another, but you might choose use it to add more utility functions to <code>shoestring</code> itself, like so:</p>
-<pre><code>shoestring.extend( Shoestring, { alertfoo: function(){ alert( &quot;foo&quot; ); } });
+<p>There are three sets of extensions to the Shoestring core: DOM manipulation, events, and ajax.</p>
+<h3 id="dom">DOM</h3>
+<p>If you&#39;ve used jQuery, the structure and behavior of the DOM manipulation methods will be immediately familiar:</p>
+<pre><code class="lang-javascript">shoestring( &quot;.foo&quot; ).addClass( &quot;bar&quot; ).attr( &quot;data-baz&quot;, &quot;bak&quot; );</code></pre>
+<p>That is, construct a sequence of elements from the DOM and invoke each method on all the elements of the sequence in turn. You can find a full list of the supported DOM methods and their arguments in the <a href="http://filamentgroup.github.io/shoestring/dist/docs/">API docs</a> under the <code>dom/*</code> subdirectory.</p>
+<h3 id="events">Events</h3>
+<p>Shoestring supports most of the jQuery events API including: custom events that bubble, event namespaces, a normalized event object, event arguments, DOM Ready, a <code>.one</code> method, comprehensive <code>.unbind</code>, etc. The major difference here is that Shoestring does not support the event delegation helpers built into jQuery, like <code>.delegate</code> or <code>.on</code> with a selector argument.</p>
+<pre><code class="lang-javascript">shoestring( &quot;.foo&quot; ).bind( &quot;click&quot;, function( event ) { ... });</code></pre>
+<p>Or with a custom event triggered on a child element:</p>
+<pre><code class="lang-javascript">shoestring( &quot;.foo&quot; ).bind( &quot;bar&quot;, function( event, arg ) {
+  ...
+  if(arg == 1) { ... }
+  ...
+});
 
-shoestring.foo();
+// ...
 
-// --&gt; throws an alert of &quot;foo&quot;</code></pre>
-<p>the second utility, <code>inArray</code>, will let you know if an item is in an array or not, returning the position of the item in the array (or <code>-1</code> if it&#39;s not present). This is helpful when returning arrays that should only contain unique entries, like a bunch of dom node references, for instance.</p>
-<pre><code>shoestring.inArray( &quot;b&quot;, [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;] );
-// --&gt; true, &quot;b&quot; is in that array</code></pre>
-<p>The third utility function, <code>fn</code>, is a bit more interesting, as it is where you add chainable methods to the <code>shoestring</code> api. Here&#39;s a simple little <code>addClass</code> method, added to <code>shoestring</code> via the <code>fn</code> api:</p>
-<pre><code>shoestring.fn.addClass = function( cname ){
+shoestring( &quot;.foo&quot; ).children().first().trigger( &quot;bar&quot;, 1 );</code></pre>
+<p>You can find a full list of the supported event methods and their arguments in the <a href="http://filamentgroup.github.io/shoestring/dist/docs/">API docs</a> under the <code>events/*</code> subdirectory.</p>
+<h3 id="ajax">Ajax</h3>
+<p>Shoestring supports a full <code>shoestring.ajax</code> method as well as some shorthand helpers like <code>shoestring.get</code> and <code>shoestring.post</code>.</p>
+<pre><code class="lang-javascript">shoestring.ajax( &quot;/foo&quot;, {
+  success: function(){ ... },
+  method: &quot;GET&quot;,
+  ...
+});</code></pre>
+<p>Which could also be accomplished using <code>shoestring.get</code></p>
+<pre><code class="lang-javascript">shoestring.get( &quot;/foo&quot;, function(){ ... });</code></pre>
+<p>You can find a full list of the supported ajax methods and their arguments in the <a href="http://filamentgroup.github.io/shoestring/dist/docs/">API docs</a> under the <code>ajax/*</code> subdirectory.</p>
+<h2 id="extensions">Extensions</h2>
+<p>Extending Shoestring is done in nearly the same fashion as jQuery. There is an object on which you can define properties using functions and those functions will have access to the Shoestring DOM element sequence during invocation using <code>this</code>. As an example the <code>remove</code> method:</p>
+<pre><code class="lang-javascript">/**
+ * Remove the current set of elements from the DOM.
+ *
+ * @return shoestring
+ * @this shoestring
+ */
+shoestring.fn.remove = function(){
   return this.each(function(){
-    this.className += &quot; &quot; + cname;
+    if( this.parentNode ) {
+      this.parentNode.removeChild( this );
+    }
   });
 };</code></pre>
-<p>A quick explanation: we&#39;ve defined a function with a single argument <code>cname</code>, representing the class to be added. Inside the function, <code>this</code> refers to the <code>shoestring</code>&#39;d set of dom nodes. In order to maintain <code>shoestring</code>&#39;s chainability, an <code>fn</code> function should always return either <code>this</code> or a call to <code>Shoestring()</code> or one of its api methods. In this case, we&#39;re returning <code>this</code>, but we&#39;re also chaining on an <code>each</code> method to iterate through each item in the selection and add <code>cname</code> to its class attribute.</p>
-<p>Now we can use it.</p>
-<pre><code>shoestring( &quot;body&quot; ).addClass( &quot;foo&quot; );
+<p>It uses the <code>each</code> method to handle the DOM elements in the current sequence in turn.</p>
+<p><strong>NOTE</strong> these definitions must be made before a Shoestring object that depends on them is constructed. This is in contrast with jQuery where each object has access to new methods through the prototype change. This will be changed soon.</p>
+<h3 id="modules">Modules</h3>
+<p>Each extension to Shoestring included in the repository is defined as an AMD module, but only for build purposes. We don&#39;t support, or plan to support, loading the library as modules in the browser.</p>
+<pre><code class="lang-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
+define([ &quot;shoestring&quot;, &quot;dom/remove&quot; ], function(){
+//&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-// --&gt; [&lt;body class=&quot;foo&quot;&gt;&lt;/body&gt;]</code></pre>
-<p>...and since we returned <code>this</code>, we can keep chaining.</p>
-<pre><code>shoestring( &quot;body, #foo&quot; ).addClass( &quot;foo&quot; ).each(function(){
-  // do something else here
-});</code></pre>
-<p>That&#39;s pretty much it. Of course, you&#39;re probably going to need a few more methods to make Shoestring useful...</p>
-<h2 id="shoestring-extensions">Shoestring extensions</h2>
-<p>The <code>src/extensions</code> folder includes a few prebuilt methods you can grab and chuck into your project.</p>
-<h2 id="custom-builds">Custom Builds</h2>
-<p>Each extension is defined an AMD module and the dependencies are sort out during the build by requirejs. The all inclusive build is <code>build/main.js</code> and can act as a reference for a custom build. To creat a custom build:</p>
+shoestring.fn.foo = function(){ ... };
+
+//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
+});
+//&gt;&gt;excludeEnd(&quot;exclude&quot;);</code></pre>
+<p>Note that the AMD wrapper is removed during the process of the build and that the dependencies are defined from the <code>src</code> subdirectory. More on custom builds below.</p>
+<h3 id="dependencies">Dependencies</h3>
+<p>Browsing the modules in Shoestring you&#39;ll notice that very few have explicit dependencies in their module definitions. This is by design. We are interested in being able to select the minimum number of methods necessary for a given project to reduce load and parse times.</p>
+<h2 id="builds">Builds</h2>
+<p>Shoestring releases include two different builds, one for development and one for production. The development build is larger. It is intended to help with jQuery compatibility issues and includes other development utilities like the method tracker. The production build is meant to be shipped in production and does not include the extra dev-time helpers.</p>
+<h3 id="custom">Custom</h3>
+<p>This repository supports custom builds through creating a meta-module in the <code>build/custom/</code> directory and running the default Grunt task. To get started building a custom production build, do the following:</p>
 <ol>
-<li>Copy <code>build/main.js</code> to <code>build/custom/my-build.js</code></li>
-<li>Edit <code>build/custom/my-build.js</code> and remove any extensions you&#39;re not using</li>
-<li>Run <code>grunt build</code></li>
-<li>View <code>dist/my-build.js</code></li>
+<li>make sure the project dependencies are installed with <code>npm install</code></li>
+<li>copy <code>build/development.js</code> to <code>build/custom/foo.js</code></li>
+<li>run <code>grunt</code> or <code>node node_modules/.bin/grunt</code></li>
+<li>use <code>dist/foo.js</code></li>
 </ol>
-<h2 id="want-a-dollar-">Want a dollar?</h2>
-<p>here you go:</p>
-<pre><code>window.$ = shoestring;
-
-$( &quot;foo, bar, .baz&quot; ).each(...)</code></pre>
+<h3 id="tracker">Tracker</h3>
+<p>Included in the development build is a method tracker. It works by proxying all calls to <code>shoestring.fn</code> methods through a corresponding method that records the invocation in local storage. <strong>NOTE</strong> this does not include methods defined on <code>shoestring</code>. Then the methods being used across pages by your application can be inspected.</p>
+<pre><code class="lang-javascript">JSON.parse( window.localStorage.getItem(shoestring.trackedMethodsKey) );</code></pre>
+<p>If the method tracker is included during a significant portion of development this list can be used to remove unused functions from your Shoestring build with a custom meta-module.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Please see the <a href="CONTRIBUTING.md">contribution guidelines</a>.</p>
 </section>
         </div>
         <div id="nav" class="span3 bs-docs-sidebar">
@@ -247,6 +249,9 @@ $( &quot;foo, bar, .baz&quot; ).each(...)</code></pre>
             <li><a href="ajax/get.js.html">ajax/get.js</a></li>
             <li><a href="ajax/load.js.html">ajax/load.js</a></li>
             <li><a href="ajax/post.js.html">ajax/post.js</a></li>
+            <li><a href="core/each.js.html">core/each.js</a></li>
+            <li><a href="core/inarray.js.html">core/inarray.js</a></li>
+            <li><a href="core/ready.js.html">core/ready.js</a></li>
             <li><a href="data/data.js.html">data/data.js</a></li>
             <li><a href="data/removeData.js.html">data/removeData.js</a></li>
             <li><a href="dollar.js.html">dollar.js</a></li>
@@ -257,6 +262,7 @@ $( &quot;foo, bar, .baz&quot; ).each(...)</code></pre>
             <li><a href="dom/appendTo.js.html">dom/appendTo.js</a></li>
             <li><a href="dom/attr.js.html">dom/attr.js</a></li>
             <li><a href="dom/before.js.html">dom/before.js</a></li>
+            <li><a href="dom/children.js.html">dom/children.js</a></li>
             <li><a href="dom/clone.js.html">dom/clone.js</a></li>
             <li><a href="dom/closest.js.html">dom/closest.js</a></li>
             <li><a href="dom/css/exceptions.js.html">dom/css/exceptions.js</a></li>
@@ -267,6 +273,7 @@ $( &quot;foo, bar, .baz&quot; ).each(...)</code></pre>
             <li><a href="dom/dimension.js.html">dom/dimension.js</a></li>
             <li><a href="dom/eq.js.html">dom/eq.js</a></li>
             <li><a href="dom/filter.js.html">dom/filter.js</a></li>
+            <li><a href="dom/find.js.html">dom/find.js</a></li>
             <li><a href="dom/first.js.html">dom/first.js</a></li>
             <li><a href="dom/get.js.html">dom/get.js</a></li>
             <li><a href="dom/hasClass.js.html">dom/hasClass.js</a></li>
@@ -310,10 +317,8 @@ $( &quot;foo, bar, .baz&quot; ).each(...)</code></pre>
             <li><a href="events/triggerHandler.js.html">events/triggerHandler.js</a></li>
             <li><a href="events/unbind.js.html">events/unbind.js</a></li>
             <li><a href="shoestring.js.html">shoestring.js</a></li>
-            <li><a href="util/each.js.html">util/each.js</a></li>
             <li><a href="util/errors.js.html">util/errors.js</a></li>
             <li><a href="util/map.js.html">util/map.js</a></li>
-            <li><a href="util/merge.js.html">util/merge.js</a></li>
             <li><a href="util/tracker.js.html">util/tracker.js</a></li>
             <li><a href="util/trim.js.html">util/trim.js</a></li>
           </ul>

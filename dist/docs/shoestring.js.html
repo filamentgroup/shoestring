@@ -152,209 +152,127 @@
     <div class="container">
       <div class="row">
         <div class="span9">
-          <div class="description"> </div>
+          <section id="shoestring">
+            <h1>shoestring</h1>
+            <h5 class="subheader"></h5>
+            <p>
+              <div class="label label-info radius ctx-type">function</div><span>shoestring()</span>
+            </p>
+          </section>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th style="width:20%">Option name</th>
+                <th style="width:20%">Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>prim</td>
+                <td>string,object</td>
+                <td>The selector to find or element to wrap.</td>
+              </tr>
+              <tr>
+                <td>sec</td>
+                <td>object</td>
+                <td>The context in which to match the `prim` selector.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="description"><p>The shoestring object constructor.</p> </div>
           <pre><code class="language-javascript">//&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
-(function( w, undefined ){
-//&gt;&gt;excludeEnd(&quot;exclude&quot;);
-	&quot;use strict&quot;;
-	var doc = w.document,
-		shoestring = function( prim, sec ){
+define([], function(){
+	//&gt;&gt;excludeEnd(&quot;exclude&quot;);
 
-			var pType = typeof( prim ),
+	/**
+	 * The shoestring object constructor.
+	 *
+	 * @param {string,object} prim The selector to find or element to wrap.
+	 * @param {object} sec The context in which to match the `prim` selector.
+	 * @returns shoestring
+	 * @this window
+	 */
+	function shoestring( prim, sec ){
+		var pType = typeof( prim ),
 				ret = [],
 				sel;
 
-			if( prim ){
-				// if string starting with &lt;, make html
-				if( pType === &quot;string&quot; &amp;&amp; prim.indexOf( &quot;&lt;&quot; ) === 0 ){
-					var dfrag = document.createElement( &quot;div&quot; );
-					dfrag.innerHTML = prim;
-					return shoestring( dfrag ).children().each(function(){
-						dfrag.removeChild( this );
-					});
+		if( prim ){
+			// if string starting with &lt;, make html
+			if( pType === &quot;string&quot; &amp;&amp; prim.indexOf( &quot;&lt;&quot; ) === 0 ){
+				var dfrag = document.createElement( &quot;div&quot; );
+				dfrag.innerHTML = prim;
+				return shoestring( dfrag ).children().each(function(){
+					dfrag.removeChild( this );
+				});
+			}
+			else if( pType === &quot;function&quot; ){
+				return shoestring.ready( prim );
+			}
+			// if string, it's a selector, use qsa
+			else if( pType === &quot;string&quot; ){
+				if( sec ){
+					return shoestring( sec ).find( prim );
 				}
-				else if( pType === &quot;function&quot; ){
-					return shoestring.ready( prim );
-				}
-				// if string, it's a selector, use qsa
-				else if( pType === &quot;string&quot; ){
-					if( sec ){
-						return shoestring( sec ).find( prim );
-					}
 //&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
-					try {
+				try {
 //&gt;&gt;includeEnd(&quot;development&quot;);
-						sel = doc.querySelectorAll( prim );
+					sel = document.querySelectorAll( prim );
 //&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
-					} catch( e ) {
-						shoestring.error( 'queryselector', prim );
-					}
+				} catch( e ) {
+					shoestring.error( 'queryselector', prim );
+				}
 //&gt;&gt;includeEnd(&quot;development&quot;);
-					for( var i = 0, il = sel.length; i &lt; il; i++ ){
-						ret[ i ] = sel[ i ];
-					}
-				}
-				else if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-					pType === &quot;object&quot; &amp;&amp; prim instanceof w.NodeList ){
-
-					for( var i2 = 0, il2 = prim.length; i2 &lt; il2; i2++ ){
-						ret[ i2 ] = prim[ i2 ];
-					}
-				}
-				// object? passthrough
-				else {
-					ret = ret.concat( prim );
+				for( var i = 0, il = sel.length; i &lt; il; i++ ){
+					ret[ i ] = sel[ i ];
 				}
 			}
-			// if no prim, return a wrapped doc
-			else{
-				ret.push( doc );
+			else if( Object.prototype.toString.call( pType ) === '[object Array]' ||
+							 pType === &quot;object&quot; &amp;&amp; prim instanceof w.NodeList ){
+
+								 for( var i2 = 0, il2 = prim.length; i2 &lt; il2; i2++ ){
+									 ret[ i2 ] = prim[ i2 ];
+								 }
+							 }
+			// object? passthrough
+			else {
+				ret = ret.concat( prim );
 			}
+		}
+		// if no prim, return a wrapped doc
+		else{
+			ret.push( document );
+		}
 
-			ret = shoestring.extend( ret, shoestring.fn );
+		ret = shoestring.extend( ret, shoestring.fn );
 
-			// add selector prop
-			ret.selector = prim;
+		// add selector prop
+		ret.selector = prim;
 
-			return ret;
-		};
+		return ret;
+	}
 
 	// For adding element set methods
 	shoestring.fn = {};
 
-	// Public each method
-	// For iteration on sets
-	shoestring.fn.each = function( fn ){
-		for( var i = 0, il = this.length; i &lt; il; i++ ){
-			fn.call( this[ i ], i );
-		}
-		return this;
-	};
-
-	// For contextual lookups
-	shoestring.fn.find = function( sel ){
-		var ret = [],
-			finds;
-		this.each(function(){
-//&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
-			try {
-//&gt;&gt;includeEnd(&quot;development&quot;);
-				finds = this.querySelectorAll( sel );
-//&gt;&gt;includeStart(&quot;development&quot;, pragmas.development);
-			} catch( e ) {
-				shoestring.error( 'queryselector', sel );
-			}
-//&gt;&gt;includeEnd(&quot;development&quot;);
-
-			for( var i = 0, il = finds.length; i &lt; il; i++ ){
-				ret = ret.concat( finds[i] );
-			}
-		});
-		return shoestring( ret );
-	};
-
-	// Children - get element child nodes.
-	// This is needed for HTML string creation
-	shoestring.fn.children = function(){
-		var ret = [],
-			childs,
-			j;
-		this.each(function(){
-			childs = this.children;
-			j = -1;
-
-			while( j++ &lt; childs.length-1 ){
-				if( shoestring.inArray(  childs[ j ], ret ) === -1 ){
-					ret.push( childs[ j ] );
-				}
-			}
-		});
-		return shoestring(ret);
-	};
-
-	// Public non-dom utilities
-
 	// For extending objects
+	// TODO move to separate module when we use prototypes
 	shoestring.extend = function( first, second ){
 		for( var i in second ){
 			if( second.hasOwnProperty( i ) ){
 				first[ i ] = second[ i ];
 			}
 		}
+
 		return first;
 	};
 
-	// check if an item exists in an array
-	shoestring.inArray = function( needle, haystack ){
-		var isin = -1;
-		for( var i = 0, il = haystack.length; i &lt; il; i++ ){
-			if( haystack.hasOwnProperty( i ) &amp;&amp; haystack[ i ] === needle ){
-				isin = i;
-			}
-		}
-		return isin;
-	};
-
-	// For DOM ready execution
-	shoestring.ready = function( fn ){
-		if( ready &amp;&amp; fn ){
-			fn.call( document );
-		}
-		else if( fn ){
-			readyQueue.push( fn );
-		}
-		else {
-			runReady();
-		}
-
-		return [doc];
-	};
-
-	// non-shortcut ready
-	shoestring.fn.ready = function( fn ){
-		shoestring.ready( fn );
-		return this;
-	};
-
-	// Empty and exec the ready queue
-	var ready = false,
-		readyQueue = [],
-		runReady = function(){
-			if( !ready ){
-				while( readyQueue.length ){
-					readyQueue.shift().call( document );
-				}
-				ready = true;
-			}
-		};
-
-	// Quick IE8 shiv
-	if( !w.addEventListener ){
-		w.addEventListener = function( evt, cb ){
-			return w.attachEvent( &quot;on&quot; + evt, cb );
-		};
-	}
-
-	// If DOM is already ready at exec time, depends on the browser.
-	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
-	if (document.attachEvent ? doc.readyState === &quot;complete&quot; : doc.readyState !== &quot;loading&quot;) {
-		runReady();
-	}	else {
-		if( !w.document.addEventListener ){
-			w.document.attachEvent( &quot;DOMContentLoaded&quot;, runReady );
-			w.document.attachEvent( &quot;onreadystatechange&quot;, runReady );
-		} else {
-			w.document.addEventListener( &quot;DOMContentLoaded&quot;, runReady, false );
-			w.document.addEventListener( &quot;readystatechange&quot;, runReady, false );
-		}
-		w.addEventListener( &quot;load&quot;, runReady, false );
-	}
-
 	// expose
-	w.shoestring = shoestring;
+	window.shoestring = shoestring;
 
 //&gt;&gt;excludeStart(&quot;exclude&quot;, pragmas.exclude);
-}( this ));
+});
 //&gt;&gt;excludeEnd(&quot;exclude&quot;);
 </code></pre>
         </div>
@@ -365,6 +283,9 @@
             <li><a href="ajax/get.js.html">ajax/get.js</a></li>
             <li><a href="ajax/load.js.html">ajax/load.js</a></li>
             <li><a href="ajax/post.js.html">ajax/post.js</a></li>
+            <li><a href="core/each.js.html">core/each.js</a></li>
+            <li><a href="core/inarray.js.html">core/inarray.js</a></li>
+            <li><a href="core/ready.js.html">core/ready.js</a></li>
             <li><a href="data/data.js.html">data/data.js</a></li>
             <li><a href="data/removeData.js.html">data/removeData.js</a></li>
             <li><a href="dollar.js.html">dollar.js</a></li>
@@ -375,6 +296,7 @@
             <li><a href="dom/appendTo.js.html">dom/appendTo.js</a></li>
             <li><a href="dom/attr.js.html">dom/attr.js</a></li>
             <li><a href="dom/before.js.html">dom/before.js</a></li>
+            <li><a href="dom/children.js.html">dom/children.js</a></li>
             <li><a href="dom/clone.js.html">dom/clone.js</a></li>
             <li><a href="dom/closest.js.html">dom/closest.js</a></li>
             <li><a href="dom/css/exceptions.js.html">dom/css/exceptions.js</a></li>
@@ -385,6 +307,7 @@
             <li><a href="dom/dimension.js.html">dom/dimension.js</a></li>
             <li><a href="dom/eq.js.html">dom/eq.js</a></li>
             <li><a href="dom/filter.js.html">dom/filter.js</a></li>
+            <li><a href="dom/find.js.html">dom/find.js</a></li>
             <li><a href="dom/first.js.html">dom/first.js</a></li>
             <li><a href="dom/get.js.html">dom/get.js</a></li>
             <li><a href="dom/hasClass.js.html">dom/hasClass.js</a></li>
@@ -428,10 +351,8 @@
             <li><a href="events/triggerHandler.js.html">events/triggerHandler.js</a></li>
             <li><a href="events/unbind.js.html">events/unbind.js</a></li>
             <li class="active"><a href="shoestring.js.html">shoestring.js</a></li>
-            <li><a href="util/each.js.html">util/each.js</a></li>
             <li><a href="util/errors.js.html">util/errors.js</a></li>
             <li><a href="util/map.js.html">util/map.js</a></li>
-            <li><a href="util/merge.js.html">util/merge.js</a></li>
             <li><a href="util/tracker.js.html">util/tracker.js</a></li>
             <li><a href="util/trim.js.html">util/trim.js</a></li>
           </ul>

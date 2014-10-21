@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 
 		srcs = args.length ? srcs = args.join(":") : "src";
 
-		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', srcs, '--target', 'dist/docs']);
+		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', srcs, '--target', 'dist/docs', '--template', 'views/template.jade']);
 
 		doxx.on( 'close', function( code ) {
 			console.log( "doxx completed with exit code: "	+ code );
