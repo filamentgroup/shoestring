@@ -55,7 +55,7 @@ When you are contributing a new extensions use the name of this extension, like 
 Otherwise give it a descriptive name like `doc-generator` or reference a specific issue like `issues-12`.
 When the issue is resolved create a pull request to allow us to review and accept your contribution.
 
-**NOTE** All changes are considered carefully but additions especially so. We are particularly interested in retaining a small footprint and if an method is there history tells us that someone will use it.
+**NOTE** All changes are considered carefully but additions especially so. We are particularly interested in retaining a small footprint and if a method is present, history tells us that someone will use it.
 
 ## JavaScript Style Guide
 
