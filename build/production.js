@@ -6,6 +6,9 @@ require([
 	"ajax/get",
 	"ajax/load",
 	"ajax/post",
+	"core/each",
+	"core/inarray",
+	"core/ready",
 	"data/data",
 	"data/removeData",
 	"dollar",
@@ -16,11 +19,13 @@ require([
 	"dom/appendTo",
 	"dom/attr",
 	"dom/before",
+	"dom/children",
 	"dom/clone",
 	"dom/closest",
 	"dom/css",
 	"dom/eq",
 	"dom/filter",
+	"dom/find",
 	"dom/first",
 	"dom/get",
 	"dom/height",
@@ -55,8 +60,6 @@ require([
 	"events/one",
 	"events/triggerHandler",
 	"events/trigger",
-	"events/unbind",
-	"util/each",
-	"util/merge"
+	"events/unbind"
 ]);
 //>>excludeEnd("exclude");

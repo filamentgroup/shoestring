@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 		}
 	};
 
-  // NOTE config includes development
+	// NOTE config includes development
 	builds.development = {
 		options: {
 			baseUrl: "src",
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		meta: {
-			version: '0.1.5',
+			version: '1.0.0',
 			banner: '/*! Shoestring - v<%= meta.version %> - ' +
 				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 				'* http://github.com/filamentgroup/shoestring/\n' +
@@ -110,9 +110,15 @@ module.exports = function(grunt) {
 	spawn = require('child_process').spawn;
 
 	grunt.registerTask('docs', function() {
-		var doxx, done = this.async();
+		var doxx, srcs, args = [], done = this.async();
 
-		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', 'src', '--target', 'dist/docs', '--template', 'views/template.jade' ]);
+		for(var i in arguments){
+			args.push(arguments[i]);
+		}
+
+		srcs = args.length ? srcs = args.join(":") : "src";
+
+		doxx = spawn( 'node', ['node_modules/.bin/doxx', '--source', srcs, '--target', 'dist/docs']);
 
 		doxx.on( 'close', function( code ) {
 			console.log( "doxx completed with exit code: "	+ code );

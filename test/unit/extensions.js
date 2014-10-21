@@ -7,10 +7,10 @@
 			$fixture = shoestring( '#qunit-fixture' );
 		},
 
-    teardown: function() {
-      $fixture.unbind("foo");
-      $(document).unbind("foo");
-    }
+		teardown: function() {
+			$fixture.unbind("foo");
+			$(document).unbind("foo");
+		}
 	});
 
 	test( '`.add()` adds selected elements to the set', function(){
@@ -1342,6 +1342,49 @@
 		$( "#child" ).trigger( "click" );
 	});
 
+	asyncTest( 'stopPropagation prevents propagation', function() {
+		expect( 1 ) ;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( "#child" ).one( "click", function(e) {
+			e.stopPropagation();
+			ok( true, "one runs" );
+
+			setTimeout(function() {
+				start();
+			});
+
+		});
+
+		$( "#parent" ).one( "click", function() {
+			ok( false, "never runs" );
+		});
+
+		$( "#child" ).trigger( "click" );
+	});
+
+	asyncTest( 'no stopPropagation allows propagation', function() {
+		expect( 2 ) ;
+
+		shoestring( '#qunit-fixture' ).html( '<div id="parent"><div id="child"></div></div>' );
+
+		$( "#child" ).one( "click", function(e) {
+			ok( true, "one runs" );
+
+			setTimeout(function() {
+				start();
+			});
+
+		});
+
+		$( "#parent" ).one( "click", function() {
+			ok( true, "also runs" );
+		});
+
+		$( "#child" ).trigger( "click" );
+	});
+
 	asyncTest( 'Custom Events: namespaced bind, namespaced trigger', function() {
 		expect( 2 );
 
@@ -1621,9 +1664,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 
 	test( "ajax doesn't override default options", function() {
 		equal( shoestring.ajax.settings.method, "GET" );
-		shoestring.ajax( "foo", { method: "FOO" } );
+		shoestring.ajax( "foo", { method: "POST" } );
 		equal( shoestring.ajax.settings.method, "GET" );
 	});
-
-	// TODO test events + arguments on callbacks and trigger
 })();

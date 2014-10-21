@@ -17,7 +17,8 @@ define([ "shoestring" ], function(){
 			// jQuery parent: return the document object for <html> or the parent node if it exists
 			parent = (this === document.documentElement ? document : this.parentNode);
 
-			if( parent ){
+			// if there is a parent and it's not a document fragment
+			if( parent && parent.nodeType !== 11 ){
 				ret.push( parent );
 			}
 		});
