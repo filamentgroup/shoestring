@@ -12,6 +12,7 @@ define([ "shoestring" ], function(){
 			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
 			"map": "the map method. Try using .each to make a new object.",
 			"next-selector" : "passing selectors into .next, try .next().filter( selector )",
+			"next-until" : "nextUntil is not implemented in shoestring. Use .next in a loop until you reach the selector, don't include the selector",
 			"on-delegate" : "the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
 			"outer-width": "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side.",
 			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
