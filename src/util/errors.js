@@ -12,6 +12,7 @@ define([ "shoestring" ], function(){
 			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
 			"map": "the map method. Try using .each to make a new object.",
 			"next-selector" : "passing selectors into .next, try .next().filter( selector )",
+			"off-delegate" : "the .off method with three or more arguments. Using .off( eventName, callback ) instead.",
 			"on-delegate" : "the .on method with three or more arguments. Using .on( eventName, callback ) instead.",
 			"outer-width": "the outerWidth method. Try combining .width() with .css for padding-left, padding-right, and the border of the left and right side.",
 			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
