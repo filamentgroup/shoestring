@@ -74,6 +74,7 @@ define([ "shoestring" ], function(){
 		}
 	}
 
+	shoestring.fn.off = shoestring.fn.unbind;
 //>>excludeStart("exclude", pragmas.exclude);
 });
 //>>excludeEnd("exclude");
