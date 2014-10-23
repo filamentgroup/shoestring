@@ -43,6 +43,7 @@ define([ "shoestring" ], function(){
 			el = this[0];
 
 			if( el.tagName === "SELECT" ){
+				if( el.selectedIndex < 0 ){ return ""; }
 				return el.options[ el.selectedIndex ].value;
 			} else {
 				return el.value;
