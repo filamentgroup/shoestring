@@ -57,10 +57,6 @@ define([], function(){
 				ret = ret.concat( prim );
 			}
 		}
-		// if no prim, return a wrapped doc
-		else{
-			ret.push( document );
-		}
 
 		ret = shoestring.extend( ret, shoestring.fn );
 
