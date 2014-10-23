@@ -11,6 +11,13 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.fn.unbind = function( event, callback ){
+
+		//>>includeStart("development", pragmas.development);
+		if( arguments.length >= 3 || typeof callback === "string" ){
+			shoestring.error( 'off-delegate' );
+		}
+		//>>includeEnd("development");
+
 		var evts = event ? event.split( " " ) : [];
 
 		return this.each(function(){
