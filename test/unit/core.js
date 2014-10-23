@@ -83,12 +83,8 @@ test( 'shoestring with no arguments returns an array with core methods', functio
 	ok( shoestring().constructor === Array );
 });
 
-test( 'shoestring with no arguments returns an array with one child', function() {
-	ok( shoestring().length === 1 );
-});
-
-test( 'shoestring with no arguments returns an array with first child of document', function() {
-	ok( shoestring()[0] === document );
+test( 'shoestring with no arguments returns an empty array', function() {
+	ok( shoestring().length === 0 );
 });
 
 test( 'shoestring with a string argument returns an array', function() {
