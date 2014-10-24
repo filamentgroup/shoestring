@@ -299,6 +299,21 @@
 		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
 	});
 
+	test( '`.html(HTML Object)`', function() {
+		var $old = shoestring( '.html .old' ),
+			$new = shoestring( '.html .new' );
+
+		var div = document.createElement( "div" );
+		div.id = "sibling";
+
+		$old[0].innerHTML = "<div id='sibling'></div>";
+		$new.html( div );
+
+		ok( !!$old[0].innerHTML );
+		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(obj) set properly.' );
+		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
+	});
+
 	test('`.index()`', function() {
 		var $indexed = $fixture.find( ".index div" );
 		equal( $indexed.index( ".first" ), 0 );

@@ -10,9 +10,13 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.fn.html = function( html ){
-		if( html ){
+		if( typeof html === "string" ){
 			return this.each(function(){
 				this.innerHTML = html;
+			});
+		} else if ( typeof html === "object" ) {
+			return this.each(function(){
+				this.innerHTML = html.outerHTML;
 			});
 		} else {
 			var pile = "";
