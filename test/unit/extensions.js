@@ -749,14 +749,13 @@
 		}).trigger( "click" );
 	});
 
-	asyncTest( '`.trigger("click")` checks a checkbox', function() {
+	test( '`.trigger("click")` checks a checkbox', function() {
 		expect( 2 );
 		shoestring( '#qunit-fixture' ).html( '<input id="cbx" type="checkbox" />' );
 
 		ok( !$( "#cbx" )[0].checked, "Checkbox shouldn't be checked" );
 		$( "#cbx" ).trigger( "click" );
-		ok( !!$( "#cbx" )[0].checked, "Checkbox shouldn't be checked" );
-
+		ok( !!$( "#cbx" )[0].checked, "Checkbox should be checked" );
 	});
 
 	asyncTest( "custom event bindings get the right target", function() {
