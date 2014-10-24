@@ -612,6 +612,23 @@
 		equal( $( select ).val(), "2", ".val should return the equivalent of the select's selected option's value" );
 	});
 
+	test( '`.val()` returns correct value of select element', function(){
+		var select = document.createElement( "select" );
+		var option1 = document.createElement( "option" );
+		var option2 = document.createElement( "option" );
+
+		option1.value = "1";
+		option2.value = "2";
+
+
+		select.appendChild( option1 );
+		select.appendChild( option2 );
+
+		select.selectedIndex = -1;
+
+		equal( $( select ).val(), "", ".val should return empty string if nothing is selected" );
+	});
+
 	test( '`$( input ).val(value)` inserts value into input', function(){
 		var value = "happy";
 		var input = document.createElement( "input" );
