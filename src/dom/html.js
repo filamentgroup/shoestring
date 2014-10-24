@@ -10,6 +10,11 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.fn.html = function( html ){
+		//>>includeStart("development", pragmas.development);
+		if( !!html && typeof html === "function" ){
+			shoestring.error( 'html-function' );
+		}
+		//>>includeEnd("development");
 		if( html ){
 			return this.each(function(){
 				this.innerHTML = html;
