@@ -296,7 +296,7 @@
 
 		ok( !!$old[0].innerHTML );
 		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(str) set properly.' );
-		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
+		equal( $new.html(), $old[0].innerHTML, '.html() get str properly.' );
 	});
 
 	test( '`.html(HTML Object)`', function() {
@@ -311,6 +311,43 @@
 
 		ok( !!$old[0].innerHTML );
 		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(obj) set properly.' );
+		equal( $new.html(), $old[0].innerHTML, '.html() get obj properly.' );
+	});
+
+	test( '`.html(HTML Object)`', function() {
+		var $old = shoestring( '.html .old' ),
+			$new = shoestring( '.html .new' );
+
+		var div = document.createElement( "div" );
+		div.id = "sibling";
+
+		$old[0].innerHTML = "<div id='sibling'></div>";
+		$new.html( div );
+
+		ok( !!$old[0].innerHTML );
+		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(obj) set properly.' );
+		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
+	});
+
+	test( '`.html(Array)`', function() {
+		var $old = shoestring( '.html .old' ),
+			$new = shoestring( '.html .new' );
+
+		var arr = [];
+
+		var div = document.createElement( "div" );
+		div.id = "sibling";
+		var div2 = document.createElement( "div" );
+		div2.id = "sibling2";
+
+		arr.push( div );
+		arr.push( div2 );
+
+		$old[0].innerHTML = "<div id='sibling'></div><div id='sibling2'></div>";
+		$new.html( arr );
+
+		ok( !!$old[0].innerHTML );
+		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(Array) set properly.' );
 		equal( $new.html(), $old[0].innerHTML, '.html() get properly.' );
 	});
 
