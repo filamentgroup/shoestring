@@ -20,6 +20,13 @@ define([ "shoestring" ], function(){
 				evt = split[ 0 ],
 				namespace = split.length > 0 ? split[ 1 ] : null;
 
+				if( evt === "click" ){
+					if( this.tagName === "INPUT" && this.type === "checkbox" && this.click ){
+						this.click();
+						return false;
+					}
+				}
+
 				if( document.createEvent ){
 					var event = document.createEvent( "Event" );
 					event.initEvent( evt, true, true );
