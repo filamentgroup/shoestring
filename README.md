@@ -105,7 +105,7 @@ shoestring.fn.remove = function(){
 
 It uses the `each` method to handle the DOM elements in the current sequence in turn.
 
-**NOTE** these definitions must be made before a Shoestring object that depends on them is constructed. This is in contrast with jQuery where each object has access to new methods through the prototype change. This will be changed soon.
+**NOTE** these definitions must be made before a Shoestring object that depends on them is constructed. This is in contrast with jQuery where each object has access to new methods through the prototype chain.
 
 ### Modules
 
