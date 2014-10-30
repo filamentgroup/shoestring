@@ -10,11 +10,30 @@ define([ "shoestring" ], function(){
 	 * @this {shoestring}
 	 */
 	shoestring.fn.is = function( selector ){
-		var ret = false;
+		var ret = false, self = this;
 
-		this.each(function(){
-			if( shoestring.inArray( this, shoestring( selector ) )  > -1 ){
-				ret = true;
+		this.parent().each(function( i, e ) {
+			var j = 0, children;
+
+//>>includeStart("development", pragmas.development);
+				try {
+//>>includeEnd("development");
+					children = e.querySelectorAll( selector );
+//>>includeStart("development", pragmas.development);
+				} catch( e ) {
+					shoestring.error( 'queryselector', selector );
+				}
+//>>includeEnd("development");
+
+			while( j < children.length ){
+
+				self.each(function() {
+					if( this == children.item(j) ){
+						ret = true;
+					}
+				});
+
+				j++;
 			}
 		});
 
