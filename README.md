@@ -8,6 +8,8 @@ Shoestring is part of the [Southstreet workflow](https://github.com/filamentgrou
 
 You can find more details in the [API documentation](http://filamentgroup.github.io/shoestring/dist/docs/).
 
+[![Build Status](https://travis-ci.org/filamentgroup/shoestring.svg?branch=master)](https://travis-ci.org/filamentgroup/shoestring)
+
 ## Philosophy
 
 
