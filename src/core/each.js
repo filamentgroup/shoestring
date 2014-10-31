@@ -14,8 +14,12 @@ define([ "shoestring" ], function(){
 	};
 
 	shoestring.each = function( collection, callback ) {
+		var val;
 		for( var i = 0, il = collection.length; i < il; i++ ){
-			callback.call( collection[i], i, collection[i] );
+			val = callback.call( collection[i], i, collection[i] );
+			if( val === false ){
+				break;
+			}
 		}
 
 		return collection;
