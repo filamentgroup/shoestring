@@ -1,0 +1,25 @@
+{
+  "name": "shoestring",
+  "version": "1.0.1",
+  "homepage": "https://github.com/filamentgroup/shoestring",
+  "authors": [
+    "Filament Group <hello@filamentgroup.com>"
+  ],
+  "description": "A lightweight, simple DOM utility made to run on a tight budget.",
+  "main": "dist/shoestring.js",
+  "keywords": [
+    "dom"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+		"src",
+		"build",
+		"Vagrantfile",
+		"Gruntfile.js"
+  ]
+}
