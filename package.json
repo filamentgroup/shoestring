@@ -1,7 +1,7 @@
 {
 	"name": "shoestring",
 	"title": "Shoestring",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A simple framework for organizing, creating, and using DOM-based utilities.",
 	"private": true,
 	"repository": {
