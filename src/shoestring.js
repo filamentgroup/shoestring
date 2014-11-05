@@ -15,69 +15,82 @@ define([], function(){
 				ret = [],
 				sel;
 
-		if( prim ){
-			// if string starting with <, make html
-			if( pType === "string" && prim.indexOf( "<" ) === 0 ){
-				var dfrag = document.createElement( "div" );
-
-				dfrag.innerHTML = prim;
-
-				return shoestring( dfrag ).children().each(function(){
-					dfrag.removeChild( this );
-				});
-			}
-
-			if( pType === "function" ){
-				return shoestring.ready( prim );
-			}
-
-			// handle re-wrapping shoestring objects
-			if( prim.constructor === shoestring.Shoestring && !sec ){
-				return prim;
-			}
-
-			// if string, it's a selector, use qsa
-			if( pType === "string" ){
-				if( sec ){
-					return shoestring( sec ).find( prim );
-				}
-
-//>>includeStart("development", pragmas.development);
-				try {
-//>>includeEnd("development");
-					sel = document.querySelectorAll( prim );
-//>>includeStart("development", pragmas.development);
-				} catch( e ) {
-					shoestring.error( 'queryselector', prim );
-				}
-//>>includeEnd("development");
-				for( var i = 0, il = sel.length; i < il; i++ ){
-					ret[ i ] = sel[ i ];
-				}
-			} else if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-		             pType === "object" && prim instanceof w.NodeList ){
-
-			  for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
-					ret[ i2 ] = prim[ i2 ];
-				}
-		  } else {
-				// object? passthrough
-				// TODO handle concat of shoestring objects
-				ret = ret.concat( prim );
-			}
+		// return an empty shoestring object
+		if( !prim ){
+			return new shoestring.Shoestring( ret );
 		}
 
-		var ssObj = new shoestring.Shoestring();
+		// read calls
+		if( pType === "function" ){
+			return shoestring.ready( prim );
+		}
 
-		ssObj.length = 0;
-		shoestring.merge(ssObj, ret);
+		// handle re-wrapping shoestring objects
+		if( prim.constructor === shoestring.Shoestring && !sec ){
+			return prim;
+		}
 
-		ret.selector = prim;
+		// if string starting with <, make html
+		if( pType === "string" && prim.indexOf( "<" ) === 0 ){
+			var dfrag = document.createElement( "div" );
 
-		return ssObj;
+			dfrag.innerHTML = prim;
+
+			// TODO depends on children (circular)
+			return shoestring( dfrag ).children().each(function(){
+				dfrag.removeChild( this );
+			});
+		}
+
+		// if string, it's a selector, use qsa
+		if( pType === "string" ){
+			if( sec ){
+				return shoestring( sec ).find( prim );
+			}
+
+//>>includeStart("development", pragmas.development);
+			try {
+//>>includeEnd("development");
+				sel = document.querySelectorAll( prim );
+//>>includeStart("development", pragmas.development);
+			} catch( e ) {
+				shoestring.error( 'queryselector', prim );
+			}
+//>>includeEnd("development");
+			for( var i = 0, il = sel.length; i < il; i++ ){
+				ret[ i ] = sel[ i ];
+			}
+
+			return new shoestring.Shoestring( ret, prim );
+		}
+
+		// confused about this case
+		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
+				pType === "object" &&
+				prim instanceof w.NodeList ){
+
+			for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
+				ret[ i2 ] = prim[ i2 ];
+			}
+
+			return new shoestring.Shoestring( ret, prim );
+		}
+
+		// if it's an array, use all the elements
+		if( prim.constructor === Array ){
+			return new shoestring.Shoestring( prim, prim );
+		}
+
+
+		// otherwise assume it's an object the we want at an index
+		return new shoestring.Shoestring( [prim], prim );
 	}
 
-	shoestring.Shoestring = function() {};
+	shoestring.Shoestring = function( ret, prim ) {
+		this.length = 0;
+		this.selector = prim;
+		shoestring.merge(this, ret);
+	};
 
 	// TODO only required for tests
 	shoestring.Shoestring.prototype.reverse = [].reverse;
