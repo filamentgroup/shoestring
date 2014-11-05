@@ -57,11 +57,8 @@ define([], function(){
 				shoestring.error( 'queryselector', prim );
 			}
 //>>includeEnd("development");
-			for( var i = 0, il = sel.length; i < il; i++ ){
-				ret[ i ] = sel[ i ];
-			}
 
-			return new shoestring.Shoestring( ret, prim );
+			return new shoestring.Shoestring( sel, prim );
 		}
 
 		// confused about this case
@@ -69,11 +66,7 @@ define([], function(){
 				pType === "object" &&
 				prim instanceof w.NodeList ){
 
-			for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
-				ret[ i2 ] = prim[ i2 ];
-			}
-
-			return new shoestring.Shoestring( ret, prim );
+			return new shoestring.Shoestring( prim, prim );
 		}
 
 		// if it's an array, use all the elements
