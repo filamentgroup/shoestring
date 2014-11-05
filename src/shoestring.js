@@ -32,7 +32,7 @@ define([], function(){
 			}
 
 			// handle re-wrapping shoestring objects
-			if( prim.constructor == shoestring.Shoestring && !sec ){
+			if( prim.constructor === shoestring.Shoestring && !sec ){
 				return prim;
 			}
 
