@@ -17,7 +17,7 @@ define([], function(){
 
 		// return an empty shoestring object
 		if( !prim ){
-			return new shoestring.Shoestring( ret );
+			return new Shoestring( ret );
 		}
 
 		// read calls
@@ -58,7 +58,7 @@ define([], function(){
 			}
 //>>includeEnd("development");
 
-			return new shoestring.Shoestring( sel, prim );
+			return new Shoestring( sel, prim );
 		}
 
 		// confused about this case
@@ -66,20 +66,20 @@ define([], function(){
 				pType === "object" &&
 				prim instanceof w.NodeList ){
 
-			return new shoestring.Shoestring( prim, prim );
+			return new Shoestring( prim, prim );
 		}
 
 		// if it's an array, use all the elements
 		if( prim.constructor === Array ){
-			return new shoestring.Shoestring( prim, prim );
+			return new Shoestring( prim, prim );
 		}
 
 
 		// otherwise assume it's an object the we want at an index
-		return new shoestring.Shoestring( [prim], prim );
+		return new Shoestring( [prim], prim );
 	}
 
-	shoestring.Shoestring = function( ret, prim ) {
+	var Shoestring = shoestring.Shoestring = function( ret, prim ) {
 		this.length = 0;
 		this.selector = prim;
 		shoestring.merge(this, ret);
