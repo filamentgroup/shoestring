@@ -26,7 +26,7 @@ define([], function(){
 		}
 
 		// handle re-wrapping shoestring objects
-		if( prim.constructor === shoestring.Shoestring && !sec ){
+		if( prim.constructor === Shoestring && !sec ){
 			return prim;
 		}
 
@@ -79,17 +79,20 @@ define([], function(){
 		return new Shoestring( [prim], prim );
 	}
 
-	var Shoestring = shoestring.Shoestring = function( ret, prim ) {
+	var Shoestring = function( ret, prim ) {
 		this.length = 0;
 		this.selector = prim;
 		shoestring.merge(this, ret);
 	};
 
 	// TODO only required for tests
-	shoestring.Shoestring.prototype.reverse = [].reverse;
+	Shoestring.prototype.reverse = [].reverse;
 
 	// For adding element set methods
-	shoestring.fn = shoestring.Shoestring.prototype;
+	shoestring.fn = Shoestring.prototype;
+
+  // // expose for testing purposes only
+  // shoestring.Shoestring = Shoestring;
 
 	// For extending objects
 	// TODO move to separate module when we use prototypes
