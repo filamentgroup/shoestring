@@ -117,9 +117,15 @@ test( 'shoestring with a Node passed in returns an array of that node', function
 	ok( shoestring( el )[0] === el );
 });
 
-test( 'shoestring with a Node passed in returns an array returns an array of that node', function(){
+test( 'shoestring with a Node passed in returns a singleton array', function(){
 	var el = document.querySelectorAll( ".constructor-selector" )[0];
 	ok( shoestring( el )[0].constructor === HTMLDivElement );
+});
+
+test( 'shoestring with a NodeList passed in returns an array of those nodes', function(){
+	var els = document.querySelectorAll( ".constructor-selector" );
+	equal( shoestring( els )[0], els[0] );
+	equal( shoestring( els ).length, 1 );
 });
 
 test( 'passing a string argument to shoestring with a second argument returns result scoped to second arg', function() {
