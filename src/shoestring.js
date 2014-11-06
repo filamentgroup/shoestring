@@ -20,8 +20,8 @@ define([], function(){
 			return new Shoestring( ret );
 		}
 
-		// read calls
-		if( pType === "function" ){
+		// ready calls
+		if( prim.call ){
 			return shoestring.ready( prim );
 		}
 
@@ -61,9 +61,8 @@ define([], function(){
 			return new Shoestring( sel, prim );
 		}
 
-		// confused about this case
+		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				pType === "object" &&
 				prim instanceof window.NodeList ){
 
 			return new Shoestring( prim, prim );
@@ -73,7 +72,6 @@ define([], function(){
 		if( prim.constructor === Array ){
 			return new Shoestring( prim, prim );
 		}
-
 
 		// otherwise assume it's an object the we want at an index
 		return new Shoestring( [prim], prim );
@@ -106,7 +104,7 @@ define([], function(){
 		return first;
 	};
 
-  // taken directly from jQuery
+	// taken directly from jQuery
 	shoestring.merge = function( first, second ) {
 		var len, j, i;
 
