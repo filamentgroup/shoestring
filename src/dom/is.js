@@ -10,9 +10,22 @@ define([ "shoestring" ], function(){
 	 * @this {shoestring}
 	 */
 	shoestring.fn.is = function( selector ){
-		var ret = false, self = this;
+		var ret = false, self = this, children = [], parents;
 
-		this.parent().each(function( i, e ) {
+		parents = this.parent();
+
+		if( !parents.length ){
+			parents = shoestring( document );
+		}
+
+		// assume a dom element
+		if( typeof selector !== "string" ){
+			children = [selector];
+
+			return _checkElements(this, [selector]);
+		}
+
+		parents.each(function( i, e ) {
 			var j = 0, children;
 
 //>>includeStart("development", pragmas.development);
@@ -25,20 +38,29 @@ define([ "shoestring" ], function(){
 				}
 //>>includeEnd("development");
 
-			while( j < children.length ){
+			ret = _checkElements(self, children);
+		});
 
-				self.each(function() {
-					if( this == children.item(j) ){
-						ret = true;
-					}
-				});
+		return ret;
+	};
+
+	function _checkElements(needles, haystack){
+		var ret = false;
+
+		needles.each(function() {
+			var j = 0;
+
+			while( j < haystack.length ){
+				if( this == haystack[j] ){
+					ret = true;
+				}
 
 				j++;
 			}
 		});
 
 		return ret;
-	};
+	}
 
 //>>excludeStart("exclude", pragmas.exclude);
 });

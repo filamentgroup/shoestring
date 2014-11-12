@@ -367,6 +367,11 @@
 	test('`.is()`', function() {
 		ok( $fixture.is("#qunit-fixture") );
 		ok( !$fixture.is(".jacky-jormp-jomp") );
+		ok( $("html").is("html") );
+		ok( $("body").is("body") );
+
+		// element checks permitted, works at parent level
+		ok( $( document ).is( document ) );
 	});
 
 	test('`.last()`', function() {
