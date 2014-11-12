@@ -12,15 +12,15 @@ define([ "shoestring" ], function(){
 	shoestring.fn.is = function( selector ){
 		var ret = false, self = this, children = [], parents;
 
+		// assume a dom element
+		if( typeof selector !== "string" ){
+			return _checkElements(this, [selector]);
+		}
+
 		parents = this.parent();
 
 		if( !parents.length ){
 			parents = shoestring( document );
-		}
-
-		// assume a dom element
-		if( typeof selector !== "string" ){
-			return _checkElements(this, [selector]);
 		}
 
 		parents.each(function( i, e ) {
