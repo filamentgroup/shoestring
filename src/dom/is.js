@@ -20,8 +20,6 @@ define([ "shoestring" ], function(){
 
 		// assume a dom element
 		if( typeof selector !== "string" ){
-			children = [selector];
-
 			return _checkElements(this, [selector]);
 		}
 
