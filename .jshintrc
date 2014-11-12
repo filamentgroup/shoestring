@@ -8,8 +8,9 @@
 	"noarg": true,
 	"smarttabs": true,
 	"trailing": true,
-	"undef": false,
+	"undef": true,
 	"unused": true,
 	"node": true,
-  "loopfunc": true
+  "loopfunc": true,
+	"predef": [ "window", "document", "define" ] 
 }

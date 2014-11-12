@@ -46,7 +46,7 @@ define([], function(){
 				}
 			}
 			else if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-							 pType === "object" && prim instanceof w.NodeList ){
+							 pType === "object" && prim instanceof window.NodeList ){
 
 								 for( var i2 = 0, il2 = prim.length; i2 < il2; i2++ ){
 									 ret[ i2 ] = prim[ i2 ];
