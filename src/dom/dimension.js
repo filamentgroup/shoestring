@@ -30,7 +30,7 @@ define([ "shoestring" ], function(){
 				this.style[ name ] = value;
 			});
 		}
-	}
+	};
 
 //>>excludeStart("exclude", pragmas.exclude);
 });

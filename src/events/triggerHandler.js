@@ -21,7 +21,7 @@ define([ "shoestring" ], function(){
 			var bindings = el.shoestringData.events[ e ];
 			for (var i in bindings ){
 				if( bindings.hasOwnProperty( i ) ){
-					var event = document.createEvent( "Event" );
+					event = document.createEvent( "Event" );
 					event.initEvent( e, true, true );
 					event._args = args;
 					args.unshift( event );

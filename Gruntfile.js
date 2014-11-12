@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 					jshintrc: ".jshintrc",
 				},
 
-				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/**/*.js']
+				src: ['Gruntfile.js', 'src/**/*.js']
 			}
 		}
 	});

@@ -42,9 +42,9 @@ define([ "shoestring" ], function(){
 		};
 
 	// Quick IE8 shiv
-	if( !w.addEventListener ){
-		w.addEventListener = function( evt, cb ){
-			return w.attachEvent( "on" + evt, cb );
+	if( !window.addEventListener ){
+		window.addEventListener = function( evt, cb ){
+			return window.attachEvent( "on" + evt, cb );
 		};
 	}
 
@@ -53,14 +53,14 @@ define([ "shoestring" ], function(){
 	if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
 		runReady();
 	}	else {
-		if( !w.document.addEventListener ){
-			w.document.attachEvent( "DOMContentLoaded", runReady );
-			w.document.attachEvent( "onreadystatechange", runReady );
+		if( !document.addEventListener ){
+			document.attachEvent( "DOMContentLoaded", runReady );
+			document.attachEvent( "onreadystatechange", runReady );
 		} else {
-			w.document.addEventListener( "DOMContentLoaded", runReady, false );
-			w.document.addEventListener( "readystatechange", runReady, false );
+			document.addEventListener( "DOMContentLoaded", runReady, false );
+			document.addEventListener( "readystatechange", runReady, false );
 		}
-		w.addEventListener( "load", runReady, false );
+		window.addEventListener( "load", runReady, false );
 	}
 
 //>>excludeStart("exclude", pragmas.exclude);
