@@ -372,6 +372,8 @@
 
 		// element checks permitted, works at parent level
 		ok( $( document ).is( document ) );
+
+		ok( $fixture.is( $fixture ) );
 	});
 
 	test('`.last()`', function() {

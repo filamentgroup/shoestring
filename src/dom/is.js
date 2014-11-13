@@ -10,11 +10,18 @@ define([ "shoestring" ], function(){
 	 * @this {shoestring}
 	 */
 	shoestring.fn.is = function( selector ){
-		var ret = false, self = this, children = [], parents;
+		var ret = false, self = this, children = [], parents, check;
 
 		// assume a dom element
 		if( typeof selector !== "string" ){
-			return _checkElements(this, [selector]);
+			// array-like, ie shoestring objects or element arrays
+			if( selector[0] ){
+				check = selector;
+			} else {
+				check = [selector];
+			}
+
+			return _checkElements(this, check);
 		}
 
 		parents = this.parent();
