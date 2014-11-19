@@ -15,7 +15,7 @@ define([ "shoestring" ], function(){
 		// assume a dom element
 		if( typeof selector !== "string" ){
 			// array-like, ie shoestring objects or element arrays
-			if( selector[0] ){
+			if( selector.length && selector[0] ){
 				check = selector;
 			} else {
 				check = [selector];
