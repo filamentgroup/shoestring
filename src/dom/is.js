@@ -10,7 +10,7 @@ define([ "shoestring" ], function(){
 	 * @this {shoestring}
 	 */
 	shoestring.fn.is = function( selector ){
-		var ret = false, self = this, children = [], parents, check;
+		var ret = false, self = this, parents, check;
 
 		// assume a dom element
 		if( typeof selector !== "string" ){
@@ -31,7 +31,7 @@ define([ "shoestring" ], function(){
 		}
 
 		parents.each(function( i, e ) {
-			var j = 0, children;
+			var children;
 
 //>>includeStart("development", pragmas.development);
 				try {
@@ -43,7 +43,7 @@ define([ "shoestring" ], function(){
 				}
 //>>includeEnd("development");
 
-			ret = _checkElements(self, children);
+			ret = _checkElements( self, children );
 		});
 
 		return ret;

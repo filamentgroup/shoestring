@@ -369,9 +369,13 @@
 		ok( !$fixture.is(".jacky-jormp-jomp") );
 		ok( $("html").is("html") );
 		ok( $("body").is("body") );
+		ok( $("body").is(document.body), "body is document.body" );
+
+		// For some reason in IE8, document[0] returns the first form.
+		ok( !$("form[name=abc]").is( document ), "a form is not document" );
 
 		// element checks permitted, works at parent level
-		ok( $( document ).is( document ) );
+		ok( $( document ).is( document ), "document should be document" );
 
 		ok( $fixture.is( $fixture ) );
 	});
