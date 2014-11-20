@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		meta: {
-			version: '1.0.1',
+			version: '1.0.3',
 			banner: '/*! Shoestring - v<%= meta.version %> - ' +
 				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 				'* http://github.com/filamentgroup/shoestring/\n' +
@@ -104,6 +104,14 @@ module.exports = function(grunt) {
 
 				src: ['Gruntfile.js', 'src/shoestring.js', 'src/extensions/**/*.js']
 			}
+		},
+		watch: {
+			js: {
+				files: [
+					'src/**'
+				],
+				tasks: 'default'
+			}
 		}
 	});
 
@@ -132,6 +140,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-qunit');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task.
 	grunt.registerTask('build', 'requirejs concat uglify'.split(' ') );

@@ -154,6 +154,19 @@ test ('shoestring.each only runs as many times as are items in array', function(
 	var testels = $( ".testel-2" );
 	var divout = [];
 	$.each( testels, function( i, v ){
+		if( i > 0 ){
+			return false;
+		}
+		divout.push(v);
+	});
+
+	equal( divout.length, 1, "Both arrays should have equal length" );
+});
+
+test ('shoestring.each exits early if "false" is returned', function(){
+	var testels = $( ".testel-2" );
+	var divout = [];
+	$.each( testels, function( i, v ){
 		divout.push(v);
 	});
 
