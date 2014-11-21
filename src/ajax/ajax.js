@@ -48,10 +48,12 @@ define([ "shoestring" ], function(){
 		if(settings.data !== null){
 			var params = "";
 			for (var key in settings.data){
-				if (params !== ""){
-					params += "&";
+				if(settings.data.hasOwnProperty(key)){
+					if (params !== ""){
+						params += "&";
+					}
+					params += key + "=" + settings.data[key];
 				}
-				params += key + "=" + settings.data[key];
 			}
 		}
 
