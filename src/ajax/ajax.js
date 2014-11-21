@@ -45,11 +45,11 @@ define([ "shoestring" ], function(){
 		}
 
 		// create parameter string from data object
-		if(settings.data !== null){
+		if( settings.data !== null ){
 			var params = "";
-			for (var key in settings.data){
-				if(settings.data.hasOwnProperty(key)){
-					if (params !== ""){
+			for( var key in settings.data ){
+				if( settings.data.hasOwnProperty( key ) ){
+					if( params !== "" ){
 						params += "&";
 					}
 					params += key + "=" + settings.data[key];
@@ -58,7 +58,7 @@ define([ "shoestring" ], function(){
 		}
 
 		// append params to url for GET requests
-		if(settings.method === "GET" && settings.data !== null){
+		if( settings.method === "GET" && settings.data !== null ){
 			url += "?" + params;
 		}
 
@@ -67,8 +67,8 @@ define([ "shoestring" ], function(){
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
 			// Set 'Content-type' header for POST requests
-			if(settings.method === "POST" && settings.data !== null){
-				req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			if( settings.method === "POST" && settings.data !== null ){
+				req.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" );
 			}
 		}
 
@@ -93,7 +93,7 @@ define([ "shoestring" ], function(){
 		}
 
 		// Send request
-		if(settings.method === "POST" && settings.data !== null){
+		if( settings.method === "POST" && settings.data !== null ){
 			req.send( params );
 		} else {
 			req.send();
