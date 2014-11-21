@@ -52,7 +52,8 @@ define([ "shoestring" ], function(){
 					if( params !== "" ){
 						params += "&";
 					}
-					params += key + "=" + settings.data[key];
+					params += encodeURIComponent( key ) + "=" + 
+						encodeURIComponent( settings.data[key] );
 				}
 			}
 		}
