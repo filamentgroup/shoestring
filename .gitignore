@@ -1,5 +1,9 @@
 # Project files
-/dist/
+/dist/development.js
+/dist/main.js
+/dist/production.js
+/dist/shoestring-dev.min.js
+/dist/shoestring.min.js
 
 # Versioning
 *.diff
