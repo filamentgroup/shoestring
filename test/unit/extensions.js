@@ -378,6 +378,10 @@
 		ok( $( document ).is( document ), "document should be document" );
 
 		ok( $fixture.is( $fixture ) );
+
+		// correctly matches the child/descendant selector combinators
+		ok( $fixture.find( ".is .child" ).is( ".is > .child" ) );
+		ok( $fixture.find( ".is .child" ).is( "body .child" ) );
 	});
 
 	test('`.last()`', function() {
