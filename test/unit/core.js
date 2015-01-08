@@ -30,7 +30,7 @@ test( 'API Properties: shoestring is a function', function() {
 });
 
 test( 'API Properties: shoestring.fn is an object', function() {
-	ok( shoestring.fn.constructor === Object );
+	ok( shoestring.fn === shoestring.Shoestring.prototype );
 });
 
 test( 'API Properties: shoestring.extend is a function', function() {
@@ -75,28 +75,24 @@ test( 'API Properties: shoestring.fn.find, is a function', function() {
 
 
 module( 'Functionality' );
-test( 'shoestring with no arguments returns an array', function() {
-	ok( shoestring().constructor === Array );
-});
-
-test( 'shoestring with no arguments returns an array with core methods', function() {
-	ok( shoestring().constructor === Array );
+test( 'shoestring with no arguments returns a shoestring object', function() {
+	ok( shoestring().constructor === shoestring.Shoestring );
 });
 
 test( 'shoestring with no arguments returns an empty array', function() {
 	ok( shoestring().length === 0 );
 });
 
-test( 'shoestring with a string argument returns an array', function() {
-	ok( shoestring( "body" ).constructor === Array );
+test( 'shoestring with a string argument returns a shoestring objecty', function() {
+	ok( shoestring( "body" ).constructor === shoestring.Shoestring );
 });
 
-test( 'shoestring with a string argument returns an array of dom nodes from qsa', function() {
+test( 'shoestring with a string argument returns a collection of dom nodes from qsa', function() {
 	ok( shoestring( "body" )[ 0 ] === document.querySelectorAll( "body" )[ 0 ] );
 });
 
-test( 'shoestring with a string argument starting with "<" returns a generated array', function() {
-	ok( shoestring( "<div></div>" ).constructor === Array );
+test( 'shoestring with a string argument starting with "<" returns a shoestring object', function() {
+	ok( shoestring( "<div></div>" ).constructor === shoestring.Shoestring );
 });
 
 test( 'shoestring with a string argument starting with "<" returns a generated array of dom nodes', function() {
@@ -117,12 +113,19 @@ test( 'shoestring with a function argument returns array with document child', f
 
 test( 'shoestring with a Node passed in returns an array of that node', function(){
 	var el = document.querySelectorAll( ".constructor-selector" )[0];
-	ok( shoestring( el ).constructor === Array );
+	ok( shoestring( el ).constructor === shoestring.Shoestring );
+	ok( shoestring( el )[0] === el );
 });
 
-test( 'shoestring with a Node passed in returns an array returns an array of that node', function(){
+test( 'shoestring with a Node passed in returns a singleton array', function(){
 	var el = document.querySelectorAll( ".constructor-selector" )[0];
 	ok( shoestring( el )[0].constructor === HTMLDivElement );
+});
+
+test( 'shoestring with a NodeList passed in returns an array of those nodes', function(){
+	var els = document.querySelectorAll( ".constructor-selector" );
+	equal( shoestring( els )[0], els[0] );
+	equal( shoestring( els ).length, 1 );
 });
 
 test( 'passing a string argument to shoestring with a second argument returns result scoped to second arg', function() {
@@ -175,7 +178,7 @@ test ('shoestring.each exits early if "false" is returned', function(){
 
 test( 'shoestring with an array of Nodes passed returns an array of those nodes', function(){
 	var els = [ document.createElement( "div" ), document.createElement( "div" ), document.createElement( "div" ) ];
-	ok( shoestring( els ).constructor === Array );
+	ok( shoestring( els ).constructor === shoestring.Shoestring );
 	ok( shoestring( els )[0].constructor === HTMLDivElement );
 	ok( shoestring( els ).length === 3 );
 	equal( Object.prototype.toString.call( shoestring( els ).map ).indexOf( '[native code]' ), -1, undefined );

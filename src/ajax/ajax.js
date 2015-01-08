@@ -59,7 +59,7 @@ define([ "shoestring" ], function(){
 				else if ( req.status.toString().match( /^(4|5)/ ) && RegExp.$1 ){
 					return settings.error( res, req.status, req );
 				}
-				else {
+				else if (settings.success) {
 					return settings.success( res, req.status, req );
 				}
 			}
