@@ -5,11 +5,14 @@ define([ "shoestring" ], function(){
 	(function() {
 		shoestring.trackedMethodsKey = "shoestringMethods";
 
-		// simple check for localStorage from http://diveintohtml5.info/storage.html
+		// simple check for localStorage from Modernizr - https://github.com/Modernizr/Modernizr/blob/master/feature-detects/storage/localstorage.js
 		function supportsStorage() {
+			var mod = "modernizr";
 			try {
-				return 'localStorage' in window && window.localStorage !== null;
-			} catch (e) {
+				localStorage.setItem(mod, mod);
+				localStorage.removeItem(mod);
+				return true;
+			} catch(e) {
 				return false;
 			}
 		}

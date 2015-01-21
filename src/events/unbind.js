@@ -46,7 +46,7 @@ define([ "shoestring" ], function(){
 
 	function unbind( evt, namespace, callback ) {
 		var bound = this.shoestringData.events[ evt ];
-		if( !bound.length ) {
+		if( !(bound && bound.length) ) {
 			return;
 		}
 

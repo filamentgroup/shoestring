@@ -1220,6 +1220,17 @@
 		}, 30);
 	});
 
+	asyncTest( '`.unbind("eventThatDoesntExist", function)` doesn\'t throw error, does nothing', function() {
+		expect( 1 );
+		shoestring( '#qunit-fixture' ).html( '<div id="el"></div>' );
+		$( "#el" ).unbind( "eventThatDoesntExist" );
+		setTimeout(function() {
+			ok( true, "No error thrown, nothing happened" );
+			start();
+		}, 30);
+
+	});
+
 	test( '`.one()` with multiple events (see #13)', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 			triggerCount = 0,

@@ -1,0 +1,15 @@
+{
+	"name": "filament-shoestring",
+	"version": "1.0.2",
+	"main": [
+		"dist/shoestring-dev.js",
+		"dist/shoestring.js"
+	],
+	"ignore": [
+		"**/.*"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"qunit": "1.11.0"
+	}
+}
