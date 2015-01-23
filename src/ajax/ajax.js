@@ -18,6 +18,7 @@ define([ "shoestring" ], function(){
 	 *
 	 * - *method* - The HTTP method used with the request. Default: `GET`.
 	 * - *data* - Raw object with keys and values to pass with request as query params. Default `null`.
+	 * - *headers* - Set of request headers to add. Default `{}`.
 	 * - *async* - Whether the opened request is asynchronouse. Default `true`.
 	 * - *success* - Callback for successful request and response. Passed the response data.
 	 * - *error* - Callback for failed request and response.
@@ -74,9 +75,16 @@ define([ "shoestring" ], function(){
 
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
+
 			// Set 'Content-type' header for POST requests
 			if( settings.method === "POST" && params ){
 				req.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" );
+			}
+
+			for( var key in settings.headers ){
+				if( settings.headers.hasOwnProperty( key ) ){
+					req.setRequestHeader(key, settings.headers[ key ]);
+				}
 			}
 		}
 
@@ -116,7 +124,8 @@ define([ "shoestring" ], function(){
 		cancel: function(){},
 		method: "GET",
 		async: true,
-		data: null
+		data: null,
+		headers: {}
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);
