@@ -31,7 +31,7 @@ define([ "shoestring" ], function(){
 	 */
 
 	shoestring.ajax = function( url, options ) {
-		var params = "", req = xmlHttp(), settings;
+		var params = "", req = xmlHttp(), settings, key;
 
 		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
@@ -49,7 +49,7 @@ define([ "shoestring" ], function(){
 
 		// create parameter string from data object
 		if( settings.data ){
-			for( var key in settings.data ){
+			for( key in settings.data ){
 				if( settings.data.hasOwnProperty( key ) ){
 					if( params !== "" ){
 						params += "&";
@@ -81,7 +81,7 @@ define([ "shoestring" ], function(){
 				req.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" );
 			}
 
-			for( var key in settings.headers ){
+			for( key in settings.headers ){
 				if( settings.headers.hasOwnProperty( key ) ){
 					req.setRequestHeader(key, settings.headers[ key ]);
 				}
