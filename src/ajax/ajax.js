@@ -47,18 +47,7 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
-		// create parameter string from data object
-		if( settings.data ){
-			for( key in settings.data ){
-				if( settings.data.hasOwnProperty( key ) ){
-					if( params !== "" ){
-						params += "&";
-					}
-					params += encodeURIComponent( key ) + "=" +
-						encodeURIComponent( settings.data[key] );
-				}
-			}
-		}
+		params = (shoestring.ajax.dataParams || function() {})(settings.data);
 
 		// append params to url for GET requests
 		if( settings.method === "GET" && params ){
