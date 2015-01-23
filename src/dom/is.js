@@ -56,7 +56,7 @@ define([ "shoestring" ], function(){
 			var j = 0;
 
 			while( j < haystack.length ){
-				if( this == haystack[j] ){
+				if( this === haystack[j] ){
 					ret = true;
 				}
 
