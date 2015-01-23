@@ -2,10 +2,10 @@
 define([ "shoestring", "ajax/ajax" ], function(){
 //>>excludeEnd("exclude");
 
-	shoestring.ajax.headers = function(req, settings) {
-		for( var key in settings.headers ){
-			if( settings.headers.hasOwnProperty( key ) ){
-				req.setRequestHeader(key, settings.headers[ key ]);
+	shoestring.ajax.headers = function(req, headers) {
+		for( var key in headers ){
+			if( headers.hasOwnProperty( key ) ){
+				req.setRequestHeader(key, headers[ key ]);
 			}
 		}
 	};

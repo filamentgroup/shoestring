@@ -62,7 +62,7 @@ define([ "shoestring" ], function(){
 
 		url = shoestring.ifdef({
 			call: shoestring.ajax.data.url,
-			args: [url, params, settings],
+			args: [url, params, settings.method],
 			default: url
 		});
 
@@ -70,7 +70,7 @@ define([ "shoestring" ], function(){
 
 		shoestring.ifdef({
 			call: shoestring.ajax.data.headers,
-			args: [params, req, settings]
+			args: [params, req, settings.method]
 		});
 
 		if( req.setRequestHeader ){
@@ -78,7 +78,7 @@ define([ "shoestring" ], function(){
 
 			shoestring.ifdef({
 				call: shoestring.ajax.headers,
-				args: [req, settings]
+				args: [req, settings.headers]
 			});
 		}
 
