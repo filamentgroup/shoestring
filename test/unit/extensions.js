@@ -1757,6 +1757,16 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		equal( shoestring.ajax.settings.method, "GET" );
 	});
 
+  test( ".ajax throws exception with data and url with params", function(){
+		var fakeXHR = sinon.useFakeXMLHttpRequest();
+
+    throws(function() {
+      shoestring.ajax( "/some/url?foo=bar", {
+        data: { bar: 'baz' }
+      });
+    });
+  });
+
 	test( ".ajax sends request with method GET and appends data elements to url", function(){
 		var fakeXHR = sinon.useFakeXMLHttpRequest();
 		var requests = sinon.requests = [];
@@ -1769,8 +1779,8 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 
 		// call ajax method
 		shoestring.ajax( "/some/url", {
-			data: { param1: "one", param2: "two" }, 
-			success: callback 
+			data: { param1: "one", param2: "two" },
+			success: callback
 		});
 
 		// check that only one request is sent

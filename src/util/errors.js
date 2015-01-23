@@ -6,6 +6,7 @@ define([ "shoestring" ], function(){
 		errors: {
 			"prefix": "Shoestring does not support",
 
+			"ajax-url-query": "data with urls that have existing query params",
 			"click": "the click method. Try using trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",

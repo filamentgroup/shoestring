@@ -17,7 +17,7 @@ define([ "shoestring" ], function(){
 	 * **NOTE** the following options are supported:
 	 *
 	 * - *method* - The HTTP method used with the request. Default: `GET`.
-	 * - *data* - Raw object with keys and values to pass with request. Default `null`.
+	 * - *data* - Raw object with keys and values to pass with request as query params. Default `null`.
 	 * - *async* - Whether the opened request is asynchronouse. Default `true`.
 	 * - *success* - Callback for successful request and response. Passed the response data.
 	 * - *error* - Callback for failed request and response.
@@ -30,7 +30,9 @@ define([ "shoestring" ], function(){
 	 */
 
 	shoestring.ajax = function( url, options ) {
-		var req = xmlHttp(), settings = shoestring.extend( {}, shoestring.ajax.settings );
+		var params = "", req = xmlHttp(), settings;
+
+		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
 		if( options ){
 			shoestring.extend( settings, options );
@@ -45,14 +47,13 @@ define([ "shoestring" ], function(){
 		}
 
 		// create parameter string from data object
-		if( settings.data !== null ){
-			var params = "";
+		if( settings.data ){
 			for( var key in settings.data ){
 				if( settings.data.hasOwnProperty( key ) ){
 					if( params !== "" ){
 						params += "&";
 					}
-					params += encodeURIComponent( key ) + "=" + 
+					params += encodeURIComponent( key ) + "=" +
 						encodeURIComponent( settings.data[key] );
 				}
 			}
@@ -60,6 +61,12 @@ define([ "shoestring" ], function(){
 
 		// append params to url for GET requests
 		if( settings.method === "GET" && params ){
+			//>>includeStart("development", pragmas.development);
+			if( url.indexOf("?") >= 0 ){
+				shoestring.error( 'ajax-url-query' );
+			}
+			//>>includeEnd("development");
+
 			url += "?" + params;
 		}
 
@@ -99,7 +106,7 @@ define([ "shoestring" ], function(){
 		} else {
 			req.send();
 		}
-		
+
 		return req;
 	};
 
