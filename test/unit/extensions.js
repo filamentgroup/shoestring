@@ -1757,8 +1757,19 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		equal( shoestring.ajax.settings.method, "GET" );
 	});
 
-	test( ".ajax throws exception with data and url with params", function(){
+	var mockXHR = function() {
 		var fakeXHR = sinon.useFakeXMLHttpRequest();
+		var requests = sinon.requests = [];
+
+		fakeXHR.onCreate = function ( request ) {
+			requests.push( request );
+		};
+
+		return requests;
+	};
+
+	test( ".ajax throws exception with data and url with params", function(){
+		mockXHR();
 
 		throws(function() {
 			shoestring.ajax( "/some/url?foo=bar", {
@@ -1768,12 +1779,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 	});
 
 	test( ".ajax defaul headers", function(){
-		var fakeXHR = sinon.useFakeXMLHttpRequest();
-		var requests = sinon.requests = [];
-
-		fakeXHR.onCreate = function ( request ) {
-			requests.push( request );
-		};
+		var requests = mockXHR();
 
 		// call ajax method
 		shoestring.ajax( "/some/url", {	success: function() {} });
@@ -1782,12 +1788,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 	});
 
 	test( ".ajax includes headers", function(){
-		var fakeXHR = sinon.useFakeXMLHttpRequest();
-		var requests = sinon.requests = [];
-
-		fakeXHR.onCreate = function ( request ) {
-			requests.push( request );
-		};
+		var requests = mockXHR();
 
 		// call ajax method
 		shoestring.ajax( "/some/url", {
@@ -1800,13 +1801,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 	});
 
 	test( ".ajax sends request with method GET and appends data elements to url", function(){
-		var fakeXHR = sinon.useFakeXMLHttpRequest();
-		var requests = sinon.requests = [];
-
-		fakeXHR.onCreate = function ( request ) {
-			requests.push( request );
-		};
-
+		var requests = mockXHR();
 		var callback = sinon.spy();
 
 		// call ajax method
@@ -1829,12 +1824,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 	});
 
 	test( ".post sends request with method POST, send data in request body", function(){
-		var fakeXHR = sinon.useFakeXMLHttpRequest();
-		var requests = sinon.requests = [];
-
-		fakeXHR.onCreate = function ( request ) {
-			requests.push( request );
-		};
+		var requests = mockXHR();
 
 		var url = "/some/url";
 		var callback = sinon.spy();
