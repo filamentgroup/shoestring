@@ -38,7 +38,7 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.ajax = function( url, options ) {
-		var dataConfig, params = "", req = xmlHttp(), settings, key;
+		var params = "", req = xmlHttp(), settings;
 
 		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
@@ -54,14 +54,17 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
-		dataConfig = shoestring.ifdef({
+		params = shoestring.ifdef({
 			call: shoestring.ajax.data.params,
-			args: [url, req, settings],
-			default: {}
+			args: [settings.data],
+			default: ""
 		});
 
-		params = dataConfig.params || params;
-		url = dataConfig.url || url;
+		url = shoestring.ifdef({
+			call: shoestring.ajax.data.url,
+			args: [url, params, settings],
+			default: url
+		});
 
 		req.open( settings.method, url, settings.async );
 
@@ -75,7 +78,7 @@ define([ "shoestring" ], function(){
 
 			shoestring.ifdef({
 				call: shoestring.ajax.headers,
-				args: [settings, req]
+				args: [req, settings]
 			});
 		}
 

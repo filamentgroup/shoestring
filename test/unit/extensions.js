@@ -1792,7 +1792,6 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 
 		// call ajax method
 		shoestring.ajax( "/some/url", {
-			data: { param1: "one", param2: "two" },
 			headers: { foo: 'bar' },
 			success: function() {}
 		});
@@ -1841,7 +1840,7 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		// check data elements are sent in request body
 		equal( sinon.requests[0].requestBody, "param1=one&param2=two" );
 		// check that only one request is sent
-		ok( sinon.requests[0].requestHeaders['Content-type'].indexOf("application/x-www-form-urlencode") >= 0);
+		ok( sinon.requests[0].requestHeaders['Content-Type'].indexOf("application/x-www-form-urlencode") >= 0);
 
 		requests[0].respond( 200, { "Content-Type": "application/json" }, '[]' );
 
