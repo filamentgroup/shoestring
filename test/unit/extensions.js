@@ -1767,6 +1767,38 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		});
 	});
 
+	test( ".ajax defaul headers", function(){
+		var fakeXHR = sinon.useFakeXMLHttpRequest();
+		var requests = sinon.requests = [];
+
+		fakeXHR.onCreate = function ( request ) {
+			requests.push( request );
+		};
+
+		// call ajax method
+		shoestring.ajax( "/some/url", {	success: function() {} });
+
+		equal(requests[0].requestHeaders['X-Requested-With'], "XMLHttpRequest");
+	});
+
+	test( ".ajax includes headers", function(){
+		var fakeXHR = sinon.useFakeXMLHttpRequest();
+		var requests = sinon.requests = [];
+
+		fakeXHR.onCreate = function ( request ) {
+			requests.push( request );
+		};
+
+		// call ajax method
+		shoestring.ajax( "/some/url", {
+			data: { param1: "one", param2: "two" },
+			headers: { foo: 'bar' },
+			success: function() {}
+		});
+
+		equal(requests[0].requestHeaders.foo, 'bar');
+	});
+
 	test( ".ajax sends request with method GET and appends data elements to url", function(){
 		var fakeXHR = sinon.useFakeXMLHttpRequest();
 		var requests = sinon.requests = [];
@@ -1818,6 +1850,8 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		equal( sinon.requests[0].url, url );
 		// check data elements are sent in request body
 		equal( sinon.requests[0].requestBody, "param1=one&param2=two" );
+		// check that only one request is sent
+		ok( sinon.requests[0].requestHeaders['Content-type'].indexOf("application/x-www-form-urlencode") >= 0);
 
 		requests[0].respond( 200, { "Content-Type": "application/json" }, '[]' );
 
