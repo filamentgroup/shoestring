@@ -11,6 +11,14 @@ define([ "shoestring" ], function(){
 		}
 	};
 
+	shoestring.ifdef = function(options) {
+		if( !options.call ){
+			return options.default;
+		}
+
+		return options.call.apply(this, options.args);
+	};
+
 	/**
 	 * Make an HTTP request to a url.
 	 *
@@ -29,9 +37,8 @@ define([ "shoestring" ], function(){
 	 * @return shoestring
 	 * @this shoestring
 	 */
-
 	shoestring.ajax = function( url, options ) {
-		var params = "", req = xmlHttp(), settings, key;
+		var dataConfig, params = "", req = xmlHttp(), settings, key;
 
 		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
@@ -47,34 +54,29 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
-		params = (shoestring.ajax.dataParams || function() {})(settings.data);
+		dataConfig = shoestring.ifdef({
+			call: shoestring.ajax.data.params,
+			args: [url, req, settings],
+			default: {}
+		});
 
-		// append params to url for GET requests
-		if( settings.method === "GET" && params ){
-			//>>includeStart("development", pragmas.development);
-			if( url.indexOf("?") >= 0 ){
-				shoestring.error( 'ajax-url-query' );
-			}
-			//>>includeEnd("development");
-
-			url += "?" + params;
-		}
+		params = dataConfig.params || params;
+		url = dataConfig.url || url;
 
 		req.open( settings.method, url, settings.async );
+
+		shoestring.ifdef({
+			call: shoestring.ajax.data.headers,
+			args: [params, req, settings]
+		});
 
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
 
-			// Set 'Content-type' header for POST requests
-			if( settings.method === "POST" && params ){
-				req.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" );
-			}
-
-			for( key in settings.headers ){
-				if( settings.headers.hasOwnProperty( key ) ){
-					req.setRequestHeader(key, settings.headers[ key ]);
-				}
-			}
+			shoestring.ifdef({
+				call: shoestring.ajax.headers,
+				args: [settings, req]
+			});
 		}
 
 		req.onreadystatechange = function () {

@@ -3,7 +3,7 @@
 require([
 	"shoestring",
 	"ajax/ajax",
-	"ajax/dataParams",
+	"ajax/data",
 	"ajax/get",
 	"ajax/load",
 	"ajax/post",
