@@ -1756,4 +1756,61 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		shoestring.ajax( "foo", { method: "POST" } );
 		equal( shoestring.ajax.settings.method, "GET" );
 	});
+
+	test( ".ajax sends request with method GET and appends data elements to url", function(){
+		var fakeXHR = sinon.useFakeXMLHttpRequest();
+		var requests = sinon.requests = [];
+
+		fakeXHR.onCreate = function ( request ) {
+			requests.push( request );
+		};
+
+		var callback = sinon.spy();
+
+		// call ajax method
+		shoestring.ajax( "/some/url", {
+			data: { param1: "one", param2: "two" }, 
+			success: callback 
+		});
+
+		// check that only one request is sent
+		equal( sinon.requests.length, 1 );
+		// check correct method is used
+		equal( sinon.requests[0].method, "GET" );
+		// check that parameter string was appended to url
+		equal( sinon.requests[0].url, "/some/url?param1=one&param2=two" );
+
+		// mock response to test callback
+		requests[0].respond( 200, { "Content-Type": "application/json" }, '{}' );
+		// check that callback was called
+		ok( callback.called );
+	});
+
+	test( ".post sends request with method POST, send data in request body", function(){
+		var fakeXHR = sinon.useFakeXMLHttpRequest();
+		var requests = sinon.requests = [];
+
+		fakeXHR.onCreate = function ( request ) {
+			requests.push( request );
+		};
+
+		var url = "/some/url";
+		var callback = sinon.spy();
+
+		// call post method
+		shoestring.post( url, { param1: "one", param2: "two" }, callback );
+
+		// check that only one request is sent
+		equal( sinon.requests.length, 1 );
+		// check correct method is used
+		equal( sinon.requests[0].method, "POST" );
+		// check that url has not been changed
+		equal( sinon.requests[0].url, url );
+		// check data elements are sent in request body
+		equal( sinon.requests[0].requestBody, "param1=one&param2=two" );
+
+		requests[0].respond( 200, { "Content-Type": "application/json" }, '[]' );
+
+		ok( callback.called );
+	});
 })();

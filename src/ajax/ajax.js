@@ -28,6 +28,7 @@ define([ "shoestring" ], function(){
 	 * @return shoestring
 	 * @this shoestring
 	 */
+
 	shoestring.ajax = function( url, options ) {
 		var req = xmlHttp(), settings = shoestring.extend( {}, shoestring.ajax.settings );
 
@@ -43,10 +44,33 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
+		// create parameter string from data object
+		if( settings.data !== null ){
+			var params = "";
+			for( var key in settings.data ){
+				if( settings.data.hasOwnProperty( key ) ){
+					if( params !== "" ){
+						params += "&";
+					}
+					params += encodeURIComponent( key ) + "=" + 
+						encodeURIComponent( settings.data[key] );
+				}
+			}
+		}
+
+		// append params to url for GET requests
+		if( settings.method === "GET" && params ){
+			url += "?" + params;
+		}
+
 		req.open( settings.method, url, settings.async );
 
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
+			// Set 'Content-type' header for POST requests
+			if( settings.method === "POST" && params ){
+				req.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" );
+			}
 		}
 
 		req.onreadystatechange = function () {
@@ -69,7 +93,13 @@ define([ "shoestring" ], function(){
 			return req;
 		}
 
-		req.send( settings.data || null );
+		// Send request
+		if( settings.method === "POST" && params ){
+			req.send( params );
+		} else {
+			req.send();
+		}
+		
 		return req;
 	};
 
