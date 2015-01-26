@@ -11,12 +11,11 @@ define([ "shoestring" ], function(){
 		}
 	};
 
-	shoestring.ifdef = function(options) {
-		if( !options.call ){
-			return options.default;
+	shoestring.ifdef = function(def, callback) {
+		// TODO insert tracking method
+		if( def ){
+			return callback(def);
 		}
-
-		return options.call.apply(this, options.args);
 	};
 
 	/**
@@ -38,9 +37,9 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.ajax = function( url, options ) {
-		var params = "", req = xmlHttp(), settings;
+		var params = "", req = xmlHttp(), settings, ajax = shoestring.ajax;
 
-		settings = shoestring.extend( {}, shoestring.ajax.settings );
+		settings = shoestring.extend( {}, ajax.settings );
 
 		if( options ){
 			shoestring.extend( settings, options );
@@ -54,31 +53,25 @@ define([ "shoestring" ], function(){
 			return;
 		}
 
-		params = shoestring.ifdef({
-			call: shoestring.ajax.data.params,
-			args: [settings.data],
-			default: ""
-		});
+		params = shoestring.ifdef(ajax.data, function(datam) {
+			return datam.params( settings.data );
+		}) || "";
 
-		url = shoestring.ifdef({
-			call: shoestring.ajax.data.url,
-			args: [url, params, settings.method],
-			default: url
-		});
+		url = shoestring.ifdef(ajax.data, function(datam) {
+			return datam.url(url, params,settings.method);
+		}) || url;
 
 		req.open( settings.method, url, settings.async );
 
-		shoestring.ifdef({
-			call: shoestring.ajax.data.headers,
-			args: [params, req, settings.method]
+		shoestring.ifdef(ajax.data, function(datam) {
+			return datam.headers( params, req, settings.method );
 		});
 
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
 
-			shoestring.ifdef({
-				call: shoestring.ajax.headers,
-				args: [req, settings.headers]
+			shoestring.ifdef(ajax.headers, function(headers) {
+				headers(req, settings.headers);
 			});
 		}
 
