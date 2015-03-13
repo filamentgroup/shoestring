@@ -41,7 +41,7 @@ define([ "shoestring" ], function(){
 					this.checked ){
 
 				data[ name ] = value;
-			}	else if( this.nodeName === "select" ){
+			}	else if( this.nodeName === "SELECT" ){
 				data[ name ] = this.options[ this.selectedIndex ].nodeValue;
 			}
 		});
