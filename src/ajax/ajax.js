@@ -89,7 +89,12 @@ define([ "shoestring" ], function(){
 		}
 
 		req.onreadystatechange = function () {
+			if( req.readyState === 1) {
+				shoestring.active++;
+			}
+
 			if( req.readyState === 4 ){
+				shoestring.active--;
 				// Trim the whitespace so shoestring('<div>') works
 				var res = (req.responseText || '').replace(/^\s+|\s+$/g, '');
 				if( req.status.toString().indexOf( "0" ) === 0 ){

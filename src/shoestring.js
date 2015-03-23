@@ -92,6 +92,9 @@ define([], function(){
 	// expose for testing purposes only
 	shoestring.Shoestring = Shoestring;
 
+	// keep track of current AJAX requests
+	shoestring.active = 0;
+
 	// For extending objects
 	// TODO move to separate module when we use prototypes
 	shoestring.extend = function( first, second ){
