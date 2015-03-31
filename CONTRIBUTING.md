@@ -8,7 +8,7 @@ Contributions are appreciated. In order for us to consider including a contribut
 
 ## Feature Parity
 
-Shoestring isn't attempting to reach feature parity with jQuery but even at the method level it may not support the same profusion of invocation patterns that the corresponding jQuery method does. To prevent surprises we've started adding exceptions into the `-dev` builds so that when a feature isn't supported it's immediately clear. If you find a feature missing (other than an absent method/object) please consider adding an `error` call and a descriptive error message. For example, in `src/extensions/dom/prev.js`:
+Shoestring isn't attempting to reach feature parity with jQuery. It may not even support the same invocation patterns for included methods. To prevent surprises we've started adding exceptions into the `-dev` builds so that when a feature isn't supported it's obvious. If you find a feature missing (other than an absent method/object) please consider adding an `error` call and a descriptive error message. For example, in `src/extensions/dom/prev.js`:
 
 ```javascript
 shoestring.fn.prev = function(selectors){
@@ -48,7 +48,7 @@ Here, we're throwing an error if the selectors argument is passed since we don't
 
 ```
 
-## Code relates to issue
+## Code to an Issue
 
 Use a separate git branch for each contribution. Give the branch a meaningful name.
 When you are contributing a new extensions use the name of this extension, like `dom-toggleclass`.
