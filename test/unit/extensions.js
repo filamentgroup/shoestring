@@ -1783,15 +1783,15 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		return requests;
 	};
 
-	test( ".ajax throws exception with data and url with params", function(){
-		mockXHR();
+	// test( ".ajax throws exception with data and url with params", function(){
+	// 	mockXHR();
 
-		throws(function() {
-			shoestring.ajax( "/some/url?foo=bar", {
-				data: { bar: 'baz' }
-			});
-		});
-	});
+	// 	throws(function() {
+	// 		shoestring.ajax( "/some/url?foo=bar", {
+	// 			data: { bar: 'baz' }
+	// 		});
+	// 	});
+	// });
 
 	test( ".ajax defaul headers", function(){
 		var requests = mockXHR();
@@ -1799,7 +1799,10 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 		// call ajax method
 		shoestring.ajax( "/some/url", {	success: function() {} });
 
+
 		equal(requests[0].requestHeaders['X-Requested-With'], "XMLHttpRequest");
+
+		requests[0].respond( 200 );
 	});
 
 	test( ".ajax includes headers", function(){
@@ -1812,7 +1815,10 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 			success: function() {}
 		});
 
+
 		equal(requests[0].requestHeaders.foo, 'bar');
+
+		requests[0].respond( 200 );
 	});
 
 	test( ".ajax sends request with method GET and appends data elements to url", function(){
@@ -1862,4 +1868,27 @@ asyncTest( '`Custom Events: .bind("myCustomEvent.myNamespace") .unbind("myCustom
 
 		ok( callback.called );
 	});
+
+	test( "each ajax request is kept track of by .active", function(){
+		var requests = mockXHR();
+
+		// make first request
+		shoestring.ajax( "/some/url", {	success: function() {} });
+
+		// check active count is one
+		equal(shoestring.active, 1);
+
+		// make second request
+		shoestring.ajax( "/some/url", {	success: function() {} });
+
+		// check active count is two
+		equal(shoestring.active, 2);
+
+		// respond to both requests
+		requests[0].respond( 200, { "Content-Type": "application/json" }, '[]' );
+		requests[1].respond( 500 );
+
+		// check active count is zero
+		equal(shoestring.active, 0);
+	})
 })();
