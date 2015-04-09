@@ -1,4 +1,4 @@
-/*! Shoestring - v1.0.3 - 2015-01-21
+/*! Shoestring - v1.0.3 - 2015-04-09
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
@@ -133,7 +133,8 @@
 	 * **NOTE** the following options are supported:
 	 *
 	 * - *method* - The HTTP method used with the request. Default: `GET`.
-	 * - *data* - Raw object with keys and values to pass with request. Default `null`.
+	 * - *data* - Raw object with keys and values to pass with request as query params. Default `null`.
+	 * - *headers* - Set of request headers to add. Default `{}`.
 	 * - *async* - Whether the opened request is asynchronouse. Default `true`.
 	 * - *success* - Callback for successful request and response. Passed the response data.
 	 * - *error* - Callback for failed request and response.
@@ -144,8 +145,11 @@
 	 * @return shoestring
 	 * @this shoestring
 	 */
+
 	shoestring.ajax = function( url, options ) {
-		var req = xmlHttp(), settings = shoestring.extend( {}, shoestring.ajax.settings );
+		var params = "", req = xmlHttp(), settings, key;
+
+		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
 		if( options ){
 			shoestring.extend( settings, options );
@@ -159,10 +163,40 @@
 			return;
 		}
 
+		// create parameter string from data object
+		if( settings.data ){
+			for( key in settings.data ){
+				if( settings.data.hasOwnProperty( key ) ){
+					if( params !== "" ){
+						params += "&";
+					}
+					params += encodeURIComponent( key ) + "=" +
+						encodeURIComponent( settings.data[key] );
+				}
+			}
+		}
+
+		// append params to url for GET requests
+		if( settings.method === "GET" && params ){
+			
+			url += "?" + params;
+		}
+
 		req.open( settings.method, url, settings.async );
 
 		if( req.setRequestHeader ){
 			req.setRequestHeader( "X-Requested-With", "XMLHttpRequest" );
+
+			// Set 'Content-type' header for POST requests
+			if( settings.method === "POST" && params ){
+				req.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" );
+			}
+
+			for( key in settings.headers ){
+				if( settings.headers.hasOwnProperty( key ) ){
+					req.setRequestHeader(key, settings.headers[ key ]);
+				}
+			}
 		}
 
 		req.onreadystatechange = function () {
@@ -185,7 +219,13 @@
 			return req;
 		}
 
-		req.send( settings.data || null );
+		// Send request
+		if( settings.method === "POST" && params ){
+			req.send( params );
+		} else {
+			req.send();
+		}
+
 		return req;
 	};
 
@@ -195,7 +235,8 @@
 		cancel: function(){},
 		method: "GET",
 		async: true,
-		data: null
+		data: null,
+		headers: {}
 	};
 
 
@@ -627,16 +668,54 @@
 	 * @this {shoestring}
 	 */
 	shoestring.fn.is = function( selector ){
-		var ret = false;
+		var ret = false, self = this, parents, check;
 
-		this.each(function(){
-			if( shoestring.inArray( this, shoestring( selector ) )  > -1 ){
-				ret = true;
+		// assume a dom element
+		if( typeof selector !== "string" ){
+			// array-like, ie shoestring objects or element arrays
+			if( selector.length && selector[0] ){
+				check = selector;
+			} else {
+				check = [selector];
 			}
+
+			return _checkElements(this, check);
+		}
+
+		parents = this.parent();
+
+		if( !parents.length ){
+			parents = shoestring( document );
+		}
+
+		parents.each(function( i, e ) {
+			var children;
+
+					children = e.querySelectorAll( selector );
+
+			ret = _checkElements( self, children );
 		});
 
 		return ret;
 	};
+
+	function _checkElements(needles, haystack){
+		var ret = false;
+
+		needles.each(function() {
+			var j = 0;
+
+			while( j < haystack.length ){
+				if( this === haystack[j] ){
+					ret = true;
+				}
+
+				j++;
+			}
+		});
+
+		return ret;
+	}
 
 
 
@@ -1676,7 +1755,7 @@
 					this.checked ){
 
 				data[ name ] = value;
-			}	else if( this.nodeName === "select" ){
+			}	else if( this.nodeName === "SELECT" ){
 				data[ name ] = this.options[ this.selectedIndex ].nodeValue;
 			}
 		});
