@@ -125,9 +125,9 @@ define(function(){
 				return new CSSStyleDeclaration(element);
 			};
 
-      if ( window.Window ) {
-        window.Window.prototype.getComputedStyle = window.getComputedStyle;
-      }
+			if ( window.Window ) {
+				window.Window.prototype.getComputedStyle = window.getComputedStyle;
+			}
 		}
 	})();
 
