@@ -63,7 +63,7 @@ define([], function(){
 
 		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				prim instanceof window.NodeList ){
+				(window.NodeList && prim instanceof window.NodeList) ){
 
 			return new Shoestring( prim, prim );
 		}
