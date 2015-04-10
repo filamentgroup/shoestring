@@ -120,9 +120,14 @@ define(function(){
 
 		if( !window.getComputedStyle ) {
 			// <window>.getComputedStyle
-			window.getComputedStyle = Window.prototype.getComputedStyle = function (element) {
+			// NOTE Window is not defined in all browsers
+			window.getComputedStyle = function (element) {
 				return new CSSStyleDeclaration(element);
 			};
+
+      if ( window.Window ) {
+        window.Window.prototype.getComputedStyle = window.getComputedStyle;
+      }
 		}
 	})();
 
