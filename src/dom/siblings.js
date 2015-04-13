@@ -9,6 +9,12 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.fn.siblings = function(){
+		//>>includeStart("development", pragmas.development);
+		if( arguments.length > 0 ) {
+			shoestring.error( 'siblings-selector' );
+		}
+		//>>includeEnd("development");
+
 		if( !this.length ) {
 			return shoestring( [] );
 		}

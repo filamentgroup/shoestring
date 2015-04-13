@@ -21,6 +21,7 @@ define([ "shoestring" ], function(){
 			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
 			"prevall-selector" : "passing selectors into .prevAll, try .prevAll().filter( selector )",
 			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: ",
+			"siblings-selector": "passing selector into siblings not supported, try .siblings().find( ... )",
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
 			"text-setter": "setting text via the .text method.",
 			"toggle-class" : "the toggleClass method. Try using addClass or removeClass instead.",
