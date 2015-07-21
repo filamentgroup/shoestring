@@ -152,6 +152,18 @@
 		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
 	});
 
+	test( '`.data` works with `data-` attributes', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el" data-attr1 data-attr2="test"></div>' );
+		$el = $( "#el" );
+
+		strictEqual( $( '#el' ).data( "attr0" ), undefined, 'should alias to attr("data-attr0") (does not exist)' );
+		strictEqual( $( '#el' ).data( "attr1" ), undefined, 'should alias to attr("data-attr1"), has no value' );
+		strictEqual( $( '#el' ).data( "attr2" ), "test", 'should alias to attr("data-attr2"), has a value' );
+	});
+
 	test( '`.insertBefore()` inserts before the selector', function(){
 		expect( 3 );
 

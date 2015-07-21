@@ -1,5 +1,8 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([
+	"shoestring",
+	"dom/attr",
+], function(){
 //>>excludeEnd("exclude");
 
 	/**
@@ -22,7 +25,12 @@ define([ "shoestring" ], function(){
 				});
 			}
 			else {
-				return this[ 0 ] && this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
+				if( this[ 0 ] ) {
+					if( this[ 0 ].shoestringData ) {
+						return this[ 0 ].shoestringData[ name ];
+					}
+					return shoestring( this[ 0 ] ).attr( "data-" + name ) || undefined;
+				}
 			}
 		}
 		else {
