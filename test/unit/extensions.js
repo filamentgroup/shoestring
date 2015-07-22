@@ -138,6 +138,23 @@
 		});
 	});
 
+	test( '`.data` and falsy values', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		$el.data( "val-false", false );
+		strictEqual( $( '#el' ).data( "val-false" ), false );
+
+		$el.data( "val-zero", 0 );
+		strictEqual( $( '#el' ).data( "val-zero" ), 0 );
+
+		$el.data( "val-undefined", undefined );
+		strictEqual( $( '#el' ).data( "val-undefined" ), undefined );
+	});
+
 	test( '`.data` works on empty nodelists', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 			$el;
@@ -150,6 +167,25 @@
 
 		deepEqual( $( '#el' ).data(), {}, 'should be an empty object on an nonempty result set.' );
 		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
+	});
+
+	test( '`.data` does not alias to `data-` attributes', function() {
+		expect( 3 );
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el" data-attr1 data-attr2="test"></div>' );
+		$el = $( "#el" );
+
+		strictEqual( $( '#el' ).data( "attr0" ), undefined, 'attribute does not exist, should not throw an error.' );
+
+		throws(function() {
+			$( '#el' ).data( "attr1" );
+		}, 'attribute exists but has no value, should have thrown a dev error.' );
+
+		throws(function() {
+			$( '#el' ).data( "attr2" );
+		}, 'attribute exists and has a value, should have thrown a dev error.' );
 	});
 
 	test( '`.insertBefore()` inserts before the selector', function(){

@@ -9,6 +9,7 @@ define([ "shoestring" ], function(){
 			"ajax-url-query": "data with urls that have existing query params",
 			"click": "the click method. Try using trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
+			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
 			"html-function" : "passing a function into .html. Try generating the html you're passing in an outside function",
 			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
