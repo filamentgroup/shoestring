@@ -2,6 +2,7 @@
 define([
 	"shoestring",
 //>>includeStart("development", pragmas.development);
+	// Note the use of nested pragmas here
 	"dom/is"
 //>>includeEnd("development");
 ], function(){
