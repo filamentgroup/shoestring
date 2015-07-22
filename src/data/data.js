@@ -1,7 +1,9 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
 	"shoestring",
-	"dom/attr",
+//>>includeStart("development", pragmas.development);
+	"dom/is"
+//>>includeEnd("development");
 ], function(){
 //>>excludeEnd("exclude");
 
@@ -30,8 +32,7 @@ define([
 						return this[ 0 ].shoestringData[ name ] || undefined;
 					}
 //>>includeStart("development", pragmas.development);
-					var dataAlias = shoestring( this[ 0 ] ).attr( "data-" + name );
-					if( dataAlias || dataAlias === '' ){
+					if( shoestring( this[ 0 ] ).is( "[data-" + name + "]" ) ){
 						shoestring.error( 'data-attr-alias' );
 					}
 //>>includeEnd("development");
