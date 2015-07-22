@@ -27,9 +27,14 @@ define([
 			else {
 				if( this[ 0 ] ) {
 					if( this[ 0 ].shoestringData ) {
-						return this[ 0 ].shoestringData[ name ];
+						return this[ 0 ].shoestringData[ name ] || undefined;
 					}
-					return shoestring( this[ 0 ] ).attr( "data-" + name ) || undefined;
+//>>includeStart("development", pragmas.development);
+					var dataAlias = shoestring( this[ 0 ] ).attr( "data-" + name );
+					if( dataAlias || dataAlias === '' ){
+						shoestring.error( 'data-attr-alias' );
+					}
+//>>includeEnd("development");
 				}
 			}
 		}

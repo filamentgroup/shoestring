@@ -152,16 +152,23 @@
 		strictEqual( $( '#el' ).data( "somekey" ), undefined, 'should be undefined on an nonempty result set with a key passed in.' );
 	});
 
-	test( '`.data` works with `data-` attributes', function() {
+	test( '`.data` does not alias to `data-` attributes', function() {
+		expect( 3 );
 		var $fixture = shoestring( '#qunit-fixture' ),
 			$el;
 
 		$fixture.html( '<div id="el" data-attr1 data-attr2="test"></div>' );
 		$el = $( "#el" );
 
-		strictEqual( $( '#el' ).data( "attr0" ), undefined, 'should alias to attr("data-attr0") (does not exist)' );
-		strictEqual( $( '#el' ).data( "attr1" ), undefined, 'should alias to attr("data-attr1"), has no value' );
-		strictEqual( $( '#el' ).data( "attr2" ), "test", 'should alias to attr("data-attr2"), has a value' );
+		strictEqual( $( '#el' ).data( "attr0" ), undefined, 'attribute does not exist, should not throw an error.' );
+
+		throws(function() {
+			$( '#el' ).data( "attr1" );
+		}, 'attribute exists but has no value, should have thrown a dev error.' );
+
+		throws(function() {
+			$( '#el' ).data( "attr2" );
+		}, 'attribute exists and has a value, should have thrown a dev error.' );
 	});
 
 	test( '`.insertBefore()` inserts before the selector', function(){
