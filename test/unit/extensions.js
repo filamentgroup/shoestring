@@ -138,6 +138,23 @@
 		});
 	});
 
+	test( '`.data` and falsy values', function() {
+		var $fixture = shoestring( '#qunit-fixture' ),
+			$el;
+
+		$fixture.html( '<div id="el"></div>' );
+		$el = $( "#el" );
+
+		$el.data( "val-false", false );
+		strictEqual( $( '#el' ).data( "val-false" ), false );
+
+		$el.data( "val-zero", 0 );
+		strictEqual( $( '#el' ).data( "val-zero" ), 0 );
+
+		$el.data( "val-undefined", undefined );
+		strictEqual( $( '#el' ).data( "val-undefined" ), undefined );
+	});
+
 	test( '`.data` works on empty nodelists', function() {
 		var $fixture = shoestring( '#qunit-fixture' ),
 			$el;

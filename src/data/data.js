@@ -30,7 +30,7 @@ define([
 			else {
 				if( this[ 0 ] ) {
 					if( this[ 0 ].shoestringData ) {
-						return this[ 0 ].shoestringData[ name ] || undefined;
+						return this[ 0 ].shoestringData[ name ];
 					}
 //>>includeStart("development", pragmas.development);
 					if( shoestring( this[ 0 ] ).is( "[data-" + name + "]" ) ){
