@@ -1,10 +1,7 @@
 //>>excludeStart("exclude", pragmas.exclude);
 define([
 	"shoestring",
-//>>includeStart("development", pragmas.development);
-	// Note the use of nested pragmas here
-	"dom/is"
-//>>includeEnd("development");
+	"dom/is" // note this dependency is only used for a dev error
 ], function(){
 //>>excludeEnd("exclude");
 
