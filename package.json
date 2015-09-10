@@ -1,32 +1,32 @@
 {
-	"name": "shoestring",
-	"title": "Shoestring",
-	"version": "1.0.2",
-	"description": "A simple framework for organizing, creating, and using DOM-based utilities.",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/filamentgroup/shoestring.git"
-	},
-	"bugs": {
-		"url": "https://github.com/filamentgroup/shop.lego.com/issues"
-	},
-	"author": {
-		"name": "Filament Group",
-		"email": "thegroup@filamentgroup.com",
-		"url": "filamentgroup.com"
-	},
-	"license": "MIT",
-	"readmeFilename": "README.md",
-	"devDependencies": {
-		"doxx": "filamentgroup/doxx",
-		"grunt": "~0.4.5",
-		"grunt-cli": "~0.1.13",
-		"grunt-contrib-concat": "~0.5.1",
-		"grunt-contrib-jshint": "~0.11.0",
-		"grunt-contrib-qunit": "~0.5.2",
-		"grunt-contrib-requirejs": "~0.4.4",
-		"grunt-contrib-uglify": "~0.8.0",
-		"grunt-contrib-watch": "^0.6.1"
-	},
-	"keywords": []
+  "name": "shoestring",
+  "title": "Shoestring",
+  "version": "1.0.3",
+  "description": "A simple framework for organizing, creating, and using DOM-based utilities.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/filamentgroup/shoestring.git"
+  },
+  "bugs": {
+    "url": "https://github.com/filamentgroup/shop.lego.com/issues"
+  },
+  "author": {
+    "name": "Filament Group",
+    "email": "thegroup@filamentgroup.com",
+    "url": "filamentgroup.com"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "doxx": "filamentgroup/doxx",
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-jshint": "~0.11.0",
+    "grunt-contrib-qunit": "~0.5.2",
+    "grunt-contrib-requirejs": "~0.4.4",
+    "grunt-contrib-uglify": "~0.8.0",
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "keywords": []
 }
