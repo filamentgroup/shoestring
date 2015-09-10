@@ -1,4 +1,4 @@
-/*! Shoestring - v1.0.3 - 2015-04-09
+/*! Shoestring - v1.0.3 - 2015-09-10
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
@@ -59,7 +59,7 @@
 
 		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				prim instanceof window.NodeList ){
+				(window.NodeList && prim instanceof window.NodeList) ){
 
 			return new Shoestring( prim, prim );
 		}
@@ -129,6 +129,7 @@
 			"ajax-url-query": "data with urls that have existing query params",
 			"click": "the click method. Try using trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
+			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
 			"html-function" : "passing a function into .html. Try generating the html you're passing in an outside function",
 			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
@@ -141,6 +142,7 @@
 			"prev-selector" : "passing selectors into .prev, try .prev().filter( selector )",
 			"prevall-selector" : "passing selectors into .prevAll, try .prevAll().filter( selector )",
 			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: ",
+			"siblings-selector": "passing selector into siblings not supported, try .siblings().find( ... )",
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
 			"text-setter": "setting text via the .text method.",
 			"toggle-class" : "the toggleClass method. Try using addClass or removeClass instead.",
@@ -445,6 +447,69 @@
 
 
 
+  /**
+	 * Checks the current set of elements against the selector, if one matches return `true`.
+	 *
+	 * @param {string} selector The selector to check.
+	 * @return {boolean}
+	 * @this {shoestring}
+	 */
+	shoestring.fn.is = function( selector ){
+		var ret = false, self = this, parents, check;
+
+		// assume a dom element
+		if( typeof selector !== "string" ){
+			// array-like, ie shoestring objects or element arrays
+			if( selector.length && selector[0] ){
+				check = selector;
+			} else {
+				check = [selector];
+			}
+
+			return _checkElements(this, check);
+		}
+
+		parents = this.parent();
+
+		if( !parents.length ){
+			parents = shoestring( document );
+		}
+
+		parents.each(function( i, e ) {
+			var children;
+
+				try {
+					children = e.querySelectorAll( selector );
+				} catch( e ) {
+					shoestring.error( 'queryselector', selector );
+				}
+
+			ret = _checkElements( self, children );
+		});
+
+		return ret;
+	};
+
+	function _checkElements(needles, haystack){
+		var ret = false;
+
+		needles.each(function() {
+			var j = 0;
+
+			while( j < haystack.length ){
+				if( this === haystack[j] ){
+					ret = true;
+				}
+
+				j++;
+			}
+		});
+
+		return ret;
+	}
+
+
+
 	/**
 	 * Get data attached to the first element or set data values on all elements in the current set.
 	 *
@@ -465,7 +530,14 @@
 				});
 			}
 			else {
-				return this[ 0 ] && this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
+				if( this[ 0 ] ) {
+					if( this[ 0 ].shoestringData ) {
+						return this[ 0 ].shoestringData[ name ];
+					}
+					if( shoestring( this[ 0 ] ).is( "[data-" + name + "]" ) ){
+						shoestring.error( 'data-attr-alias' );
+					}
+				}
 			}
 		}
 		else {
@@ -700,69 +772,6 @@
 
 
 
-  /**
-	 * Checks the current set of elements against the selector, if one matches return `true`.
-	 *
-	 * @param {string} selector The selector to check.
-	 * @return {boolean}
-	 * @this {shoestring}
-	 */
-	shoestring.fn.is = function( selector ){
-		var ret = false, self = this, parents, check;
-
-		// assume a dom element
-		if( typeof selector !== "string" ){
-			// array-like, ie shoestring objects or element arrays
-			if( selector.length && selector[0] ){
-				check = selector;
-			} else {
-				check = [selector];
-			}
-
-			return _checkElements(this, check);
-		}
-
-		parents = this.parent();
-
-		if( !parents.length ){
-			parents = shoestring( document );
-		}
-
-		parents.each(function( i, e ) {
-			var children;
-
-				try {
-					children = e.querySelectorAll( selector );
-				} catch( e ) {
-					shoestring.error( 'queryselector', selector );
-				}
-
-			ret = _checkElements( self, children );
-		});
-
-		return ret;
-	};
-
-	function _checkElements(needles, haystack){
-		var ret = false;
-
-		needles.each(function() {
-			var j = 0;
-
-			while( j < haystack.length ){
-				if( this === haystack[j] ){
-					ret = true;
-				}
-
-				j++;
-			}
-		});
-
-		return ret;
-	}
-
-
-
 	/**
 	 * Find an element matching the selector in the set of the current element and its parents.
 	 *
@@ -924,9 +933,14 @@
 
 		if( !window.getComputedStyle ) {
 			// <window>.getComputedStyle
-			window.getComputedStyle = Window.prototype.getComputedStyle = function (element) {
+			// NOTE Window is not defined in all browsers
+			window.getComputedStyle = function (element) {
 				return new CSSStyleDeclaration(element);
 			};
+
+			if ( window.Window ) {
+				window.Window.prototype.getComputedStyle = window.getComputedStyle;
+			}
 		}
 	})();
 
@@ -1832,6 +1846,10 @@
 	 * @this shoestring
 	 */
 	shoestring.fn.siblings = function(){
+				if( arguments.length > 0 ) {
+			shoestring.error( 'siblings-selector' );
+		}
+		
 		if( !this.length ) {
 			return shoestring( [] );
 		}
