@@ -394,6 +394,7 @@
 
 		var $second = $fixture.find( ".index .second" );
 		equal( $second.index(), 1 );
+		equal( $indexed.index( $second ), 1 );
 	});
 
 	test('empty set `.index()`', function() {
