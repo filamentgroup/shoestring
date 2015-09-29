@@ -394,6 +394,12 @@
 
 		var $second = $fixture.find( ".index .second" );
 		equal( $second.index(), 1 );
+		equal( $indexed.index( $second.get( 0 ) ), 1, "index() DOM element argument" );
+
+		throws(function() {
+			equal( $indexed.index( $second ), 1, "index() shoestring argument" );
+		}, 'index(shoestring()) should throw a dev error.' );
+
 	});
 
 	test('empty set `.index()`', function() {

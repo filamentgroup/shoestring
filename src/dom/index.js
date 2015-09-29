@@ -45,6 +45,11 @@ define([ "shoestring" ], function(){
 					return self[0] === element;
 				});
 			} else {
+//>>includeStart("development", pragmas.development);
+				if( selector.constructor === shoestring.Shoestring ) {
+					shoestring.error( "index-shoestring-object" );
+				}
+//>>includeEnd("development");
 
 				// check if the element matches the first selected node from the parent
 				return _getIndex(self, function( element ) {
