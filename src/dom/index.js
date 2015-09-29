@@ -46,7 +46,7 @@ define([ "shoestring" ], function(){
 				});
 			} else {
 //>>includeStart("development", pragmas.development);
-				if( typeof selector !== "string" ) {
+				if( selector.constructor === shoestring.Shoestring ) {
 					shoestring.error( "index-shoestring-object" );
 				}
 //>>includeEnd("development");

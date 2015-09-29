@@ -89,7 +89,6 @@ define([], function(){
 	// For adding element set methods
 	shoestring.fn = Shoestring.prototype;
 
-	// expose for testing purposes only
 	shoestring.Shoestring = Shoestring;
 
 	// For extending objects
