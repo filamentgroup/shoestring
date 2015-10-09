@@ -7,6 +7,7 @@ define([ "shoestring" ], function(){
 			"prefix": "Shoestring does not support",
 
 			"ajax-url-query": "data with urls that have existing query params",
+			"children-selector" : "passing selectors into .child, try .children().filter( selector )",
 			"click": "the click method. Try using trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
