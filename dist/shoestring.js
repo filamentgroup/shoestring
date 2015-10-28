@@ -1,4 +1,4 @@
-/*! Shoestring - v1.0.3 - 2015-09-10
+/*! Shoestring - v1.0.3 - 2015-10-28
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
@@ -81,7 +81,6 @@
 	// For adding element set methods
 	shoestring.fn = Shoestring.prototype;
 
-	// expose for testing purposes only
 	shoestring.Shoestring = Shoestring;
 
 	// For extending objects
@@ -687,7 +686,7 @@
 	 * @this shoestring
 	 */
 	shoestring.fn.children = function(){
-		var ret = [],
+				var ret = [],
 			childs,
 			j;
 		this.each(function(){

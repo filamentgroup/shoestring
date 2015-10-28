@@ -1,4 +1,4 @@
-/*! Shoestring - v1.0.3 - 2015-09-10
+/*! Shoestring - v1.0.3 - 2015-10-28
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
@@ -85,7 +85,6 @@
 	// For adding element set methods
 	shoestring.fn = Shoestring.prototype;
 
-	// expose for testing purposes only
 	shoestring.Shoestring = Shoestring;
 
 	// For extending objects
@@ -127,11 +126,13 @@
 			"prefix": "Shoestring does not support",
 
 			"ajax-url-query": "data with urls that have existing query params",
+			"children-selector" : "passing selectors into .child, try .children().filter( selector )",
 			"click": "the click method. Try using trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
 			"html-function" : "passing a function into .html. Try generating the html you're passing in an outside function",
+			"index-shoestring-object": "an index call with a shoestring object argument. Use .get(0) on the argument instead.",
 			"live-delegate" : "the .live or .delegate methods. Use .bind or .on instead.",
 			"map": "the map method. Try using .each to make a new object.",
 			"next-selector" : "passing selectors into .next, try .next().filter( selector )",
@@ -736,7 +737,10 @@
 	 * @this shoestring
 	 */
 	shoestring.fn.children = function(){
-		var ret = [],
+				if( arguments.length > 0 ){
+			shoestring.error( 'children-selector' );
+		}
+				var ret = [],
 			childs,
 			j;
 		this.each(function(){
@@ -1327,6 +1331,9 @@
 					return self[0] === element;
 				});
 			} else {
+				if( selector.constructor === shoestring.Shoestring ) {
+					shoestring.error( "index-shoestring-object" );
+				}
 
 				// check if the element matches the first selected node from the parent
 				return _getIndex(self, function( element ) {
