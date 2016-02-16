@@ -1,2 +1,3 @@
 user: filament
 subdir: .
+per_domain_command: echo "works! $BRANCH_SUBDOMAIN"
