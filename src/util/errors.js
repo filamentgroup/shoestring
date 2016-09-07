@@ -8,7 +8,7 @@ define([ "shoestring" ], function(){
 
 			"ajax-url-query": "data with urls that have existing query params",
 			"children-selector" : "passing selectors into .child, try .children().filter( selector )",
-			"click": "the click method. Try using trigger( 'click' ) instead.",
+			"click": "the click method. Try using .on( 'click', function(){}) or .trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
