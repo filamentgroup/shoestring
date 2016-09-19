@@ -32,7 +32,7 @@ define([], function(){
 
 		// if string starting with <, make html
 		if( pType === "string" && prim.indexOf( "<" ) === 0 ){
-			var dfrag = document.createElement( "div" );
+			var dfrag = doc.createElement( "div" );
 
 			dfrag.innerHTML = prim;
 
@@ -51,7 +51,7 @@ define([], function(){
 //>>includeStart("development", pragmas.development);
 			try {
 //>>includeEnd("development");
-				sel = document.querySelectorAll( prim );
+				sel = doc.querySelectorAll( prim );
 //>>includeStart("development", pragmas.development);
 			} catch( e ) {
 				shoestring.error( 'queryselector', prim );
@@ -63,7 +63,7 @@ define([], function(){
 
 		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				(window.NodeList && prim instanceof window.NodeList) ){
+				(win.NodeList && prim instanceof win.NodeList) ){
 
 			return new Shoestring( prim, prim );
 		}
@@ -121,7 +121,7 @@ define([], function(){
 	};
 
 	// expose
-	window.shoestring = shoestring;
+	win.shoestring = shoestring;
 
 //>>excludeStart("exclude", pragmas.exclude);
 });

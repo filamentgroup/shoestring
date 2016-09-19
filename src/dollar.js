@@ -5,7 +5,7 @@ define([ "shoestring" ], function(){
 	/**
 	 * An alias for the `shoestring` constructor.
 	 */
-	window.$ = shoestring;
+	win.$ = shoestring;
 
 //>>excludeStart("exclude", pragmas.exclude);
 });

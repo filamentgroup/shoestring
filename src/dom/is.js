@@ -27,7 +27,7 @@ define([ "shoestring" ], function(){
 		parents = this.parent();
 
 		if( !parents.length ){
-			parents = shoestring( document );
+			parents = shoestring( doc );
 		}
 
 		parents.each(function( i, e ) {

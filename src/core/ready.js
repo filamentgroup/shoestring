@@ -11,7 +11,7 @@ define([ "shoestring" ], function(){
 	 */
 	shoestring.ready = function( fn ){
 		if( ready && fn ){
-			fn.call( document );
+			fn.call( doc );
 		}
 		else if( fn ){
 			readyQueue.push( fn );
@@ -20,7 +20,7 @@ define([ "shoestring" ], function(){
 			runReady();
 		}
 
-		return [document];
+		return [doc];
 	};
 
 	// TODO necessary?
@@ -35,32 +35,32 @@ define([ "shoestring" ], function(){
 		runReady = function(){
 			if( !ready ){
 				while( readyQueue.length ){
-					readyQueue.shift().call( document );
+					readyQueue.shift().call( doc );
 				}
 				ready = true;
 			}
 		};
 
 	// Quick IE8 shiv
-	if( !window.addEventListener ){
-		window.addEventListener = function( evt, cb ){
-			return window.attachEvent( "on" + evt, cb );
+	if( !win.addEventListener ){
+		win.addEventListener = function( evt, cb ){
+			return win.attachEvent( "on" + evt, cb );
 		};
 	}
 
 	// If DOM is already ready at exec time, depends on the browser.
 	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
-	if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+	if (doc.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
 	}	else {
-		if( !document.addEventListener ){
-			document.attachEvent( "DOMContentLoaded", runReady );
-			document.attachEvent( "onreadystatechange", runReady );
+		if( !doc.addEventListener ){
+			doc.attachEvent( "DOMContentLoaded", runReady );
+			doc.attachEvent( "onreadystatechange", runReady );
 		} else {
-			document.addEventListener( "DOMContentLoaded", runReady, false );
-			document.addEventListener( "readystatechange", runReady, false );
+			doc.addEventListener( "DOMContentLoaded", runReady, false );
+			doc.addEventListener( "readystatechange", runReady, false );
 		}
-		window.addEventListener( "load", runReady, false );
+		win.addEventListener( "load", runReady, false );
 	}
 
 //>>excludeStart("exclude", pragmas.exclude);

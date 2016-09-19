@@ -17,11 +17,11 @@ define([ "shoestring" ], function(){
 
 		// TODO needs IE8 support
 		// See this.fireEvent( 'on' + evts[ i ], document.createEventObject() ); instead of click() etc in trigger.
-		if( document.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
+		if( doc.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
 			var bindings = el.shoestringData.events[ e ];
 			for (var i in bindings ){
 				if( bindings.hasOwnProperty( i ) ){
-					event = document.createEvent( "Event" );
+					event = doc.createEvent( "Event" );
 					event.initEvent( e, true, true );
 					event._args = args;
 					args.unshift( event );

@@ -38,7 +38,7 @@ define([ "shoestring" ], function(){
 
 			// no arg? check the children, otherwise check each element that matches
 			if( selector === undefined ){
-				children = ( ( this[ 0 ] && this[0].parentNode ) || document.documentElement).childNodes;
+				children = ( ( this[ 0 ] && this[0].parentNode ) || doc.documentElement).childNodes;
 
 				// check if the element matches the first of the set
 				return _getIndex(children, function( element ) {

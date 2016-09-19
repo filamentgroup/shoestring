@@ -27,14 +27,14 @@ define([ "shoestring" ], function(){
 					}
 				}
 
-				if( document.createEvent ){
-					var event = document.createEvent( "Event" );
+				if( doc.createEvent ){
+					var event = doc.createEvent( "Event" );
 					event.initEvent( evt, true, true );
 					event._args = args;
 					event._namespace = namespace;
 
 					this.dispatchEvent( event );
-				} else if ( document.createEventObject ) {
+				} else if ( doc.createEventObject ) {
 					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
 						this.ssEventTrigger = {
 							_namespace: namespace,
@@ -43,7 +43,7 @@ define([ "shoestring" ], function(){
 
 						this[ evt ]();
 					} else {
-						document.documentElement[ evt ] = {
+						doc.documentElement[ evt ] = {
 							"el": this,
 							_namespace: namespace,
 							_args: args

@@ -7,7 +7,7 @@ requirejs.config({
 	skipModuleInsertion: true,
 	optimize: 'none',
 	wrap: {
-		start: "(function( w, undefined ){",
-		end: "})( this );"
+		startFile: "wrapStartFile.frag",
+		endFile: "wrapEndFile.frag"
 	}
 });
