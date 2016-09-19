@@ -3,9 +3,9 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
 	var set = function( html ){
-		if( typeof html === "string" ){
+		if( typeof html === "string" || typeof html === "number" ){
 			return this.each(function(){
-				this.innerHTML = html;
+				this.innerHTML = "" + html;
 			});
 		} else {
 			var h = "";

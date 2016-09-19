@@ -335,6 +335,19 @@
 		equal( $new.html(), $old[0].innerHTML, '.html() get str properly.' );
 	});
 
+	test( '`.html(Number)`', function() {
+		var $old = shoestring( '.html .old' ),
+			$new = shoestring( '.html .new' ),
+			htmlStr = 2;
+
+		$old[0].innerHTML = htmlStr;
+		$new.html( htmlStr );
+
+		ok( !!$old[0].innerHTML );
+		equal( $new[0].innerHTML, $old[0].innerHTML, '.html(number) set a number properly.' );
+		equal( $new.html(), $old[0].innerHTML, '.html() get number properly.' );
+	});
+
 	test( '`.html(HTML Object)`', function() {
 		var $old = shoestring( '.html .old' ),
 			$new = shoestring( '.html .new' );
