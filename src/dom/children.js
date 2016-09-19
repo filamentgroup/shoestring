@@ -8,6 +8,11 @@ define([ "shoestring" ], function(){
 	 * @this shoestring
 	 */
 	shoestring.fn.children = function(){
+		//>>includeStart("development", pragmas.development);
+		if( arguments.length > 0 ){
+			shoestring.error( 'children-selector' );
+		}
+		//>>includeEnd("development");
 		var ret = [],
 			childs,
 			j;

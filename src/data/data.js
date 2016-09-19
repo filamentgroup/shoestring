@@ -1,5 +1,8 @@
 //>>excludeStart("exclude", pragmas.exclude);
-define([ "shoestring" ], function(){
+define([
+	"shoestring",
+	"dom/is" // note this dependency is only used for a dev error
+], function(){
 //>>excludeEnd("exclude");
 
 	/**
@@ -22,7 +25,16 @@ define([ "shoestring" ], function(){
 				});
 			}
 			else {
-				return this[ 0 ] && this[ 0 ].shoestringData ? this[ 0 ].shoestringData[ name ] : undefined;
+				if( this[ 0 ] ) {
+					if( this[ 0 ].shoestringData ) {
+						return this[ 0 ].shoestringData[ name ];
+					}
+//>>includeStart("development", pragmas.development);
+					if( shoestring( this[ 0 ] ).is( "[data-" + name + "]" ) ){
+						shoestring.error( 'data-attr-alias' );
+					}
+//>>includeEnd("development");
+				}
 			}
 		}
 		else {
