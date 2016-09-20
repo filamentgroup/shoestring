@@ -15,6 +15,11 @@ define([ "shoestring" ], function(){
 
 	shoestring.each = function( collection, callback ) {
 		var val;
+//>>includeStart("development", pragmas.development);
+		if( !( "length" in collection ) ) {
+			shoestring.error( 'each-length' );
+		}
+//>>includeEnd("development");
 		for( var i = 0, il = collection.length; i < il; i++ ){
 			val = callback.call( collection[i], i, collection[i] );
 			if( val === false ){

@@ -11,6 +11,7 @@ define([ "shoestring" ], function(){
 			"click": "the click method. Try using .on( 'click', function(){}) or .trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
+			"each-length": "objects without a length passed into each",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
 			"html-function" : "passing a function into .html. Try generating the html you're passing in an outside function",
 			"index-shoestring-object": "an index call with a shoestring object argument. Use .get(0) on the argument instead.",

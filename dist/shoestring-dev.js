@@ -1,7 +1,8 @@
-/*! Shoestring - v1.0.3 - 2015-10-28
+/*! Shoestring - v1.0.3 - 2016-09-20
 * http://github.com/filamentgroup/shoestring/
-* Copyright (c) 2015 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
+* Copyright (c) 2016 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
+
 	/**
 	 * The shoestring object constructor.
 	 *
@@ -127,9 +128,10 @@
 
 			"ajax-url-query": "data with urls that have existing query params",
 			"children-selector" : "passing selectors into .child, try .children().filter( selector )",
-			"click": "the click method. Try using trigger( 'click' ) instead.",
+			"click": "the click method. Try using .on( 'click', function(){}) or .trigger( 'click' ) instead.",
 			"css-get" : "getting computed attributes from the DOM.",
 			"data-attr-alias": "the data method aliased to `data-` DOM attributes.",
+			"each-length": "objects without a length passed into each",
 			"has-class" : "the hasClass method. Try using .is( '.klassname' ) instead.",
 			"html-function" : "passing a function into .html. Try generating the html you're passing in an outside function",
 			"index-shoestring-object": "an index call with a shoestring object argument. Use .get(0) on the argument instead.",
@@ -353,6 +355,9 @@
 
 	shoestring.each = function( collection, callback ) {
 		var val;
+		if( !( "length" in collection ) ) {
+			shoestring.error( 'each-length' );
+		}
 		for( var i = 0, il = collection.length; i < il; i++ ){
 			val = callback.call( collection[i], i, collection[i] );
 			if( val === false ){
