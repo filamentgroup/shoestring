@@ -1,7 +1,21 @@
-/*! Shoestring - v1.0.3 - 2016-09-20
+/*! Shoestring - v1.0.4 - 2016-09-20
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2016 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
-(function( w, undefined ){
+(function( factory ) {
+	if( typeof define === 'function' && define.amd ) {
+			// AMD. Register as an anonymous module.
+			define( [ 'shoestring' ], factory );
+	} else if (typeof module === 'object' && module.exports) {
+		// Node/CommonJS
+		module.exports = factory();
+	} else {
+		// Browser globals
+		factory();
+	}
+}(function () {
+	var win = typeof window !== "undefined" ? window : this;
+	var doc = win.document;
+
 
 	/**
 	 * The shoestring object constructor.
@@ -33,7 +47,7 @@
 
 		// if string starting with <, make html
 		if( pType === "string" && prim.indexOf( "<" ) === 0 ){
-			var dfrag = document.createElement( "div" );
+			var dfrag = doc.createElement( "div" );
 
 			dfrag.innerHTML = prim;
 
@@ -50,7 +64,7 @@
 			}
 
 			try {
-				sel = document.querySelectorAll( prim );
+				sel = doc.querySelectorAll( prim );
 			} catch( e ) {
 				shoestring.error( 'queryselector', prim );
 			}
@@ -60,7 +74,7 @@
 
 		// array like objects or node lists
 		if( Object.prototype.toString.call( pType ) === '[object Array]' ||
-				(window.NodeList && prim instanceof window.NodeList) ){
+				(win.NodeList && prim instanceof win.NodeList) ){
 
 			return new Shoestring( prim, prim );
 		}
@@ -118,7 +132,7 @@
 	};
 
 	// expose
-	window.shoestring = shoestring;
+	win.shoestring = shoestring;
 
 
 
@@ -399,7 +413,7 @@
 	 */
 	shoestring.ready = function( fn ){
 		if( ready && fn ){
-			fn.call( document );
+			fn.call( doc );
 		}
 		else if( fn ){
 			readyQueue.push( fn );
@@ -408,7 +422,7 @@
 			runReady();
 		}
 
-		return [document];
+		return [doc];
 	};
 
 	// TODO necessary?
@@ -423,32 +437,32 @@
 		runReady = function(){
 			if( !ready ){
 				while( readyQueue.length ){
-					readyQueue.shift().call( document );
+					readyQueue.shift().call( doc );
 				}
 				ready = true;
 			}
 		};
 
 	// Quick IE8 shiv
-	if( !window.addEventListener ){
-		window.addEventListener = function( evt, cb ){
-			return window.attachEvent( "on" + evt, cb );
+	if( !win.addEventListener ){
+		win.addEventListener = function( evt, cb ){
+			return win.attachEvent( "on" + evt, cb );
 		};
 	}
 
 	// If DOM is already ready at exec time, depends on the browser.
 	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
-	if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+	if (doc.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
 	}	else {
-		if( !document.addEventListener ){
-			document.attachEvent( "DOMContentLoaded", runReady );
-			document.attachEvent( "onreadystatechange", runReady );
+		if( !doc.addEventListener ){
+			doc.attachEvent( "DOMContentLoaded", runReady );
+			doc.attachEvent( "onreadystatechange", runReady );
 		} else {
-			document.addEventListener( "DOMContentLoaded", runReady, false );
-			document.addEventListener( "readystatechange", runReady, false );
+			doc.addEventListener( "DOMContentLoaded", runReady, false );
+			doc.addEventListener( "readystatechange", runReady, false );
 		}
-		window.addEventListener( "load", runReady, false );
+		win.addEventListener( "load", runReady, false );
 	}
 
 
@@ -478,7 +492,7 @@
 		parents = this.parent();
 
 		if( !parents.length ){
-			parents = shoestring( document );
+			parents = shoestring( doc );
 		}
 
 		parents.each(function( i, e ) {
@@ -575,7 +589,7 @@
 	/**
 	 * An alias for the `shoestring` constructor.
 	 */
-	window.$ = shoestring;
+	win.$ = shoestring;
 
 
 
@@ -940,15 +954,15 @@
 			}
 		};
 
-		if( !window.getComputedStyle ) {
-			// <window>.getComputedStyle
-			// NOTE Window is not defined in all browsers
-			window.getComputedStyle = function (element) {
+		if( !win.getComputedStyle ) {
+			// <win>.getComputedStyle
+			// NOTE win is not defined in all browsers
+			win.getComputedStyle = function (element) {
 				return new CSSStyleDeclaration(element);
 			};
 
-			if ( window.Window ) {
-				window.Window.prototype.getComputedStyle = window.getComputedStyle;
+			if ( win.Window ) {
+				win.Window.prototype.getComputedStyle = win.getComputedStyle;
 			}
 		}
 	})();
@@ -967,7 +981,7 @@
 
 		function _getStyle( element, property ) {
 			// polyfilled in getComputedStyle module
-			return window.getComputedStyle( element, null ).getPropertyValue( property );
+			return win.getComputedStyle( element, null ).getPropertyValue( property );
 		}
 
 		var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];
@@ -1133,7 +1147,7 @@
 				}
 			} else {
 				if( !this.parentNode ){
-					var context = shoestring( document.createDocumentFragment() );
+					var context = shoestring( doc.createDocumentFragment() );
 
 					context[ 0 ].appendChild( this );
 					wsel = shoestring( selector, context );
@@ -1194,11 +1208,23 @@
 	 * Returns the raw DOM node at the passed index.
 	 *
 	 * @param {integer} index The index of the element to wrap and return.
-	 * @return HTMLElement
+	 * @return {HTMLElement|undefined|array}
 	 * @this shoestring
 	 */
 	shoestring.fn.get = function( index ){
-		return this[ index ];
+
+		// return an array of elements if index is undefined
+		if( index === undefined ){
+			var elements = [];
+
+			for( var i = 0; i < this.length; i++ ){
+				elements.push( this[ i ] );
+			}
+
+			return elements;
+		} else {
+			return this[ index ];
+		}
 	};
 
 
@@ -1249,9 +1275,9 @@
 
 
 	var set = function( html ){
-		if( typeof html === "string" ){
+		if( typeof html === "string" || typeof html === "number" ){
 			return this.each(function(){
-				this.innerHTML = html;
+				this.innerHTML = "" + html;
 			});
 		} else {
 			var h = "";
@@ -1329,7 +1355,7 @@
 
 			// no arg? check the children, otherwise check each element that matches
 			if( selector === undefined ){
-				children = ( ( this[ 0 ] && this[0].parentNode ) || document.documentElement).childNodes;
+				children = ( ( this[ 0 ] && this[0].parentNode ) || doc.documentElement).childNodes;
 
 				// check if the element matches the first of the set
 				return _getIndex(children, function( element ) {
@@ -1486,7 +1512,7 @@
 		this.each(function(){
 			// no parent node, assume top level
 			// jQuery parent: return the document object for <html> or the parent node if it exists
-			parent = (this === document.documentElement ? document : this.parentNode);
+			parent = (this === doc.documentElement ? doc : this.parentNode);
 
 			// if there is a parent and it's not a document fragment
 			if( parent && parent.nodeType !== 11 ){
@@ -2080,7 +2106,7 @@
 		}
 
 		var evts = evt.split( " " ),
-			docEl = document.documentElement;
+			docEl = doc.documentElement;
 
 		// NOTE the `triggeredElement` is purely for custom events from IE
 		function encasedCallback( e, namespace, triggeredElement ){
@@ -2135,13 +2161,13 @@
 
 		// This is exclusively for custom events on browsers without addEventListener (IE8)
 		function propChange( originalEvent, boundElement, namespace ) {
-			var lastEventInfo = document.documentElement[ originalEvent.propertyName ],
+			var lastEventInfo = doc.documentElement[ originalEvent.propertyName ],
 				triggeredElement = lastEventInfo.el;
 
 			var boundCheckElement = boundElement;
 
-			if( boundElement === document && triggeredElement !== document ) {
-				boundCheckElement = document.documentElement;
+			if( boundElement === doc && triggeredElement !== doc ) {
+				boundCheckElement = doc.documentElement;
 			}
 
 			if( triggeredElement !== undefined &&
@@ -2296,7 +2322,7 @@
 		for( j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
 				if( callback === undefined || callback === bound[ j ].originalCallback ) {
-					if( "removeEventListener" in window ){
+					if( "removeEventListener" in win ){
 						this.removeEventListener( evt, bound[ j ].callback, false );
 					} else if( this.detachEvent ){
 						// dom event
@@ -2304,7 +2330,7 @@
 
 						// only unbind custom events if its the last one on the element
 						if( bound.length === 1 && this.shoestringData.loop && this.shoestringData.loop[ evt ] ) {
-							document.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
+							doc.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
 						}
 					}
 					matched.push( j );
@@ -2375,11 +2401,11 @@
 
 		// TODO needs IE8 support
 		// See this.fireEvent( 'on' + evts[ i ], document.createEventObject() ); instead of click() etc in trigger.
-		if( document.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
+		if( doc.createEvent && el.shoestringData && el.shoestringData.events && el.shoestringData.events[ e ] ){
 			var bindings = el.shoestringData.events[ e ];
 			for (var i in bindings ){
 				if( bindings.hasOwnProperty( i ) ){
-					event = document.createEvent( "Event" );
+					event = doc.createEvent( "Event" );
 					event.initEvent( e, true, true );
 					event._args = args;
 					args.unshift( event );
@@ -2419,14 +2445,14 @@
 					}
 				}
 
-				if( document.createEvent ){
-					var event = document.createEvent( "Event" );
+				if( doc.createEvent ){
+					var event = doc.createEvent( "Event" );
 					event.initEvent( evt, true, true );
 					event._args = args;
 					event._namespace = namespace;
 
 					this.dispatchEvent( event );
-				} else if ( document.createEventObject ) {
+				} else if ( doc.createEventObject ) {
 					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
 						this.ssEventTrigger = {
 							_namespace: namespace,
@@ -2435,7 +2461,7 @@
 
 						this[ evt ]();
 					} else {
-						document.documentElement[ evt ] = {
+						doc.documentElement[ evt ] = {
 							"el": this,
 							_namespace: namespace,
 							_args: args
@@ -2517,7 +2543,7 @@
 			return function() {
 				var tracked;
 				try {
-					tracked = JSON.parse(window.localStorage.getItem( shoestring.trackedMethodsKey ) || "{}");
+					tracked = JSON.parse(win.localStorage.getItem( shoestring.trackedMethodsKey ) || "{}");
 				} catch (e) {
 					if( e instanceof SyntaxError) {
 						tracked = {};
@@ -2525,7 +2551,7 @@
 				}
 
 				tracked[ name ] = true;
-				window.localStorage.setItem( shoestring.trackedMethodsKey, JSON.stringify(tracked) );
+				win.localStorage.setItem( shoestring.trackedMethodsKey, JSON.stringify(tracked) );
 
 				return old.apply(this, arguments);
 			};
@@ -2543,4 +2569,5 @@
 
 
 
-})( this );
+	return shoestring;
+}));
