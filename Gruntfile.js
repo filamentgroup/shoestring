@@ -49,9 +49,10 @@ module.exports = function(grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
+		pkg: grunt.file.readJSON( 'package.json' ),
+
 		meta: {
-			version: '1.0.3',
-			banner: '/*! Shoestring - v<%= meta.version %> - ' +
+			banner: '/*! Shoestring - v<%= pkg.version %> - ' +
 				'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 				'* http://github.com/filamentgroup/shoestring/\n' +
 				'* Copyright (c) <%= grunt.template.today("yyyy") %> ' +
