@@ -74,7 +74,7 @@ define([ "shoestring", "dom/closest" ], function(){
 		}
 
 		var evts = evt.split( " " ),
-			docEl = document.documentElement;
+			docEl = doc.documentElement;
 
 		// NOTE the `triggeredElement` is purely for custom events from IE
 		function encasedCallback( e, namespace, triggeredElement ){
@@ -129,13 +129,13 @@ define([ "shoestring", "dom/closest" ], function(){
 
 		// This is exclusively for custom events on browsers without addEventListener (IE8)
 		function propChange( originalEvent, boundElement, namespace ) {
-			var lastEventInfo = document.documentElement[ originalEvent.propertyName ],
+			var lastEventInfo = doc.documentElement[ originalEvent.propertyName ],
 				triggeredElement = lastEventInfo.el;
 
 			var boundCheckElement = boundElement;
 
-			if( boundElement === document && triggeredElement !== document ) {
-				boundCheckElement = document.documentElement;
+			if( boundElement === doc && triggeredElement !== doc ) {
+				boundCheckElement = doc.documentElement;
 			}
 
 			if( triggeredElement !== undefined &&

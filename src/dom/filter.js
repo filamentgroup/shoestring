@@ -22,7 +22,7 @@ define([ "shoestring" ], function(){
 				}
 			} else {
 				if( !this.parentNode ){
-					var context = shoestring( document.createDocumentFragment() );
+					var context = shoestring( doc.createDocumentFragment() );
 
 					context[ 0 ].appendChild( this );
 					wsel = shoestring( selector, context );

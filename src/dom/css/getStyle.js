@@ -18,7 +18,7 @@ define([
 
 		function _getStyle( element, property ) {
 			// polyfilled in getComputedStyle module
-			return window.getComputedStyle( element, null ).getPropertyValue( property );
+			return win.getComputedStyle( element, null ).getPropertyValue( property );
 		}
 
 		var vendorPrefixes = [ '', '-webkit-', '-ms-', '-moz-', '-o-', '-khtml-' ];

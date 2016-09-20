@@ -12,5 +12,5 @@
 	"unused": true,
 	"node": true,
 	"loopfunc": true,
-	"predef": [ "window", "document", "define", "shoestring", "XMLHttpRequest", "ActiveXObject", "Window", "localStorage" ]
+	"predef": [ "window", "win", "doc", "define", "shoestring", "XMLHttpRequest", "ActiveXObject", "Window", "localStorage" ]
 }

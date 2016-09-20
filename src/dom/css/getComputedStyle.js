@@ -118,15 +118,15 @@ define(function(){
 			}
 		};
 
-		if( !window.getComputedStyle ) {
-			// <window>.getComputedStyle
-			// NOTE Window is not defined in all browsers
-			window.getComputedStyle = function (element) {
+		if( !win.getComputedStyle ) {
+			// <win>.getComputedStyle
+			// NOTE win is not defined in all browsers
+			win.getComputedStyle = function (element) {
 				return new CSSStyleDeclaration(element);
 			};
 
-			if ( window.Window ) {
-				window.Window.prototype.getComputedStyle = window.getComputedStyle;
+			if ( win.Window ) {
+				win.Window.prototype.getComputedStyle = win.getComputedStyle;
 			}
 		}
 	})();

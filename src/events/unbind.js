@@ -54,7 +54,7 @@ define([ "shoestring" ], function(){
 		for( j = 0, jl = bound.length; j < jl; j++ ) {
 			if( !namespace || namespace === bound[ j ].namespace ) {
 				if( callback === undefined || callback === bound[ j ].originalCallback ) {
-					if( "removeEventListener" in window ){
+					if( "removeEventListener" in win ){
 						this.removeEventListener( evt, bound[ j ].callback, false );
 					} else if( this.detachEvent ){
 						// dom event
@@ -62,7 +62,7 @@ define([ "shoestring" ], function(){
 
 						// only unbind custom events if its the last one on the element
 						if( bound.length === 1 && this.shoestringData.loop && this.shoestringData.loop[ evt ] ) {
-							document.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
+							doc.documentElement.detachEvent( "onpropertychange", this.shoestringData.loop[ evt ] );
 						}
 					}
 					matched.push( j );

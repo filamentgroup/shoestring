@@ -22,7 +22,7 @@ define([ "shoestring" ], function(){
 			return function() {
 				var tracked;
 				try {
-					tracked = JSON.parse(window.localStorage.getItem( shoestring.trackedMethodsKey ) || "{}");
+					tracked = JSON.parse(win.localStorage.getItem( shoestring.trackedMethodsKey ) || "{}");
 				} catch (e) {
 					if( e instanceof SyntaxError) {
 						tracked = {};
@@ -30,7 +30,7 @@ define([ "shoestring" ], function(){
 				}
 
 				tracked[ name ] = true;
-				window.localStorage.setItem( shoestring.trackedMethodsKey, JSON.stringify(tracked) );
+				win.localStorage.setItem( shoestring.trackedMethodsKey, JSON.stringify(tracked) );
 
 				return old.apply(this, arguments);
 			};
