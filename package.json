@@ -3,6 +3,7 @@
   "title": "Shoestring",
   "version": "1.0.4",
   "description": "A simple framework for organizing, creating, and using DOM-based utilities.",
+  "main": "dist/shoestring-dev.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/filamentgroup/shoestring.git"
