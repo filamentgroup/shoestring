@@ -1,7 +1,8 @@
-/*! Shoestring - v1.0.3 - 2016-09-19
+/*! Shoestring - v1.0.3 - 2016-09-20
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2016 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( w, undefined ){
+
 	/**
 	 * The shoestring object constructor.
 	 *
