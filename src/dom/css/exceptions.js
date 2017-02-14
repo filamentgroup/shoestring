@@ -3,7 +3,7 @@ define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
   shoestring.cssExceptions = {
-		'float': [ 'cssFloat', 'styleFloat' ] // styleFloat is IE8
+		'float': [ 'cssFloat' ]
 	};
 
 //>>excludeStart("exclude", pragmas.exclude);

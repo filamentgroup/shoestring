@@ -41,25 +41,13 @@ define([ "shoestring" ], function(){
 			}
 		};
 
-	// Quick IE8 shiv
-	if( !win.addEventListener ){
-		win.addEventListener = function( evt, cb ){
-			return win.attachEvent( "on" + evt, cb );
-		};
-	}
-
 	// If DOM is already ready at exec time, depends on the browser.
 	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
 	if (doc.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
-	}	else {
-		if( !doc.addEventListener ){
-			doc.attachEvent( "DOMContentLoaded", runReady );
-			doc.attachEvent( "onreadystatechange", runReady );
-		} else {
-			doc.addEventListener( "DOMContentLoaded", runReady, false );
-			doc.addEventListener( "readystatechange", runReady, false );
-		}
+	} else {
+		doc.addEventListener( "DOMContentLoaded", runReady, false );
+		doc.addEventListener( "readystatechange", runReady, false );
 		win.addEventListener( "load", runReady, false );
 	}
 

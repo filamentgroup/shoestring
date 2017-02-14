@@ -29,7 +29,7 @@ define([ "shoestring" ], function(){
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
 			"text-setter": "setting text via the .text method.",
 			"toggle-class" : "the toggleClass method. Try using addClass or removeClass instead.",
-			"trim": "the trim method. Try using replace(/^\\s+|\\s+$/g, ''), or just String.prototype.trim if you don't need to support IE8"
+			"trim": "the trim method. Use String.prototype.trim."
 		}
 	};
 

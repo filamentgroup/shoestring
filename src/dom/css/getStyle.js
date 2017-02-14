@@ -2,7 +2,6 @@
 define([
 	"shoestring",
 	"dom/css/exceptions",
-	"dom/css/getComputedStyle"
 ], function(){
 //>>excludeEnd("exclude");
 
@@ -17,7 +16,6 @@ define([
 		}
 
 		function _getStyle( element, property ) {
-			// polyfilled in getComputedStyle module
 			return win.getComputedStyle( element, null ).getPropertyValue( property );
 		}
 

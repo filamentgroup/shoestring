@@ -34,21 +34,6 @@ define([ "shoestring" ], function(){
 					event._namespace = namespace;
 
 					this.dispatchEvent( event );
-				} else if ( doc.createEventObject ) {
-					if( ( "" + this[ evt ] ).indexOf( "function" ) > -1 ) {
-						this.ssEventTrigger = {
-							_namespace: namespace,
-							_args: args
-						};
-
-						this[ evt ]();
-					} else {
-						doc.documentElement[ evt ] = {
-							"el": this,
-							_namespace: namespace,
-							_args: args
-						};
-					}
 				}
 			}
 		});
