@@ -1,4 +1,4 @@
-/*! Shoestring - v1.0.5 - 2017-02-14
+/*! Shoestring - v2.0.0 - 2017-02-14
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2017 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( factory ) {
