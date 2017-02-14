@@ -399,7 +399,7 @@
 	// From: https://github.com/mobify/mobifyjs/blob/526841be5509e28fc949038021799e4223479f8d/src/capture.js#L128
 	if (doc.attachEvent ? doc.readyState === "complete" : doc.readyState !== "loading") {
 		runReady();
-	}	else {
+	} else {
 		doc.addEventListener( "DOMContentLoaded", runReady, false );
 		doc.addEventListener( "readystatechange", runReady, false );
 		win.addEventListener( "load", runReady, false );
