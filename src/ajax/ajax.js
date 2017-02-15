@@ -2,15 +2,6 @@
 define([ "shoestring" ], function(){
 //>>excludeEnd("exclude");
 
-	var xmlHttp = function() {
-		try {
-			return new XMLHttpRequest();
-		}
-		catch( e ){
-			return new ActiveXObject( "Microsoft.XMLHTTP" );
-		}
-	};
-
 	/**
 	 * Make an HTTP request to a url.
 	 *
@@ -31,7 +22,7 @@ define([ "shoestring" ], function(){
 	 */
 
 	shoestring.ajax = function( url, options ) {
-		var params = "", req = xmlHttp(), settings, key;
+		var params = "", req = new XMLHttpRequest(), settings, key;
 
 		settings = shoestring.extend( {}, shoestring.ajax.settings );
 

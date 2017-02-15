@@ -8,7 +8,7 @@ define([
 	(function() {
 		var cssExceptions = shoestring.cssExceptions;
 
-		// IE8 uses marginRight instead of margin-right
+		// marginRight instead of margin-right
 		function convertPropertyName( str ) {
 			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
 				return character.toUpperCase();
