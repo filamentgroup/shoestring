@@ -1,4 +1,4 @@
-/*! Shoestring - v2.0.0 - 2017-02-14
+/*! Shoestring - v2.0.1 - 2017-05-24
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2017 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
 (function( factory ) {
@@ -174,15 +174,6 @@
 
 
 
-	var xmlHttp = function() {
-		try {
-			return new XMLHttpRequest();
-		}
-		catch( e ){
-			return new ActiveXObject( "Microsoft.XMLHTTP" );
-		}
-	};
-
 	/**
 	 * Make an HTTP request to a url.
 	 *
@@ -203,7 +194,7 @@
 	 */
 
 	shoestring.ajax = function( url, options ) {
-		var params = "", req = xmlHttp(), settings, key;
+		var params = "", req = new XMLHttpRequest(), settings, key;
 
 		settings = shoestring.extend( {}, shoestring.ajax.settings );
 
@@ -829,7 +820,7 @@
 	(function() {
 		var cssExceptions = shoestring.cssExceptions;
 
-		// IE8 uses marginRight instead of margin-right
+		// marginRight instead of margin-right
 		function convertPropertyName( str ) {
 			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
 				return character.toUpperCase();
@@ -893,7 +884,7 @@
 	(function() {
 		var cssExceptions = shoestring.cssExceptions;
 
-		// IE8 uses marginRight instead of margin-right
+		// marginRight instead of margin-right
 		function convertPropertyName( str ) {
 			return str.replace( /\-([A-Za-z])/g, function ( match, character ) {
 				return character.toUpperCase();
@@ -999,6 +990,11 @@
 
 			if( typeof selector === 'function' ) {
 				if( selector.call( this, index ) !== false ) {
+					ret.push( this );
+				}
+			// document node
+			} else if( this.nodeType === 9 ){
+				if( this === selector ) {
 					ret.push( this );
 				}
 			} else {
