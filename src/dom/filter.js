@@ -20,6 +20,11 @@ define([ "shoestring" ], function(){
 				if( selector.call( this, index ) !== false ) {
 					ret.push( this );
 				}
+			// document node
+			} else if( this.nodeType === 9 ){
+				if( this === selector ) {
+					ret.push( this );
+				}
 			} else {
 				if( !this.parentNode ){
 					var context = shoestring( doc.createDocumentFragment() );
