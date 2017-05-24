@@ -291,6 +291,15 @@
 		equal( $withoutParent.filter( ".filter" )[0], $withoutParent[0] );
 	});
 
+	test('`.add( document ).filter( selector )`', function() {
+		var $divs = $fixture.find( "div" );
+		var $addDoc = $divs.add( document );
+		equal( $addDoc.filter( ".filter" ).length, 1 );
+
+		var $doc = $( document );
+		equal( $doc.filter( document ).length, 1 );
+	});
+
 	test('`.filter( function )`', function() {
 		var $divs = $fixture.find( ".filter" );
 
