@@ -39,7 +39,7 @@ define([ "shoestring" ], function(){
 					this.value = value;
 				}
 			});
-		} else {
+		} else if (this[0]) {
 			el = this[0];
 
 			if( el.tagName === "SELECT" ){
