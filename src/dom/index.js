@@ -32,13 +32,12 @@ define([ "shoestring" ], function(){
 		 * @this {shoestring}
 		 */
 		shoestring.fn.index = function( selector ){
-			var self, children;
-
-			self = this;
+			var self = this;
+			var children;
 
 			// no arg? check the children, otherwise check each element that matches
 			if( selector === undefined ){
-				children = ( ( this[ 0 ] && this[0].parentNode ) || doc.documentElement).childNodes;
+				children = this[0] && this[0].parentNode ? this[0].parentNode.childNodes : [];
 
 				// check if the element matches the first of the set
 				return _getIndex(children, function( element ) {
@@ -53,7 +52,7 @@ define([ "shoestring" ], function(){
 
 				// check if the element matches the first selected node from the parent
 				return _getIndex(self, function( element ) {
-					return element === (shoestring( selector, element.parentNode )[ 0 ]);
+					return element === shoestring( selector, element.parentNode )[0];
 				});
 			}
 		};

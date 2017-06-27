@@ -410,6 +410,9 @@
 	});
 
 	test('`.index()`', function() {
+		equal( shoestring( document.createElement( "div" ) ).index(), -1, "detached nodes should return -1 on index()" );
+		equal( shoestring( document.createElement( "div" ) ).index('div'), -1, "detached nodes should return -1 on index('div')" );
+
 		var $indexed = $fixture.find( ".index div" );
 		equal( $indexed.index( ".first" ), 0 );
 		equal( $indexed.index( ".second" ), 1 );
