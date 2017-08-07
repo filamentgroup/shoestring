@@ -1,3 +1,4 @@
 user: filament
 subdir: .
 per_branch_command: echo "domain: $BRANCH_DOMAIN"
+ssl: off
