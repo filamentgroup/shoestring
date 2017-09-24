@@ -712,6 +712,9 @@
 
 		strictEqual( $( '#imaginary_element' ).siblings().length, 0, '.siblings runs on an empty set.' );
 		equal( $( '#sibling' ).siblings().length, 2, '.siblings returns non-empty set.' );
+
+		$fixture = $( '<div></div>' );
+		equal($fixture.siblings().length, 0, '.siblings returns empty set for detached');
 	});
 
 	test( '`.text()` returns content properly', function(){

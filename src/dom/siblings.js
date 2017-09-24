@@ -19,15 +19,17 @@ define([ "shoestring" ], function(){
 			return shoestring( [] );
 		}
 
-		var sibs = [], el = this[ 0 ].parentNode.firstChild;
+		var sibs = [], el;
 
-		do {
+		el = (this[ 0 ].parentNode || {}).firstChild;
+
+		while( el ) {
 			if( el.nodeType === 1 && el !== this[ 0 ] ) {
 				sibs.push( el );
 			}
 
       el = el.nextSibling;
-		} while( el );
+		}
 
 		return shoestring( sibs );
 	};
