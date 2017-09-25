@@ -16,6 +16,9 @@
     "email": "thegroup@filamentgroup.com",
     "url": "filamentgroup.com"
   },
+  "scripts": {
+    "test": "grunt"
+  },
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
