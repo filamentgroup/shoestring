@@ -1,7 +1,7 @@
-/*! Shoestring - v2.0.1 - 2017-05-24
+/*! Shoestring - v2.0.1 - 2017-11-03
 * http://github.com/filamentgroup/shoestring/
 * Copyright (c) 2017 Scott Jehl, Filament Group, Inc; Licensed MIT & GPLv2 */ 
-(function( factory ) {
+(function( global, factory ) {
 	if( typeof define === 'function' && define.amd ) {
 			// AMD. Register as an anonymous module.
 			define( [ 'shoestring' ], factory );
@@ -10,9 +10,9 @@
 		module.exports = factory();
 	} else {
 		// Browser globals
-		factory();
+		global.shoestring = global.$ = factory();
 	}
-}(function () {
+}(this, function () {
 	var win = typeof window !== "undefined" ? window : this;
 	var doc = win.document;
 
@@ -130,10 +130,6 @@
 
 		return first;
 	};
-
-	// expose
-	win.shoestring = shoestring;
-
 
 
 	shoestring.enUS = {
@@ -562,13 +558,6 @@
 			}
 		});
 	};
-
-
-
-	/**
-	 * An alias for the `shoestring` constructor.
-	 */
-	win.$ = shoestring;
 
 
 
@@ -1201,13 +1190,12 @@
 		 * @this {shoestring}
 		 */
 		shoestring.fn.index = function( selector ){
-			var self, children;
-
-			self = this;
+			var self = this;
+			var children;
 
 			// no arg? check the children, otherwise check each element that matches
 			if( selector === undefined ){
-				children = ( ( this[ 0 ] && this[0].parentNode ) || doc.documentElement).childNodes;
+				children = this[0] && this[0].parentNode ? this[0].parentNode.childNodes : [];
 
 				// check if the element matches the first of the set
 				return _getIndex(children, function( element ) {
@@ -1220,7 +1208,7 @@
 
 				// check if the element matches the first selected node from the parent
 				return _getIndex(self, function( element ) {
-					return element === (shoestring( selector, element.parentNode )[ 0 ]);
+					return element === shoestring( selector, element.parentNode )[0];
 				});
 			}
 		};
@@ -1744,15 +1732,17 @@
 			return shoestring( [] );
 		}
 
-		var sibs = [], el = this[ 0 ].parentNode.firstChild;
+		var sibs = [], el;
 
-		do {
+		el = (this[ 0 ].parentNode || {}).firstChild;
+
+		while( el ) {
 			if( el.nodeType === 1 && el !== this[ 0 ] ) {
 				sibs.push( el );
 			}
 
       el = el.nextSibling;
-		} while( el );
+		}
 
 		return shoestring( sibs );
 	};
@@ -1843,7 +1833,7 @@
 					this.value = value;
 				}
 			});
-		} else {
+		} else if (this[0]) {
 			el = this[0];
 
 			if( el.tagName === "SELECT" ){

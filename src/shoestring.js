@@ -119,10 +119,6 @@ define([], function(){
 
 		return first;
 	};
-
-	// expose
-	win.shoestring = shoestring;
-
 //>>excludeStart("exclude", pragmas.exclude);
 });
 //>>excludeEnd("exclude");
