@@ -1,3 +1,5 @@
+:warning: This project is archived and the repository is no longer maintained. 
+
 # Shoestring
 
 [![Filament Group](http://filamentgroup.com/images/fg-logo-positive-sm-crop.png) ](http://www.filamentgroup.com/)
@@ -8,7 +10,7 @@ Shoestring is part of the [Southstreet workflow](https://github.com/filamentgrou
 
 You can find more details in the [API documentation](http://filamentgroup.github.io/shoestring/dist/docs/).
 
-[![Build Status](https://travis-ci.org/filamentgroup/shoestring.svg?branch=master)](https://travis-ci.org/filamentgroup/shoestring) [![devDependency Status](https://david-dm.org/filamentgroup/shoestring/dev-status.svg)](https://david-dm.org/filamentgroup/shoestring#info=devDependencies)
+[![Build Status](https://travis-ci.org/filamentgroup/shoestring.svg?branch=master)](https://travis-ci.org/filamentgroup/shoestring) 
 
 ## Philosophy
 
