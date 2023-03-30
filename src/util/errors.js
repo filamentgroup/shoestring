@@ -27,6 +27,7 @@ define([ "shoestring" ], function(){
 			"queryselector": "all CSS selectors on querySelector (varies per browser support). Specifically, this failed: ",
 			"siblings-selector": "passing selector into siblings not supported, try .siblings().find( ... )",
 			"show-hide": "the show or hide methods. Use display: block (or whatever you'd like it to be) or none instead",
+			"stop-immediate-propagation": "stopImmediatePropagation is not supported in shoestring as it does not work in IE8 or Android 2.x, use stopPropagation instead.",
 			"text-setter": "setting text via the .text method.",
 			"toggle-class" : "the toggleClass method. Try using addClass or removeClass instead.",
 			"trim": "the trim method. Use String.prototype.trim."

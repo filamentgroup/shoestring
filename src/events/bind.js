@@ -97,6 +97,11 @@ define([ "shoestring", "dom/closest" ], function(){
 			e.stopPropagation = e.stopPropagation || function () {
 				e.cancelBubble = true;
 			};
+			//>>includeStart("development", pragmas.development);
+			e.stopImmediatePropagation = function(){
+				shoestring.error( 'stop-immediate-propagation' );
+			};
+			//>>includeEnd("development");
 
 			result = originalCallback.apply(this, [ e ].concat( e._args ) );
 
