@@ -1,4 +1,4 @@
-(function( factory ) {
+(function( global, factory ) {
 	if( typeof define === 'function' && define.amd ) {
 			// AMD. Register as an anonymous module.
 			define( [ 'shoestring' ], factory );
@@ -7,9 +7,9 @@
 		module.exports = factory();
 	} else {
 		// Browser globals
-		factory();
+		global.shoestring = global.$ = factory();
 	}
-}(function () {
+}(this, function () {
 	var win = typeof window !== "undefined" ? window : this;
 	var doc = win.document;
 

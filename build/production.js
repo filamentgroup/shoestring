@@ -11,7 +11,6 @@ require([
 	"core/ready",
 	"data/data",
 	"data/removeData",
-	"dollar",
 	"dom/addClass",
 	"dom/add",
 	"dom/after",
